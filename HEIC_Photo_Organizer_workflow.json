@@ -33,29 +33,41 @@
     },
     {
       "parameters": {
-        "operation": "list",
-        "folderId": {
-          "__rl": true,
-          "mode": "id",
-          "value": "={{ $json.folderId }}"
-        },
-        "filter": {
-          "foldersOnly": "files"
+        "method": "GET",
+        "url": "https://www.googleapis.com/drive/v3/files",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDriveOAuth2Api",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "q",
+              "value": "='{{ $json.folderId }}' in parents and (mimeType = 'image/heic' or name contains '.HEIC' or name contains '.heic') and trashed = false"
+            },
+            {
+              "name": "fields",
+              "value": "files(id,name,mimeType)"
+            },
+            {
+              "name": "pageSize",
+              "value": "200"
+            }
+          ]
         },
         "options": {}
       },
       "id": "node-list-files",
-      "name": "Google Drive — List Files",
-      "type": "n8n-nodes-base.googleDrive",
-      "typeVersion": 3,
+      "name": "List HEIC Files",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
       "position": [240, 300]
     },
     {
       "parameters": {
-        "jsCode": "// Фильтруем только HEIC-файлы\nconst items = $input.all();\nconst heicFiles = items.filter(item => {\n  const name = (item.json.name || '').toLowerCase();\n  const mime = (item.json.mimeType || '').toLowerCase();\n  return name.endsWith('.heic') || mime === 'image/heic';\n});\n\nif (heicFiles.length === 0) {\n  throw new Error('Не найдено HEIC-файлов в папке');\n}\n\nconst folderId = $('Set Folder ID').first().json.folderId;\n\nreturn heicFiles.map(item => ({\n  json: {\n    fileId: item.json.id,\n    fileName: item.json.name,\n    mimeType: item.json.mimeType,\n    parentFolderId: folderId\n  }\n}));"
+        "jsCode": "// Парсим список файлов из Google Drive API\nconst response = $input.first().json;\nconst files = response.files || [];\n\nif (files.length === 0) {\n  throw new Error('Не найдено HEIC-файлов в папке');\n}\n\nconst folderId = $('Set Folder ID').first().json.folderId;\n\nreturn files.map(file => ({\n  json: {\n    fileId: file.id,\n    fileName: file.name,\n    mimeType: file.mimeType,\n    parentFolderId: folderId\n  }\n}));"
       },
       "id": "node-filter-heic",
-      "name": "Filter HEIC Files",
+      "name": "Parse File List",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [460, 300]
@@ -334,25 +346,25 @@
       "main": [
         [
           {
-            "node": "Google Drive — List Files",
+            "node": "List HEIC Files",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Google Drive — List Files": {
+    "List HEIC Files": {
       "main": [
         [
           {
-            "node": "Filter HEIC Files",
+            "node": "Parse File List",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Filter HEIC Files": {
+    "Parse File List": {
       "main": [
         [
           {
