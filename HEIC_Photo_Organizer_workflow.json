@@ -1,0 +1,564 @@
+{
+  "name": "HEIC Photo Organizer — Sort by Patient ID",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## HEIC Photo Organizer\n\nАвтоматическая сортировка HEIC-фото пациентов по ID клиента.\n\n### Как работает:\n1. Получает список HEIC-файлов из Google Drive\n2. Скачивает и конвертирует HEIC → JPEG\n3. Отправляет в OpenAI Vision (GPT-4o) для распознавания ID\n4. Создаёт подпапки по ID клиента\n5. Перемещает файлы в соответствующие папки\n6. Нераспознанные файлы остаются на месте\n\n### Настройки:\n- Папка: 1iEbSMlsHPX6Sg3y0J0znlT47ri78hk9_\n- Rate limit: 2 сек между файлами\n- Модель: gpt-4o\n\n### Credentials нужно подключить:\n- Google Drive OAuth2\n- OpenAI API Key",
+        "height": 520,
+        "width": 360
+      },
+      "id": "sticky-info",
+      "name": "Info",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [-600, 0]
+    },
+    {
+      "parameters": {},
+      "id": "node-manual-trigger",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [-200, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// ID папки Google Drive с HEIC-фотографиями\n// Можно изменить на нужный folder ID\nconst folderId = '1iEbSMlsHPX6Sg3y0J0znlT47ri78hk9_';\n\nreturn [{ json: { folderId } }];"
+      },
+      "id": "node-set-folder",
+      "name": "Set Folder ID",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [20, 300]
+    },
+    {
+      "parameters": {
+        "operation": "list",
+        "folderId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $json.folderId }}"
+        },
+        "filter": {
+          "foldersOnly": "files"
+        },
+        "options": {}
+      },
+      "id": "node-list-files",
+      "name": "Google Drive — List Files",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Фильтруем только HEIC-файлы\nconst items = $input.all();\nconst heicFiles = items.filter(item => {\n  const name = (item.json.name || '').toLowerCase();\n  const mime = (item.json.mimeType || '').toLowerCase();\n  return name.endsWith('.heic') || mime === 'image/heic';\n});\n\nif (heicFiles.length === 0) {\n  throw new Error('Не найдено HEIC-файлов в папке');\n}\n\nconst folderId = $('Set Folder ID').first().json.folderId;\n\nreturn heicFiles.map(item => ({\n  json: {\n    fileId: item.json.id,\n    fileName: item.json.name,\n    mimeType: item.json.mimeType,\n    parentFolderId: folderId\n  }\n}));"
+      },
+      "id": "node-filter-heic",
+      "name": "Filter HEIC Files",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "id": "node-split-batches",
+      "name": "Split In Batches",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $json.fileId }}"
+        },
+        "options": {}
+      },
+      "id": "node-download-file",
+      "name": "Download File",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Конвертация HEIC → JPEG\nconst binaryData = $input.first().binary;\n\nif (!binaryData || !binaryData.data) {\n  throw new Error('Нет бинарных данных файла');\n}\n\nconst fileBuffer = Buffer.from(binaryData.data.data, 'base64');\nlet base64Image;\nlet mediaType = 'image/jpeg';\n\ntry {\n  // Пробуем sharp для конвертации HEIC → JPEG\n  const sharp = require('sharp');\n  const jpegBuffer = await sharp(fileBuffer)\n    .jpeg({ quality: 85 })\n    .toBuffer();\n  base64Image = jpegBuffer.toString('base64');\n} catch (e) {\n  // Fallback: отправляем как есть\n  base64Image = fileBuffer.toString('base64');\n  mediaType = 'image/heic';\n}\n\nreturn [{\n  json: {\n    base64Image,\n    mediaType,\n    fileId: $('Split In Batches').first().json.fileId,\n    fileName: $('Split In Batches').first().json.fileName,\n    parentFolderId: $('Split In Batches').first().json.parentFolderId\n  }\n}];"
+      },
+      "id": "node-convert-heic",
+      "name": "Convert HEIC → JPEG",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1120, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "openAiApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ model: 'gpt-4o', max_tokens: 100, messages: [{ role: 'user', content: [{ type: 'image_url', image_url: { url: 'data:' + $json.mediaType + ';base64,' + $json.base64Image, detail: 'high' } }, { type: 'text', text: 'This is a photo of a hospital monitor screen showing a patient medical report in German. Look at the top-left corner of the document. There should be a patient ID number (5-7 digits). Extract ONLY the patient ID number. Return ONLY the number, nothing else. If you cannot find it, return UNKNOWN.' }] }] }) }}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "id": "node-openai-vision",
+      "name": "OpenAI Vision — Extract ID",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1340, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Парсинг ответа OpenAI\nconst response = $input.first().json;\nlet text = '';\n\ntry {\n  text = response.choices[0].message.content.trim();\n} catch (e) {\n  text = 'UNKNOWN';\n}\n\n// Валидация: 5-7 цифр\nconst clientId = /^\\d{5,7}$/.test(text) ? text : 'UNKNOWN';\n\nconst prev = $('Convert HEIC → JPEG').first().json;\n\nreturn [{\n  json: {\n    clientId,\n    rawResponse: text,\n    fileId: prev.fileId,\n    fileName: prev.fileName,\n    parentFolderId: prev.parentFolderId\n  }\n}];"
+      },
+      "id": "node-parse-response",
+      "name": "Parse Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1560, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "cond-id-check",
+              "leftValue": "={{ $json.clientId }}",
+              "rightValue": "UNKNOWN",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "node-if-recognized",
+      "name": "ID Recognized?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1780, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Логируем нераспознанный файл — оставляем на месте\nconst prev = $input.first().json;\n\nreturn [{\n  json: {\n    timestamp: new Date().toISOString(),\n    fileName: prev.fileName,\n    fileId: prev.fileId,\n    clientId: 'UNKNOWN',\n    rawResponse: prev.rawResponse,\n    status: 'SKIPPED'\n  }\n}];"
+      },
+      "id": "node-log-unknown",
+      "name": "Log — Skip Unknown",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [2000, 460]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "https://www.googleapis.com/drive/v3/files",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDriveOAuth2Api",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "q",
+              "value": "=name = '{{ $json.clientId }}' and '{{ $json.parentFolderId }}' in parents and mimeType = 'application/vnd.google-apps.folder' and trashed = false"
+            },
+            {
+              "name": "fields",
+              "value": "files(id,name)"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-search-folder",
+      "name": "Search Client Folder",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [2000, 200]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Проверяем существование папки клиента, создаём если нет\nconst response = $input.first().json;\nconst files = response.files || [];\nconst prev = $('Parse Response').first().json;\n\nif (files.length > 0) {\n  // Папка уже существует\n  return [{\n    json: {\n      clientFolderId: files[0].id,\n      needCreate: false,\n      clientId: prev.clientId,\n      fileId: prev.fileId,\n      fileName: prev.fileName,\n      parentFolderId: prev.parentFolderId\n    }\n  }];\n} else {\n  // Нужно создать\n  return [{\n    json: {\n      clientFolderId: null,\n      needCreate: true,\n      clientId: prev.clientId,\n      fileId: prev.fileId,\n      fileName: prev.fileName,\n      parentFolderId: prev.parentFolderId\n    }\n  }];\n}"
+      },
+      "id": "node-check-folder",
+      "name": "Check Folder",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [2220, 200]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "cond-need-create",
+              "leftValue": "={{ $json.needCreate }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "node-if-need-create",
+      "name": "Need Create Folder?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [2440, 200]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.googleapis.com/drive/v3/files",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDriveOAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ name: $json.clientId, mimeType: 'application/vnd.google-apps.folder', parents: [$json.parentFolderId] }) }}",
+        "options": {}
+      },
+      "id": "node-create-folder",
+      "name": "Create Folder",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [2660, 200]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Получаем folder ID (из создания или из поиска)\nconst input = $input.first().json;\nlet clientFolderId;\n\n// Если папка была создана — берём id из ответа API\nif (input.id) {\n  clientFolderId = input.id;\n} else {\n  clientFolderId = input.clientFolderId;\n}\n\n// Данные для перемещения файла\nconst prev = $('Check Folder').first().json;\n\nreturn [{\n  json: {\n    clientFolderId,\n    clientId: prev.clientId,\n    fileId: prev.fileId,\n    fileName: prev.fileName,\n    parentFolderId: prev.parentFolderId\n  }\n}];"
+      },
+      "id": "node-prepare-move",
+      "name": "Prepare Move",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [2880, 200]
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "=https://www.googleapis.com/drive/v3/files/{{ $json.fileId }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDriveOAuth2Api",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "addParents",
+              "value": "={{ $json.clientFolderId }}"
+            },
+            {
+              "name": "removeParents",
+              "value": "={{ $json.parentFolderId }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-move-file",
+      "name": "Move File",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [3100, 200]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Логируем успешное перемещение\nconst prev = $('Check Folder').first().json;\n\nreturn [{\n  json: {\n    timestamp: new Date().toISOString(),\n    fileName: prev.fileName,\n    fileId: prev.fileId,\n    clientId: prev.clientId,\n    status: 'SUCCESS'\n  }\n}];"
+      },
+      "id": "node-log-success",
+      "name": "Log — Success",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [3320, 200]
+    },
+    {
+      "parameters": {
+        "amount": 2,
+        "unit": "seconds"
+      },
+      "id": "node-wait-success",
+      "name": "Wait 2s",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [3540, 200]
+    },
+    {
+      "parameters": {
+        "amount": 2,
+        "unit": "seconds"
+      },
+      "id": "node-wait-unknown",
+      "name": "Wait 2s (Skip)",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [2220, 460]
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set Folder ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Folder ID": {
+      "main": [
+        [
+          {
+            "node": "Google Drive — List Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive — List Files": {
+      "main": [
+        [
+          {
+            "node": "Filter HEIC Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter HEIC Files": {
+      "main": [
+        [
+          {
+            "node": "Split In Batches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split In Batches": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Download File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download File": {
+      "main": [
+        [
+          {
+            "node": "Convert HEIC → JPEG",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert HEIC → JPEG": {
+      "main": [
+        [
+          {
+            "node": "OpenAI Vision — Extract ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Vision — Extract ID": {
+      "main": [
+        [
+          {
+            "node": "Parse Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Response": {
+      "main": [
+        [
+          {
+            "node": "ID Recognized?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ID Recognized?": {
+      "main": [
+        [
+          {
+            "node": "Search Client Folder",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Log — Skip Unknown",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log — Skip Unknown": {
+      "main": [
+        [
+          {
+            "node": "Wait 2s (Skip)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait 2s (Skip)": {
+      "main": [
+        [
+          {
+            "node": "Split In Batches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search Client Folder": {
+      "main": [
+        [
+          {
+            "node": "Check Folder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Folder": {
+      "main": [
+        [
+          {
+            "node": "Need Create Folder?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Need Create Folder?": {
+      "main": [
+        [
+          {
+            "node": "Create Folder",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Prepare Move",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Folder": {
+      "main": [
+        [
+          {
+            "node": "Prepare Move",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Move": {
+      "main": [
+        [
+          {
+            "node": "Move File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Move File": {
+      "main": [
+        [
+          {
+            "node": "Log — Success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log — Success": {
+      "main": [
+        [
+          {
+            "node": "Wait 2s",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait 2s": {
+      "main": [
+        [
+          {
+            "node": "Split In Batches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  }
+}

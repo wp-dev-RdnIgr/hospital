@@ -62,7 +62,7 @@
 - Выход: бинарные данные файла
 
 ### Нода 5 — Execute Command (HEIC → JPEG конвертация)
-- Конвертировать HEIC в JPEG для совместимости с Claude Vision API
+- Конвертировать HEIC в JPEG для совместимости с OpenAI Vision API
 - Использовать системную утилиту `ImageMagick` или `heif-convert`
 - Команда: `convert input.heic output.jpg` (через Code node или Execute Command node)
 - **Альтернатива**: использовать Code node (JavaScript) с sharp/heic-decode если ImageMagick недоступен
@@ -103,7 +103,7 @@
   ```
 - **Выход**: строка с ID клиента (например: `441882`)
 
-### Нода 7 — Code Node (Парсинг ответа Claude)
+### Нода 7 — Code Node (Парсинг ответа OpenAI)
 ```javascript
 const response = $input.first().json;
 const text = response.choices[0].message.content.trim();
@@ -152,7 +152,7 @@ return [{ json: { clientId, fileName: $('Split in Batches').first().json.name, f
 - **OpenAI**: API Key credential
 
 ### Работа с HEIC
-HEIC не поддерживается напрямую Claude Vision API. Варианты конвертации:
+HEIC не поддерживается напрямую OpenAI Vision API. Варианты конвертации:
 1. **ImageMagick** (предпочтительно): `convert file.heic file.jpg`
 2. **Sharp npm** в Code node: `npm install sharp heic-decode`
 3. **Внешний API конвертации** (запасной вариант)
@@ -205,7 +205,7 @@ which convert && convert --version
 ## Порядок разработки (рекомендуемый)
 
 1. Проверить конвертацию HEIC → JPEG на тестовом файле
-2. Настроить и протестировать Claude Vision на 3-5 файлах
+2. Настроить и протестировать OpenAI Vision на 3-5 файлах
 3. Собрать workflow для одного файла end-to-end
 4. Добавить логику создания папок
 5. Добавить батч-обработку всех файлов
