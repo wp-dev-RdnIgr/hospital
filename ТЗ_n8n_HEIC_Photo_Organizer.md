@@ -18,11 +18,12 @@
 1. Принимает ID папки Google Drive с HEIC-фотографиями
 2. Обходит каждый файл
 3. Конвертирует HEIC в JPEG (для отправки в Vision API)
-4. Отправляет изображение в Claude Vision API для распознавания ID клиента
+4. Отправляет изображение в OpenAI Vision API (GPT-4o) для распознавания ID клиента
 5. Создаёт в **той же** папке Google Drive подпапку с именем = ID клиента (если не существует)
 6. Перемещает фото в подпапку соответствующего клиента
+7. Файлы, где не удалось распознать ID, остаются в исходной папке без изменений
 
-Итог: каждый клиент имеет свою подпапку вида `441882/`, в которой лежат все его фотографии.
+Итог: каждый клиент имеет свою подпапку вида `441882/`, в которой лежат все его фотографии. Нераспознанные файлы остаются в корневой папке.
 
 ---
 
@@ -68,30 +69,27 @@
 
 > **Примечание для разработчика**: Проверить доступность ImageMagick на n8n-сервере. Если недоступен — реализовать конвертацию через npm-пакет `sharp` в Code node.
 
-### Нода 6 — HTTP Request (Claude Vision API)
-- **URL**: `https://api.anthropic.com/v1/messages`
+### Нода 6 — HTTP Request (OpenAI Vision API)
+- **URL**: `https://api.openai.com/v1/chat/completions`
 - **Метод**: POST
 - **Headers**:
   ```
-  x-api-key: {{$credentials.anthropic.apiKey}}
-  anthropic-version: 2023-06-01
-  content-type: application/json
+  Authorization: Bearer {{$credentials.openai.apiKey}}
+  Content-Type: application/json
   ```
 - **Body** (JSON):
   ```json
   {
-    "model": "claude-opus-4-5",
+    "model": "gpt-4o",
     "max_tokens": 100,
     "messages": [
       {
         "role": "user",
         "content": [
           {
-            "type": "image",
-            "source": {
-              "type": "base64",
-              "media_type": "image/jpeg",
-              "data": "{{base64EncodedImage}}"
+            "type": "image_url",
+            "image_url": {
+              "url": "data:image/jpeg;base64,{{base64EncodedImage}}"
             }
           },
           {
@@ -108,7 +106,7 @@
 ### Нода 7 — Code Node (Парсинг ответа Claude)
 ```javascript
 const response = $input.first().json;
-const text = response.content[0].text.trim();
+const text = response.choices[0].message.content.trim();
 
 // Валидация: должно быть число (5-7 цифр)
 const clientId = /^\d{5,7}$/.test(text) ? text : 'UNKNOWN';
@@ -119,7 +117,7 @@ return [{ json: { clientId, fileName: $('Split in Batches').first().json.name, f
 ### Нода 8 — IF Node (Проверка распознавания)
 - **Условие**: `clientId !== 'UNKNOWN'`
 - **True**: переходим к созданию/проверке папки
-- **False**: файл помещается в папку `_UNKNOWN/` или логируется для ручной проверки
+- **False**: файл остаётся в исходной папке без изменений (пропускаем, переходим к следующему файлу)
 
 ### Нода 9 — Google Drive: Search Folder (Проверка существования папки)
 - Поиск папки с именем = `clientId` внутри родительской папки
@@ -151,7 +149,7 @@ return [{ json: { clientId, fileName: $('Split in Batches').first().json.name, f
 
 ### Аутентификация
 - **Google Drive**: OAuth2 credential (уже настроен в n8n Webpromo)
-- **Anthropic**: API Key credential
+- **OpenAI**: API Key credential
 
 ### Работа с HEIC
 HEIC не поддерживается напрямую Claude Vision API. Варианты конвертации:
@@ -165,13 +163,13 @@ which convert && convert --version
 ```
 
 ### Обработка ошибок
-- Таймаут Claude API: retry 3 раза с паузой 5 сек
-- Файл не распознан: переместить в папку `_UNKNOWN_` + логировать
+- Таймаут OpenAI API: retry 3 раза с паузой 5 сек
+- Файл не распознан: оставить в исходной папке + логировать
 - Google Drive quota exceeded: throttle — 1 запрос в 2 секунды
 
 ### Rate Limiting
 - Между обработкой файлов: задержка 1-2 секунды (Wait node)
-- Claude API: не более 50 запросов в минуту
+- OpenAI API: не более 50 запросов в минуту
 - Google Drive API: не более 1000 запросов в 100 секунд
 
 ---
@@ -199,8 +197,7 @@ which convert && convert --version
     📷 IMG_003.HEIC
     📷 IMG_047.HEIC
     📷 IMG_088.HEIC
-  📁 _UNKNOWN/
-    📷 IMG_077.HEIC  ← не распознан
+  📷 IMG_077.HEIC  ← не распознан, остался в корне
 ```
 
 ---
@@ -224,7 +221,7 @@ which convert && convert --version
 - [ ] ID клиента извлекается корректно (проверить на 10 случайных файлах)
 - [ ] Для каждого уникального ID создаётся ровно 1 папка
 - [ ] Файлы перемещены (не скопированы) в соответствующие папки
-- [ ] Нераспознанные файлы попадают в `_UNKNOWN/`
+- [ ] Нераспознанные файлы остаются в исходной папке
 - [ ] Workflow не падает при обработке 100 файлов подряд
 - [ ] Логи сохранены (Google Sheets или n8n execution log)
 
@@ -232,6 +229,6 @@ which convert && convert --version
 
 ## Дополнительные замечания
 
-- **Конфиденциальность**: данные пациентов — медицинская тайна. Claude API обрабатывает изображения без сохранения (согласно политике Anthropic), но убедитесь в соответствии с GDPR/HIPAA требованиями клиники.
-- **Промпт для Claude**: можно улучшить, указав конкретный шрифт или контекст ("German medical BMI report"), если точность распознавания будет недостаточной.
-- **Альтернатива Claude**: если нужно исключить внешние API — можно использовать локальный OCR (Tesseract) через Execute Command node.
+- **Конфиденциальность**: данные пациентов — медицинская тайна. OpenAI API обрабатывает изображения согласно своей политике, но убедитесь в соответствии с GDPR/HIPAA требованиями клиники.
+- **Промпт для OpenAI**: можно улучшить, указав конкретный шрифт или контекст ("German medical BMI report"), если точность распознавания будет недостаточной.
+- **Альтернатива OpenAI**: если нужно исключить внешние API — можно использовать локальный OCR (Tesseract) через Execute Command node.
