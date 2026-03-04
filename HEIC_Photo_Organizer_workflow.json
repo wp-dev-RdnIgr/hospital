@@ -1,5 +1,5 @@
 {
-    "updatedAt": "2026-03-04T17:18:28.341Z",
+    "updatedAt": "2026-03-04T19:35:16.156Z",
     "createdAt": "2026-03-04T16:51:31.541Z",
     "id": "gFcvIN83wmc9UvkS",
     "name": "HEIC Photo Organizer \u2014 Sort by Patient ID",
@@ -943,7 +943,8 @@
         "executionOrder": "v1",
         "availableInMCP": false,
         "timeSavedMode": "fixed",
-        "callerPolicy": "workflowsFromSameOwner"
+        "callerPolicy": "workflowsFromSameOwner",
+        "errorWorkflow": "03h9SHa3Bj7pe8Gk"
     },
     "staticData": {
         "node:Schedule Trigger": {
@@ -956,7 +957,7 @@
     "pinData": {},
     "versionId": "41092d92-a4f4-4c93-b63b-e2d81c38e00d",
     "activeVersionId": "41092d92-a4f4-4c93-b63b-e2d81c38e00d",
-    "versionCounter": 26,
+    "versionCounter": 29,
     "triggerCount": 2,
     "shared": [
         {
@@ -1959,6 +1960,14 @@
             {
                 "createdAt": "2026-03-04T17:18:28.483Z",
                 "id": 803,
+                "workflowId": "gFcvIN83wmc9UvkS",
+                "versionId": "41092d92-a4f4-4c93-b63b-e2d81c38e00d",
+                "event": "activated",
+                "userId": "6f7766c1-8e6d-478f-a667-93619ba35dbe"
+            },
+            {
+                "createdAt": "2026-03-04T19:35:16.601Z",
+                "id": 805,
                 "workflowId": "gFcvIN83wmc9UvkS",
                 "versionId": "41092d92-a4f4-4c93-b63b-e2d81c38e00d",
                 "event": "activated",
