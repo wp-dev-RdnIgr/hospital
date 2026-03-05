@@ -1,1037 +1,2297 @@
 {
-  "name": "Medical Photos HEIC → Google Sheets",
-  "nodes": [
-    {
-      "id": "5027c2ee-900ee096",
-      "name": "Manual Trigger",
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
-      "position": [
-        0,
-        -300
-      ],
-      "parameters": {}
+    "updatedAt": "2026-03-05T10:59:49.904Z",
+    "createdAt": "2026-03-05T09:51:37.044Z",
+    "id": "1yit8oX2g097l1U9",
+    "name": "Medical Photos HEIC \u2192 Google Sheets",
+    "description": null,
+    "active": true,
+    "isArchived": false,
+    "nodes": [
+        {
+            "id": "Manual_Trigger",
+            "name": "Manual Trigger",
+            "type": "n8n-nodes-base.manualTrigger",
+            "typeVersion": 1,
+            "position": [
+                0,
+                -300
+            ],
+            "parameters": {}
+        },
+        {
+            "id": "Webhook1",
+            "name": "Webhook1",
+            "type": "n8n-nodes-base.webhook",
+            "typeVersion": 2,
+            "position": [
+                0,
+                -500
+            ],
+            "parameters": {
+                "httpMethod": "GET",
+                "path": "07362437-9b53-435b-869f-55e872df9be0",
+                "options": {}
+            },
+            "webhookId": "07362437-9b53-435b-869f-55e872df9be0"
+        },
+        {
+            "id": "Set_Config",
+            "name": "Set Config",
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                250,
+                -300
+            ],
+            "parameters": {
+                "jsCode": "const staticData = $getWorkflowStaticData('global');\nstaticData.clients = {};\nstaticData.allFiles = [];\n\nreturn [{ json: {\n  rootFolderId: \"1iEbSMlsHPX6Sg3y0J0znlT47ri78hk9_\",\n  spreadsheetId: \"1cgctBCQVmqpfQKdomYLfGAWVwRjT1Qw0-dl9F5RzoOg\",\n  sheetGid: 1199154574,\n  sheetName: \"Patientendaten\",\n  testClientIds: [\"1614978\",\"443974\",\"443074\",\"444571\",\"441882\",\"448515\",\"190716\",\"431306\"]\n}}];"
+            }
+        },
+        {
+            "id": "List_Subfolders",
+            "name": "List Subfolders",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                500,
+                -300
+            ],
+            "parameters": {
+                "url": "https://www.googleapis.com/drive/v3/files",
+                "authentication": "predefinedCredentialType",
+                "nodeCredentialType": "googleDriveOAuth2Api",
+                "sendQuery": true,
+                "queryParameters": {
+                    "parameters": [
+                        {
+                            "name": "q",
+                            "value": "='{{ $json.rootFolderId }}' in parents AND mimeType='application/vnd.google-apps.folder' AND trashed=false"
+                        },
+                        {
+                            "name": "fields",
+                            "value": "files(id,name)"
+                        },
+                        {
+                            "name": "pageSize",
+                            "value": "200"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "credentials": {
+                "googleDriveOAuth2Api": {
+                    "id": "Nl36H51nJBoCaf67",
+                    "name": "Google Drive for n8n"
+                }
+            }
+        },
+        {
+            "id": "Filter_Clients",
+            "name": "Filter Clients",
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                750,
+                -300
+            ],
+            "parameters": {
+                "jsCode": "const config = $('Set Config').first().json;\nconst folders = $input.first().json.files || [];\nconst allowed = config.testClientIds;\nconst filtered = folders.filter(f => allowed.includes(f.name) && !f.name.endsWith('_DONE'));\nif (!filtered.length) return [{ json: { empty: true } }];\nreturn filtered.map(f => ({ json: { clientFolderId: f.id, clientFolderName: f.name } }));"
+            }
+        },
+        {
+            "id": "Split_Clients",
+            "name": "Split Clients",
+            "type": "n8n-nodes-base.splitInBatches",
+            "typeVersion": 3,
+            "position": [
+                1000,
+                -300
+            ],
+            "parameters": {
+                "batchSize": 1,
+                "options": {}
+            }
+        },
+        {
+            "id": "List_Client_Files",
+            "name": "List Client Files",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                1250,
+                -300
+            ],
+            "parameters": {
+                "url": "https://www.googleapis.com/drive/v3/files",
+                "authentication": "predefinedCredentialType",
+                "nodeCredentialType": "googleDriveOAuth2Api",
+                "sendQuery": true,
+                "queryParameters": {
+                    "parameters": [
+                        {
+                            "name": "q",
+                            "value": "='{{ $json.clientFolderId }}' in parents AND trashed=false"
+                        },
+                        {
+                            "name": "fields",
+                            "value": "files(id,name,mimeType,thumbnailLink)"
+                        },
+                        {
+                            "name": "pageSize",
+                            "value": "200"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "credentials": {
+                "googleDriveOAuth2Api": {
+                    "id": "Nl36H51nJBoCaf67",
+                    "name": "Google Drive for n8n"
+                }
+            }
+        },
+        {
+            "id": "Collect_Files",
+            "name": "Collect Files",
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                1500,
+                -300
+            ],
+            "parameters": {
+                "jsCode": "const staticData = $getWorkflowStaticData('global');\nconst response = $input.first().json;\nconst prev = $('Split Clients').first().json;\nconst allFiles = response.files || [];\n\nconst allowed = ['.heic', '.jpg', '.jpeg', '.png'];\nconst mediaFiles = allFiles.filter(f =>\n  !f.name.includes('_DONE') &&\n  allowed.some(ext => f.name.toLowerCase().endsWith(ext))\n);\n\nfor (const f of mediaFiles) {\n  staticData.allFiles.push({\n    fileId: f.id,\n    fileName: f.name,\n    mimeType: f.mimeType,\n    thumbnailLink: f.thumbnailLink || null,\n    clientFolderId: prev.clientFolderId,\n    clientFolderName: prev.clientFolderName\n  });\n}\n\nreturn [{ json: { collected: mediaFiles.length, total: staticData.allFiles.length, client: prev.clientFolderName } }];"
+            }
+        },
+        {
+            "id": "Output_All_Files",
+            "name": "Output All Files",
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                1250,
+                -600
+            ],
+            "parameters": {
+                "jsCode": "const staticData = $getWorkflowStaticData('global');\nconst files = staticData.allFiles || [];\nif (!files.length) return [{ json: { empty: true } }];\nreturn files.map(f => ({ json: f }));"
+            }
+        },
+        {
+            "id": "Has_Files?",
+            "name": "Has Files?",
+            "type": "n8n-nodes-base.if",
+            "typeVersion": 2,
+            "position": [
+                1500,
+                -600
+            ],
+            "parameters": {
+                "conditions": {
+                    "options": {
+                        "caseSensitive": true,
+                        "leftValue": "",
+                        "typeValidation": "strict"
+                    },
+                    "conditions": [
+                        {
+                            "id": "hf",
+                            "leftValue": "={{ $json.empty }}",
+                            "rightValue": true,
+                            "operator": {
+                                "type": "boolean",
+                                "operation": "notEquals"
+                            }
+                        }
+                    ],
+                    "combinator": "and"
+                },
+                "options": {}
+            }
+        },
+        {
+            "id": "Split_Files",
+            "name": "Split Files",
+            "type": "n8n-nodes-base.splitInBatches",
+            "typeVersion": 3,
+            "position": [
+                1750,
+                -600
+            ],
+            "parameters": {
+                "batchSize": 1,
+                "options": {}
+            }
+        },
+        {
+            "id": "Get_File_Metadata",
+            "name": "Get File Metadata",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                2000,
+                -600
+            ],
+            "parameters": {
+                "url": "=https://www.googleapis.com/drive/v3/files/{{ $json.fileId }}",
+                "authentication": "predefinedCredentialType",
+                "nodeCredentialType": "googleDriveOAuth2Api",
+                "sendQuery": true,
+                "queryParameters": {
+                    "parameters": [
+                        {
+                            "name": "fields",
+                            "value": "id,name,thumbnailLink,mimeType"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "credentials": {
+                "googleDriveOAuth2Api": {
+                    "id": "Nl36H51nJBoCaf67",
+                    "name": "Google Drive for n8n"
+                }
+            }
+        },
+        {
+            "id": "Build_OpenAI_Request",
+            "name": "Build OpenAI Request",
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                2250,
+                -600
+            ],
+            "parameters": {
+                "jsCode": "const fileData = $input.first().json;\nconst prev = $('Split Files').first().json;\n\nlet base64Image = null;\nlet mediaType = 'image/jpeg';\n\nconst thumbnailLink = fileData.thumbnailLink;\nif (thumbnailLink) {\n  const highResUrl = thumbnailLink.replace(/=s\\d+$/, '=s2048');\n  try {\n    const response = await this.helpers.httpRequest({ method: 'GET', url: highResUrl, encoding: 'arraybuffer' });\n    base64Image = Buffer.from(response).toString('base64');\n  } catch (e) {}\n}\n\nif (!base64Image) {\n  return [{ json: { error: true, errorMessage: 'No thumbnail', fileName: fileData.name, fileId: fileData.id,\n    clientFolderId: prev.clientFolderId, clientFolderName: prev.clientFolderName }}];\n}\n\nconst PROMPT = `This is a photo of a German hospital monitor screen showing a patient medical report (BIA/body composition analysis). Extract ALL visible medical measurements and return ONLY this JSON object (no other text, no markdown, no code blocks):\n{\n  \"client_id\": \"5-9 digit number visible in top area, or null\",\n  \"client_name\": \"patient full name if visible, or null\",\n  \"date\": \"date in DD.MM.YYYY format if visible, or null\",\n  \"Gewicht_kg\": number or null, \"Grosse_cm\": number or null, \"BMI_kg_m2\": number or null,\n  \"FM_kg\": number or null, \"FM_pct\": number or null, \"FMI_kg_m2\": number or null,\n  \"FFM_kg\": number or null, \"FFM_pct\": number or null, \"FFMI_kg_m2\": number or null,\n  \"SMM_kg\": number or null, \"R_ohm\": number or null, \"Xc_ohm\": number or null,\n  \"VAT_l\": number or null, \"WC_cm\": number or null,\n  \"phase_angle_deg\": number or null, \"perzentile\": number or null,\n  \"TBW_l\": number or null, \"TBW_pct\": number or null,\n  \"ECW_l\": number or null, \"ECW_pct\": number or null, \"ECW_TBW_pct\": number or null\n}`;\n\nreturn [{ json: {\n  requestBody: {\n    model: \"gpt-4o\", max_tokens: 800,\n    messages: [\n      { role: \"system\", content: \"You are a medical data extraction assistant. Extract data from hospital monitor screen photos. Always respond with valid JSON only.\" },\n      { role: \"user\", content: [\n        { type: \"image_url\", image_url: { url: \"data:\" + mediaType + \";base64,\" + base64Image, detail: \"high\" } },\n        { type: \"text\", text: PROMPT }\n      ]}\n    ]\n  },\n  fileName: fileData.name, fileId: fileData.id,\n  clientFolderId: prev.clientFolderId, clientFolderName: prev.clientFolderName, error: false\n}}];"
+            }
+        },
+        {
+            "id": "Image_OK?",
+            "name": "Image OK?",
+            "type": "n8n-nodes-base.if",
+            "typeVersion": 2,
+            "position": [
+                2500,
+                -600
+            ],
+            "parameters": {
+                "conditions": {
+                    "options": {
+                        "caseSensitive": true,
+                        "leftValue": "",
+                        "typeValidation": "strict"
+                    },
+                    "conditions": [
+                        {
+                            "id": "io",
+                            "leftValue": "={{ $json.error }}",
+                            "rightValue": true,
+                            "operator": {
+                                "type": "boolean",
+                                "operation": "notEquals"
+                            }
+                        }
+                    ],
+                    "combinator": "and"
+                },
+                "options": {}
+            }
+        },
+        {
+            "id": "OpenAI_Vision_API",
+            "name": "OpenAI Vision API",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                2750,
+                -600
+            ],
+            "parameters": {
+                "method": "POST",
+                "url": "https://api.openai.com/v1/chat/completions",
+                "authentication": "predefinedCredentialType",
+                "nodeCredentialType": "openAiApi",
+                "sendBody": true,
+                "specifyBody": "json",
+                "jsonBody": "={{ JSON.stringify($json.requestBody) }}",
+                "options": {
+                    "timeout": 60000,
+                    "retry": {
+                        "enabled": true,
+                        "maxRetries": 3,
+                        "retryInterval": 10000
+                    }
+                }
+            },
+            "credentials": {
+                "openAiApi": {
+                    "id": "b1hLC5E1Ad7p27A9",
+                    "name": "OpenAi - course generator"
+                }
+            }
+        },
+        {
+            "id": "Parse_&_Accumulate",
+            "name": "Parse & Accumulate",
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                3000,
+                -600
+            ],
+            "parameters": {
+                "jsCode": "const staticData = $getWorkflowStaticData('global');\nif (!staticData.clients) staticData.clients = {};\n\nconst resp = $input.first().json;\nconst prev = $('Split Files').first().json;\nconst clientFolderName = prev.clientFolderName;\n\nlet parsed;\ntry {\n  let rawText = resp.choices && resp.choices[0] ? resp.choices[0].message.content.trim() : '';\n  const clean = rawText.replace(/^```json\\s*/,'').replace(/\\s*```$/,'').trim();\n  parsed = JSON.parse(clean);\n} catch(e) {\n  return [{ json: { parseError: true, fileName: prev.fileName, fileId: prev.fileId,\n    clientFolderId: prev.clientFolderId, clientFolderName, rawResponse: resp.choices ? resp.choices[0].message.content : JSON.stringify(resp), errorMessage: e.message }}];\n}\n\nconst clientId = (parsed.client_id && String(parsed.client_id).trim()) || clientFolderName;\nconst date = parsed.date || \"unbekannt\";\n\nif (!staticData.clients[clientId]) {\n  staticData.clients[clientId] = { client_id: clientId, client_name: \"\", folderName: clientFolderName, operations: {} };\n}\nif (parsed.client_name && !staticData.clients[clientId].client_name) staticData.clients[clientId].client_name = parsed.client_name;\nif (!staticData.clients[clientId].operations[date]) staticData.clients[clientId].operations[date] = {};\n\nconst FIELDS = [\"Gewicht_kg\",\"Grosse_cm\",\"BMI_kg_m2\",\"FM_kg\",\"FM_pct\",\"FMI_kg_m2\",\"FFM_kg\",\"FFM_pct\",\"FFMI_kg_m2\",\"SMM_kg\",\"R_ohm\",\"Xc_ohm\",\"VAT_l\",\"WC_cm\",\"phase_angle_deg\",\"perzentile\",\"TBW_l\",\"TBW_pct\",\"ECW_l\",\"ECW_pct\",\"ECW_TBW_pct\"];\nconst op = staticData.clients[clientId].operations[date];\nfor (const field of FIELDS) { if (parsed[field] !== null && parsed[field] !== undefined) op[field] = parsed[field]; }\n\nreturn [{ json: { parseError: false, clientId, date, fileName: prev.fileName, fileId: prev.fileId, clientFolderId: prev.clientFolderId, clientFolderName }}];"
+            }
+        },
+        {
+            "id": "Parse_OK?",
+            "name": "Parse OK?",
+            "type": "n8n-nodes-base.if",
+            "typeVersion": 2,
+            "position": [
+                3250,
+                -600
+            ],
+            "parameters": {
+                "conditions": {
+                    "options": {
+                        "caseSensitive": true,
+                        "leftValue": "",
+                        "typeValidation": "strict"
+                    },
+                    "conditions": [
+                        {
+                            "id": "po",
+                            "leftValue": "={{ $json.parseError }}",
+                            "rightValue": true,
+                            "operator": {
+                                "type": "boolean",
+                                "operation": "notEquals"
+                            }
+                        }
+                    ],
+                    "combinator": "and"
+                },
+                "options": {}
+            }
+        },
+        {
+            "id": "Rename_File_DONE",
+            "name": "Rename File DONE",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                3500,
+                -600
+            ],
+            "parameters": {
+                "method": "PATCH",
+                "url": "=https://www.googleapis.com/drive/v3/files/{{ $json.fileId }}",
+                "authentication": "predefinedCredentialType",
+                "nodeCredentialType": "googleDriveOAuth2Api",
+                "sendBody": true,
+                "specifyBody": "json",
+                "jsonBody": "={{ JSON.stringify({ name: (() => { const n = $json.fileName; const d = n.lastIndexOf('.'); return d > -1 ? n.slice(0, d) + '_DONE' + n.slice(d) : n + '_DONE'; })() }) }}",
+                "options": {}
+            },
+            "credentials": {
+                "googleDriveOAuth2Api": {
+                    "id": "Nl36H51nJBoCaf67",
+                    "name": "Google Drive for n8n"
+                }
+            }
+        },
+        {
+            "id": "Delay_1.5s",
+            "name": "Delay 3s",
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                3750,
+                -600
+            ],
+            "parameters": {
+                "jsCode": "await new Promise(r => setTimeout(r, 3000));\nreturn $input.all();"
+            }
+        },
+        {
+            "id": "Log_Error",
+            "name": "Log Error",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                3500,
+                -400
+            ],
+            "parameters": {
+                "method": "POST",
+                "url": "=https://sheets.googleapis.com/v4/spreadsheets/{{ $('Set Config').first().json.spreadsheetId }}/values/_FEHLER!A1:E1:append",
+                "authentication": "predefinedCredentialType",
+                "nodeCredentialType": "googleDriveOAuth2Api",
+                "sendQuery": true,
+                "queryParameters": {
+                    "parameters": [
+                        {
+                            "name": "valueInputOption",
+                            "value": "RAW"
+                        },
+                        {
+                            "name": "insertDataOption",
+                            "value": "INSERT_ROWS"
+                        }
+                    ]
+                },
+                "sendBody": true,
+                "specifyBody": "json",
+                "jsonBody": "={{ JSON.stringify({ values: [[ new Date().toISOString(), $json.clientFolderName || '', $json.fileName || '', $json.errorMessage || 'Error', ($json.rawResponse || '').substring(0, 500) ]] }) }}",
+                "options": {
+                    "allowUnauthorizedCerts": true
+                }
+            },
+            "credentials": {
+                "googleDriveOAuth2Api": {
+                    "id": "Nl36H51nJBoCaf67",
+                    "name": "Google Drive for n8n"
+                }
+            }
+        },
+        {
+            "id": "Delay_Error",
+            "name": "Delay Error",
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                3750,
+                -400
+            ],
+            "parameters": {
+                "jsCode": "await new Promise(r => setTimeout(r, 1000));\nreturn $input.all();"
+            }
+        },
+        {
+            "id": "Prepare_All_Clients",
+            "name": "Prepare All Clients",
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                2000,
+                -900
+            ],
+            "parameters": {
+                "jsCode": "const staticData = $getWorkflowStaticData('global');\nconst clients = staticData.clients || {};\nconst config = $('Set Config').first().json;\n\nconst clientList = Object.values(clients).filter(c => Object.keys(c.operations).length > 0);\nif (!clientList.length) return [{ json: { empty: true } }];\n\nconst FIELD_ORDER = [\"Gewicht_kg\",\"Grosse_cm\",\"BMI_kg_m2\",\"FM_kg\",\"FM_pct\",\"FMI_kg_m2\",\"FFM_kg\",\"FFM_pct\",\"FFMI_kg_m2\",\"SMM_kg\",\"R_ohm\",\"Xc_ohm\",\"VAT_l\",\"WC_cm\",\"phase_angle_deg\",\"perzentile\",\"TBW_l\",\"TBW_pct\",\"ECW_l\",\"ECW_pct\",\"ECW_TBW_pct\"];\n\nreturn clientList.map(c => {\n  const sortedDates = Object.keys(c.operations).filter(d => d !== \"unbekannt\")\n    .sort((a, b) => { const p = d => { const [dd,mm,yy] = d.split('.'); return new Date(yy, mm-1, dd); }; return p(a) - p(b); });\n  if (c.operations[\"unbekannt\"]) sortedDates.push(\"unbekannt\");\n\n  return { json: {\n    clientId: c.client_id, clientName: c.client_name || '', folderName: c.folderName,\n    operations: sortedDates.map((date, i) => ({ operationNumber: i+1, date, fields: c.operations[date] })),\n    fieldOrder: FIELD_ORDER, totalOps: sortedDates.length,\n    spreadsheetId: config.spreadsheetId, sheetGid: config.sheetGid, sheetName: config.sheetName,\n    config\n  }};\n});"
+            }
+        },
+        {
+            "id": "Split_Clients_Sheets",
+            "name": "Split Clients Sheets",
+            "type": "n8n-nodes-base.splitInBatches",
+            "typeVersion": 3,
+            "position": [
+                2250,
+                -900
+            ],
+            "parameters": {
+                "batchSize": 1,
+                "options": {}
+            }
+        },
+        {
+            "id": "Read_Sheet",
+            "name": "Read Sheet",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                2500,
+                -900
+            ],
+            "parameters": {
+                "url": "=https://sheets.googleapis.com/v4/spreadsheets/{{ $json.spreadsheetId }}/values/{{ $json.sheetName }}!A1:ZZ2000",
+                "authentication": "predefinedCredentialType",
+                "nodeCredentialType": "googleDriveOAuth2Api",
+                "options": {}
+            },
+            "credentials": {
+                "googleDriveOAuth2Api": {
+                    "id": "Nl36H51nJBoCaf67",
+                    "name": "Google Drive for n8n"
+                }
+            }
+        },
+        {
+            "id": "Build_Sheets_Request",
+            "name": "Build Sheets Requests",
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                2750,
+                -900
+            ],
+            "parameters": {
+                "jsCode": "const sheetData = $input.first().json;\nconst prev = $('Split Clients Sheets').first().json;\nconst rows = sheetData.values || [];\nconst clientId = prev.clientId;\nconst clientName = prev.clientName;\nconst operations = prev.operations;\nconst FIELD_ORDER = prev.fieldOrder;\nconst sheetGid = prev.sheetGid;\nconst spreadsheetId = prev.spreadsheetId;\nconst sheetName = prev.sheetName;\nconst COLS_PER_OP = 21;\nconst START_COL = 2;\n\nconst headerRow = rows[1] || [];\nlet maxOpBlock = 0;\nheaderRow.forEach(cell => {\n  const match = cell && String(cell).match(/^(\\d+)\\.\\s*Operation/);\n  if (match) maxOpBlock = Math.max(maxOpBlock, parseInt(match[1]));\n});\n\nconst clientRowMap = {};\nfor (let i = 5; i < rows.length; i += 2) {\n  const id = rows[i] && rows[i][0];\n  if (id) clientRowMap[String(id).trim()] = i + 1;\n}\nconst usedRows = Object.values(clientRowMap);\nconst nextFreeRow = usedRows.length > 0 ? Math.max(...usedRows) + 2 : 7;\n\nlet dateRow, dataRow;\nif (clientRowMap[clientId]) { dateRow = clientRowMap[clientId]; dataRow = dateRow + 1; }\nelse { dateRow = nextFreeRow; dataRow = nextFreeRow + 1; }\n\nconst valueRanges = [];\nconst mergeRequests = [];\n\nconst SECTION_HEADERS = ['BMI','BMI','BMI','Fettmasse','Fettmasse','Fettmasse','Fettfreie Masse','Fettfreie Masse','Fettfreie Masse','Skelettmuskelmasse','BIVA','BIVA','Viszerales Fett & Taillenumfang','Viszerales Fett & Taillenumfang','Phasenwinkel','Phasenwinkel','Wasser','Wasser','Wasser','Wasser','Wasser'];\nconst FIELD_NAMES = ['Gewicht','Gr\u00f6\u00dfe','BMI','FM','FM','FMI','FFM','FFM','FFMI','SMM','R','Xc','VAT','Taillenumfang','\u03c6','Perzentile','TBW','TBW','ECW','ECW','ECW/TBW'];\nconst UNITS = ['kg','cm','kg/m\u00b2','kg','%','kg/m\u00b2','kg','%','kg/m\u00b2','kg','\u03a9','\u03a9','l','cm','\u00b0','\u2014','l','%','l','%','%'];\n\nfunction colToLetter(col) { let l=''; while(col>=0){l=String.fromCharCode(65+(col%26))+l;col=Math.floor(col/26)-1;} return l; }\n\n// Headers for new op blocks\nfor (let opIdx = maxOpBlock; opIdx < operations.length; opIdx++) {\n  const cs = START_COL + opIdx * COLS_PER_OP;\n  const cl = colToLetter(cs); const ce = colToLetter(cs + COLS_PER_OP - 1);\n  const r2 = new Array(COLS_PER_OP).fill(''); r2[0] = (opIdx+1)+'. Operation';\n  valueRanges.push({range: sheetName+'!'+cl+'2:'+ce+'2', values: [r2]});\n  valueRanges.push({range: sheetName+'!'+cl+'3:'+ce+'3', values: [SECTION_HEADERS]});\n  valueRanges.push({range: sheetName+'!'+cl+'4:'+ce+'4', values: [FIELD_NAMES]});\n  valueRanges.push({range: sheetName+'!'+cl+'5:'+ce+'5', values: [UNITS]});\n  mergeRequests.push({mergeCells:{range:{sheetId:sheetGid,startRowIndex:1,endRowIndex:2,startColumnIndex:cs,endColumnIndex:cs+COLS_PER_OP},mergeType:\"MERGE_ALL\"}});\n  [{s:0,c:3},{s:3,c:3},{s:6,c:3},{s:10,c:2},{s:12,c:2},{s:14,c:2},{s:16,c:5}].forEach(sec => {\n    mergeRequests.push({mergeCells:{range:{sheetId:sheetGid,startRowIndex:2,endRowIndex:3,startColumnIndex:cs+sec.s,endColumnIndex:cs+sec.s+sec.c},mergeType:\"MERGE_ALL\"}});\n  });\n}\n\n// Client data\nconst maxCols = START_COL + Math.max(operations.length, maxOpBlock) * COLS_PER_OP;\nconst dateVals = new Array(maxCols).fill('');\nconst dataVals = new Array(maxCols).fill('');\ndateVals[0] = clientId; dateVals[1] = clientName;\n\noperations.forEach((op, idx) => {\n  const co = START_COL + idx * COLS_PER_OP;\n  dateVals[co] = 'Datum der Operation: ' + op.date;\n  FIELD_ORDER.forEach((field, fi) => {\n    const v = op.fields[field];\n    if (v !== undefined && v !== null) dataVals[co + fi] = v;\n  });\n  mergeRequests.push({mergeCells:{range:{sheetId:sheetGid,startRowIndex:dateRow-1,endRowIndex:dateRow,startColumnIndex:co,endColumnIndex:co+COLS_PER_OP},mergeType:\"MERGE_ALL\"}});\n});\n\nvalueRanges.push({range:sheetName+'!A'+dateRow+':'+colToLetter(maxCols-1)+dateRow, values:[dateVals]});\nvalueRanges.push({range:sheetName+'!A'+dataRow+':'+colToLetter(maxCols-1)+dataRow, values:[dataVals]});\n\nreturn [{ json: { spreadsheetId, sheetName, sheetGid, valueRanges, mergeRequests, clientId, clientFolderName: prev.folderName, clientFolderId: null }}];"
+            }
+        },
+        {
+            "id": "Sheets_Merge",
+            "name": "Sheets Merge",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                3000,
+                -900
+            ],
+            "parameters": {
+                "method": "POST",
+                "url": "=https://sheets.googleapis.com/v4/spreadsheets/{{ $json.spreadsheetId }}:batchUpdate",
+                "authentication": "predefinedCredentialType",
+                "nodeCredentialType": "googleDriveOAuth2Api",
+                "sendBody": true,
+                "specifyBody": "json",
+                "jsonBody": "={{ JSON.stringify({ requests: $json.mergeRequests }) }}",
+                "options": {}
+            },
+            "credentials": {
+                "googleDriveOAuth2Api": {
+                    "id": "Nl36H51nJBoCaf67",
+                    "name": "Google Drive for n8n"
+                }
+            }
+        },
+        {
+            "id": "Sheets_Write",
+            "name": "Sheets Write",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                3250,
+                -900
+            ],
+            "parameters": {
+                "method": "POST",
+                "url": "=https://sheets.googleapis.com/v4/spreadsheets/{{ $json.spreadsheetId }}/values:batchUpdate",
+                "authentication": "predefinedCredentialType",
+                "nodeCredentialType": "googleDriveOAuth2Api",
+                "sendBody": true,
+                "specifyBody": "json",
+                "jsonBody": "={{ JSON.stringify({ valueInputOption: 'RAW', data: $('Build Sheets Requests').first().json.valueRanges }) }}",
+                "options": {}
+            },
+            "credentials": {
+                "googleDriveOAuth2Api": {
+                    "id": "Nl36H51nJBoCaf67",
+                    "name": "Google Drive for n8n"
+                }
+            }
+        },
+        {
+            "id": "Find_Client_Folder",
+            "name": "Find Client Folder",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                3500,
+                -900
+            ],
+            "parameters": {
+                "url": "https://www.googleapis.com/drive/v3/files",
+                "authentication": "predefinedCredentialType",
+                "nodeCredentialType": "googleDriveOAuth2Api",
+                "sendQuery": true,
+                "queryParameters": {
+                    "parameters": [
+                        {
+                            "name": "q",
+                            "value": "=name='{{ $('Split Clients Sheets').first().json.folderName }}' AND '{{ $('Set Config').first().json.rootFolderId }}' in parents AND mimeType='application/vnd.google-apps.folder' AND trashed=false"
+                        },
+                        {
+                            "name": "fields",
+                            "value": "files(id,name)"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "credentials": {
+                "googleDriveOAuth2Api": {
+                    "id": "Nl36H51nJBoCaf67",
+                    "name": "Google Drive for n8n"
+                }
+            }
+        },
+        {
+            "id": "Rename_Folder_DONE",
+            "name": "Rename Folder DONE",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                3750,
+                -900
+            ],
+            "parameters": {
+                "method": "PATCH",
+                "url": "=https://www.googleapis.com/drive/v3/files/{{ $json.files[0].id }}",
+                "authentication": "predefinedCredentialType",
+                "nodeCredentialType": "googleDriveOAuth2Api",
+                "sendBody": true,
+                "specifyBody": "json",
+                "jsonBody": "={{ JSON.stringify({ name: $json.files[0].name + '_DONE' }) }}",
+                "options": {}
+            },
+            "credentials": {
+                "googleDriveOAuth2Api": {
+                    "id": "Nl36H51nJBoCaf67",
+                    "name": "Google Drive for n8n"
+                }
+            }
+        },
+        {
+            "id": "Delay_Client",
+            "name": "Delay Client",
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                4000,
+                -900
+            ],
+            "parameters": {
+                "jsCode": "await new Promise(r => setTimeout(r, 1000));\nreturn $input.all();"
+            }
+        },
+        {
+            "id": "Instructions",
+            "name": "Instructions",
+            "type": "n8n-nodes-base.stickyNote",
+            "typeVersion": 1,
+            "position": [
+                -200,
+                -1000
+            ],
+            "parameters": {
+                "content": "## Medical Photos HEIC \u2192 Google Sheets (v2)\n\n**Architecture:** 3-phase sequential (no nested loops)\n1. Collect all files from all client folders\n2. Process each file through OpenAI Vision (flat loop)\n3. Write results to Sheets per client\n\n**Model:** GPT-4o (OpenAI)\n**Rate limit:** 1.5s between OpenAI calls",
+                "width": 400,
+                "height": 200
+            }
+        }
+    ],
+    "connections": {
+        "Manual Trigger": {
+            "main": [
+                [
+                    {
+                        "node": "Set Config",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Webhook1": {
+            "main": [
+                [
+                    {
+                        "node": "Set Config",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Set Config": {
+            "main": [
+                [
+                    {
+                        "node": "List Subfolders",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "List Subfolders": {
+            "main": [
+                [
+                    {
+                        "node": "Filter Clients",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Filter Clients": {
+            "main": [
+                [
+                    {
+                        "node": "Split Clients",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Split Clients": {
+            "main": [
+                [
+                    {
+                        "node": "Output All Files",
+                        "type": "main",
+                        "index": 0
+                    }
+                ],
+                [
+                    {
+                        "node": "List Client Files",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "List Client Files": {
+            "main": [
+                [
+                    {
+                        "node": "Collect Files",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Collect Files": {
+            "main": [
+                [
+                    {
+                        "node": "Split Clients",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Output All Files": {
+            "main": [
+                [
+                    {
+                        "node": "Has Files?",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Has Files?": {
+            "main": [
+                [
+                    {
+                        "node": "Split Files",
+                        "type": "main",
+                        "index": 0
+                    }
+                ],
+                [
+                    {
+                        "node": "Prepare All Clients",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Split Files": {
+            "main": [
+                [
+                    {
+                        "node": "Prepare All Clients",
+                        "type": "main",
+                        "index": 0
+                    }
+                ],
+                [
+                    {
+                        "node": "Get File Metadata",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Get File Metadata": {
+            "main": [
+                [
+                    {
+                        "node": "Build OpenAI Request",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Build OpenAI Request": {
+            "main": [
+                [
+                    {
+                        "node": "Image OK?",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Image OK?": {
+            "main": [
+                [
+                    {
+                        "node": "OpenAI Vision API",
+                        "type": "main",
+                        "index": 0
+                    }
+                ],
+                [
+                    {
+                        "node": "Log Error",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "OpenAI Vision API": {
+            "main": [
+                [
+                    {
+                        "node": "Parse & Accumulate",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Parse & Accumulate": {
+            "main": [
+                [
+                    {
+                        "node": "Parse OK?",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Parse OK?": {
+            "main": [
+                [
+                    {
+                        "node": "Rename File DONE",
+                        "type": "main",
+                        "index": 0
+                    }
+                ],
+                [
+                    {
+                        "node": "Log Error",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Rename File DONE": {
+            "main": [
+                [
+                    {
+                        "node": "Delay 3s",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Log Error": {
+            "main": [
+                [
+                    {
+                        "node": "Delay Error",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Delay Error": {
+            "main": [
+                [
+                    {
+                        "node": "Split Files",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Prepare All Clients": {
+            "main": [
+                [
+                    {
+                        "node": "Split Clients Sheets",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Split Clients Sheets": {
+            "main": [
+                [],
+                [
+                    {
+                        "node": "Read Sheet",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Read Sheet": {
+            "main": [
+                [
+                    {
+                        "node": "Build Sheets Requests",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Build Sheets Requests": {
+            "main": [
+                [
+                    {
+                        "node": "Sheets Merge",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Sheets Merge": {
+            "main": [
+                [
+                    {
+                        "node": "Sheets Write",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Sheets Write": {
+            "main": [
+                [
+                    {
+                        "node": "Find Client Folder",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Find Client Folder": {
+            "main": [
+                [
+                    {
+                        "node": "Rename Folder DONE",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Rename Folder DONE": {
+            "main": [
+                [
+                    {
+                        "node": "Delay Client",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Delay Client": {
+            "main": [
+                [
+                    {
+                        "node": "Split Clients Sheets",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Delay 3s": {
+            "main": [
+                [
+                    {
+                        "node": "Split Files",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
     },
-    {
-      "id": "ae5d87a4-87125c8b",
-      "name": "Set Config",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        250,
-        -300
-      ],
-      "parameters": {
-        "jsCode": "// Configuration\nconst staticData = this.getWorkflowStaticData('global');\nstaticData.clients = {}; // Clear previous run data\n\nconst CONFIG = {\n  rootFolderId: \"1iEbSMlsHPX6Sg3y0J0znlT47ri78hk9_\",\n  spreadsheetId: \"1cgctBCQVmqpfQKdomYLfGAWVwRjT1Qw0-dl9F5RzoOg\",\n  sheetGid: 1199154574,\n  sheetName: \"Tabelle1\",\n  openaiModel: \"gpt-4o\",\n  testClientIds: [\"1614978\",\"443974\",\"443074\",\"444571\",\"441882\",\"448515\",\"190716\",\"431306\"]\n};\n\nreturn [{ json: CONFIG }];"
-      }
+    "settings": {
+        "executionOrder": "v1",
+        "callerPolicy": "workflowsFromSameOwner",
+        "availableInMCP": true,
+        "timeSavedMode": "fixed"
     },
-    {
-      "id": "2f9148ac-e5de5794",
-      "name": "List Subfolders",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        500,
-        -300
-      ],
-      "parameters": {
-        "url": "https://www.googleapis.com/drive/v3/files",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "googleDriveOAuth2Api",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
+    "staticData": {
+        "global": {
+            "clients": {},
+            "allFiles": [
+                {
+                    "fileId": "1V0jcBqZiihF4Nn-QBf_jwtYDU3W0002j",
+                    "fileName": "IMG_4420.HEIC",
+                    "mimeType": "image/heif",
+                    "thumbnailLink": "https://lh3.googleusercontent.com/drive-storage/AJQWtBO9Puix-RoX2F03lQaN6e0a3DLzovAyexVQTCCAwA6-g31fqZn3VXCBy9HztwTTr6-7jXCkLVWDGG30T2VCENYdq3MnvyytEJOlCFTtgs9xZCA5Fw=s220",
+                    "clientFolderId": "1DhUemEJsDcpZjUnoQKp0xZbjHm2n1AEB",
+                    "clientFolderName": "448515"
+                },
+                {
+                    "fileId": "1AnXff26yQSVUx7MnFK7NdOaHbVfoGn5K",
+                    "fileName": "IMG_4409.HEIC",
+                    "mimeType": "image/heif",
+                    "thumbnailLink": "https://lh3.googleusercontent.com/drive-storage/AJQWtBPfKdxwfBq0_x_UQg7UWUxRy3w6ty5cLponuvybq3fQM0piU1aHAuoACFtCsMhopsm2SCqDs5HrpgpQfNf2VMk3C0sBPIrp3nKZjnPJdHNH0e2B9A=s220",
+                    "clientFolderId": "1PkXsXLdROWUWr6tjl1z1_hmyB3nVZ6nW",
+                    "clientFolderName": "190716"
+                },
+                {
+                    "fileId": "1LsErgq3q6-nFsuVxdJS2HxzNKDMflBf9",
+                    "fileName": "IMG_4407.HEIC",
+                    "mimeType": "image/heif",
+                    "thumbnailLink": "https://lh3.googleusercontent.com/drive-storage/AJQWtBOujUnN3Trbe-rqmdKzDD0reQkXEZRhX9rHp-7a77P69UML8UE4SJEtZ6QtnQEmAY7f9Bbd0L-Hjet_edVhAXU25btdAf-kcTLDchB97Swv-_V9NQ=s220",
+                    "clientFolderId": "1PkXsXLdROWUWr6tjl1z1_hmyB3nVZ6nW",
+                    "clientFolderName": "190716"
+                },
+                {
+                    "fileId": "1KWoO5edLZB31Rc-V-xk91fVMGbjM-0tg",
+                    "fileName": "IMG_4408.HEIC",
+                    "mimeType": "image/heif",
+                    "thumbnailLink": "https://lh3.googleusercontent.com/drive-storage/AJQWtBNCL4687WrNHV5SxJaSER7QP2t7GMcafYh8TV50eyvr1E9TeYTbE_673028BAtG86DWT62FQWFcnYYguiM-ukouhLwWYP0HiSjvJYy7jB4EP8WIGQ=s220",
+                    "clientFolderId": "1PkXsXLdROWUWr6tjl1z1_hmyB3nVZ6nW",
+                    "clientFolderName": "190716"
+                },
+                {
+                    "fileId": "16BTdmLrRZYYohbolUXEEIs0_JlsPE2fg",
+                    "fileName": "IMG_4412.HEIC",
+                    "mimeType": "image/heif",
+                    "thumbnailLink": "https://lh3.googleusercontent.com/drive-storage/AJQWtBO1uONHwl6wRqsVTQ8FqTjapTmXtfjC_DMDW5-Sk-AUOmGu7W9Eri2hiCMry-G99Mh1ZBmT-6rJo8XiHqzMYwp1vbTZlLeot1eWpAP16Juql0tdFw=s220",
+                    "clientFolderId": "1PkXsXLdROWUWr6tjl1z1_hmyB3nVZ6nW",
+                    "clientFolderName": "190716"
+                },
+                {
+                    "fileId": "1dsDK15ESlTZtNaaoThaxlQLX5ZnOhBc1",
+                    "fileName": "IMG_4404.HEIC",
+                    "mimeType": "image/heif",
+                    "thumbnailLink": "https://lh3.googleusercontent.com/drive-storage/AJQWtBOU4bKzO3zOGJ6r7gIVO-NquT_niyA9ZZAYmFk7upy39Us4sy3zXBb7apnN9nPqCBgq-fMv3vZPSjsPhksI3YnWtwBP9rjAPdHFAmFBZBtlYop7_w=s220",
+                    "clientFolderId": "1PkXsXLdROWUWr6tjl1z1_hmyB3nVZ6nW",
+                    "clientFolderName": "190716"
+                },
+                {
+                    "fileId": "1ZwZUFNomMv4U7N3u46AUaFiVhhvec2-4",
+                    "fileName": "IMG_4410.HEIC",
+                    "mimeType": "image/heif",
+                    "thumbnailLink": "https://lh3.googleusercontent.com/drive-storage/AJQWtBMk1YTcxpdrSdDXTiJmN7-HeFPdJnF_TbQYWIwCT4a2m3Gu3CeQmRXIeNvMfqqiFfaYCgl5m89C1cebQzxbWpAD-ptsnl5hFGz6gzJegy6K2VmSGg=s220",
+                    "clientFolderId": "1PkXsXLdROWUWr6tjl1z1_hmyB3nVZ6nW",
+                    "clientFolderName": "190716"
+                },
+                {
+                    "fileId": "1yY2AADlVYD3qpk8_70LZVNV_A0SparMK",
+                    "fileName": "IMG_4405.HEIC",
+                    "mimeType": "image/heif",
+                    "thumbnailLink": "https://lh3.googleusercontent.com/drive-storage/AJQWtBOkgWPUA_6SqMsWB_iMpDo1GB9ZTYkH3ROAe8h_RCuy8jqBeRsLezSwxbS5P0FNuAqxUYDHRCOhEZdG3XpXdT4KeIj0fmJrMWjwLGmyOvjJgJ59ww=s220",
+                    "clientFolderId": "1PkXsXLdROWUWr6tjl1z1_hmyB3nVZ6nW",
+                    "clientFolderName": "190716"
+                },
+                {
+                    "fileId": "1gBGsunUbnrk73W3YxwUWUpoAZCtCkg-m",
+                    "fileName": "IMG_4406.HEIC",
+                    "mimeType": "image/heif",
+                    "thumbnailLink": "https://lh3.googleusercontent.com/drive-storage/AJQWtBNOHPHk-1srJgdIC6X1TBR3y0k0J11VUFqQPE2JHFj7nxWHRp2AEIj1PV1Zx8rWGKz--eibjomJXm_b6eW1Qt-tmnwX-nlLeqtDDX9-lew8znqY3A=s220",
+                    "clientFolderId": "1PkXsXLdROWUWr6tjl1z1_hmyB3nVZ6nW",
+                    "clientFolderName": "190716"
+                },
+                {
+                    "fileId": "1kXp1zgZ3811fb0xctUNVgetQX7H6PLcF",
+                    "fileName": "IMG_4267.HEIC",
+                    "mimeType": "image/heif",
+                    "thumbnailLink": "https://lh3.googleusercontent.com/drive-storage/AJQWtBOfmq7k5SN2MdH41hh8DW4OJpHz1AJT7rTv9khefkbl1QdSZRif9DHiRsFpXtvTqdSXnpOGvjRhROGGBMiiMnhkQKOcRApocW6H0bJA5kc1lMFN=s220",
+                    "clientFolderId": "1uCi476Wx0VQ-ygyAILI4sybhmohCVbq5",
+                    "clientFolderName": "431306"
+                },
+                {
+                    "fileId": "1kuRuTZ894oPQJwN1POhSjb6Ez_hOBTb7",
+                    "fileName": "IMG_4270.HEIC",
+                    "mimeType": "image/heif",
+                    "thumbnailLink": "https://lh3.googleusercontent.com/drive-storage/AJQWtBPQOnf3GBbzfBFGSE-VE1DgrnjsNIGE0Rx_o0XdAsUPOJeBpdZ00Bfm073QzlHKbPHOgyfAkRUk_fUEjeSwk6KxY4_jrkBBzcrd4GAm5ifJmuYI=s220",
+                    "clientFolderId": "1uCi476Wx0VQ-ygyAILI4sybhmohCVbq5",
+                    "clientFolderName": "431306"
+                },
+                {
+                    "fileId": "12azSmV_qWx8v6mqbjzFT7rrSpB6UaCED",
+                    "fileName": "IMG_4268.HEIC",
+                    "mimeType": "image/heif",
+                    "thumbnailLink": "https://lh3.googleusercontent.com/drive-storage/AJQWtBPzHVaT7wEFEmitfE_Ra-U0jPfc9YQvuOTMypIkFUuWze2-txW9eQm8c8PPtn6kFAPrJIQt26HDXxIGRkWSzLkUJciSMfnqPcl_vBgF9zIS5gPR=s220",
+                    "clientFolderId": "1uCi476Wx0VQ-ygyAILI4sybhmohCVbq5",
+                    "clientFolderName": "431306"
+                },
+                {
+                    "fileId": "1j_8pe6YbNypRB4sXNcsuZoDeK4FkMXev",
+                    "fileName": "IMG_4269.HEIC",
+                    "mimeType": "image/heif",
+                    "thumbnailLink": "https://lh3.googleusercontent.com/drive-storage/AJQWtBOpyToTTyiN9yiWDs250aflPpV6Fhgz-yar3iAQ4kHlRqw8C1pAzPCkECBtpqeutJqNNepOuGKjRQDVURYAw04xpORFVGLaiyUk12xaHQJKmnrv=s220",
+                    "clientFolderId": "1uCi476Wx0VQ-ygyAILI4sybhmohCVbq5",
+                    "clientFolderName": "431306"
+                },
+                {
+                    "fileId": "1DIDxiPoy1RZ2itSqg_OcITL632A8emqZ",
+                    "fileName": "IMG_4272.HEIC",
+                    "mimeType": "image/heif",
+                    "thumbnailLink": "https://lh3.googleusercontent.com/drive-storage/AJQWtBOV3GuUHq2OL2Hs9yD2opSg7QH9qRqA7dPt8Hl8xvspEixt_Ab6bVa8vdx-DEX7_Sjo585x0GGlQJry14Z7i-m_XgyWptBZjf9UswPjJRepDGPe=s220",
+                    "clientFolderId": "1uCi476Wx0VQ-ygyAILI4sybhmohCVbq5",
+                    "clientFolderName": "431306"
+                },
+                {
+                    "fileId": "1ySyWuQB8sQ6ni6fYuAOVPd-rQr3FPCZc",
+                    "fileName": "IMG_4271.HEIC",
+                    "mimeType": "image/heif",
+                    "thumbnailLink": "https://lh3.googleusercontent.com/drive-storage/AJQWtBPnqzEWCi5CilNJM5fnF6SVLHNdkjkuhM-0VcqJKxOZfLWMY6VRzno3ffo9vU7wDAqjDJmAdej_CjdKHlOoDgkD_o6DCWn4gl5BXidoBzp1_e2J=s220",
+                    "clientFolderId": "1uCi476Wx0VQ-ygyAILI4sybhmohCVbq5",
+                    "clientFolderName": "431306"
+                }
+            ]
+        }
+    },
+    "meta": null,
+    "pinData": {},
+    "versionId": "3e032ef0-049f-4416-a935-a974afc17ad5",
+    "activeVersionId": "3e032ef0-049f-4416-a935-a974afc17ad5",
+    "versionCounter": 49,
+    "triggerCount": 1,
+    "shared": [
+        {
+            "updatedAt": "2026-03-05T09:51:37.044Z",
+            "createdAt": "2026-03-05T09:51:37.044Z",
+            "role": "workflow:owner",
+            "workflowId": "1yit8oX2g097l1U9",
+            "projectId": "LmhOD4aQjDc8j54F",
+            "project": {
+                "updatedAt": "2025-08-01T12:06:15.569Z",
+                "createdAt": "2025-07-31T12:25:48.704Z",
+                "id": "LmhOD4aQjDc8j54F",
+                "name": "OLEKSANDR Polischuk <ap@web-promo.com.ua>",
+                "type": "personal",
+                "icon": null,
+                "description": null,
+                "creatorId": "6f7766c1-8e6d-478f-a667-93619ba35dbe",
+                "projectRelations": [
+                    {
+                        "updatedAt": "2025-07-31T12:25:48.704Z",
+                        "createdAt": "2025-07-31T12:25:48.704Z",
+                        "userId": "6f7766c1-8e6d-478f-a667-93619ba35dbe",
+                        "projectId": "LmhOD4aQjDc8j54F",
+                        "user": {
+                            "updatedAt": "2026-03-05T08:05:31.534Z",
+                            "createdAt": "2025-07-31T12:25:47.251Z",
+                            "id": "6f7766c1-8e6d-478f-a667-93619ba35dbe",
+                            "email": "ap@web-promo.com.ua",
+                            "firstName": "OLEKSANDR",
+                            "lastName": "Polischuk",
+                            "personalizationAnswers": {
+                                "version": "v4",
+                                "personalization_survey_submitted_at": "2025-08-01T12:06:26.310Z",
+                                "personalization_survey_n8n_version": "1.104.1"
+                            },
+                            "settings": {
+                                "userActivated": true,
+                                "easyAIWorkflowOnboarded": true,
+                                "firstSuccessfulWorkflowId": "i6feMHLya6oSMXYC",
+                                "userActivatedAt": 1759166190434,
+                                "npsSurvey": {
+                                    "responded": true,
+                                    "lastShownAt": 1761673568422
+                                }
+                            },
+                            "disabled": false,
+                            "mfaEnabled": false,
+                            "lastActiveAt": "2026-03-04",
+                            "isPending": false
+                        }
+                    }
+                ]
+            }
+        }
+    ],
+    "tags": [],
+    "activeVersion": {
+        "updatedAt": "2026-03-05T10:59:49.906Z",
+        "createdAt": "2026-03-05T10:59:49.906Z",
+        "versionId": "3e032ef0-049f-4416-a935-a974afc17ad5",
+        "workflowId": "1yit8oX2g097l1U9",
+        "nodes": [
             {
-              "name": "q",
-              "value": "='{{ $json.rootFolderId }}' in parents AND mimeType='application/vnd.google-apps.folder' AND trashed=false"
+                "id": "Manual_Trigger",
+                "name": "Manual Trigger",
+                "type": "n8n-nodes-base.manualTrigger",
+                "typeVersion": 1,
+                "position": [
+                    0,
+                    -300
+                ],
+                "parameters": {}
             },
             {
-              "name": "fields",
-              "value": "files(id,name)"
+                "id": "Webhook1",
+                "name": "Webhook1",
+                "type": "n8n-nodes-base.webhook",
+                "typeVersion": 2,
+                "position": [
+                    0,
+                    -500
+                ],
+                "parameters": {
+                    "httpMethod": "GET",
+                    "path": "07362437-9b53-435b-869f-55e872df9be0",
+                    "options": {}
+                },
+                "webhookId": "07362437-9b53-435b-869f-55e872df9be0"
             },
             {
-              "name": "pageSize",
-              "value": "200"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "Nl36H51nJBoCaf67",
-          "name": "Google Drive for n8n"
-        }
-      }
-    },
-    {
-      "id": "2767f02d-0aa247c9",
-      "name": "Filter Clients",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        750,
-        -300
-      ],
-      "parameters": {
-        "jsCode": "const config = $('Set Config').first().json;\nconst response = $input.first().json;\nconst folders = response.files || [];\n\nconst allowed = config.testClientIds;\nconst filtered = folders.filter(f =>\n  allowed.includes(f.name) && !f.name.endsWith('_DONE')\n);\n\nif (filtered.length === 0) {\n  return [{ json: { empty: true, message: 'No client folders to process' } }];\n}\n\nreturn filtered.map(f => ({\n  json: {\n    clientFolderId: f.id,\n    clientFolderName: f.name,\n    config: config\n  }\n}));"
-      }
-    },
-    {
-      "id": "c84cde1c-0e2e44b9",
-      "name": "Has Clients?",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2,
-      "position": [
-        1000,
-        -300
-      ],
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict"
-          },
-          "conditions": [
-            {
-              "id": "has-clients",
-              "leftValue": "={{ $json.empty }}",
-              "rightValue": true,
-              "operator": {
-                "type": "boolean",
-                "operation": "notEquals"
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      }
-    },
-    {
-      "id": "0d1a21a0-0372975f",
-      "name": "Split Clients",
-      "type": "n8n-nodes-base.splitInBatches",
-      "typeVersion": 3,
-      "position": [
-        1250,
-        -300
-      ],
-      "parameters": {
-        "batchSize": 1,
-        "options": {}
-      }
-    },
-    {
-      "id": "689f6d24-23483391",
-      "name": "List Client Files",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        1500,
-        -300
-      ],
-      "parameters": {
-        "url": "https://www.googleapis.com/drive/v3/files",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "googleDriveOAuth2Api",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            {
-              "name": "q",
-              "value": "='{{ $json.clientFolderId }}' in parents AND trashed=false"
+                "id": "Set_Config",
+                "name": "Set Config",
+                "type": "n8n-nodes-base.code",
+                "typeVersion": 2,
+                "position": [
+                    250,
+                    -300
+                ],
+                "parameters": {
+                    "jsCode": "const staticData = $getWorkflowStaticData('global');\nstaticData.clients = {};\nstaticData.allFiles = [];\n\nreturn [{ json: {\n  rootFolderId: \"1iEbSMlsHPX6Sg3y0J0znlT47ri78hk9_\",\n  spreadsheetId: \"1cgctBCQVmqpfQKdomYLfGAWVwRjT1Qw0-dl9F5RzoOg\",\n  sheetGid: 1199154574,\n  sheetName: \"Patientendaten\",\n  testClientIds: [\"1614978\",\"443974\",\"443074\",\"444571\",\"441882\",\"448515\",\"190716\",\"431306\"]\n}}];"
+                }
             },
             {
-              "name": "fields",
-              "value": "files(id,name,mimeType,thumbnailLink)"
+                "id": "List_Subfolders",
+                "name": "List Subfolders",
+                "type": "n8n-nodes-base.httpRequest",
+                "typeVersion": 4.2,
+                "position": [
+                    500,
+                    -300
+                ],
+                "parameters": {
+                    "url": "https://www.googleapis.com/drive/v3/files",
+                    "authentication": "predefinedCredentialType",
+                    "nodeCredentialType": "googleDriveOAuth2Api",
+                    "sendQuery": true,
+                    "queryParameters": {
+                        "parameters": [
+                            {
+                                "name": "q",
+                                "value": "='{{ $json.rootFolderId }}' in parents AND mimeType='application/vnd.google-apps.folder' AND trashed=false"
+                            },
+                            {
+                                "name": "fields",
+                                "value": "files(id,name)"
+                            },
+                            {
+                                "name": "pageSize",
+                                "value": "200"
+                            }
+                        ]
+                    },
+                    "options": {}
+                },
+                "credentials": {
+                    "googleDriveOAuth2Api": {
+                        "id": "Nl36H51nJBoCaf67",
+                        "name": "Google Drive for n8n"
+                    }
+                }
             },
             {
-              "name": "pageSize",
-              "value": "200"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "Nl36H51nJBoCaf67",
-          "name": "Google Drive for n8n"
-        }
-      }
-    },
-    {
-      "id": "cb1d345a-9cfb2bb3",
-      "name": "Filter Media Files",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        1750,
-        -300
-      ],
-      "parameters": {
-        "jsCode": "const response = $input.first().json;\nconst prev = $('Split Clients').first().json;\nconst allFiles = response.files || [];\n\nconst allowed = ['.heic', '.jpg', '.jpeg', '.png'];\nconst mediaFiles = allFiles.filter(f =>\n  !f.name.includes('_DONE') &&\n  allowed.some(ext => f.name.toLowerCase().endsWith(ext))\n);\n\nif (mediaFiles.length === 0) {\n  return [{ json: { hasFiles: false, clientFolderId: prev.clientFolderId, clientFolderName: prev.clientFolderName } }];\n}\n\nreturn mediaFiles.map(f => ({\n  json: {\n    fileId: f.id,\n    fileName: f.name,\n    mimeType: f.mimeType,\n    thumbnailLink: f.thumbnailLink || null,\n    clientFolderId: prev.clientFolderId,\n    clientFolderName: prev.clientFolderName,\n    hasFiles: true\n  }\n}));"
-      }
-    },
-    {
-      "id": "8edf74af-f65d7edb",
-      "name": "Has Files?",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2,
-      "position": [
-        2000,
-        -300
-      ],
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict"
-          },
-          "conditions": [
-            {
-              "id": "has-files",
-              "leftValue": "={{ $json.hasFiles }}",
-              "rightValue": true,
-              "operator": {
-                "type": "boolean",
-                "operation": "equals"
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      }
-    },
-    {
-      "id": "e4673907-a0135c59",
-      "name": "Wait Skip Client",
-      "type": "n8n-nodes-base.wait",
-      "typeVersion": 1.1,
-      "position": [
-        2250,
-        -100
-      ],
-      "parameters": {
-        "amount": 0.5,
-        "unit": "seconds"
-      }
-    },
-    {
-      "id": "62e36fdd-a2233b92",
-      "name": "Split Files",
-      "type": "n8n-nodes-base.splitInBatches",
-      "typeVersion": 3,
-      "position": [
-        2250,
-        -300
-      ],
-      "parameters": {
-        "batchSize": 1,
-        "options": {}
-      }
-    },
-    {
-      "id": "1b354884-5dfed01d",
-      "name": "Get File Metadata",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        2500,
-        -300
-      ],
-      "parameters": {
-        "url": "=https://www.googleapis.com/drive/v3/files/{{ $json.fileId }}",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "googleDriveOAuth2Api",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            {
-              "name": "fields",
-              "value": "id,name,thumbnailLink,mimeType"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "Nl36H51nJBoCaf67",
-          "name": "Google Drive for n8n"
-        }
-      }
-    },
-    {
-      "id": "a004085f-a732ac23",
-      "name": "Build OpenAI Request",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        2750,
-        -300
-      ],
-      "parameters": {
-        "jsCode": "const fileData = $input.first().json;\nconst prev = $('Split Files').first().json;\nconst config = $('Set Config').first().json;\n\nlet base64Image = null;\nlet mediaType = 'image/jpeg';\n\n// Try thumbnailLink first (works for HEIC)\nconst thumbnailLink = fileData.thumbnailLink;\nif (thumbnailLink) {\n  const highResUrl = thumbnailLink.replace(/=s\\d+$/, '=s2048');\n  try {\n    const response = await this.helpers.httpRequest({\n      method: 'GET',\n      url: highResUrl,\n      encoding: 'arraybuffer',\n    });\n    base64Image = Buffer.from(response).toString('base64');\n  } catch (e) {\n    // thumbnailLink failed\n  }\n}\n\n// Fallback: direct download for JPG/PNG\nif (!base64Image && !fileData.name.toLowerCase().endsWith('.heic')) {\n  try {\n    const response = await this.helpers.httpRequestWithAuthentication.call(\n      this, 'googleDriveOAuth2Api',\n      {\n        method: 'GET',\n        url: `https://www.googleapis.com/drive/v3/files/${fileData.id}?alt=media`,\n        encoding: 'arraybuffer',\n      }\n    );\n    base64Image = Buffer.from(response).toString('base64');\n    const ext = fileData.name.toLowerCase();\n    if (ext.endsWith('.png')) mediaType = 'image/png';\n  } catch (e) {}\n}\n\nif (!base64Image) {\n  return [{ json: {\n    error: true,\n    errorMessage: 'Could not download image',\n    fileName: fileData.name,\n    fileId: fileData.id,\n    clientFolderId: prev.clientFolderId,\n    clientFolderName: prev.clientFolderName\n  }}];\n}\n\nconst PROMPT = `This is a photo of a German hospital monitor screen showing a patient medical report (BIA/body composition analysis). Extract ALL visible medical measurements and return ONLY this JSON object (no other text, no markdown, no code blocks):\n{\n  \"client_id\": \"5-9 digit number visible in top area, or null\",\n  \"client_name\": \"patient full name if visible, or null\",\n  \"date\": \"date in DD.MM.YYYY format if visible, or null\",\n  \"Gewicht_kg\": number or null,\n  \"Grosse_cm\": number or null,\n  \"BMI_kg_m2\": number or null,\n  \"FM_kg\": number or null,\n  \"FM_pct\": number or null,\n  \"FMI_kg_m2\": number or null,\n  \"FFM_kg\": number or null,\n  \"FFM_pct\": number or null,\n  \"FFMI_kg_m2\": number or null,\n  \"SMM_kg\": number or null,\n  \"R_ohm\": number or null,\n  \"Xc_ohm\": number or null,\n  \"VAT_l\": number or null,\n  \"WC_cm\": number or null,\n  \"phase_angle_deg\": number or null,\n  \"perzentile\": number or null,\n  \"TBW_l\": number or null,\n  \"TBW_pct\": number or null,\n  \"ECW_l\": number or null,\n  \"ECW_pct\": number or null,\n  \"ECW_TBW_pct\": number or null\n}`;\n\n// Build OpenAI API request body\nconst requestBody = {\n  model: \"gpt-4o\",\n  max_tokens: 800,\n  messages: [{\n    role: \"system\",\n    content: \"You are a medical data extraction assistant. Extract data from hospital monitor screen photos. Always respond with valid JSON only. No explanations, no markdown, no code blocks. Just the raw JSON object.\"\n  }, {\n    role: \"user\",\n    content: [\n      {\n        type: \"image_url\",\n        image_url: {\n          url: \"data:\" + mediaType + \";base64,\" + base64Image,\n          detail: \"high\"\n        }\n      },\n      {\n        type: \"text\",\n        text: PROMPT\n      }\n    ]\n  }]\n};\n\nreturn [{ json: {\n  requestBody,\n  fileName: fileData.name,\n  fileId: fileData.id,\n  clientFolderId: prev.clientFolderId,\n  clientFolderName: prev.clientFolderName,\n  error: false\n}}];"
-      }
-    },
-    {
-      "id": "6971b23a-7c6fd40e",
-      "name": "Image OK?",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2,
-      "position": [
-        3000,
-        -300
-      ],
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict"
-          },
-          "conditions": [
-            {
-              "id": "img-ok",
-              "leftValue": "={{ $json.error }}",
-              "rightValue": true,
-              "operator": {
-                "type": "boolean",
-                "operation": "notEquals"
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      }
-    },
-    {
-      "id": "fe7556d8-901e59ae",
-      "name": "OpenAI Vision API",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        3250,
-        -300
-      ],
-      "parameters": {
-        "method": "POST",
-        "url": "https://api.openai.com/v1/chat/completions",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
-            {
-              "name": "content-type",
-              "value": "application/json"
-            }
-          ]
-        },
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify($json.requestBody) }}",
-        "options": {
-          "timeout": 60000
-        }
-      },
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "CONFIGURE_OPENAI",
-          "name": "OpenAI API Key"
-        }
-      }
-    },
-    {
-      "id": "35288f3b-a4831468",
-      "name": "Parse & Accumulate",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        3500,
-        -300
-      ],
-      "parameters": {
-        "jsCode": "const staticData = this.getWorkflowStaticData('global');\nif (!staticData.clients) staticData.clients = {};\n\nconst openaiResponse = $input.first().json;\nconst prev = $('Split Files').first().json;\nconst clientFolderName = prev.clientFolderName;\n\n// Parse OpenAI response (different format from Anthropic)\nlet parsed;\ntry {\n  let rawText = '';\n  if (openaiResponse.choices && openaiResponse.choices[0]) {\n    rawText = openaiResponse.choices[0].message.content.trim();\n  }\n  // Remove markdown wrappers if present\n  const clean = rawText.replace(/^```json\\s*/,'').replace(/\\s*```$/,'').trim();\n  parsed = JSON.parse(clean);\n} catch(e) {\n  return [{ json: {\n    parseError: true,\n    fileName: prev.fileName,\n    fileId: prev.fileId,\n    clientFolderId: prev.clientFolderId,\n    clientFolderName: clientFolderName,\n    rawResponse: openaiResponse.choices ? openaiResponse.choices[0].message.content : JSON.stringify(openaiResponse),\n    errorMessage: e.message\n  }}];\n}\n\n// Client ID from response or folder name\nconst clientId = (parsed.client_id && String(parsed.client_id).trim()) || clientFolderName;\nconst date = parsed.date || \"unbekannt\";\n\n// Initialize client\nif (!staticData.clients[clientId]) {\n  staticData.clients[clientId] = {\n    client_id: clientId,\n    client_name: \"\",\n    folderName: clientFolderName,\n    operations: {}\n  };\n}\n\nif (parsed.client_name && !staticData.clients[clientId].client_name) {\n  staticData.clients[clientId].client_name = parsed.client_name;\n}\n\nif (!staticData.clients[clientId].operations[date]) {\n  staticData.clients[clientId].operations[date] = {};\n}\n\nconst FIELDS = [\n  \"Gewicht_kg\",\"Grosse_cm\",\"BMI_kg_m2\",\n  \"FM_kg\",\"FM_pct\",\"FMI_kg_m2\",\n  \"FFM_kg\",\"FFM_pct\",\"FFMI_kg_m2\",\n  \"SMM_kg\",\n  \"R_ohm\",\"Xc_ohm\",\n  \"VAT_l\",\"WC_cm\",\n  \"phase_angle_deg\",\"perzentile\",\n  \"TBW_l\",\"TBW_pct\",\"ECW_l\",\"ECW_pct\",\"ECW_TBW_pct\"\n];\n\nconst op = staticData.clients[clientId].operations[date];\nfor (const field of FIELDS) {\n  if (parsed[field] !== null && parsed[field] !== undefined) {\n    op[field] = parsed[field];\n  }\n}\n\nreturn [{ json: {\n  parseError: false,\n  clientId,\n  date,\n  fileName: prev.fileName,\n  fileId: prev.fileId,\n  clientFolderId: prev.clientFolderId,\n  clientFolderName: clientFolderName\n}}];"
-      }
-    },
-    {
-      "id": "5e111fa7-fc8dccb3",
-      "name": "Parse OK?",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2,
-      "position": [
-        3750,
-        -300
-      ],
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict"
-          },
-          "conditions": [
-            {
-              "id": "parse-ok",
-              "leftValue": "={{ $json.parseError }}",
-              "rightValue": true,
-              "operator": {
-                "type": "boolean",
-                "operation": "notEquals"
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      }
-    },
-    {
-      "id": "8d2163e1-12e6057d",
-      "name": "Rename File DONE",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        4000,
-        -300
-      ],
-      "parameters": {
-        "method": "PATCH",
-        "url": "=https://www.googleapis.com/drive/v3/files/{{ $json.fileId }}",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "googleDriveOAuth2Api",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({ name: (() => { const n = $json.fileName; const d = n.lastIndexOf('.'); return d > -1 ? n.slice(0, d) + '_DONE' + n.slice(d) : n + '_DONE'; })() }) }}",
-        "options": {}
-      },
-      "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "Nl36H51nJBoCaf67",
-          "name": "Google Drive for n8n"
-        }
-      }
-    },
-    {
-      "id": "927075d7-86e81748",
-      "name": "Wait 1.5s File",
-      "type": "n8n-nodes-base.wait",
-      "typeVersion": 1.1,
-      "position": [
-        4250,
-        -300
-      ],
-      "parameters": {
-        "amount": 1.5,
-        "unit": "seconds"
-      }
-    },
-    {
-      "id": "99f6c780-3a92a1f7",
-      "name": "Log Error FEHLER",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        4000,
-        -100
-      ],
-      "parameters": {
-        "method": "POST",
-        "url": "=https://sheets.googleapis.com/v4/spreadsheets/{{ $('Set Config').first().json.spreadsheetId }}/values/_FEHLER!A1:E1:append",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "googleDriveOAuth2Api",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            {
-              "name": "valueInputOption",
-              "value": "RAW"
+                "id": "Filter_Clients",
+                "name": "Filter Clients",
+                "type": "n8n-nodes-base.code",
+                "typeVersion": 2,
+                "position": [
+                    750,
+                    -300
+                ],
+                "parameters": {
+                    "jsCode": "const config = $('Set Config').first().json;\nconst folders = $input.first().json.files || [];\nconst allowed = config.testClientIds;\nconst filtered = folders.filter(f => allowed.includes(f.name) && !f.name.endsWith('_DONE'));\nif (!filtered.length) return [{ json: { empty: true } }];\nreturn filtered.map(f => ({ json: { clientFolderId: f.id, clientFolderName: f.name } }));"
+                }
             },
             {
-              "name": "insertDataOption",
-              "value": "INSERT_ROWS"
-            }
-          ]
-        },
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({ values: [[ new Date().toISOString(), $json.clientFolderName || '', $json.fileName || '', $json.errorMessage || 'Parse error', ($json.rawResponse || '').substring(0, 500) ]] }) }}",
-        "options": {}
-      },
-      "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "Nl36H51nJBoCaf67",
-          "name": "Google Drive for n8n"
-        }
-      }
-    },
-    {
-      "id": "4fade42c-ab968d13",
-      "name": "Wait 1s Error",
-      "type": "n8n-nodes-base.wait",
-      "typeVersion": 1.1,
-      "position": [
-        4250,
-        -100
-      ],
-      "parameters": {
-        "amount": 1,
-        "unit": "seconds"
-      }
-    },
-    {
-      "id": "0281a0c3-72d456c4",
-      "name": "Prepare Sheets Data",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        2500,
-        -600
-      ],
-      "parameters": {
-        "jsCode": "const staticData = this.getWorkflowStaticData('global');\nconst prev = $('Split Clients').first().json;\nconst clientFolderName = prev.clientFolderName;\nconst config = prev.config || $('Set Config').first().json;\n\n// Find client data - try folder name first\nlet clientData = staticData.clients[clientFolderName];\nif (!clientData) {\n  // Try to find by matching folderName\n  for (const [id, data] of Object.entries(staticData.clients)) {\n    if (data.folderName === clientFolderName) {\n      clientData = data;\n      break;\n    }\n  }\n}\n\nif (!clientData || Object.keys(clientData.operations).length === 0) {\n  return [{ json: { skip: true, clientFolderName, clientFolderId: prev.clientFolderId } }];\n}\n\n// Sort dates chronologically\nconst sortedDates = Object.keys(clientData.operations)\n  .filter(d => d !== \"unbekannt\")\n  .sort((a, b) => {\n    const parse = d => {\n      const [dd, mm, yyyy] = d.split('.');\n      return new Date(yyyy, mm - 1, dd);\n    };\n    return parse(a) - parse(b);\n  });\n\nif (clientData.operations[\"unbekannt\"]) sortedDates.push(\"unbekannt\");\n\nconst FIELD_ORDER = [\n  \"Gewicht_kg\",\"Grosse_cm\",\"BMI_kg_m2\",\n  \"FM_kg\",\"FM_pct\",\"FMI_kg_m2\",\n  \"FFM_kg\",\"FFM_pct\",\"FFMI_kg_m2\",\n  \"SMM_kg\",\n  \"R_ohm\",\"Xc_ohm\",\n  \"VAT_l\",\"WC_cm\",\n  \"phase_angle_deg\",\"perzentile\",\n  \"TBW_l\",\"TBW_pct\",\"ECW_l\",\"ECW_pct\",\"ECW_TBW_pct\"\n];\n\nconst operations = sortedDates.map((date, idx) => ({\n  operationNumber: idx + 1,\n  date,\n  fields: clientData.operations[date]\n}));\n\nreturn [{ json: {\n  skip: false,\n  clientId: clientData.client_id,\n  clientName: clientData.client_name || '',\n  clientFolderName,\n  clientFolderId: prev.clientFolderId,\n  operations,\n  fieldOrder: FIELD_ORDER,\n  totalOps: operations.length,\n  spreadsheetId: config.spreadsheetId,\n  sheetGid: config.sheetGid,\n  sheetName: config.sheetName\n}}];"
-      }
-    },
-    {
-      "id": "5e9c6980-d8d32ac9",
-      "name": "Has Sheet Data?",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2,
-      "position": [
-        2750,
-        -600
-      ],
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict"
-          },
-          "conditions": [
+                "id": "Split_Clients",
+                "name": "Split Clients",
+                "type": "n8n-nodes-base.splitInBatches",
+                "typeVersion": 3,
+                "position": [
+                    1000,
+                    -300
+                ],
+                "parameters": {
+                    "batchSize": 1,
+                    "options": {}
+                }
+            },
             {
-              "id": "has-data",
-              "leftValue": "={{ $json.skip }}",
-              "rightValue": true,
-              "operator": {
-                "type": "boolean",
-                "operation": "notEquals"
-              }
+                "id": "List_Client_Files",
+                "name": "List Client Files",
+                "type": "n8n-nodes-base.httpRequest",
+                "typeVersion": 4.2,
+                "position": [
+                    1250,
+                    -300
+                ],
+                "parameters": {
+                    "url": "https://www.googleapis.com/drive/v3/files",
+                    "authentication": "predefinedCredentialType",
+                    "nodeCredentialType": "googleDriveOAuth2Api",
+                    "sendQuery": true,
+                    "queryParameters": {
+                        "parameters": [
+                            {
+                                "name": "q",
+                                "value": "='{{ $json.clientFolderId }}' in parents AND trashed=false"
+                            },
+                            {
+                                "name": "fields",
+                                "value": "files(id,name,mimeType,thumbnailLink)"
+                            },
+                            {
+                                "name": "pageSize",
+                                "value": "200"
+                            }
+                        ]
+                    },
+                    "options": {}
+                },
+                "credentials": {
+                    "googleDriveOAuth2Api": {
+                        "id": "Nl36H51nJBoCaf67",
+                        "name": "Google Drive for n8n"
+                    }
+                }
+            },
+            {
+                "id": "Collect_Files",
+                "name": "Collect Files",
+                "type": "n8n-nodes-base.code",
+                "typeVersion": 2,
+                "position": [
+                    1500,
+                    -300
+                ],
+                "parameters": {
+                    "jsCode": "const staticData = $getWorkflowStaticData('global');\nconst response = $input.first().json;\nconst prev = $('Split Clients').first().json;\nconst allFiles = response.files || [];\n\nconst allowed = ['.heic', '.jpg', '.jpeg', '.png'];\nconst mediaFiles = allFiles.filter(f =>\n  !f.name.includes('_DONE') &&\n  allowed.some(ext => f.name.toLowerCase().endsWith(ext))\n);\n\nfor (const f of mediaFiles) {\n  staticData.allFiles.push({\n    fileId: f.id,\n    fileName: f.name,\n    mimeType: f.mimeType,\n    thumbnailLink: f.thumbnailLink || null,\n    clientFolderId: prev.clientFolderId,\n    clientFolderName: prev.clientFolderName\n  });\n}\n\nreturn [{ json: { collected: mediaFiles.length, total: staticData.allFiles.length, client: prev.clientFolderName } }];"
+                }
+            },
+            {
+                "id": "Output_All_Files",
+                "name": "Output All Files",
+                "type": "n8n-nodes-base.code",
+                "typeVersion": 2,
+                "position": [
+                    1250,
+                    -600
+                ],
+                "parameters": {
+                    "jsCode": "const staticData = $getWorkflowStaticData('global');\nconst files = staticData.allFiles || [];\nif (!files.length) return [{ json: { empty: true } }];\nreturn files.map(f => ({ json: f }));"
+                }
+            },
+            {
+                "id": "Has_Files?",
+                "name": "Has Files?",
+                "type": "n8n-nodes-base.if",
+                "typeVersion": 2,
+                "position": [
+                    1500,
+                    -600
+                ],
+                "parameters": {
+                    "conditions": {
+                        "options": {
+                            "caseSensitive": true,
+                            "leftValue": "",
+                            "typeValidation": "strict"
+                        },
+                        "conditions": [
+                            {
+                                "id": "hf",
+                                "leftValue": "={{ $json.empty }}",
+                                "rightValue": true,
+                                "operator": {
+                                    "type": "boolean",
+                                    "operation": "notEquals"
+                                }
+                            }
+                        ],
+                        "combinator": "and"
+                    },
+                    "options": {}
+                }
+            },
+            {
+                "id": "Split_Files",
+                "name": "Split Files",
+                "type": "n8n-nodes-base.splitInBatches",
+                "typeVersion": 3,
+                "position": [
+                    1750,
+                    -600
+                ],
+                "parameters": {
+                    "batchSize": 1,
+                    "options": {}
+                }
+            },
+            {
+                "id": "Get_File_Metadata",
+                "name": "Get File Metadata",
+                "type": "n8n-nodes-base.httpRequest",
+                "typeVersion": 4.2,
+                "position": [
+                    2000,
+                    -600
+                ],
+                "parameters": {
+                    "url": "=https://www.googleapis.com/drive/v3/files/{{ $json.fileId }}",
+                    "authentication": "predefinedCredentialType",
+                    "nodeCredentialType": "googleDriveOAuth2Api",
+                    "sendQuery": true,
+                    "queryParameters": {
+                        "parameters": [
+                            {
+                                "name": "fields",
+                                "value": "id,name,thumbnailLink,mimeType"
+                            }
+                        ]
+                    },
+                    "options": {}
+                },
+                "credentials": {
+                    "googleDriveOAuth2Api": {
+                        "id": "Nl36H51nJBoCaf67",
+                        "name": "Google Drive for n8n"
+                    }
+                }
+            },
+            {
+                "id": "Build_OpenAI_Request",
+                "name": "Build OpenAI Request",
+                "type": "n8n-nodes-base.code",
+                "typeVersion": 2,
+                "position": [
+                    2250,
+                    -600
+                ],
+                "parameters": {
+                    "jsCode": "const fileData = $input.first().json;\nconst prev = $('Split Files').first().json;\n\nlet base64Image = null;\nlet mediaType = 'image/jpeg';\n\nconst thumbnailLink = fileData.thumbnailLink;\nif (thumbnailLink) {\n  const highResUrl = thumbnailLink.replace(/=s\\d+$/, '=s2048');\n  try {\n    const response = await this.helpers.httpRequest({ method: 'GET', url: highResUrl, encoding: 'arraybuffer' });\n    base64Image = Buffer.from(response).toString('base64');\n  } catch (e) {}\n}\n\nif (!base64Image) {\n  return [{ json: { error: true, errorMessage: 'No thumbnail', fileName: fileData.name, fileId: fileData.id,\n    clientFolderId: prev.clientFolderId, clientFolderName: prev.clientFolderName }}];\n}\n\nconst PROMPT = `This is a photo of a German hospital monitor screen showing a patient medical report (BIA/body composition analysis). Extract ALL visible medical measurements and return ONLY this JSON object (no other text, no markdown, no code blocks):\n{\n  \"client_id\": \"5-9 digit number visible in top area, or null\",\n  \"client_name\": \"patient full name if visible, or null\",\n  \"date\": \"date in DD.MM.YYYY format if visible, or null\",\n  \"Gewicht_kg\": number or null, \"Grosse_cm\": number or null, \"BMI_kg_m2\": number or null,\n  \"FM_kg\": number or null, \"FM_pct\": number or null, \"FMI_kg_m2\": number or null,\n  \"FFM_kg\": number or null, \"FFM_pct\": number or null, \"FFMI_kg_m2\": number or null,\n  \"SMM_kg\": number or null, \"R_ohm\": number or null, \"Xc_ohm\": number or null,\n  \"VAT_l\": number or null, \"WC_cm\": number or null,\n  \"phase_angle_deg\": number or null, \"perzentile\": number or null,\n  \"TBW_l\": number or null, \"TBW_pct\": number or null,\n  \"ECW_l\": number or null, \"ECW_pct\": number or null, \"ECW_TBW_pct\": number or null\n}`;\n\nreturn [{ json: {\n  requestBody: {\n    model: \"gpt-4o\", max_tokens: 800,\n    messages: [\n      { role: \"system\", content: \"You are a medical data extraction assistant. Extract data from hospital monitor screen photos. Always respond with valid JSON only.\" },\n      { role: \"user\", content: [\n        { type: \"image_url\", image_url: { url: \"data:\" + mediaType + \";base64,\" + base64Image, detail: \"high\" } },\n        { type: \"text\", text: PROMPT }\n      ]}\n    ]\n  },\n  fileName: fileData.name, fileId: fileData.id,\n  clientFolderId: prev.clientFolderId, clientFolderName: prev.clientFolderName, error: false\n}}];"
+                }
+            },
+            {
+                "id": "Image_OK?",
+                "name": "Image OK?",
+                "type": "n8n-nodes-base.if",
+                "typeVersion": 2,
+                "position": [
+                    2500,
+                    -600
+                ],
+                "parameters": {
+                    "conditions": {
+                        "options": {
+                            "caseSensitive": true,
+                            "leftValue": "",
+                            "typeValidation": "strict"
+                        },
+                        "conditions": [
+                            {
+                                "id": "io",
+                                "leftValue": "={{ $json.error }}",
+                                "rightValue": true,
+                                "operator": {
+                                    "type": "boolean",
+                                    "operation": "notEquals"
+                                }
+                            }
+                        ],
+                        "combinator": "and"
+                    },
+                    "options": {}
+                }
+            },
+            {
+                "id": "OpenAI_Vision_API",
+                "name": "OpenAI Vision API",
+                "type": "n8n-nodes-base.httpRequest",
+                "typeVersion": 4.2,
+                "position": [
+                    2750,
+                    -600
+                ],
+                "parameters": {
+                    "method": "POST",
+                    "url": "https://api.openai.com/v1/chat/completions",
+                    "authentication": "predefinedCredentialType",
+                    "nodeCredentialType": "openAiApi",
+                    "sendBody": true,
+                    "specifyBody": "json",
+                    "jsonBody": "={{ JSON.stringify($json.requestBody) }}",
+                    "options": {
+                        "timeout": 60000,
+                        "retry": {
+                            "enabled": true,
+                            "maxRetries": 3,
+                            "retryInterval": 10000
+                        }
+                    }
+                },
+                "credentials": {
+                    "openAiApi": {
+                        "id": "b1hLC5E1Ad7p27A9",
+                        "name": "OpenAi - course generator"
+                    }
+                }
+            },
+            {
+                "id": "Parse_&_Accumulate",
+                "name": "Parse & Accumulate",
+                "type": "n8n-nodes-base.code",
+                "typeVersion": 2,
+                "position": [
+                    3000,
+                    -600
+                ],
+                "parameters": {
+                    "jsCode": "const staticData = $getWorkflowStaticData('global');\nif (!staticData.clients) staticData.clients = {};\n\nconst resp = $input.first().json;\nconst prev = $('Split Files').first().json;\nconst clientFolderName = prev.clientFolderName;\n\nlet parsed;\ntry {\n  let rawText = resp.choices && resp.choices[0] ? resp.choices[0].message.content.trim() : '';\n  const clean = rawText.replace(/^```json\\s*/,'').replace(/\\s*```$/,'').trim();\n  parsed = JSON.parse(clean);\n} catch(e) {\n  return [{ json: { parseError: true, fileName: prev.fileName, fileId: prev.fileId,\n    clientFolderId: prev.clientFolderId, clientFolderName, rawResponse: resp.choices ? resp.choices[0].message.content : JSON.stringify(resp), errorMessage: e.message }}];\n}\n\nconst clientId = (parsed.client_id && String(parsed.client_id).trim()) || clientFolderName;\nconst date = parsed.date || \"unbekannt\";\n\nif (!staticData.clients[clientId]) {\n  staticData.clients[clientId] = { client_id: clientId, client_name: \"\", folderName: clientFolderName, operations: {} };\n}\nif (parsed.client_name && !staticData.clients[clientId].client_name) staticData.clients[clientId].client_name = parsed.client_name;\nif (!staticData.clients[clientId].operations[date]) staticData.clients[clientId].operations[date] = {};\n\nconst FIELDS = [\"Gewicht_kg\",\"Grosse_cm\",\"BMI_kg_m2\",\"FM_kg\",\"FM_pct\",\"FMI_kg_m2\",\"FFM_kg\",\"FFM_pct\",\"FFMI_kg_m2\",\"SMM_kg\",\"R_ohm\",\"Xc_ohm\",\"VAT_l\",\"WC_cm\",\"phase_angle_deg\",\"perzentile\",\"TBW_l\",\"TBW_pct\",\"ECW_l\",\"ECW_pct\",\"ECW_TBW_pct\"];\nconst op = staticData.clients[clientId].operations[date];\nfor (const field of FIELDS) { if (parsed[field] !== null && parsed[field] !== undefined) op[field] = parsed[field]; }\n\nreturn [{ json: { parseError: false, clientId, date, fileName: prev.fileName, fileId: prev.fileId, clientFolderId: prev.clientFolderId, clientFolderName }}];"
+                }
+            },
+            {
+                "id": "Parse_OK?",
+                "name": "Parse OK?",
+                "type": "n8n-nodes-base.if",
+                "typeVersion": 2,
+                "position": [
+                    3250,
+                    -600
+                ],
+                "parameters": {
+                    "conditions": {
+                        "options": {
+                            "caseSensitive": true,
+                            "leftValue": "",
+                            "typeValidation": "strict"
+                        },
+                        "conditions": [
+                            {
+                                "id": "po",
+                                "leftValue": "={{ $json.parseError }}",
+                                "rightValue": true,
+                                "operator": {
+                                    "type": "boolean",
+                                    "operation": "notEquals"
+                                }
+                            }
+                        ],
+                        "combinator": "and"
+                    },
+                    "options": {}
+                }
+            },
+            {
+                "id": "Rename_File_DONE",
+                "name": "Rename File DONE",
+                "type": "n8n-nodes-base.httpRequest",
+                "typeVersion": 4.2,
+                "position": [
+                    3500,
+                    -600
+                ],
+                "parameters": {
+                    "method": "PATCH",
+                    "url": "=https://www.googleapis.com/drive/v3/files/{{ $json.fileId }}",
+                    "authentication": "predefinedCredentialType",
+                    "nodeCredentialType": "googleDriveOAuth2Api",
+                    "sendBody": true,
+                    "specifyBody": "json",
+                    "jsonBody": "={{ JSON.stringify({ name: (() => { const n = $json.fileName; const d = n.lastIndexOf('.'); return d > -1 ? n.slice(0, d) + '_DONE' + n.slice(d) : n + '_DONE'; })() }) }}",
+                    "options": {}
+                },
+                "credentials": {
+                    "googleDriveOAuth2Api": {
+                        "id": "Nl36H51nJBoCaf67",
+                        "name": "Google Drive for n8n"
+                    }
+                }
+            },
+            {
+                "id": "Delay_1.5s",
+                "name": "Delay 3s",
+                "type": "n8n-nodes-base.code",
+                "typeVersion": 2,
+                "position": [
+                    3750,
+                    -600
+                ],
+                "parameters": {
+                    "jsCode": "await new Promise(r => setTimeout(r, 3000));\nreturn $input.all();"
+                }
+            },
+            {
+                "id": "Log_Error",
+                "name": "Log Error",
+                "type": "n8n-nodes-base.httpRequest",
+                "typeVersion": 4.2,
+                "position": [
+                    3500,
+                    -400
+                ],
+                "parameters": {
+                    "method": "POST",
+                    "url": "=https://sheets.googleapis.com/v4/spreadsheets/{{ $('Set Config').first().json.spreadsheetId }}/values/_FEHLER!A1:E1:append",
+                    "authentication": "predefinedCredentialType",
+                    "nodeCredentialType": "googleDriveOAuth2Api",
+                    "sendQuery": true,
+                    "queryParameters": {
+                        "parameters": [
+                            {
+                                "name": "valueInputOption",
+                                "value": "RAW"
+                            },
+                            {
+                                "name": "insertDataOption",
+                                "value": "INSERT_ROWS"
+                            }
+                        ]
+                    },
+                    "sendBody": true,
+                    "specifyBody": "json",
+                    "jsonBody": "={{ JSON.stringify({ values: [[ new Date().toISOString(), $json.clientFolderName || '', $json.fileName || '', $json.errorMessage || 'Error', ($json.rawResponse || '').substring(0, 500) ]] }) }}",
+                    "options": {
+                        "allowUnauthorizedCerts": true
+                    }
+                },
+                "credentials": {
+                    "googleDriveOAuth2Api": {
+                        "id": "Nl36H51nJBoCaf67",
+                        "name": "Google Drive for n8n"
+                    }
+                }
+            },
+            {
+                "id": "Delay_Error",
+                "name": "Delay Error",
+                "type": "n8n-nodes-base.code",
+                "typeVersion": 2,
+                "position": [
+                    3750,
+                    -400
+                ],
+                "parameters": {
+                    "jsCode": "await new Promise(r => setTimeout(r, 1000));\nreturn $input.all();"
+                }
+            },
+            {
+                "id": "Prepare_All_Clients",
+                "name": "Prepare All Clients",
+                "type": "n8n-nodes-base.code",
+                "typeVersion": 2,
+                "position": [
+                    2000,
+                    -900
+                ],
+                "parameters": {
+                    "jsCode": "const staticData = $getWorkflowStaticData('global');\nconst clients = staticData.clients || {};\nconst config = $('Set Config').first().json;\n\nconst clientList = Object.values(clients).filter(c => Object.keys(c.operations).length > 0);\nif (!clientList.length) return [{ json: { empty: true } }];\n\nconst FIELD_ORDER = [\"Gewicht_kg\",\"Grosse_cm\",\"BMI_kg_m2\",\"FM_kg\",\"FM_pct\",\"FMI_kg_m2\",\"FFM_kg\",\"FFM_pct\",\"FFMI_kg_m2\",\"SMM_kg\",\"R_ohm\",\"Xc_ohm\",\"VAT_l\",\"WC_cm\",\"phase_angle_deg\",\"perzentile\",\"TBW_l\",\"TBW_pct\",\"ECW_l\",\"ECW_pct\",\"ECW_TBW_pct\"];\n\nreturn clientList.map(c => {\n  const sortedDates = Object.keys(c.operations).filter(d => d !== \"unbekannt\")\n    .sort((a, b) => { const p = d => { const [dd,mm,yy] = d.split('.'); return new Date(yy, mm-1, dd); }; return p(a) - p(b); });\n  if (c.operations[\"unbekannt\"]) sortedDates.push(\"unbekannt\");\n\n  return { json: {\n    clientId: c.client_id, clientName: c.client_name || '', folderName: c.folderName,\n    operations: sortedDates.map((date, i) => ({ operationNumber: i+1, date, fields: c.operations[date] })),\n    fieldOrder: FIELD_ORDER, totalOps: sortedDates.length,\n    spreadsheetId: config.spreadsheetId, sheetGid: config.sheetGid, sheetName: config.sheetName,\n    config\n  }};\n});"
+                }
+            },
+            {
+                "id": "Split_Clients_Sheets",
+                "name": "Split Clients Sheets",
+                "type": "n8n-nodes-base.splitInBatches",
+                "typeVersion": 3,
+                "position": [
+                    2250,
+                    -900
+                ],
+                "parameters": {
+                    "batchSize": 1,
+                    "options": {}
+                }
+            },
+            {
+                "id": "Read_Sheet",
+                "name": "Read Sheet",
+                "type": "n8n-nodes-base.httpRequest",
+                "typeVersion": 4.2,
+                "position": [
+                    2500,
+                    -900
+                ],
+                "parameters": {
+                    "url": "=https://sheets.googleapis.com/v4/spreadsheets/{{ $json.spreadsheetId }}/values/{{ $json.sheetName }}!A1:ZZ2000",
+                    "authentication": "predefinedCredentialType",
+                    "nodeCredentialType": "googleDriveOAuth2Api",
+                    "options": {}
+                },
+                "credentials": {
+                    "googleDriveOAuth2Api": {
+                        "id": "Nl36H51nJBoCaf67",
+                        "name": "Google Drive for n8n"
+                    }
+                }
+            },
+            {
+                "id": "Build_Sheets_Request",
+                "name": "Build Sheets Requests",
+                "type": "n8n-nodes-base.code",
+                "typeVersion": 2,
+                "position": [
+                    2750,
+                    -900
+                ],
+                "parameters": {
+                    "jsCode": "const sheetData = $input.first().json;\nconst prev = $('Split Clients Sheets').first().json;\nconst rows = sheetData.values || [];\nconst clientId = prev.clientId;\nconst clientName = prev.clientName;\nconst operations = prev.operations;\nconst FIELD_ORDER = prev.fieldOrder;\nconst sheetGid = prev.sheetGid;\nconst spreadsheetId = prev.spreadsheetId;\nconst sheetName = prev.sheetName;\nconst COLS_PER_OP = 21;\nconst START_COL = 2;\n\nconst headerRow = rows[1] || [];\nlet maxOpBlock = 0;\nheaderRow.forEach(cell => {\n  const match = cell && String(cell).match(/^(\\d+)\\.\\s*Operation/);\n  if (match) maxOpBlock = Math.max(maxOpBlock, parseInt(match[1]));\n});\n\nconst clientRowMap = {};\nfor (let i = 5; i < rows.length; i += 2) {\n  const id = rows[i] && rows[i][0];\n  if (id) clientRowMap[String(id).trim()] = i + 1;\n}\nconst usedRows = Object.values(clientRowMap);\nconst nextFreeRow = usedRows.length > 0 ? Math.max(...usedRows) + 2 : 7;\n\nlet dateRow, dataRow;\nif (clientRowMap[clientId]) { dateRow = clientRowMap[clientId]; dataRow = dateRow + 1; }\nelse { dateRow = nextFreeRow; dataRow = nextFreeRow + 1; }\n\nconst valueRanges = [];\nconst mergeRequests = [];\n\nconst SECTION_HEADERS = ['BMI','BMI','BMI','Fettmasse','Fettmasse','Fettmasse','Fettfreie Masse','Fettfreie Masse','Fettfreie Masse','Skelettmuskelmasse','BIVA','BIVA','Viszerales Fett & Taillenumfang','Viszerales Fett & Taillenumfang','Phasenwinkel','Phasenwinkel','Wasser','Wasser','Wasser','Wasser','Wasser'];\nconst FIELD_NAMES = ['Gewicht','Gr\u00f6\u00dfe','BMI','FM','FM','FMI','FFM','FFM','FFMI','SMM','R','Xc','VAT','Taillenumfang','\u03c6','Perzentile','TBW','TBW','ECW','ECW','ECW/TBW'];\nconst UNITS = ['kg','cm','kg/m\u00b2','kg','%','kg/m\u00b2','kg','%','kg/m\u00b2','kg','\u03a9','\u03a9','l','cm','\u00b0','\u2014','l','%','l','%','%'];\n\nfunction colToLetter(col) { let l=''; while(col>=0){l=String.fromCharCode(65+(col%26))+l;col=Math.floor(col/26)-1;} return l; }\n\n// Headers for new op blocks\nfor (let opIdx = maxOpBlock; opIdx < operations.length; opIdx++) {\n  const cs = START_COL + opIdx * COLS_PER_OP;\n  const cl = colToLetter(cs); const ce = colToLetter(cs + COLS_PER_OP - 1);\n  const r2 = new Array(COLS_PER_OP).fill(''); r2[0] = (opIdx+1)+'. Operation';\n  valueRanges.push({range: sheetName+'!'+cl+'2:'+ce+'2', values: [r2]});\n  valueRanges.push({range: sheetName+'!'+cl+'3:'+ce+'3', values: [SECTION_HEADERS]});\n  valueRanges.push({range: sheetName+'!'+cl+'4:'+ce+'4', values: [FIELD_NAMES]});\n  valueRanges.push({range: sheetName+'!'+cl+'5:'+ce+'5', values: [UNITS]});\n  mergeRequests.push({mergeCells:{range:{sheetId:sheetGid,startRowIndex:1,endRowIndex:2,startColumnIndex:cs,endColumnIndex:cs+COLS_PER_OP},mergeType:\"MERGE_ALL\"}});\n  [{s:0,c:3},{s:3,c:3},{s:6,c:3},{s:10,c:2},{s:12,c:2},{s:14,c:2},{s:16,c:5}].forEach(sec => {\n    mergeRequests.push({mergeCells:{range:{sheetId:sheetGid,startRowIndex:2,endRowIndex:3,startColumnIndex:cs+sec.s,endColumnIndex:cs+sec.s+sec.c},mergeType:\"MERGE_ALL\"}});\n  });\n}\n\n// Client data\nconst maxCols = START_COL + Math.max(operations.length, maxOpBlock) * COLS_PER_OP;\nconst dateVals = new Array(maxCols).fill('');\nconst dataVals = new Array(maxCols).fill('');\ndateVals[0] = clientId; dateVals[1] = clientName;\n\noperations.forEach((op, idx) => {\n  const co = START_COL + idx * COLS_PER_OP;\n  dateVals[co] = 'Datum der Operation: ' + op.date;\n  FIELD_ORDER.forEach((field, fi) => {\n    const v = op.fields[field];\n    if (v !== undefined && v !== null) dataVals[co + fi] = v;\n  });\n  mergeRequests.push({mergeCells:{range:{sheetId:sheetGid,startRowIndex:dateRow-1,endRowIndex:dateRow,startColumnIndex:co,endColumnIndex:co+COLS_PER_OP},mergeType:\"MERGE_ALL\"}});\n});\n\nvalueRanges.push({range:sheetName+'!A'+dateRow+':'+colToLetter(maxCols-1)+dateRow, values:[dateVals]});\nvalueRanges.push({range:sheetName+'!A'+dataRow+':'+colToLetter(maxCols-1)+dataRow, values:[dataVals]});\n\nreturn [{ json: { spreadsheetId, sheetName, sheetGid, valueRanges, mergeRequests, clientId, clientFolderName: prev.folderName, clientFolderId: null }}];"
+                }
+            },
+            {
+                "id": "Sheets_Merge",
+                "name": "Sheets Merge",
+                "type": "n8n-nodes-base.httpRequest",
+                "typeVersion": 4.2,
+                "position": [
+                    3000,
+                    -900
+                ],
+                "parameters": {
+                    "method": "POST",
+                    "url": "=https://sheets.googleapis.com/v4/spreadsheets/{{ $json.spreadsheetId }}:batchUpdate",
+                    "authentication": "predefinedCredentialType",
+                    "nodeCredentialType": "googleDriveOAuth2Api",
+                    "sendBody": true,
+                    "specifyBody": "json",
+                    "jsonBody": "={{ JSON.stringify({ requests: $json.mergeRequests }) }}",
+                    "options": {}
+                },
+                "credentials": {
+                    "googleDriveOAuth2Api": {
+                        "id": "Nl36H51nJBoCaf67",
+                        "name": "Google Drive for n8n"
+                    }
+                }
+            },
+            {
+                "id": "Sheets_Write",
+                "name": "Sheets Write",
+                "type": "n8n-nodes-base.httpRequest",
+                "typeVersion": 4.2,
+                "position": [
+                    3250,
+                    -900
+                ],
+                "parameters": {
+                    "method": "POST",
+                    "url": "=https://sheets.googleapis.com/v4/spreadsheets/{{ $json.spreadsheetId }}/values:batchUpdate",
+                    "authentication": "predefinedCredentialType",
+                    "nodeCredentialType": "googleDriveOAuth2Api",
+                    "sendBody": true,
+                    "specifyBody": "json",
+                    "jsonBody": "={{ JSON.stringify({ valueInputOption: 'RAW', data: $('Build Sheets Requests').first().json.valueRanges }) }}",
+                    "options": {}
+                },
+                "credentials": {
+                    "googleDriveOAuth2Api": {
+                        "id": "Nl36H51nJBoCaf67",
+                        "name": "Google Drive for n8n"
+                    }
+                }
+            },
+            {
+                "id": "Find_Client_Folder",
+                "name": "Find Client Folder",
+                "type": "n8n-nodes-base.httpRequest",
+                "typeVersion": 4.2,
+                "position": [
+                    3500,
+                    -900
+                ],
+                "parameters": {
+                    "url": "https://www.googleapis.com/drive/v3/files",
+                    "authentication": "predefinedCredentialType",
+                    "nodeCredentialType": "googleDriveOAuth2Api",
+                    "sendQuery": true,
+                    "queryParameters": {
+                        "parameters": [
+                            {
+                                "name": "q",
+                                "value": "=name='{{ $('Split Clients Sheets').first().json.folderName }}' AND '{{ $('Set Config').first().json.rootFolderId }}' in parents AND mimeType='application/vnd.google-apps.folder' AND trashed=false"
+                            },
+                            {
+                                "name": "fields",
+                                "value": "files(id,name)"
+                            }
+                        ]
+                    },
+                    "options": {}
+                },
+                "credentials": {
+                    "googleDriveOAuth2Api": {
+                        "id": "Nl36H51nJBoCaf67",
+                        "name": "Google Drive for n8n"
+                    }
+                }
+            },
+            {
+                "id": "Rename_Folder_DONE",
+                "name": "Rename Folder DONE",
+                "type": "n8n-nodes-base.httpRequest",
+                "typeVersion": 4.2,
+                "position": [
+                    3750,
+                    -900
+                ],
+                "parameters": {
+                    "method": "PATCH",
+                    "url": "=https://www.googleapis.com/drive/v3/files/{{ $json.files[0].id }}",
+                    "authentication": "predefinedCredentialType",
+                    "nodeCredentialType": "googleDriveOAuth2Api",
+                    "sendBody": true,
+                    "specifyBody": "json",
+                    "jsonBody": "={{ JSON.stringify({ name: $json.files[0].name + '_DONE' }) }}",
+                    "options": {}
+                },
+                "credentials": {
+                    "googleDriveOAuth2Api": {
+                        "id": "Nl36H51nJBoCaf67",
+                        "name": "Google Drive for n8n"
+                    }
+                }
+            },
+            {
+                "id": "Delay_Client",
+                "name": "Delay Client",
+                "type": "n8n-nodes-base.code",
+                "typeVersion": 2,
+                "position": [
+                    4000,
+                    -900
+                ],
+                "parameters": {
+                    "jsCode": "await new Promise(r => setTimeout(r, 1000));\nreturn $input.all();"
+                }
+            },
+            {
+                "id": "Instructions",
+                "name": "Instructions",
+                "type": "n8n-nodes-base.stickyNote",
+                "typeVersion": 1,
+                "position": [
+                    -200,
+                    -1000
+                ],
+                "parameters": {
+                    "content": "## Medical Photos HEIC \u2192 Google Sheets (v2)\n\n**Architecture:** 3-phase sequential (no nested loops)\n1. Collect all files from all client folders\n2. Process each file through OpenAI Vision (flat loop)\n3. Write results to Sheets per client\n\n**Model:** GPT-4o (OpenAI)\n**Rate limit:** 1.5s between OpenAI calls",
+                    "width": 400,
+                    "height": 200
+                }
             }
-          ],
-          "combinator": "and"
+        ],
+        "connections": {
+            "Manual Trigger": {
+                "main": [
+                    [
+                        {
+                            "node": "Set Config",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Webhook1": {
+                "main": [
+                    [
+                        {
+                            "node": "Set Config",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Set Config": {
+                "main": [
+                    [
+                        {
+                            "node": "List Subfolders",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "List Subfolders": {
+                "main": [
+                    [
+                        {
+                            "node": "Filter Clients",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Filter Clients": {
+                "main": [
+                    [
+                        {
+                            "node": "Split Clients",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Split Clients": {
+                "main": [
+                    [
+                        {
+                            "node": "Output All Files",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ],
+                    [
+                        {
+                            "node": "List Client Files",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "List Client Files": {
+                "main": [
+                    [
+                        {
+                            "node": "Collect Files",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Collect Files": {
+                "main": [
+                    [
+                        {
+                            "node": "Split Clients",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Output All Files": {
+                "main": [
+                    [
+                        {
+                            "node": "Has Files?",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Has Files?": {
+                "main": [
+                    [
+                        {
+                            "node": "Split Files",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ],
+                    [
+                        {
+                            "node": "Prepare All Clients",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Split Files": {
+                "main": [
+                    [
+                        {
+                            "node": "Prepare All Clients",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ],
+                    [
+                        {
+                            "node": "Get File Metadata",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Get File Metadata": {
+                "main": [
+                    [
+                        {
+                            "node": "Build OpenAI Request",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Build OpenAI Request": {
+                "main": [
+                    [
+                        {
+                            "node": "Image OK?",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Image OK?": {
+                "main": [
+                    [
+                        {
+                            "node": "OpenAI Vision API",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ],
+                    [
+                        {
+                            "node": "Log Error",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "OpenAI Vision API": {
+                "main": [
+                    [
+                        {
+                            "node": "Parse & Accumulate",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Parse & Accumulate": {
+                "main": [
+                    [
+                        {
+                            "node": "Parse OK?",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Parse OK?": {
+                "main": [
+                    [
+                        {
+                            "node": "Rename File DONE",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ],
+                    [
+                        {
+                            "node": "Log Error",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Rename File DONE": {
+                "main": [
+                    [
+                        {
+                            "node": "Delay 3s",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Log Error": {
+                "main": [
+                    [
+                        {
+                            "node": "Delay Error",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Delay Error": {
+                "main": [
+                    [
+                        {
+                            "node": "Split Files",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Prepare All Clients": {
+                "main": [
+                    [
+                        {
+                            "node": "Split Clients Sheets",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Split Clients Sheets": {
+                "main": [
+                    [],
+                    [
+                        {
+                            "node": "Read Sheet",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Read Sheet": {
+                "main": [
+                    [
+                        {
+                            "node": "Build Sheets Requests",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Build Sheets Requests": {
+                "main": [
+                    [
+                        {
+                            "node": "Sheets Merge",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Sheets Merge": {
+                "main": [
+                    [
+                        {
+                            "node": "Sheets Write",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Sheets Write": {
+                "main": [
+                    [
+                        {
+                            "node": "Find Client Folder",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Find Client Folder": {
+                "main": [
+                    [
+                        {
+                            "node": "Rename Folder DONE",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Rename Folder DONE": {
+                "main": [
+                    [
+                        {
+                            "node": "Delay Client",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Delay Client": {
+                "main": [
+                    [
+                        {
+                            "node": "Split Clients Sheets",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Delay 3s": {
+                "main": [
+                    [
+                        {
+                            "node": "Split Files",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            }
         },
-        "options": {}
-      }
-    },
-    {
-      "id": "092e0a23-23e511cf",
-      "name": "Read Sheet",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        3000,
-        -600
-      ],
-      "parameters": {
-        "url": "=https://sheets.googleapis.com/v4/spreadsheets/{{ $json.spreadsheetId }}/values/{{ $json.sheetName }}!A1:ZZ2000",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "googleDriveOAuth2Api",
-        "options": {}
-      },
-      "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "Nl36H51nJBoCaf67",
-          "name": "Google Drive for n8n"
-        }
-      }
-    },
-    {
-      "id": "84402f01-44a70e4a",
-      "name": "Build Sheets Requests",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        3250,
-        -600
-      ],
-      "parameters": {
-        "jsCode": "const sheetData = $input.first().json;\nconst prev = $('Has Sheet Data?').first().json;\nconst rows = sheetData.values || [];\n\nconst clientId = prev.clientId;\nconst clientName = prev.clientName;\nconst operations = prev.operations;\nconst FIELD_ORDER = prev.fieldOrder;\nconst sheetGid = prev.sheetGid;\nconst spreadsheetId = prev.spreadsheetId;\nconst sheetName = prev.sheetName;\nconst COLS_PER_OP = 21;\nconst START_COL = 2; // Column C (0-based)\n\n// === Find existing max operation blocks in header (row 2, index 1) ===\nconst headerRow = rows[1] || [];\nlet maxOpBlock = 0;\nheaderRow.forEach(cell => {\n  const match = cell && String(cell).match(/^(\\d+)\\.\\s*Operation/);\n  if (match) maxOpBlock = Math.max(maxOpBlock, parseInt(match[1]));\n});\n\n// === Find client row (column A, rows 6+, index 5+) ===\nconst clientRowMap = {};\nfor (let i = 5; i < rows.length; i += 2) {\n  const id = rows[i] && rows[i][0];\n  if (id) clientRowMap[String(id).trim()] = i + 1; // 1-based\n}\n\nconst usedRows = Object.values(clientRowMap);\nconst nextFreeRow = usedRows.length > 0\n  ? Math.max(...usedRows) + 2\n  : 7; // Row 7 (first data row after headers 1-6)\n\nlet dateRow, dataRow;\nif (clientRowMap[clientId]) {\n  dateRow = clientRowMap[clientId];\n  dataRow = clientRowMap[clientId] + 1;\n} else {\n  dateRow = nextFreeRow;\n  dataRow = nextFreeRow + 1;\n}\n\n// === Build value ranges for batchUpdate ===\nconst valueRanges = [];\n\n// --- Header rows for new operation blocks (rows 2-5) ---\nconst SECTION_HEADERS = ['BMI','BMI','BMI','Fettmasse','Fettmasse','Fettmasse','Fettfreie Masse','Fettfreie Masse','Fettfreie Masse','Skelettmuskelmasse','BIVA','BIVA','Viszerales Fett & Taillenumfang','Viszerales Fett & Taillenumfang','Phasenwinkel','Phasenwinkel','Wasser','Wasser','Wasser','Wasser','Wasser'];\nconst FIELD_NAMES = ['Gewicht','Größe','BMI','FM','FM','FMI','FFM','FFM','FFMI','SMM','R','Xc','VAT','Taillenumfang','φ','Perzentile','TBW','TBW','ECW','ECW','ECW/TBW'];\nconst UNITS = ['kg','cm','kg/m²','kg','%','kg/m²','kg','%','kg/m²','kg','Ω','Ω','l','cm','°','—','l','%','l','%','%'];\n\nfor (let opIdx = maxOpBlock; opIdx < operations.length; opIdx++) {\n  const colStart = START_COL + opIdx * COLS_PER_OP;\n  const colLetter = colToLetter(colStart);\n  const colEndLetter = colToLetter(colStart + COLS_PER_OP - 1);\n\n  // Row 2: \"N. Operation\"\n  const row2 = new Array(COLS_PER_OP).fill('');\n  row2[0] = (opIdx + 1) + '. Operation';\n  valueRanges.push({\n    range: sheetName + '!' + colLetter + '2:' + colEndLetter + '2',\n    values: [row2]\n  });\n\n  // Row 3: Section headers\n  valueRanges.push({\n    range: sheetName + '!' + colLetter + '3:' + colEndLetter + '3',\n    values: [SECTION_HEADERS]\n  });\n\n  // Row 4: Field names\n  valueRanges.push({\n    range: sheetName + '!' + colLetter + '4:' + colEndLetter + '4',\n    values: [FIELD_NAMES]\n  });\n\n  // Row 5: Units\n  valueRanges.push({\n    range: sheetName + '!' + colLetter + '5:' + colEndLetter + '5',\n    values: [UNITS]\n  });\n}\n\n// --- Client data rows ---\n// Date row: ID, Name, then dates in first cell of each op block\nconst maxCols = START_COL + Math.max(operations.length, maxOpBlock) * COLS_PER_OP;\nconst dateRowValues = new Array(maxCols).fill('');\ndateRowValues[0] = clientId;\ndateRowValues[1] = clientName;\n\n// Data row: empty ID/Name, then values\nconst dataRowValues = new Array(maxCols).fill('');\n\noperations.forEach((op, idx) => {\n  const colOffset = START_COL + idx * COLS_PER_OP;\n  dateRowValues[colOffset] = 'Datum der Operation: ' + op.date;\n\n  FIELD_ORDER.forEach((field, fIdx) => {\n    const val = op.fields[field];\n    if (val !== undefined && val !== null) {\n      dataRowValues[colOffset + fIdx] = val;\n    }\n  });\n});\n\nvalueRanges.push({\n  range: sheetName + '!A' + dateRow + ':' + colToLetter(maxCols - 1) + dateRow,\n  values: [dateRowValues]\n});\nvalueRanges.push({\n  range: sheetName + '!A' + dataRow + ':' + colToLetter(maxCols - 1) + dataRow,\n  values: [dataRowValues]\n});\n\n// === Build merge requests ===\nconst mergeRequests = [];\n\n// Merge operation headers in row 2 for new blocks\nfor (let opIdx = maxOpBlock; opIdx < operations.length; opIdx++) {\n  const colStart = START_COL + opIdx * COLS_PER_OP;\n  mergeRequests.push({\n    mergeCells: {\n      range: {\n        sheetId: sheetGid,\n        startRowIndex: 1, endRowIndex: 2,\n        startColumnIndex: colStart, endColumnIndex: colStart + COLS_PER_OP\n      },\n      mergeType: \"MERGE_ALL\"\n    }\n  });\n\n  // Section merges in row 3\n  const sectionSpans = [\n    {name: 'BMI', start: 0, count: 3},\n    {name: 'Fettmasse', start: 3, count: 3},\n    {name: 'Fettfreie Masse', start: 6, count: 3},\n    {name: 'Skelettmuskelmasse', start: 9, count: 1},\n    {name: 'BIVA', start: 10, count: 2},\n    {name: 'Viszerales Fett', start: 12, count: 2},\n    {name: 'Phasenwinkel', start: 14, count: 2},\n    {name: 'Wasser', start: 16, count: 5}\n  ];\n\n  sectionSpans.forEach(sec => {\n    if (sec.count > 1) {\n      mergeRequests.push({\n        mergeCells: {\n          range: {\n            sheetId: sheetGid,\n            startRowIndex: 2, endRowIndex: 3,\n            startColumnIndex: colStart + sec.start,\n            endColumnIndex: colStart + sec.start + sec.count\n          },\n          mergeType: \"MERGE_ALL\"\n        }\n      });\n    }\n  });\n}\n\n// Merge date cells for each operation in client's date row\noperations.forEach((op, idx) => {\n  const colStart = START_COL + idx * COLS_PER_OP;\n  mergeRequests.push({\n    mergeCells: {\n      range: {\n        sheetId: sheetGid,\n        startRowIndex: dateRow - 1, endRowIndex: dateRow,\n        startColumnIndex: colStart, endColumnIndex: colStart + COLS_PER_OP\n      },\n      mergeType: \"MERGE_ALL\"\n    }\n  });\n});\n\n// Helper: column index to letter\nfunction colToLetter(col) {\n  let letter = '';\n  while (col >= 0) {\n    letter = String.fromCharCode(65 + (col % 26)) + letter;\n    col = Math.floor(col / 26) - 1;\n  }\n  return letter;\n}\n\nreturn [{ json: {\n  spreadsheetId,\n  sheetName,\n  sheetGid,\n  valueRanges,\n  mergeRequests,\n  clientFolderId: prev.clientFolderId,\n  clientFolderName: prev.clientFolderName,\n  clientId\n}}];"
-      }
-    },
-    {
-      "id": "bf02d83b-8d5f95e8",
-      "name": "Sheets Merge Cells",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        3500,
-        -600
-      ],
-      "parameters": {
-        "method": "POST",
-        "url": "=https://sheets.googleapis.com/v4/spreadsheets/{{ $json.spreadsheetId }}:batchUpdate",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "googleDriveOAuth2Api",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({ requests: $json.mergeRequests }) }}",
-        "options": {}
-      },
-      "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "Nl36H51nJBoCaf67",
-          "name": "Google Drive for n8n"
-        }
-      }
-    },
-    {
-      "id": "be088a13-edeae534",
-      "name": "Sheets Write Values",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        3750,
-        -600
-      ],
-      "parameters": {
-        "method": "POST",
-        "url": "=https://sheets.googleapis.com/v4/spreadsheets/{{ $json.spreadsheetId }}/values:batchUpdate",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "googleDriveOAuth2Api",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({ valueInputOption: 'RAW', data: $('Build Sheets Requests').first().json.valueRanges }) }}",
-        "options": {}
-      },
-      "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "Nl36H51nJBoCaf67",
-          "name": "Google Drive for n8n"
-        }
-      }
-    },
-    {
-      "id": "859c581a-a89bdb47",
-      "name": "Rename Folder DONE",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        4000,
-        -600
-      ],
-      "parameters": {
-        "method": "PATCH",
-        "url": "=https://www.googleapis.com/drive/v3/files/{{ $json.clientFolderId || $('Build Sheets Requests').first().json.clientFolderId }}",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "googleDriveOAuth2Api",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({ name: ($json.clientFolderName || $('Build Sheets Requests').first().json.clientFolderName) + '_DONE' }) }}",
-        "options": {}
-      },
-      "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "Nl36H51nJBoCaf67",
-          "name": "Google Drive for n8n"
-        }
-      }
-    },
-    {
-      "id": "bd334559-5bb6ed07",
-      "name": "Wait 1s Client",
-      "type": "n8n-nodes-base.wait",
-      "typeVersion": 1.1,
-      "position": [
-        4250,
-        -600
-      ],
-      "parameters": {
-        "amount": 1,
-        "unit": "seconds"
-      }
-    },
-    {
-      "id": "bbdc7664-e6af47ee",
-      "name": "Instructions",
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        -300,
-        -700
-      ],
-      "parameters": {
-        "content": "## Medical Photos HEIC → Google Sheets\\n\\n**SETUP REQUIRED:**\\n1. Connect **OpenAI API** credential to 'OpenAI Vision API' node\\n   (Header Auth: `Authorization: Bearer sk-...`)\\n2. Ensure Google Drive OAuth2 credential has Google Sheets API scope\\n3. Create a sheet tab `_FEHLER` for error logging\\n\\n**Model:** GPT-4o (OpenAI Vision)\\n\\n**Processes:** 8 test client folders → extracts medical data via OpenAI Vision → writes to Google Sheets\\n\\n**Rate limits:** 1.5s between OpenAI API calls, 1s between Sheet writes",
-        "width": 400,
-        "height": 300
-      }
+        "authors": "OLEKSANDR Polischuk",
+        "name": null,
+        "description": null,
+        "autosaved": false,
+        "workflowPublishHistory": [
+            {
+                "createdAt": "2026-03-05T10:59:50.735Z",
+                "id": 826,
+                "workflowId": "1yit8oX2g097l1U9",
+                "versionId": "3e032ef0-049f-4416-a935-a974afc17ad5",
+                "event": "activated",
+                "userId": "6f7766c1-8e6d-478f-a667-93619ba35dbe"
+            }
+        ]
     }
-  ],
-  "connections": {
-    "Manual Trigger": {
-      "main": [
-        [
-          {
-            "node": "Set Config",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Set Config": {
-      "main": [
-        [
-          {
-            "node": "List Subfolders",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "List Subfolders": {
-      "main": [
-        [
-          {
-            "node": "Filter Clients",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Filter Clients": {
-      "main": [
-        [
-          {
-            "node": "Has Clients?",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Has Clients?": {
-      "main": [
-        [
-          {
-            "node": "Split Clients",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Split Clients": {
-      "main": [
-        [],
-        [
-          {
-            "node": "List Client Files",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "List Client Files": {
-      "main": [
-        [
-          {
-            "node": "Filter Media Files",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Filter Media Files": {
-      "main": [
-        [
-          {
-            "node": "Has Files?",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Has Files?": {
-      "main": [
-        [
-          {
-            "node": "Split Files",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Wait Skip Client",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Wait Skip Client": {
-      "main": [
-        [
-          {
-            "node": "Split Clients",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Split Files": {
-      "main": [
-        [
-          {
-            "node": "Prepare Sheets Data",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Get File Metadata",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Get File Metadata": {
-      "main": [
-        [
-          {
-            "node": "Build OpenAI Request",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Build OpenAI Request": {
-      "main": [
-        [
-          {
-            "node": "Image OK?",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Image OK?": {
-      "main": [
-        [
-          {
-            "node": "OpenAI Vision API",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Log Error FEHLER",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "OpenAI Vision API": {
-      "main": [
-        [
-          {
-            "node": "Parse & Accumulate",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Parse & Accumulate": {
-      "main": [
-        [
-          {
-            "node": "Parse OK?",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Parse OK?": {
-      "main": [
-        [
-          {
-            "node": "Rename File DONE",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Log Error FEHLER",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Rename File DONE": {
-      "main": [
-        [
-          {
-            "node": "Wait 1.5s File",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Wait 1.5s File": {
-      "main": [
-        [
-          {
-            "node": "Split Files",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Log Error FEHLER": {
-      "main": [
-        [
-          {
-            "node": "Wait 1s Error",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Wait 1s Error": {
-      "main": [
-        [
-          {
-            "node": "Split Files",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Prepare Sheets Data": {
-      "main": [
-        [
-          {
-            "node": "Has Sheet Data?",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Has Sheet Data?": {
-      "main": [
-        [
-          {
-            "node": "Read Sheet",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Rename Folder DONE",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Read Sheet": {
-      "main": [
-        [
-          {
-            "node": "Build Sheets Requests",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Build Sheets Requests": {
-      "main": [
-        [
-          {
-            "node": "Sheets Merge Cells",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Sheets Merge Cells": {
-      "main": [
-        [
-          {
-            "node": "Sheets Write Values",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Sheets Write Values": {
-      "main": [
-        [
-          {
-            "node": "Rename Folder DONE",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Rename Folder DONE": {
-      "main": [
-        [
-          {
-            "node": "Wait 1s Client",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Wait 1s Client": {
-      "main": [
-        [
-          {
-            "node": "Split Clients",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    }
-  },
-  "settings": {
-    "executionOrder": "v1"
-  }
 }
