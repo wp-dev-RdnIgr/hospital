@@ -117,7 +117,19 @@ return [{ json: { clientId, fileName: $('Split in Batches').first().json.name, f
 ### Нода 8 — IF Node (Проверка распознавания)
 - **Условие**: `clientId !== 'UNKNOWN'`
 - **True**: переходим к созданию/проверке папки
-- **False**: файл остаётся в исходной папке без изменений (пропускаем, переходим к следующему файлу)
+- **False**: переходим к поиску/созданию папки `UNKNOWN` и перемещаем файл туда
+
+### Нода 8b — Google Drive: Search UNKNOWN Folder
+- Поиск папки с именем `UNKNOWN` внутри родительской папки
+- Query: `name = 'UNKNOWN' and '{{parentFolderId}}' in parents and mimeType = 'application/vnd.google-apps.folder' and trashed = false`
+- **Если найдена** → использовать её `id`
+- **Если не найдена** → создать новую
+
+### Нода 8c — Google Drive: Create UNKNOWN Folder (условная)
+- Создать подпапку `UNKNOWN` в родительской папке (если не существует)
+
+### Нода 8d — Google Drive: Move File to UNKNOWN
+- Переместить нераспознанный файл в папку `UNKNOWN/`
 
 ### Нода 9 — Google Drive: Search Folder (Проверка существования папки)
 - Поиск папки с именем = `clientId` внутри родительской папки
@@ -197,7 +209,8 @@ which convert && convert --version
     📷 IMG_003.HEIC
     📷 IMG_047.HEIC
     📷 IMG_088.HEIC
-  📷 IMG_077.HEIC  ← не распознан, остался в корне
+  📁 UNKNOWN/
+    📷 IMG_077.HEIC  ← не распознан, перемещён в UNKNOWN
 ```
 
 ---

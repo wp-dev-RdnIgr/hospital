@@ -1,576 +1,1978 @@
 {
-  "name": "HEIC Photo Organizer — Sort by Patient ID",
-  "nodes": [
-    {
-      "parameters": {
-        "content": "## HEIC Photo Organizer\n\nАвтоматическая сортировка HEIC-фото пациентов по ID клиента.\n\n### Как работает:\n1. Получает список HEIC-файлов из Google Drive\n2. Скачивает и конвертирует HEIC → JPEG\n3. Отправляет в OpenAI Vision (GPT-4o) для распознавания ID\n4. Создаёт подпапки по ID клиента\n5. Перемещает файлы в соответствующие папки\n6. Нераспознанные файлы остаются на месте\n\n### Настройки:\n- Папка: 1iEbSMlsHPX6Sg3y0J0znlT47ri78hk9_\n- Rate limit: 2 сек между файлами\n- Модель: gpt-4o\n\n### Credentials нужно подключить:\n- Google Drive OAuth2\n- OpenAI API Key",
-        "height": 520,
-        "width": 360
-      },
-      "id": "sticky-info",
-      "name": "Info",
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [-600, 0]
-    },
-    {
-      "parameters": {},
-      "id": "node-manual-trigger",
-      "name": "Manual Trigger",
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
-      "position": [-200, 300]
-    },
-    {
-      "parameters": {
-        "jsCode": "// ID папки Google Drive с HEIC-фотографиями\n// Можно изменить на нужный folder ID\nconst folderId = '1iEbSMlsHPX6Sg3y0J0znlT47ri78hk9_';\n\nreturn [{ json: { folderId } }];"
-      },
-      "id": "node-set-folder",
-      "name": "Set Folder ID",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [20, 300]
-    },
-    {
-      "parameters": {
-        "method": "GET",
-        "url": "https://www.googleapis.com/drive/v3/files",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "googleDriveOAuth2Api",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            {
-              "name": "q",
-              "value": "='{{ $json.folderId }}' in parents and (mimeType = 'image/heic' or name contains '.HEIC' or name contains '.heic') and trashed = false"
+    "updatedAt": "2026-03-04T19:35:16.156Z",
+    "createdAt": "2026-03-04T16:51:31.541Z",
+    "id": "gFcvIN83wmc9UvkS",
+    "name": "HEIC Photo Organizer \u2014 Sort by Patient ID",
+    "description": null,
+    "active": true,
+    "isArchived": false,
+    "nodes": [
+        {
+            "parameters": {
+                "content": "## HEIC Photo Organizer\n\n\u0410\u0432\u0442\u043e\u043c\u0430\u0442\u0438\u0447\u0435\u0441\u043a\u0430\u044f \u0441\u043e\u0440\u0442\u0438\u0440\u043e\u0432\u043a\u0430 HEIC-\u0444\u043e\u0442\u043e \u043f\u0430\u0446\u0438\u0435\u043d\u0442\u043e\u0432 \u043f\u043e ID \u043a\u043b\u0438\u0435\u043d\u0442\u0430.\n\n### \u041a\u0430\u043a \u0440\u0430\u0431\u043e\u0442\u0430\u0435\u0442:\n1. \u041f\u043e\u043b\u0443\u0447\u0430\u0435\u0442 \u0441\u043f\u0438\u0441\u043e\u043a HEIC-\u0444\u0430\u0439\u043b\u043e\u0432 \u0438\u0437 Google Drive\n2. \u0421\u043a\u0430\u0447\u0438\u0432\u0430\u0435\u0442 \u0438 \u043a\u043e\u043d\u0432\u0435\u0440\u0442\u0438\u0440\u0443\u0435\u0442 HEIC \u2192 JPEG\n3. \u041e\u0442\u043f\u0440\u0430\u0432\u043b\u044f\u0435\u0442 \u0432 OpenAI Vision (GPT-4o) \u0434\u043b\u044f \u0440\u0430\u0441\u043f\u043e\u0437\u043d\u0430\u0432\u0430\u043d\u0438\u044f ID\n4. \u0421\u043e\u0437\u0434\u0430\u0451\u0442 \u043f\u043e\u0434\u043f\u0430\u043f\u043a\u0438 \u043f\u043e ID \u043a\u043b\u0438\u0435\u043d\u0442\u0430\n5. \u041f\u0435\u0440\u0435\u043c\u0435\u0449\u0430\u0435\u0442 \u0444\u0430\u0439\u043b\u044b \u0432 \u0441\u043e\u043e\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0443\u044e\u0449\u0438\u0435 \u043f\u0430\u043f\u043a\u0438\n6. \u041d\u0435\u0440\u0430\u0441\u043f\u043e\u0437\u043d\u0430\u043d\u043d\u044b\u0435 \u0444\u0430\u0439\u043b\u044b \u043e\u0441\u0442\u0430\u044e\u0442\u0441\u044f \u043d\u0430 \u043c\u0435\u0441\u0442\u0435\n\n### \u041d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438:\n- \u041f\u0430\u043f\u043a\u0430: 1iEbSMlsHPX6Sg3y0J0znlT47ri78hk9_\n- Rate limit: 2 \u0441\u0435\u043a \u043c\u0435\u0436\u0434\u0443 \u0444\u0430\u0439\u043b\u0430\u043c\u0438\n- \u041c\u043e\u0434\u0435\u043b\u044c: gpt-4o\n\n### Credentials \u043d\u0443\u0436\u043d\u043e \u043f\u043e\u0434\u043a\u043b\u044e\u0447\u0438\u0442\u044c:\n- Google Drive OAuth2\n- OpenAI API Key",
+                "height": 520,
+                "width": 360
             },
-            {
-              "name": "fields",
-              "value": "files(id,name,mimeType)"
+            "id": "eb19925e-61af-4c8a-b37d-2d2d9fdaac24",
+            "name": "Info",
+            "type": "n8n-nodes-base.stickyNote",
+            "typeVersion": 1,
+            "position": [
+                -1344,
+                -576
+            ]
+        },
+        {
+            "parameters": {},
+            "id": "9418d472-77c8-427c-91da-1710a7c751c2",
+            "name": "Manual Trigger",
+            "type": "n8n-nodes-base.manualTrigger",
+            "typeVersion": 1,
+            "position": [
+                -960,
+                -80
+            ]
+        },
+        {
+            "parameters": {
+                "jsCode": "// ID \u043f\u0430\u043f\u043a\u0438 Google Drive \u0441 HEIC-\u0444\u043e\u0442\u043e\u0433\u0440\u0430\u0444\u0438\u044f\u043c\u0438\n// \u041c\u043e\u0436\u043d\u043e \u0438\u0437\u043c\u0435\u043d\u0438\u0442\u044c \u043d\u0430 \u043d\u0443\u0436\u043d\u044b\u0439 folder ID\nconst folderId = '1iEbSMlsHPX6Sg3y0J0znlT47ri78hk9_';\n\nreturn [{ json: { folderId } }];"
             },
-            {
-              "name": "pageSize",
-              "value": "200"
+            "id": "bc41df99-3c6c-4425-af12-7a80eb825fb5",
+            "name": "Set Folder ID",
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                -720,
+                -272
+            ]
+        },
+        {
+            "parameters": {
+                "method": "GET",
+                "url": "https://www.googleapis.com/drive/v3/files",
+                "authentication": "predefinedCredentialType",
+                "nodeCredentialType": "googleDriveOAuth2Api",
+                "sendQuery": true,
+                "queryParameters": {
+                    "parameters": [
+                        {
+                            "name": "q",
+                            "value": "='{{ $json.folderId }}' in parents and (mimeType = 'image/heic' or name contains '.HEIC' or name contains '.heic') and trashed = false"
+                        },
+                        {
+                            "name": "fields",
+                            "value": "files(id,name,mimeType)"
+                        },
+                        {
+                            "name": "pageSize",
+                            "value": "200"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "id": "b8011de2-e9b9-4891-86e7-fc3e66e7851a",
+            "name": "List HEIC Files",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                -512,
+                -272
+            ],
+            "credentials": {
+                "googleDriveOAuth2Api": {
+                    "id": "Nl36H51nJBoCaf67",
+                    "name": "Google Drive for n8n"
+                }
             }
-          ]
         },
-        "options": {}
-      },
-      "id": "node-list-files",
-      "name": "List HEIC Files",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [240, 300]
-    },
-    {
-      "parameters": {
-        "jsCode": "// Парсим список файлов из Google Drive API\nconst response = $input.first().json;\nconst files = response.files || [];\n\nif (files.length === 0) {\n  throw new Error('Не найдено HEIC-файлов в папке');\n}\n\nconst folderId = $('Set Folder ID').first().json.folderId;\n\nreturn files.map(file => ({\n  json: {\n    fileId: file.id,\n    fileName: file.name,\n    mimeType: file.mimeType,\n    parentFolderId: folderId\n  }\n}));"
-      },
-      "id": "node-filter-heic",
-      "name": "Parse File List",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [460, 300]
-    },
-    {
-      "parameters": {
-        "batchSize": 1,
-        "options": {}
-      },
-      "id": "node-split-batches",
-      "name": "Split In Batches",
-      "type": "n8n-nodes-base.splitInBatches",
-      "typeVersion": 3,
-      "position": [680, 300]
-    },
-    {
-      "parameters": {
-        "operation": "download",
-        "fileId": {
-          "__rl": true,
-          "mode": "id",
-          "value": "={{ $json.fileId }}"
+        {
+            "parameters": {
+                "jsCode": "// \u041f\u0430\u0440\u0441\u0438\u043c \u0441\u043f\u0438\u0441\u043e\u043a \u0444\u0430\u0439\u043b\u043e\u0432 \u0438\u0437 Google Drive API\nconst response = $input.first().json;\nconst files = response.files || [];\n\nif (files.length === 0) {\n  throw new Error('\u041d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d\u043e HEIC-\u0444\u0430\u0439\u043b\u043e\u0432 \u0432 \u043f\u0430\u043f\u043a\u0435');\n}\n\nconst folderId = $('Set Folder ID').first().json.folderId;\n\nreturn files.map(file => ({\n  json: {\n    fileId: file.id,\n    fileName: file.name,\n    mimeType: file.mimeType,\n    parentFolderId: folderId\n  }\n}));"
+            },
+            "id": "70cfe62c-7f88-4b76-afa0-5b0f25482f98",
+            "name": "Parse File List",
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                -288,
+                -272
+            ]
         },
-        "options": {}
-      },
-      "id": "node-download-file",
-      "name": "Download File",
-      "type": "n8n-nodes-base.googleDrive",
-      "typeVersion": 3,
-      "position": [900, 300]
-    },
-    {
-      "parameters": {
-        "jsCode": "// Конвертация HEIC → JPEG\nconst binaryData = $input.first().binary;\n\nif (!binaryData || !binaryData.data) {\n  throw new Error('Нет бинарных данных файла');\n}\n\nconst fileBuffer = Buffer.from(binaryData.data.data, 'base64');\nlet base64Image;\nlet mediaType = 'image/jpeg';\n\ntry {\n  // Пробуем sharp для конвертации HEIC → JPEG\n  const sharp = require('sharp');\n  const jpegBuffer = await sharp(fileBuffer)\n    .jpeg({ quality: 85 })\n    .toBuffer();\n  base64Image = jpegBuffer.toString('base64');\n} catch (e) {\n  // Fallback: отправляем как есть\n  base64Image = fileBuffer.toString('base64');\n  mediaType = 'image/heic';\n}\n\nreturn [{\n  json: {\n    base64Image,\n    mediaType,\n    fileId: $('Split In Batches').first().json.fileId,\n    fileName: $('Split In Batches').first().json.fileName,\n    parentFolderId: $('Split In Batches').first().json.parentFolderId\n  }\n}];"
-      },
-      "id": "node-convert-heic",
-      "name": "Convert HEIC → JPEG",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [1120, 300]
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://api.openai.com/v1/chat/completions",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "openAiApi",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({ model: 'gpt-4o', max_tokens: 100, messages: [{ role: 'user', content: [{ type: 'image_url', image_url: { url: 'data:' + $json.mediaType + ';base64,' + $json.base64Image, detail: 'high' } }, { type: 'text', text: 'This is a photo of a hospital monitor screen showing a patient medical report in German. Look at the top-left corner of the document. There should be a patient ID number (5-7 digits). Extract ONLY the patient ID number. Return ONLY the number, nothing else. If you cannot find it, return UNKNOWN.' }] }] }) }}",
-        "options": {
-          "timeout": 60000
+        {
+            "parameters": {
+                "options": {}
+            },
+            "id": "c30f6c9d-b722-4904-aab1-f9ed095f1972",
+            "name": "Split In Batches",
+            "type": "n8n-nodes-base.splitInBatches",
+            "typeVersion": 3,
+            "position": [
+                -64,
+                -272
+            ]
+        },
+        {
+            "parameters": {
+                "method": "GET",
+                "url": "=https://www.googleapis.com/drive/v3/files/{{ $json.fileId }}",
+                "authentication": "predefinedCredentialType",
+                "nodeCredentialType": "googleDriveOAuth2Api",
+                "sendQuery": true,
+                "queryParameters": {
+                    "parameters": [
+                        {
+                            "name": "fields",
+                            "value": "id,name,thumbnailLink"
+                        },
+                        {
+                            "name": "supportsAllDrives",
+                            "value": "true"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "id": "e7bf2a9d-e5c4-46dd-a033-a97bf644a5f5",
+            "name": "Get Thumbnail URL",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                160,
+                -272
+            ],
+            "credentials": {
+                "googleDriveOAuth2Api": {
+                    "id": "Nl36H51nJBoCaf67",
+                    "name": "Google Drive for n8n"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "jsCode": "// \u041f\u043e\u043b\u0443\u0447\u0430\u0435\u043c thumbnailLink \u0438 \u0441\u043a\u0430\u0447\u0438\u0432\u0430\u0435\u043c JPEG-\u0432\u0435\u0440\u0441\u0438\u044e \u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u044f\nconst fileData = $input.first().json;\nconst thumbnailLink = fileData.thumbnailLink;\n\nif (!thumbnailLink) {\n  // \u0415\u0441\u043b\u0438 thumbnailLink \u043d\u0435\u0442 \u2014 \u043f\u0440\u043e\u043f\u0443\u0441\u043a\u0430\u0435\u043c \u0444\u0430\u0439\u043b\n  return [{\n    json: {\n      base64Image: null,\n      mediaType: 'image/jpeg',\n      fileId: $('Split In Batches').first().json.fileId,\n      fileName: $('Split In Batches').first().json.fileName,\n      parentFolderId: $('Split In Batches').first().json.parentFolderId,\n      error: 'No thumbnail available'\n    }\n  }];\n}\n\n// \u0423\u0432\u0435\u043b\u0438\u0447\u0438\u0432\u0430\u0435\u043c \u0440\u0430\u0437\u043c\u0435\u0440 thumbnail \u0434\u043e 2048px \u0434\u043b\u044f \u043b\u0443\u0447\u0448\u0435\u0433\u043e \u0440\u0430\u0441\u043f\u043e\u0437\u043d\u0430\u0432\u0430\u043d\u0438\u044f\nconst highResUrl = thumbnailLink.replace(/=s\\d+$/, '=s2048');\n\n// \u0421\u043a\u0430\u0447\u0438\u0432\u0430\u0435\u043c JPEG \u0447\u0435\u0440\u0435\u0437 HTTP\nconst response = await this.helpers.httpRequest({\n  method: 'GET',\n  url: highResUrl,\n  encoding: 'arraybuffer',\n  returnFullResponse: false,\n});\n\nconst base64Image = Buffer.from(response).toString('base64');\n\nreturn [{\n  json: {\n    base64Image,\n    mediaType: 'image/jpeg',\n    fileId: $('Split In Batches').first().json.fileId,\n    fileName: $('Split In Batches').first().json.fileName,\n    parentFolderId: $('Split In Batches').first().json.parentFolderId\n  }\n}];"
+            },
+            "id": "8a040f25-5e24-447f-b132-d4837b6831e0",
+            "name": "Download JPEG Thumbnail",
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                384,
+                -272
+            ]
+        },
+        {
+            "parameters": {
+                "method": "POST",
+                "url": "https://api.openai.com/v1/chat/completions",
+                "authentication": "predefinedCredentialType",
+                "nodeCredentialType": "openAiApi",
+                "sendBody": true,
+                "specifyBody": "json",
+                "jsonBody": "={{ JSON.stringify({ model: 'gpt-4o', max_tokens: 100, messages: [{ role: 'user', content: [{ type: 'image_url', image_url: { url: 'data:' + $json.mediaType + ';base64,' + $json.base64Image, detail: 'high' } }, { type: 'text', text: 'This is a photo of a hospital monitor screen showing a patient medical report in German. Look at the top-left corner of the document. There should be a patient ID number (5-7 digits). Extract ONLY the patient ID number. Return ONLY the number, nothing else. If you cannot find it, return UNKNOWN.' }] }] }) }}",
+                "options": {
+                    "timeout": 60000
+                }
+            },
+            "id": "2399fe79-764d-4929-b1d9-d0349a534bc0",
+            "name": "OpenAI Vision \u2014 Extract ID",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                608,
+                -272
+            ],
+            "credentials": {
+                "openAiApi": {
+                    "id": "b1hLC5E1Ad7p27A9",
+                    "name": "OpenAi - course generator"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "jsCode": "// \u041f\u0430\u0440\u0441\u0438\u043d\u0433 \u043e\u0442\u0432\u0435\u0442\u0430 OpenAI\nconst response = $input.first().json;\nlet text = '';\n\ntry {\n  text = response.choices[0].message.content.trim();\n} catch (e) {\n  text = 'UNKNOWN';\n}\n\n// \u0412\u0430\u043b\u0438\u0434\u0430\u0446\u0438\u044f: 5-7 \u0446\u0438\u0444\u0440\nconst clientId = /^\\d{5,7}$/.test(text) ? text : 'UNKNOWN';\n\nconst prev = $('Download JPEG Thumbnail').first().json;\n\nreturn [{\n  json: {\n    clientId,\n    rawResponse: text,\n    fileId: prev.fileId,\n    fileName: prev.fileName,\n    parentFolderId: prev.parentFolderId\n  }\n}];"
+            },
+            "id": "4b8930e2-d0b1-4070-b0aa-162471f2331c",
+            "name": "Parse Response",
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                816,
+                -272
+            ]
+        },
+        {
+            "parameters": {
+                "conditions": {
+                    "options": {
+                        "caseSensitive": true,
+                        "leftValue": "",
+                        "typeValidation": "strict"
+                    },
+                    "conditions": [
+                        {
+                            "id": "cond-id-check",
+                            "leftValue": "={{ $json.clientId }}",
+                            "rightValue": "UNKNOWN",
+                            "operator": {
+                                "type": "string",
+                                "operation": "notEquals"
+                            }
+                        }
+                    ],
+                    "combinator": "and"
+                },
+                "options": {}
+            },
+            "id": "649ff6b1-488b-4942-bc9c-19ec32a87868",
+            "name": "ID Recognized?",
+            "type": "n8n-nodes-base.if",
+            "typeVersion": 2,
+            "position": [
+                1040,
+                -272
+            ]
+        },
+        {
+            "parameters": {
+                "url": "https://www.googleapis.com/drive/v3/files",
+                "authentication": "predefinedCredentialType",
+                "nodeCredentialType": "googleDriveOAuth2Api",
+                "sendQuery": true,
+                "queryParameters": {
+                    "parameters": [
+                        {
+                            "name": "q",
+                            "value": "=name = '{{ $json.clientId }}' and '{{ $json.parentFolderId }}' in parents and mimeType = 'application/vnd.google-apps.folder' and trashed = false"
+                        },
+                        {
+                            "name": "fields",
+                            "value": "files(id,name)"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "id": "49dc52ef-2146-4dbf-9d2d-7e61292a53a1",
+            "name": "Search Client Folder",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                1264,
+                -384
+            ],
+            "credentials": {
+                "googleDriveOAuth2Api": {
+                    "id": "Nl36H51nJBoCaf67",
+                    "name": "Google Drive for n8n"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "jsCode": "// \u041f\u0440\u043e\u0432\u0435\u0440\u044f\u0435\u043c \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u043e\u0432\u0430\u043d\u0438\u0435 \u043f\u0430\u043f\u043a\u0438 \u043a\u043b\u0438\u0435\u043d\u0442\u0430, \u0441\u043e\u0437\u0434\u0430\u0451\u043c \u0435\u0441\u043b\u0438 \u043d\u0435\u0442\nconst response = $input.first().json;\nconst files = response.files || [];\nconst prev = $('Parse Response').first().json;\n\nif (files.length > 0) {\n  // \u041f\u0430\u043f\u043a\u0430 \u0443\u0436\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442\n  return [{\n    json: {\n      clientFolderId: files[0].id,\n      needCreate: false,\n      clientId: prev.clientId,\n      fileId: prev.fileId,\n      fileName: prev.fileName,\n      parentFolderId: prev.parentFolderId\n    }\n  }];\n} else {\n  // \u041d\u0443\u0436\u043d\u043e \u0441\u043e\u0437\u0434\u0430\u0442\u044c\n  return [{\n    json: {\n      clientFolderId: null,\n      needCreate: true,\n      clientId: prev.clientId,\n      fileId: prev.fileId,\n      fileName: prev.fileName,\n      parentFolderId: prev.parentFolderId\n    }\n  }];\n}"
+            },
+            "id": "4c6fb243-cda7-4a1e-a07e-1d95b09363d3",
+            "name": "Check Folder",
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                1488,
+                -384
+            ]
+        },
+        {
+            "parameters": {
+                "conditions": {
+                    "options": {
+                        "caseSensitive": true,
+                        "leftValue": "",
+                        "typeValidation": "strict"
+                    },
+                    "conditions": [
+                        {
+                            "id": "cond-need-create",
+                            "leftValue": "={{ $json.needCreate }}",
+                            "rightValue": true,
+                            "operator": {
+                                "type": "boolean",
+                                "operation": "equals"
+                            }
+                        }
+                    ],
+                    "combinator": "and"
+                },
+                "options": {}
+            },
+            "id": "f4a5bffb-3f37-4d32-98e3-4f28efd41cbf",
+            "name": "Need Create Folder?",
+            "type": "n8n-nodes-base.if",
+            "typeVersion": 2,
+            "position": [
+                1696,
+                -384
+            ]
+        },
+        {
+            "parameters": {
+                "method": "POST",
+                "url": "https://www.googleapis.com/drive/v3/files",
+                "authentication": "predefinedCredentialType",
+                "nodeCredentialType": "googleDriveOAuth2Api",
+                "sendBody": true,
+                "specifyBody": "json",
+                "jsonBody": "={{ JSON.stringify({ name: $json.clientId, mimeType: 'application/vnd.google-apps.folder', parents: [$json.parentFolderId] }) }}",
+                "options": {}
+            },
+            "id": "bb4699c3-e243-4183-9d2d-22f1aa02745b",
+            "name": "Create Folder",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                1920,
+                -384
+            ],
+            "credentials": {
+                "googleDriveOAuth2Api": {
+                    "id": "Nl36H51nJBoCaf67",
+                    "name": "Google Drive for n8n"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "jsCode": "// \u041f\u043e\u043b\u0443\u0447\u0430\u0435\u043c folder ID (\u0438\u0437 \u0441\u043e\u0437\u0434\u0430\u043d\u0438\u044f \u0438\u043b\u0438 \u0438\u0437 \u043f\u043e\u0438\u0441\u043a\u0430)\nconst input = $input.first().json;\nlet clientFolderId;\n\n// \u0415\u0441\u043b\u0438 \u043f\u0430\u043f\u043a\u0430 \u0431\u044b\u043b\u0430 \u0441\u043e\u0437\u0434\u0430\u043d\u0430 \u2014 \u0431\u0435\u0440\u0451\u043c id \u0438\u0437 \u043e\u0442\u0432\u0435\u0442\u0430 API\nif (input.id) {\n  clientFolderId = input.id;\n} else {\n  clientFolderId = input.clientFolderId;\n}\n\n// \u0414\u0430\u043d\u043d\u044b\u0435 \u0434\u043b\u044f \u043f\u0435\u0440\u0435\u043c\u0435\u0449\u0435\u043d\u0438\u044f \u0444\u0430\u0439\u043b\u0430\nconst prev = $('Check Folder').first().json;\n\nreturn [{\n  json: {\n    clientFolderId,\n    clientId: prev.clientId,\n    fileId: prev.fileId,\n    fileName: prev.fileName,\n    parentFolderId: prev.parentFolderId\n  }\n}];"
+            },
+            "id": "494dcb1b-31f0-4974-9f93-d446997ba50d",
+            "name": "Prepare Move",
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                2144,
+                -384
+            ]
+        },
+        {
+            "parameters": {
+                "method": "PATCH",
+                "url": "=https://www.googleapis.com/drive/v3/files/{{ $json.fileId }}",
+                "authentication": "predefinedCredentialType",
+                "nodeCredentialType": "googleDriveOAuth2Api",
+                "sendQuery": true,
+                "queryParameters": {
+                    "parameters": [
+                        {
+                            "name": "addParents",
+                            "value": "={{ $json.clientFolderId }}"
+                        },
+                        {
+                            "name": "removeParents",
+                            "value": "={{ $json.parentFolderId }}"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "id": "92a5e58e-fc17-4fd8-94b4-6cc2ab9c5a7e",
+            "name": "Move File",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                2368,
+                -384
+            ],
+            "credentials": {
+                "googleDriveOAuth2Api": {
+                    "id": "Nl36H51nJBoCaf67",
+                    "name": "Google Drive for n8n"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "jsCode": "// \u041b\u043e\u0433\u0438\u0440\u0443\u0435\u043c \u0443\u0441\u043f\u0435\u0448\u043d\u043e\u0435 \u043f\u0435\u0440\u0435\u043c\u0435\u0449\u0435\u043d\u0438\u0435\nconst prev = $('Check Folder').first().json;\n\nreturn [{\n  json: {\n    timestamp: new Date().toISOString(),\n    fileName: prev.fileName,\n    fileId: prev.fileId,\n    clientId: prev.clientId,\n    status: 'SUCCESS'\n  }\n}];"
+            },
+            "id": "c559ed2b-29f1-4723-a3f9-1eef77d36cb2",
+            "name": "Log \u2014 Success",
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                2576,
+                -384
+            ]
+        },
+        {
+            "parameters": {
+                "amount": 2
+            },
+            "id": "fa1b088a-b2af-4275-a155-920d4989d533",
+            "name": "Wait 2s",
+            "type": "n8n-nodes-base.wait",
+            "typeVersion": 1.1,
+            "position": [
+                2800,
+                -384
+            ],
+            "webhookId": "0e6c3720-107d-4523-9457-8fca697f77ac"
+        },
+        {
+            "parameters": {
+                "rule": {
+                    "interval": [
+                        {}
+                    ]
+                }
+            },
+            "type": "n8n-nodes-base.scheduleTrigger",
+            "typeVersion": 1.3,
+            "position": [
+                -944,
+                -448
+            ],
+            "id": "4934756d-2f7c-4712-8715-840c745d6ca8",
+            "name": "Schedule Trigger"
+        },
+        {
+            "parameters": {
+                "httpMethod": "POST",
+                "path": "heic-organizer",
+                "options": {}
+            },
+            "id": "webhook-trigger",
+            "name": "Webhook Trigger",
+            "type": "n8n-nodes-base.webhook",
+            "typeVersion": 2,
+            "position": [
+                -960,
+                -460
+            ],
+            "webhookId": "heic-organizer-webhook"
+        },
+        {
+            "parameters": {
+                "url": "https://www.googleapis.com/drive/v3/files",
+                "authentication": "predefinedCredentialType",
+                "nodeCredentialType": "googleDriveOAuth2Api",
+                "sendQuery": true,
+                "queryParameters": {
+                    "parameters": [
+                        {
+                            "name": "q",
+                            "value": "=name = 'UNKNOWN' and '{{ $json.parentFolderId }}' in parents and mimeType = 'application/vnd.google-apps.folder' and trashed = false"
+                        },
+                        {
+                            "name": "fields",
+                            "value": "files(id,name)"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "id": "unk-search-folder-001",
+            "name": "Search UNKNOWN Folder",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                1264,
+                -112
+            ],
+            "credentials": {
+                "googleDriveOAuth2Api": {
+                    "id": "Nl36H51nJBoCaf67",
+                    "name": "Google Drive for n8n"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "jsCode": "// Check if UNKNOWN folder exists\nconst response = $input.first().json;\nconst files = response.files || [];\nconst prev = $('Parse Response').first().json;\n\nif (files.length > 0) {\n  return [{\n    json: {\n      unknownFolderId: files[0].id,\n      needCreate: false,\n      fileId: prev.fileId,\n      fileName: prev.fileName,\n      parentFolderId: prev.parentFolderId,\n      rawResponse: prev.rawResponse\n    }\n  }];\n} else {\n  return [{\n    json: {\n      unknownFolderId: null,\n      needCreate: true,\n      fileId: prev.fileId,\n      fileName: prev.fileName,\n      parentFolderId: prev.parentFolderId,\n      rawResponse: prev.rawResponse\n    }\n  }];\n}"
+            },
+            "id": "unk-check-folder-002",
+            "name": "Check UNKNOWN Folder",
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                1488,
+                -112
+            ]
+        },
+        {
+            "parameters": {
+                "conditions": {
+                    "options": {
+                        "caseSensitive": true,
+                        "leftValue": "",
+                        "typeValidation": "strict"
+                    },
+                    "conditions": [
+                        {
+                            "id": "cond-need-create-unk",
+                            "leftValue": "={{ $json.needCreate }}",
+                            "rightValue": true,
+                            "operator": {
+                                "type": "boolean",
+                                "operation": "equals"
+                            }
+                        }
+                    ],
+                    "combinator": "and"
+                },
+                "options": {}
+            },
+            "id": "unk-need-create-003",
+            "name": "Need Create UNKNOWN?",
+            "type": "n8n-nodes-base.if",
+            "typeVersion": 2,
+            "position": [
+                1696,
+                -112
+            ]
+        },
+        {
+            "parameters": {
+                "method": "POST",
+                "url": "https://www.googleapis.com/drive/v3/files",
+                "authentication": "predefinedCredentialType",
+                "nodeCredentialType": "googleDriveOAuth2Api",
+                "sendBody": true,
+                "specifyBody": "json",
+                "jsonBody": "={{ JSON.stringify({ name: 'UNKNOWN', mimeType: 'application/vnd.google-apps.folder', parents: [$json.parentFolderId] }) }}",
+                "options": {}
+            },
+            "id": "unk-create-folder-004",
+            "name": "Create UNKNOWN Folder",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                1920,
+                -112
+            ],
+            "credentials": {
+                "googleDriveOAuth2Api": {
+                    "id": "Nl36H51nJBoCaf67",
+                    "name": "Google Drive for n8n"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "jsCode": "// Get UNKNOWN folder ID (from creation or search)\nconst input = $input.first().json;\nlet unknownFolderId;\n\nif (input.id) {\n  unknownFolderId = input.id;\n} else {\n  unknownFolderId = input.unknownFolderId;\n}\n\nconst prev = $('Check UNKNOWN Folder').first().json;\n\nreturn [{\n  json: {\n    unknownFolderId,\n    fileId: prev.fileId,\n    fileName: prev.fileName,\n    parentFolderId: prev.parentFolderId,\n    rawResponse: prev.rawResponse\n  }\n}];"
+            },
+            "id": "unk-prepare-move-005",
+            "name": "Prepare Move Unknown",
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                2144,
+                -112
+            ]
+        },
+        {
+            "parameters": {
+                "method": "PATCH",
+                "url": "=https://www.googleapis.com/drive/v3/files/{{ $json.fileId }}",
+                "authentication": "predefinedCredentialType",
+                "nodeCredentialType": "googleDriveOAuth2Api",
+                "sendQuery": true,
+                "queryParameters": {
+                    "parameters": [
+                        {
+                            "name": "addParents",
+                            "value": "={{ $json.unknownFolderId }}"
+                        },
+                        {
+                            "name": "removeParents",
+                            "value": "={{ $json.parentFolderId }}"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "id": "unk-move-file-006",
+            "name": "Move to UNKNOWN",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                2368,
+                -112
+            ],
+            "credentials": {
+                "googleDriveOAuth2Api": {
+                    "id": "Nl36H51nJBoCaf67",
+                    "name": "Google Drive for n8n"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "jsCode": "// Log unknown file moved to UNKNOWN folder\nconst prev = $('Prepare Move Unknown').first().json;\n\nreturn [{\n  json: {\n    timestamp: new Date().toISOString(),\n    fileName: prev.fileName,\n    fileId: prev.fileId,\n    clientId: 'UNKNOWN',\n    rawResponse: prev.rawResponse,\n    status: 'MOVED_TO_UNKNOWN'\n  }\n}];"
+            },
+            "id": "unk-log-007",
+            "name": "Log \u2014 Unknown Moved",
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                2576,
+                -112
+            ]
         }
-      },
-      "id": "node-openai-vision",
-      "name": "OpenAI Vision — Extract ID",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [1340, 300]
-    },
-    {
-      "parameters": {
-        "jsCode": "// Парсинг ответа OpenAI\nconst response = $input.first().json;\nlet text = '';\n\ntry {\n  text = response.choices[0].message.content.trim();\n} catch (e) {\n  text = 'UNKNOWN';\n}\n\n// Валидация: 5-7 цифр\nconst clientId = /^\\d{5,7}$/.test(text) ? text : 'UNKNOWN';\n\nconst prev = $('Convert HEIC → JPEG').first().json;\n\nreturn [{\n  json: {\n    clientId,\n    rawResponse: text,\n    fileId: prev.fileId,\n    fileName: prev.fileName,\n    parentFolderId: prev.parentFolderId\n  }\n}];"
-      },
-      "id": "node-parse-response",
-      "name": "Parse Response",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [1560, 300]
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict"
-          },
-          "conditions": [
-            {
-              "id": "cond-id-check",
-              "leftValue": "={{ $json.clientId }}",
-              "rightValue": "UNKNOWN",
-              "operator": {
-                "type": "string",
-                "operation": "notEquals"
-              }
-            }
-          ],
-          "combinator": "and"
+    ],
+    "connections": {
+        "Manual Trigger": {
+            "main": [
+                [
+                    {
+                        "node": "Set Folder ID",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
         },
-        "options": {}
-      },
-      "id": "node-if-recognized",
-      "name": "ID Recognized?",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2,
-      "position": [1780, 300]
+        "Set Folder ID": {
+            "main": [
+                [
+                    {
+                        "node": "List HEIC Files",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "List HEIC Files": {
+            "main": [
+                [
+                    {
+                        "node": "Parse File List",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Parse File List": {
+            "main": [
+                [
+                    {
+                        "node": "Split In Batches",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Split In Batches": {
+            "main": [
+                [],
+                [
+                    {
+                        "node": "Get Thumbnail URL",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Get Thumbnail URL": {
+            "main": [
+                [
+                    {
+                        "node": "Download JPEG Thumbnail",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Download JPEG Thumbnail": {
+            "main": [
+                [
+                    {
+                        "node": "OpenAI Vision \u2014 Extract ID",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "OpenAI Vision \u2014 Extract ID": {
+            "main": [
+                [
+                    {
+                        "node": "Parse Response",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Parse Response": {
+            "main": [
+                [
+                    {
+                        "node": "ID Recognized?",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "ID Recognized?": {
+            "main": [
+                [
+                    {
+                        "node": "Search Client Folder",
+                        "type": "main",
+                        "index": 0
+                    }
+                ],
+                [
+                    {
+                        "node": "Search UNKNOWN Folder",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Search Client Folder": {
+            "main": [
+                [
+                    {
+                        "node": "Check Folder",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Check Folder": {
+            "main": [
+                [
+                    {
+                        "node": "Need Create Folder?",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Need Create Folder?": {
+            "main": [
+                [
+                    {
+                        "node": "Create Folder",
+                        "type": "main",
+                        "index": 0
+                    }
+                ],
+                [
+                    {
+                        "node": "Prepare Move",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Create Folder": {
+            "main": [
+                [
+                    {
+                        "node": "Prepare Move",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Prepare Move": {
+            "main": [
+                [
+                    {
+                        "node": "Move File",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Move File": {
+            "main": [
+                [
+                    {
+                        "node": "Log \u2014 Success",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Log \u2014 Success": {
+            "main": [
+                [
+                    {
+                        "node": "Wait 2s",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Wait 2s": {
+            "main": [
+                [
+                    {
+                        "node": "Split In Batches",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Schedule Trigger": {
+            "main": [
+                [
+                    {
+                        "node": "Set Folder ID",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Webhook Trigger": {
+            "main": [
+                [
+                    {
+                        "node": "Set Folder ID",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Search UNKNOWN Folder": {
+            "main": [
+                [
+                    {
+                        "node": "Check UNKNOWN Folder",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Check UNKNOWN Folder": {
+            "main": [
+                [
+                    {
+                        "node": "Need Create UNKNOWN?",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Need Create UNKNOWN?": {
+            "main": [
+                [
+                    {
+                        "node": "Create UNKNOWN Folder",
+                        "type": "main",
+                        "index": 0
+                    }
+                ],
+                [
+                    {
+                        "node": "Prepare Move Unknown",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Create UNKNOWN Folder": {
+            "main": [
+                [
+                    {
+                        "node": "Prepare Move Unknown",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Prepare Move Unknown": {
+            "main": [
+                [
+                    {
+                        "node": "Move to UNKNOWN",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Move to UNKNOWN": {
+            "main": [
+                [
+                    {
+                        "node": "Log \u2014 Unknown Moved",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Log \u2014 Unknown Moved": {
+            "main": [
+                [
+                    {
+                        "node": "Wait 2s",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
     },
-    {
-      "parameters": {
-        "jsCode": "// Логируем нераспознанный файл — оставляем на месте\nconst prev = $input.first().json;\n\nreturn [{\n  json: {\n    timestamp: new Date().toISOString(),\n    fileName: prev.fileName,\n    fileId: prev.fileId,\n    clientId: 'UNKNOWN',\n    rawResponse: prev.rawResponse,\n    status: 'SKIPPED'\n  }\n}];"
-      },
-      "id": "node-log-unknown",
-      "name": "Log — Skip Unknown",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [2000, 460]
+    "settings": {
+        "executionOrder": "v1",
+        "availableInMCP": false,
+        "timeSavedMode": "fixed",
+        "callerPolicy": "workflowsFromSameOwner",
+        "errorWorkflow": "03h9SHa3Bj7pe8Gk"
     },
-    {
-      "parameters": {
-        "method": "GET",
-        "url": "https://www.googleapis.com/drive/v3/files",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "googleDriveOAuth2Api",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
+    "staticData": {
+        "node:Schedule Trigger": {
+            "recurrenceRules": []
+        }
+    },
+    "meta": {
+        "templateCredsSetupCompleted": true
+    },
+    "pinData": {},
+    "versionId": "41092d92-a4f4-4c93-b63b-e2d81c38e00d",
+    "activeVersionId": "41092d92-a4f4-4c93-b63b-e2d81c38e00d",
+    "versionCounter": 29,
+    "triggerCount": 2,
+    "shared": [
+        {
+            "updatedAt": "2026-03-04T16:51:31.541Z",
+            "createdAt": "2026-03-04T16:51:31.541Z",
+            "role": "workflow:owner",
+            "workflowId": "gFcvIN83wmc9UvkS",
+            "projectId": "LmhOD4aQjDc8j54F",
+            "project": {
+                "updatedAt": "2025-08-01T12:06:15.569Z",
+                "createdAt": "2025-07-31T12:25:48.704Z",
+                "id": "LmhOD4aQjDc8j54F",
+                "name": "OLEKSANDR Polischuk <ap@web-promo.com.ua>",
+                "type": "personal",
+                "icon": null,
+                "description": null,
+                "creatorId": "6f7766c1-8e6d-478f-a667-93619ba35dbe",
+                "projectRelations": [
+                    {
+                        "updatedAt": "2025-07-31T12:25:48.704Z",
+                        "createdAt": "2025-07-31T12:25:48.704Z",
+                        "userId": "6f7766c1-8e6d-478f-a667-93619ba35dbe",
+                        "projectId": "LmhOD4aQjDc8j54F",
+                        "user": {
+                            "updatedAt": "2026-03-04T07:57:09.652Z",
+                            "createdAt": "2025-07-31T12:25:47.251Z",
+                            "id": "6f7766c1-8e6d-478f-a667-93619ba35dbe",
+                            "email": "ap@web-promo.com.ua",
+                            "firstName": "OLEKSANDR",
+                            "lastName": "Polischuk",
+                            "personalizationAnswers": {
+                                "version": "v4",
+                                "personalization_survey_submitted_at": "2025-08-01T12:06:26.310Z",
+                                "personalization_survey_n8n_version": "1.104.1"
+                            },
+                            "settings": {
+                                "userActivated": true,
+                                "easyAIWorkflowOnboarded": true,
+                                "firstSuccessfulWorkflowId": "i6feMHLya6oSMXYC",
+                                "userActivatedAt": 1759166190434,
+                                "npsSurvey": {
+                                    "responded": true,
+                                    "lastShownAt": 1761673568422
+                                }
+                            },
+                            "disabled": false,
+                            "mfaEnabled": false,
+                            "lastActiveAt": "2026-03-03",
+                            "isPending": false
+                        }
+                    }
+                ]
+            }
+        }
+    ],
+    "tags": [],
+    "activeVersion": {
+        "updatedAt": "2026-03-04T17:18:28.344Z",
+        "createdAt": "2026-03-04T17:18:28.344Z",
+        "versionId": "41092d92-a4f4-4c93-b63b-e2d81c38e00d",
+        "workflowId": "gFcvIN83wmc9UvkS",
+        "nodes": [
             {
-              "name": "q",
-              "value": "=name = '{{ $json.clientId }}' and '{{ $json.parentFolderId }}' in parents and mimeType = 'application/vnd.google-apps.folder' and trashed = false"
+                "parameters": {
+                    "content": "## HEIC Photo Organizer\n\n\u0410\u0432\u0442\u043e\u043c\u0430\u0442\u0438\u0447\u0435\u0441\u043a\u0430\u044f \u0441\u043e\u0440\u0442\u0438\u0440\u043e\u0432\u043a\u0430 HEIC-\u0444\u043e\u0442\u043e \u043f\u0430\u0446\u0438\u0435\u043d\u0442\u043e\u0432 \u043f\u043e ID \u043a\u043b\u0438\u0435\u043d\u0442\u0430.\n\n### \u041a\u0430\u043a \u0440\u0430\u0431\u043e\u0442\u0430\u0435\u0442:\n1. \u041f\u043e\u043b\u0443\u0447\u0430\u0435\u0442 \u0441\u043f\u0438\u0441\u043e\u043a HEIC-\u0444\u0430\u0439\u043b\u043e\u0432 \u0438\u0437 Google Drive\n2. \u0421\u043a\u0430\u0447\u0438\u0432\u0430\u0435\u0442 \u0438 \u043a\u043e\u043d\u0432\u0435\u0440\u0442\u0438\u0440\u0443\u0435\u0442 HEIC \u2192 JPEG\n3. \u041e\u0442\u043f\u0440\u0430\u0432\u043b\u044f\u0435\u0442 \u0432 OpenAI Vision (GPT-4o) \u0434\u043b\u044f \u0440\u0430\u0441\u043f\u043e\u0437\u043d\u0430\u0432\u0430\u043d\u0438\u044f ID\n4. \u0421\u043e\u0437\u0434\u0430\u0451\u0442 \u043f\u043e\u0434\u043f\u0430\u043f\u043a\u0438 \u043f\u043e ID \u043a\u043b\u0438\u0435\u043d\u0442\u0430\n5. \u041f\u0435\u0440\u0435\u043c\u0435\u0449\u0430\u0435\u0442 \u0444\u0430\u0439\u043b\u044b \u0432 \u0441\u043e\u043e\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0443\u044e\u0449\u0438\u0435 \u043f\u0430\u043f\u043a\u0438\n6. \u041d\u0435\u0440\u0430\u0441\u043f\u043e\u0437\u043d\u0430\u043d\u043d\u044b\u0435 \u0444\u0430\u0439\u043b\u044b \u043e\u0441\u0442\u0430\u044e\u0442\u0441\u044f \u043d\u0430 \u043c\u0435\u0441\u0442\u0435\n\n### \u041d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438:\n- \u041f\u0430\u043f\u043a\u0430: 1iEbSMlsHPX6Sg3y0J0znlT47ri78hk9_\n- Rate limit: 2 \u0441\u0435\u043a \u043c\u0435\u0436\u0434\u0443 \u0444\u0430\u0439\u043b\u0430\u043c\u0438\n- \u041c\u043e\u0434\u0435\u043b\u044c: gpt-4o\n\n### Credentials \u043d\u0443\u0436\u043d\u043e \u043f\u043e\u0434\u043a\u043b\u044e\u0447\u0438\u0442\u044c:\n- Google Drive OAuth2\n- OpenAI API Key",
+                    "height": 520,
+                    "width": 360
+                },
+                "id": "eb19925e-61af-4c8a-b37d-2d2d9fdaac24",
+                "name": "Info",
+                "type": "n8n-nodes-base.stickyNote",
+                "typeVersion": 1,
+                "position": [
+                    -1344,
+                    -576
+                ]
             },
             {
-              "name": "fields",
-              "value": "files(id,name)"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "node-search-folder",
-      "name": "Search Client Folder",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [2000, 200]
-    },
-    {
-      "parameters": {
-        "jsCode": "// Проверяем существование папки клиента, создаём если нет\nconst response = $input.first().json;\nconst files = response.files || [];\nconst prev = $('Parse Response').first().json;\n\nif (files.length > 0) {\n  // Папка уже существует\n  return [{\n    json: {\n      clientFolderId: files[0].id,\n      needCreate: false,\n      clientId: prev.clientId,\n      fileId: prev.fileId,\n      fileName: prev.fileName,\n      parentFolderId: prev.parentFolderId\n    }\n  }];\n} else {\n  // Нужно создать\n  return [{\n    json: {\n      clientFolderId: null,\n      needCreate: true,\n      clientId: prev.clientId,\n      fileId: prev.fileId,\n      fileName: prev.fileName,\n      parentFolderId: prev.parentFolderId\n    }\n  }];\n}"
-      },
-      "id": "node-check-folder",
-      "name": "Check Folder",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [2220, 200]
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict"
-          },
-          "conditions": [
-            {
-              "id": "cond-need-create",
-              "leftValue": "={{ $json.needCreate }}",
-              "rightValue": true,
-              "operator": {
-                "type": "boolean",
-                "operation": "equals"
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "id": "node-if-need-create",
-      "name": "Need Create Folder?",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2,
-      "position": [2440, 200]
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://www.googleapis.com/drive/v3/files",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "googleDriveOAuth2Api",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({ name: $json.clientId, mimeType: 'application/vnd.google-apps.folder', parents: [$json.parentFolderId] }) }}",
-        "options": {}
-      },
-      "id": "node-create-folder",
-      "name": "Create Folder",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [2660, 200]
-    },
-    {
-      "parameters": {
-        "jsCode": "// Получаем folder ID (из создания или из поиска)\nconst input = $input.first().json;\nlet clientFolderId;\n\n// Если папка была создана — берём id из ответа API\nif (input.id) {\n  clientFolderId = input.id;\n} else {\n  clientFolderId = input.clientFolderId;\n}\n\n// Данные для перемещения файла\nconst prev = $('Check Folder').first().json;\n\nreturn [{\n  json: {\n    clientFolderId,\n    clientId: prev.clientId,\n    fileId: prev.fileId,\n    fileName: prev.fileName,\n    parentFolderId: prev.parentFolderId\n  }\n}];"
-      },
-      "id": "node-prepare-move",
-      "name": "Prepare Move",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [2880, 200]
-    },
-    {
-      "parameters": {
-        "method": "PATCH",
-        "url": "=https://www.googleapis.com/drive/v3/files/{{ $json.fileId }}",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "googleDriveOAuth2Api",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            {
-              "name": "addParents",
-              "value": "={{ $json.clientFolderId }}"
+                "parameters": {},
+                "id": "9418d472-77c8-427c-91da-1710a7c751c2",
+                "name": "Manual Trigger",
+                "type": "n8n-nodes-base.manualTrigger",
+                "typeVersion": 1,
+                "position": [
+                    -960,
+                    -80
+                ]
             },
             {
-              "name": "removeParents",
-              "value": "={{ $json.parentFolderId }}"
+                "parameters": {
+                    "jsCode": "// ID \u043f\u0430\u043f\u043a\u0438 Google Drive \u0441 HEIC-\u0444\u043e\u0442\u043e\u0433\u0440\u0430\u0444\u0438\u044f\u043c\u0438\n// \u041c\u043e\u0436\u043d\u043e \u0438\u0437\u043c\u0435\u043d\u0438\u0442\u044c \u043d\u0430 \u043d\u0443\u0436\u043d\u044b\u0439 folder ID\nconst folderId = '1iEbSMlsHPX6Sg3y0J0znlT47ri78hk9_';\n\nreturn [{ json: { folderId } }];"
+                },
+                "id": "bc41df99-3c6c-4425-af12-7a80eb825fb5",
+                "name": "Set Folder ID",
+                "type": "n8n-nodes-base.code",
+                "typeVersion": 2,
+                "position": [
+                    -720,
+                    -272
+                ]
+            },
+            {
+                "parameters": {
+                    "method": "GET",
+                    "url": "https://www.googleapis.com/drive/v3/files",
+                    "authentication": "predefinedCredentialType",
+                    "nodeCredentialType": "googleDriveOAuth2Api",
+                    "sendQuery": true,
+                    "queryParameters": {
+                        "parameters": [
+                            {
+                                "name": "q",
+                                "value": "='{{ $json.folderId }}' in parents and (mimeType = 'image/heic' or name contains '.HEIC' or name contains '.heic') and trashed = false"
+                            },
+                            {
+                                "name": "fields",
+                                "value": "files(id,name,mimeType)"
+                            },
+                            {
+                                "name": "pageSize",
+                                "value": "200"
+                            }
+                        ]
+                    },
+                    "options": {}
+                },
+                "id": "b8011de2-e9b9-4891-86e7-fc3e66e7851a",
+                "name": "List HEIC Files",
+                "type": "n8n-nodes-base.httpRequest",
+                "typeVersion": 4.2,
+                "position": [
+                    -512,
+                    -272
+                ],
+                "credentials": {
+                    "googleDriveOAuth2Api": {
+                        "id": "Nl36H51nJBoCaf67",
+                        "name": "Google Drive for n8n"
+                    }
+                }
+            },
+            {
+                "parameters": {
+                    "jsCode": "// \u041f\u0430\u0440\u0441\u0438\u043c \u0441\u043f\u0438\u0441\u043e\u043a \u0444\u0430\u0439\u043b\u043e\u0432 \u0438\u0437 Google Drive API\nconst response = $input.first().json;\nconst files = response.files || [];\n\nif (files.length === 0) {\n  throw new Error('\u041d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d\u043e HEIC-\u0444\u0430\u0439\u043b\u043e\u0432 \u0432 \u043f\u0430\u043f\u043a\u0435');\n}\n\nconst folderId = $('Set Folder ID').first().json.folderId;\n\nreturn files.map(file => ({\n  json: {\n    fileId: file.id,\n    fileName: file.name,\n    mimeType: file.mimeType,\n    parentFolderId: folderId\n  }\n}));"
+                },
+                "id": "70cfe62c-7f88-4b76-afa0-5b0f25482f98",
+                "name": "Parse File List",
+                "type": "n8n-nodes-base.code",
+                "typeVersion": 2,
+                "position": [
+                    -288,
+                    -272
+                ]
+            },
+            {
+                "parameters": {
+                    "options": {}
+                },
+                "id": "c30f6c9d-b722-4904-aab1-f9ed095f1972",
+                "name": "Split In Batches",
+                "type": "n8n-nodes-base.splitInBatches",
+                "typeVersion": 3,
+                "position": [
+                    -64,
+                    -272
+                ]
+            },
+            {
+                "parameters": {
+                    "method": "GET",
+                    "url": "=https://www.googleapis.com/drive/v3/files/{{ $json.fileId }}",
+                    "authentication": "predefinedCredentialType",
+                    "nodeCredentialType": "googleDriveOAuth2Api",
+                    "sendQuery": true,
+                    "queryParameters": {
+                        "parameters": [
+                            {
+                                "name": "fields",
+                                "value": "id,name,thumbnailLink"
+                            },
+                            {
+                                "name": "supportsAllDrives",
+                                "value": "true"
+                            }
+                        ]
+                    },
+                    "options": {}
+                },
+                "id": "e7bf2a9d-e5c4-46dd-a033-a97bf644a5f5",
+                "name": "Get Thumbnail URL",
+                "type": "n8n-nodes-base.httpRequest",
+                "typeVersion": 4.2,
+                "position": [
+                    160,
+                    -272
+                ],
+                "credentials": {
+                    "googleDriveOAuth2Api": {
+                        "id": "Nl36H51nJBoCaf67",
+                        "name": "Google Drive for n8n"
+                    }
+                }
+            },
+            {
+                "parameters": {
+                    "jsCode": "// \u041f\u043e\u043b\u0443\u0447\u0430\u0435\u043c thumbnailLink \u0438 \u0441\u043a\u0430\u0447\u0438\u0432\u0430\u0435\u043c JPEG-\u0432\u0435\u0440\u0441\u0438\u044e \u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u044f\nconst fileData = $input.first().json;\nconst thumbnailLink = fileData.thumbnailLink;\n\nif (!thumbnailLink) {\n  // \u0415\u0441\u043b\u0438 thumbnailLink \u043d\u0435\u0442 \u2014 \u043f\u0440\u043e\u043f\u0443\u0441\u043a\u0430\u0435\u043c \u0444\u0430\u0439\u043b\n  return [{\n    json: {\n      base64Image: null,\n      mediaType: 'image/jpeg',\n      fileId: $('Split In Batches').first().json.fileId,\n      fileName: $('Split In Batches').first().json.fileName,\n      parentFolderId: $('Split In Batches').first().json.parentFolderId,\n      error: 'No thumbnail available'\n    }\n  }];\n}\n\n// \u0423\u0432\u0435\u043b\u0438\u0447\u0438\u0432\u0430\u0435\u043c \u0440\u0430\u0437\u043c\u0435\u0440 thumbnail \u0434\u043e 2048px \u0434\u043b\u044f \u043b\u0443\u0447\u0448\u0435\u0433\u043e \u0440\u0430\u0441\u043f\u043e\u0437\u043d\u0430\u0432\u0430\u043d\u0438\u044f\nconst highResUrl = thumbnailLink.replace(/=s\\d+$/, '=s2048');\n\n// \u0421\u043a\u0430\u0447\u0438\u0432\u0430\u0435\u043c JPEG \u0447\u0435\u0440\u0435\u0437 HTTP\nconst response = await this.helpers.httpRequest({\n  method: 'GET',\n  url: highResUrl,\n  encoding: 'arraybuffer',\n  returnFullResponse: false,\n});\n\nconst base64Image = Buffer.from(response).toString('base64');\n\nreturn [{\n  json: {\n    base64Image,\n    mediaType: 'image/jpeg',\n    fileId: $('Split In Batches').first().json.fileId,\n    fileName: $('Split In Batches').first().json.fileName,\n    parentFolderId: $('Split In Batches').first().json.parentFolderId\n  }\n}];"
+                },
+                "id": "8a040f25-5e24-447f-b132-d4837b6831e0",
+                "name": "Download JPEG Thumbnail",
+                "type": "n8n-nodes-base.code",
+                "typeVersion": 2,
+                "position": [
+                    384,
+                    -272
+                ]
+            },
+            {
+                "parameters": {
+                    "method": "POST",
+                    "url": "https://api.openai.com/v1/chat/completions",
+                    "authentication": "predefinedCredentialType",
+                    "nodeCredentialType": "openAiApi",
+                    "sendBody": true,
+                    "specifyBody": "json",
+                    "jsonBody": "={{ JSON.stringify({ model: 'gpt-4o', max_tokens: 100, messages: [{ role: 'user', content: [{ type: 'image_url', image_url: { url: 'data:' + $json.mediaType + ';base64,' + $json.base64Image, detail: 'high' } }, { type: 'text', text: 'This is a photo of a hospital monitor screen showing a patient medical report in German. Look at the top-left corner of the document. There should be a patient ID number (5-7 digits). Extract ONLY the patient ID number. Return ONLY the number, nothing else. If you cannot find it, return UNKNOWN.' }] }] }) }}",
+                    "options": {
+                        "timeout": 60000
+                    }
+                },
+                "id": "2399fe79-764d-4929-b1d9-d0349a534bc0",
+                "name": "OpenAI Vision \u2014 Extract ID",
+                "type": "n8n-nodes-base.httpRequest",
+                "typeVersion": 4.2,
+                "position": [
+                    608,
+                    -272
+                ],
+                "credentials": {
+                    "openAiApi": {
+                        "id": "b1hLC5E1Ad7p27A9",
+                        "name": "OpenAi - course generator"
+                    }
+                }
+            },
+            {
+                "parameters": {
+                    "jsCode": "// \u041f\u0430\u0440\u0441\u0438\u043d\u0433 \u043e\u0442\u0432\u0435\u0442\u0430 OpenAI\nconst response = $input.first().json;\nlet text = '';\n\ntry {\n  text = response.choices[0].message.content.trim();\n} catch (e) {\n  text = 'UNKNOWN';\n}\n\n// \u0412\u0430\u043b\u0438\u0434\u0430\u0446\u0438\u044f: 5-7 \u0446\u0438\u0444\u0440\nconst clientId = /^\\d{5,7}$/.test(text) ? text : 'UNKNOWN';\n\nconst prev = $('Download JPEG Thumbnail').first().json;\n\nreturn [{\n  json: {\n    clientId,\n    rawResponse: text,\n    fileId: prev.fileId,\n    fileName: prev.fileName,\n    parentFolderId: prev.parentFolderId\n  }\n}];"
+                },
+                "id": "4b8930e2-d0b1-4070-b0aa-162471f2331c",
+                "name": "Parse Response",
+                "type": "n8n-nodes-base.code",
+                "typeVersion": 2,
+                "position": [
+                    816,
+                    -272
+                ]
+            },
+            {
+                "parameters": {
+                    "conditions": {
+                        "options": {
+                            "caseSensitive": true,
+                            "leftValue": "",
+                            "typeValidation": "strict"
+                        },
+                        "conditions": [
+                            {
+                                "id": "cond-id-check",
+                                "leftValue": "={{ $json.clientId }}",
+                                "rightValue": "UNKNOWN",
+                                "operator": {
+                                    "type": "string",
+                                    "operation": "notEquals"
+                                }
+                            }
+                        ],
+                        "combinator": "and"
+                    },
+                    "options": {}
+                },
+                "id": "649ff6b1-488b-4942-bc9c-19ec32a87868",
+                "name": "ID Recognized?",
+                "type": "n8n-nodes-base.if",
+                "typeVersion": 2,
+                "position": [
+                    1040,
+                    -272
+                ]
+            },
+            {
+                "parameters": {
+                    "url": "https://www.googleapis.com/drive/v3/files",
+                    "authentication": "predefinedCredentialType",
+                    "nodeCredentialType": "googleDriveOAuth2Api",
+                    "sendQuery": true,
+                    "queryParameters": {
+                        "parameters": [
+                            {
+                                "name": "q",
+                                "value": "=name = '{{ $json.clientId }}' and '{{ $json.parentFolderId }}' in parents and mimeType = 'application/vnd.google-apps.folder' and trashed = false"
+                            },
+                            {
+                                "name": "fields",
+                                "value": "files(id,name)"
+                            }
+                        ]
+                    },
+                    "options": {}
+                },
+                "id": "49dc52ef-2146-4dbf-9d2d-7e61292a53a1",
+                "name": "Search Client Folder",
+                "type": "n8n-nodes-base.httpRequest",
+                "typeVersion": 4.2,
+                "position": [
+                    1264,
+                    -384
+                ],
+                "credentials": {
+                    "googleDriveOAuth2Api": {
+                        "id": "Nl36H51nJBoCaf67",
+                        "name": "Google Drive for n8n"
+                    }
+                }
+            },
+            {
+                "parameters": {
+                    "jsCode": "// \u041f\u0440\u043e\u0432\u0435\u0440\u044f\u0435\u043c \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u043e\u0432\u0430\u043d\u0438\u0435 \u043f\u0430\u043f\u043a\u0438 \u043a\u043b\u0438\u0435\u043d\u0442\u0430, \u0441\u043e\u0437\u0434\u0430\u0451\u043c \u0435\u0441\u043b\u0438 \u043d\u0435\u0442\nconst response = $input.first().json;\nconst files = response.files || [];\nconst prev = $('Parse Response').first().json;\n\nif (files.length > 0) {\n  // \u041f\u0430\u043f\u043a\u0430 \u0443\u0436\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442\n  return [{\n    json: {\n      clientFolderId: files[0].id,\n      needCreate: false,\n      clientId: prev.clientId,\n      fileId: prev.fileId,\n      fileName: prev.fileName,\n      parentFolderId: prev.parentFolderId\n    }\n  }];\n} else {\n  // \u041d\u0443\u0436\u043d\u043e \u0441\u043e\u0437\u0434\u0430\u0442\u044c\n  return [{\n    json: {\n      clientFolderId: null,\n      needCreate: true,\n      clientId: prev.clientId,\n      fileId: prev.fileId,\n      fileName: prev.fileName,\n      parentFolderId: prev.parentFolderId\n    }\n  }];\n}"
+                },
+                "id": "4c6fb243-cda7-4a1e-a07e-1d95b09363d3",
+                "name": "Check Folder",
+                "type": "n8n-nodes-base.code",
+                "typeVersion": 2,
+                "position": [
+                    1488,
+                    -384
+                ]
+            },
+            {
+                "parameters": {
+                    "conditions": {
+                        "options": {
+                            "caseSensitive": true,
+                            "leftValue": "",
+                            "typeValidation": "strict"
+                        },
+                        "conditions": [
+                            {
+                                "id": "cond-need-create",
+                                "leftValue": "={{ $json.needCreate }}",
+                                "rightValue": true,
+                                "operator": {
+                                    "type": "boolean",
+                                    "operation": "equals"
+                                }
+                            }
+                        ],
+                        "combinator": "and"
+                    },
+                    "options": {}
+                },
+                "id": "f4a5bffb-3f37-4d32-98e3-4f28efd41cbf",
+                "name": "Need Create Folder?",
+                "type": "n8n-nodes-base.if",
+                "typeVersion": 2,
+                "position": [
+                    1696,
+                    -384
+                ]
+            },
+            {
+                "parameters": {
+                    "method": "POST",
+                    "url": "https://www.googleapis.com/drive/v3/files",
+                    "authentication": "predefinedCredentialType",
+                    "nodeCredentialType": "googleDriveOAuth2Api",
+                    "sendBody": true,
+                    "specifyBody": "json",
+                    "jsonBody": "={{ JSON.stringify({ name: $json.clientId, mimeType: 'application/vnd.google-apps.folder', parents: [$json.parentFolderId] }) }}",
+                    "options": {}
+                },
+                "id": "bb4699c3-e243-4183-9d2d-22f1aa02745b",
+                "name": "Create Folder",
+                "type": "n8n-nodes-base.httpRequest",
+                "typeVersion": 4.2,
+                "position": [
+                    1920,
+                    -384
+                ],
+                "credentials": {
+                    "googleDriveOAuth2Api": {
+                        "id": "Nl36H51nJBoCaf67",
+                        "name": "Google Drive for n8n"
+                    }
+                }
+            },
+            {
+                "parameters": {
+                    "jsCode": "// \u041f\u043e\u043b\u0443\u0447\u0430\u0435\u043c folder ID (\u0438\u0437 \u0441\u043e\u0437\u0434\u0430\u043d\u0438\u044f \u0438\u043b\u0438 \u0438\u0437 \u043f\u043e\u0438\u0441\u043a\u0430)\nconst input = $input.first().json;\nlet clientFolderId;\n\n// \u0415\u0441\u043b\u0438 \u043f\u0430\u043f\u043a\u0430 \u0431\u044b\u043b\u0430 \u0441\u043e\u0437\u0434\u0430\u043d\u0430 \u2014 \u0431\u0435\u0440\u0451\u043c id \u0438\u0437 \u043e\u0442\u0432\u0435\u0442\u0430 API\nif (input.id) {\n  clientFolderId = input.id;\n} else {\n  clientFolderId = input.clientFolderId;\n}\n\n// \u0414\u0430\u043d\u043d\u044b\u0435 \u0434\u043b\u044f \u043f\u0435\u0440\u0435\u043c\u0435\u0449\u0435\u043d\u0438\u044f \u0444\u0430\u0439\u043b\u0430\nconst prev = $('Check Folder').first().json;\n\nreturn [{\n  json: {\n    clientFolderId,\n    clientId: prev.clientId,\n    fileId: prev.fileId,\n    fileName: prev.fileName,\n    parentFolderId: prev.parentFolderId\n  }\n}];"
+                },
+                "id": "494dcb1b-31f0-4974-9f93-d446997ba50d",
+                "name": "Prepare Move",
+                "type": "n8n-nodes-base.code",
+                "typeVersion": 2,
+                "position": [
+                    2144,
+                    -384
+                ]
+            },
+            {
+                "parameters": {
+                    "method": "PATCH",
+                    "url": "=https://www.googleapis.com/drive/v3/files/{{ $json.fileId }}",
+                    "authentication": "predefinedCredentialType",
+                    "nodeCredentialType": "googleDriveOAuth2Api",
+                    "sendQuery": true,
+                    "queryParameters": {
+                        "parameters": [
+                            {
+                                "name": "addParents",
+                                "value": "={{ $json.clientFolderId }}"
+                            },
+                            {
+                                "name": "removeParents",
+                                "value": "={{ $json.parentFolderId }}"
+                            }
+                        ]
+                    },
+                    "options": {}
+                },
+                "id": "92a5e58e-fc17-4fd8-94b4-6cc2ab9c5a7e",
+                "name": "Move File",
+                "type": "n8n-nodes-base.httpRequest",
+                "typeVersion": 4.2,
+                "position": [
+                    2368,
+                    -384
+                ],
+                "credentials": {
+                    "googleDriveOAuth2Api": {
+                        "id": "Nl36H51nJBoCaf67",
+                        "name": "Google Drive for n8n"
+                    }
+                }
+            },
+            {
+                "parameters": {
+                    "jsCode": "// \u041b\u043e\u0433\u0438\u0440\u0443\u0435\u043c \u0443\u0441\u043f\u0435\u0448\u043d\u043e\u0435 \u043f\u0435\u0440\u0435\u043c\u0435\u0449\u0435\u043d\u0438\u0435\nconst prev = $('Check Folder').first().json;\n\nreturn [{\n  json: {\n    timestamp: new Date().toISOString(),\n    fileName: prev.fileName,\n    fileId: prev.fileId,\n    clientId: prev.clientId,\n    status: 'SUCCESS'\n  }\n}];"
+                },
+                "id": "c559ed2b-29f1-4723-a3f9-1eef77d36cb2",
+                "name": "Log \u2014 Success",
+                "type": "n8n-nodes-base.code",
+                "typeVersion": 2,
+                "position": [
+                    2576,
+                    -384
+                ]
+            },
+            {
+                "parameters": {
+                    "amount": 2
+                },
+                "id": "fa1b088a-b2af-4275-a155-920d4989d533",
+                "name": "Wait 2s",
+                "type": "n8n-nodes-base.wait",
+                "typeVersion": 1.1,
+                "position": [
+                    2800,
+                    -384
+                ],
+                "webhookId": "0e6c3720-107d-4523-9457-8fca697f77ac"
+            },
+            {
+                "parameters": {
+                    "rule": {
+                        "interval": [
+                            {}
+                        ]
+                    }
+                },
+                "type": "n8n-nodes-base.scheduleTrigger",
+                "typeVersion": 1.3,
+                "position": [
+                    -944,
+                    -448
+                ],
+                "id": "4934756d-2f7c-4712-8715-840c745d6ca8",
+                "name": "Schedule Trigger"
+            },
+            {
+                "parameters": {
+                    "httpMethod": "POST",
+                    "path": "heic-organizer",
+                    "options": {}
+                },
+                "id": "webhook-trigger",
+                "name": "Webhook Trigger",
+                "type": "n8n-nodes-base.webhook",
+                "typeVersion": 2,
+                "position": [
+                    -960,
+                    -460
+                ],
+                "webhookId": "heic-organizer-webhook"
+            },
+            {
+                "parameters": {
+                    "url": "https://www.googleapis.com/drive/v3/files",
+                    "authentication": "predefinedCredentialType",
+                    "nodeCredentialType": "googleDriveOAuth2Api",
+                    "sendQuery": true,
+                    "queryParameters": {
+                        "parameters": [
+                            {
+                                "name": "q",
+                                "value": "=name = 'UNKNOWN' and '{{ $json.parentFolderId }}' in parents and mimeType = 'application/vnd.google-apps.folder' and trashed = false"
+                            },
+                            {
+                                "name": "fields",
+                                "value": "files(id,name)"
+                            }
+                        ]
+                    },
+                    "options": {}
+                },
+                "id": "unk-search-folder-001",
+                "name": "Search UNKNOWN Folder",
+                "type": "n8n-nodes-base.httpRequest",
+                "typeVersion": 4.2,
+                "position": [
+                    1264,
+                    -112
+                ],
+                "credentials": {
+                    "googleDriveOAuth2Api": {
+                        "id": "Nl36H51nJBoCaf67",
+                        "name": "Google Drive for n8n"
+                    }
+                }
+            },
+            {
+                "parameters": {
+                    "jsCode": "// Check if UNKNOWN folder exists\nconst response = $input.first().json;\nconst files = response.files || [];\nconst prev = $('Parse Response').first().json;\n\nif (files.length > 0) {\n  return [{\n    json: {\n      unknownFolderId: files[0].id,\n      needCreate: false,\n      fileId: prev.fileId,\n      fileName: prev.fileName,\n      parentFolderId: prev.parentFolderId,\n      rawResponse: prev.rawResponse\n    }\n  }];\n} else {\n  return [{\n    json: {\n      unknownFolderId: null,\n      needCreate: true,\n      fileId: prev.fileId,\n      fileName: prev.fileName,\n      parentFolderId: prev.parentFolderId,\n      rawResponse: prev.rawResponse\n    }\n  }];\n}"
+                },
+                "id": "unk-check-folder-002",
+                "name": "Check UNKNOWN Folder",
+                "type": "n8n-nodes-base.code",
+                "typeVersion": 2,
+                "position": [
+                    1488,
+                    -112
+                ]
+            },
+            {
+                "parameters": {
+                    "conditions": {
+                        "options": {
+                            "caseSensitive": true,
+                            "leftValue": "",
+                            "typeValidation": "strict"
+                        },
+                        "conditions": [
+                            {
+                                "id": "cond-need-create-unk",
+                                "leftValue": "={{ $json.needCreate }}",
+                                "rightValue": true,
+                                "operator": {
+                                    "type": "boolean",
+                                    "operation": "equals"
+                                }
+                            }
+                        ],
+                        "combinator": "and"
+                    },
+                    "options": {}
+                },
+                "id": "unk-need-create-003",
+                "name": "Need Create UNKNOWN?",
+                "type": "n8n-nodes-base.if",
+                "typeVersion": 2,
+                "position": [
+                    1696,
+                    -112
+                ]
+            },
+            {
+                "parameters": {
+                    "method": "POST",
+                    "url": "https://www.googleapis.com/drive/v3/files",
+                    "authentication": "predefinedCredentialType",
+                    "nodeCredentialType": "googleDriveOAuth2Api",
+                    "sendBody": true,
+                    "specifyBody": "json",
+                    "jsonBody": "={{ JSON.stringify({ name: 'UNKNOWN', mimeType: 'application/vnd.google-apps.folder', parents: [$json.parentFolderId] }) }}",
+                    "options": {}
+                },
+                "id": "unk-create-folder-004",
+                "name": "Create UNKNOWN Folder",
+                "type": "n8n-nodes-base.httpRequest",
+                "typeVersion": 4.2,
+                "position": [
+                    1920,
+                    -112
+                ],
+                "credentials": {
+                    "googleDriveOAuth2Api": {
+                        "id": "Nl36H51nJBoCaf67",
+                        "name": "Google Drive for n8n"
+                    }
+                }
+            },
+            {
+                "parameters": {
+                    "jsCode": "// Get UNKNOWN folder ID (from creation or search)\nconst input = $input.first().json;\nlet unknownFolderId;\n\nif (input.id) {\n  unknownFolderId = input.id;\n} else {\n  unknownFolderId = input.unknownFolderId;\n}\n\nconst prev = $('Check UNKNOWN Folder').first().json;\n\nreturn [{\n  json: {\n    unknownFolderId,\n    fileId: prev.fileId,\n    fileName: prev.fileName,\n    parentFolderId: prev.parentFolderId,\n    rawResponse: prev.rawResponse\n  }\n}];"
+                },
+                "id": "unk-prepare-move-005",
+                "name": "Prepare Move Unknown",
+                "type": "n8n-nodes-base.code",
+                "typeVersion": 2,
+                "position": [
+                    2144,
+                    -112
+                ]
+            },
+            {
+                "parameters": {
+                    "method": "PATCH",
+                    "url": "=https://www.googleapis.com/drive/v3/files/{{ $json.fileId }}",
+                    "authentication": "predefinedCredentialType",
+                    "nodeCredentialType": "googleDriveOAuth2Api",
+                    "sendQuery": true,
+                    "queryParameters": {
+                        "parameters": [
+                            {
+                                "name": "addParents",
+                                "value": "={{ $json.unknownFolderId }}"
+                            },
+                            {
+                                "name": "removeParents",
+                                "value": "={{ $json.parentFolderId }}"
+                            }
+                        ]
+                    },
+                    "options": {}
+                },
+                "id": "unk-move-file-006",
+                "name": "Move to UNKNOWN",
+                "type": "n8n-nodes-base.httpRequest",
+                "typeVersion": 4.2,
+                "position": [
+                    2368,
+                    -112
+                ],
+                "credentials": {
+                    "googleDriveOAuth2Api": {
+                        "id": "Nl36H51nJBoCaf67",
+                        "name": "Google Drive for n8n"
+                    }
+                }
+            },
+            {
+                "parameters": {
+                    "jsCode": "// Log unknown file moved to UNKNOWN folder\nconst prev = $('Prepare Move Unknown').first().json;\n\nreturn [{\n  json: {\n    timestamp: new Date().toISOString(),\n    fileName: prev.fileName,\n    fileId: prev.fileId,\n    clientId: 'UNKNOWN',\n    rawResponse: prev.rawResponse,\n    status: 'MOVED_TO_UNKNOWN'\n  }\n}];"
+                },
+                "id": "unk-log-007",
+                "name": "Log \u2014 Unknown Moved",
+                "type": "n8n-nodes-base.code",
+                "typeVersion": 2,
+                "position": [
+                    2576,
+                    -112
+                ]
             }
-          ]
+        ],
+        "connections": {
+            "Manual Trigger": {
+                "main": [
+                    [
+                        {
+                            "node": "Set Folder ID",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Set Folder ID": {
+                "main": [
+                    [
+                        {
+                            "node": "List HEIC Files",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "List HEIC Files": {
+                "main": [
+                    [
+                        {
+                            "node": "Parse File List",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Parse File List": {
+                "main": [
+                    [
+                        {
+                            "node": "Split In Batches",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Split In Batches": {
+                "main": [
+                    [],
+                    [
+                        {
+                            "node": "Get Thumbnail URL",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Get Thumbnail URL": {
+                "main": [
+                    [
+                        {
+                            "node": "Download JPEG Thumbnail",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Download JPEG Thumbnail": {
+                "main": [
+                    [
+                        {
+                            "node": "OpenAI Vision \u2014 Extract ID",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "OpenAI Vision \u2014 Extract ID": {
+                "main": [
+                    [
+                        {
+                            "node": "Parse Response",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Parse Response": {
+                "main": [
+                    [
+                        {
+                            "node": "ID Recognized?",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "ID Recognized?": {
+                "main": [
+                    [
+                        {
+                            "node": "Search Client Folder",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ],
+                    [
+                        {
+                            "node": "Search UNKNOWN Folder",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Search Client Folder": {
+                "main": [
+                    [
+                        {
+                            "node": "Check Folder",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Check Folder": {
+                "main": [
+                    [
+                        {
+                            "node": "Need Create Folder?",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Need Create Folder?": {
+                "main": [
+                    [
+                        {
+                            "node": "Create Folder",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ],
+                    [
+                        {
+                            "node": "Prepare Move",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Create Folder": {
+                "main": [
+                    [
+                        {
+                            "node": "Prepare Move",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Prepare Move": {
+                "main": [
+                    [
+                        {
+                            "node": "Move File",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Move File": {
+                "main": [
+                    [
+                        {
+                            "node": "Log \u2014 Success",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Log \u2014 Success": {
+                "main": [
+                    [
+                        {
+                            "node": "Wait 2s",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Wait 2s": {
+                "main": [
+                    [
+                        {
+                            "node": "Split In Batches",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Schedule Trigger": {
+                "main": [
+                    [
+                        {
+                            "node": "Set Folder ID",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Webhook Trigger": {
+                "main": [
+                    [
+                        {
+                            "node": "Set Folder ID",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Search UNKNOWN Folder": {
+                "main": [
+                    [
+                        {
+                            "node": "Check UNKNOWN Folder",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Check UNKNOWN Folder": {
+                "main": [
+                    [
+                        {
+                            "node": "Need Create UNKNOWN?",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Need Create UNKNOWN?": {
+                "main": [
+                    [
+                        {
+                            "node": "Create UNKNOWN Folder",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ],
+                    [
+                        {
+                            "node": "Prepare Move Unknown",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Create UNKNOWN Folder": {
+                "main": [
+                    [
+                        {
+                            "node": "Prepare Move Unknown",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Prepare Move Unknown": {
+                "main": [
+                    [
+                        {
+                            "node": "Move to UNKNOWN",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Move to UNKNOWN": {
+                "main": [
+                    [
+                        {
+                            "node": "Log \u2014 Unknown Moved",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Log \u2014 Unknown Moved": {
+                "main": [
+                    [
+                        {
+                            "node": "Wait 2s",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            }
         },
-        "options": {}
-      },
-      "id": "node-move-file",
-      "name": "Move File",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [3100, 200]
-    },
-    {
-      "parameters": {
-        "jsCode": "// Логируем успешное перемещение\nconst prev = $('Check Folder').first().json;\n\nreturn [{\n  json: {\n    timestamp: new Date().toISOString(),\n    fileName: prev.fileName,\n    fileId: prev.fileId,\n    clientId: prev.clientId,\n    status: 'SUCCESS'\n  }\n}];"
-      },
-      "id": "node-log-success",
-      "name": "Log — Success",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [3320, 200]
-    },
-    {
-      "parameters": {
-        "amount": 2,
-        "unit": "seconds"
-      },
-      "id": "node-wait-success",
-      "name": "Wait 2s",
-      "type": "n8n-nodes-base.wait",
-      "typeVersion": 1.1,
-      "position": [3540, 200]
-    },
-    {
-      "parameters": {
-        "amount": 2,
-        "unit": "seconds"
-      },
-      "id": "node-wait-unknown",
-      "name": "Wait 2s (Skip)",
-      "type": "n8n-nodes-base.wait",
-      "typeVersion": 1.1,
-      "position": [2220, 460]
+        "authors": "OLEKSANDR Polischuk",
+        "name": null,
+        "description": null,
+        "autosaved": false,
+        "workflowPublishHistory": [
+            {
+                "createdAt": "2026-03-04T17:18:28.483Z",
+                "id": 803,
+                "workflowId": "gFcvIN83wmc9UvkS",
+                "versionId": "41092d92-a4f4-4c93-b63b-e2d81c38e00d",
+                "event": "activated",
+                "userId": "6f7766c1-8e6d-478f-a667-93619ba35dbe"
+            },
+            {
+                "createdAt": "2026-03-04T19:35:16.601Z",
+                "id": 805,
+                "workflowId": "gFcvIN83wmc9UvkS",
+                "versionId": "41092d92-a4f4-4c93-b63b-e2d81c38e00d",
+                "event": "activated",
+                "userId": "6f7766c1-8e6d-478f-a667-93619ba35dbe"
+            }
+        ]
     }
-  ],
-  "connections": {
-    "Manual Trigger": {
-      "main": [
-        [
-          {
-            "node": "Set Folder ID",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Set Folder ID": {
-      "main": [
-        [
-          {
-            "node": "List HEIC Files",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "List HEIC Files": {
-      "main": [
-        [
-          {
-            "node": "Parse File List",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Parse File List": {
-      "main": [
-        [
-          {
-            "node": "Split In Batches",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Split In Batches": {
-      "main": [
-        [],
-        [
-          {
-            "node": "Download File",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Download File": {
-      "main": [
-        [
-          {
-            "node": "Convert HEIC → JPEG",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Convert HEIC → JPEG": {
-      "main": [
-        [
-          {
-            "node": "OpenAI Vision — Extract ID",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "OpenAI Vision — Extract ID": {
-      "main": [
-        [
-          {
-            "node": "Parse Response",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Parse Response": {
-      "main": [
-        [
-          {
-            "node": "ID Recognized?",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "ID Recognized?": {
-      "main": [
-        [
-          {
-            "node": "Search Client Folder",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Log — Skip Unknown",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Log — Skip Unknown": {
-      "main": [
-        [
-          {
-            "node": "Wait 2s (Skip)",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Wait 2s (Skip)": {
-      "main": [
-        [
-          {
-            "node": "Split In Batches",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Search Client Folder": {
-      "main": [
-        [
-          {
-            "node": "Check Folder",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Check Folder": {
-      "main": [
-        [
-          {
-            "node": "Need Create Folder?",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Need Create Folder?": {
-      "main": [
-        [
-          {
-            "node": "Create Folder",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Prepare Move",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Create Folder": {
-      "main": [
-        [
-          {
-            "node": "Prepare Move",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Prepare Move": {
-      "main": [
-        [
-          {
-            "node": "Move File",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Move File": {
-      "main": [
-        [
-          {
-            "node": "Log — Success",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Log — Success": {
-      "main": [
-        [
-          {
-            "node": "Wait 2s",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Wait 2s": {
-      "main": [
-        [
-          {
-            "node": "Split In Batches",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    }
-  },
-  "settings": {
-    "executionOrder": "v1"
-  },
-  "meta": {
-    "templateCredsSetupCompleted": true
-  }
 }
