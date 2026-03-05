@@ -22,7 +22,7 @@
         -300
       ],
       "parameters": {
-        "jsCode": "// Configuration\nconst staticData = this.getWorkflowStaticData('global');\nstaticData.clients = {}; // Clear previous run data\n\nconst CONFIG = {\n  rootFolderId: \"1iEbSMlsHPX6Sg3y0J0znlT47ri78hk9_\",\n  spreadsheetId: \"1cgctBCQVmqpfQKdomYLfGAWVwRjT1Qw0-dl9F5RzoOg\",\n  sheetGid: 1199154574,\n  sheetName: \"Tabelle1\",\n  claudeModel: \"claude-sonnet-4-5-20250514\",\n  testClientIds: [\"1614978\",\"443974\",\"443074\",\"444571\",\"441882\",\"448515\",\"190716\",\"431306\"]\n};\n\nreturn [{ json: CONFIG }];"
+        "jsCode": "// Configuration\nconst staticData = this.getWorkflowStaticData('global');\nstaticData.clients = {}; // Clear previous run data\n\nconst CONFIG = {\n  rootFolderId: \"1iEbSMlsHPX6Sg3y0J0znlT47ri78hk9_\",\n  spreadsheetId: \"1cgctBCQVmqpfQKdomYLfGAWVwRjT1Qw0-dl9F5RzoOg\",\n  sheetGid: 1199154574,\n  sheetName: \"Tabelle1\",\n  openaiModel: \"gpt-4o\",\n  testClientIds: [\"1614978\",\"443974\",\"443074\",\"444571\",\"441882\",\"448515\",\"190716\",\"431306\"]\n};\n\nreturn [{ json: CONFIG }];"
       }
     },
     {
@@ -268,7 +268,7 @@
     },
     {
       "id": "a004085f-a732ac23",
-      "name": "Build Claude Request",
+      "name": "Build OpenAI Request",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
@@ -276,7 +276,7 @@
         -300
       ],
       "parameters": {
-        "jsCode": "const fileData = $input.first().json;\nconst prev = $('Split Files').first().json;\nconst config = $('Set Config').first().json;\n\nlet base64Image = null;\nlet mediaType = 'image/jpeg';\n\n// Try thumbnailLink first (works for HEIC)\nconst thumbnailLink = fileData.thumbnailLink;\nif (thumbnailLink) {\n  const highResUrl = thumbnailLink.replace(/=s\\d+$/, '=s2048');\n  try {\n    const response = await this.helpers.httpRequest({\n      method: 'GET',\n      url: highResUrl,\n      encoding: 'arraybuffer',\n    });\n    base64Image = Buffer.from(response).toString('base64');\n  } catch (e) {\n    // thumbnailLink failed, will try direct download\n  }\n}\n\n// Fallback: direct download for JPG/PNG\nif (!base64Image && !fileData.name.toLowerCase().endsWith('.heic')) {\n  try {\n    const response = await this.helpers.httpRequestWithAuthentication.call(\n      this, 'googleDriveOAuth2Api',\n      {\n        method: 'GET',\n        url: `https://www.googleapis.com/drive/v3/files/${fileData.id}?alt=media`,\n        encoding: 'arraybuffer',\n      }\n    );\n    base64Image = Buffer.from(response).toString('base64');\n    const ext = fileData.name.toLowerCase();\n    if (ext.endsWith('.png')) mediaType = 'image/png';\n    else if (ext.endsWith('.jpg') || ext.endsWith('.jpeg')) mediaType = 'image/jpeg';\n  } catch (e) {\n    // direct download also failed\n  }\n}\n\nif (!base64Image) {\n  return [{ json: {\n    error: true,\n    errorMessage: 'Could not download image',\n    fileName: fileData.name,\n    fileId: fileData.id,\n    clientFolderId: prev.clientFolderId,\n    clientFolderName: prev.clientFolderName\n  }}];\n}\n\n// Build Anthropic API request body\nconst PROMPT = `This is a photo of a German hospital monitor screen showing a patient medical report (BIA/body composition analysis). Extract ALL visible medical measurements and return ONLY this JSON object (no other text, no markdown, no code blocks):\n{\n  \"client_id\": \"5-9 digit number visible in top area, or null\",\n  \"client_name\": \"patient full name if visible, or null\",\n  \"date\": \"date in DD.MM.YYYY format if visible, or null\",\n  \"Gewicht_kg\": number or null,\n  \"Grosse_cm\": number or null,\n  \"BMI_kg_m2\": number or null,\n  \"FM_kg\": number or null,\n  \"FM_pct\": number or null,\n  \"FMI_kg_m2\": number or null,\n  \"FFM_kg\": number or null,\n  \"FFM_pct\": number or null,\n  \"FFMI_kg_m2\": number or null,\n  \"SMM_kg\": number or null,\n  \"R_ohm\": number or null,\n  \"Xc_ohm\": number or null,\n  \"VAT_l\": number or null,\n  \"WC_cm\": number or null,\n  \"phase_angle_deg\": number or null,\n  \"perzentile\": number or null,\n  \"TBW_l\": number or null,\n  \"TBW_pct\": number or null,\n  \"ECW_l\": number or null,\n  \"ECW_pct\": number or null,\n  \"ECW_TBW_pct\": number or null\n}`;\n\nconst requestBody = {\n  model: config.claudeModel || \"claude-sonnet-4-5-20250514\",\n  max_tokens: 800,\n  system: \"You are a medical data extraction assistant. Extract data from hospital monitor screen photos. Always respond with valid JSON only. No explanations, no markdown, no code blocks. Just the raw JSON object.\",\n  messages: [{\n    role: \"user\",\n    content: [\n      {\n        type: \"image\",\n        source: {\n          type: \"base64\",\n          media_type: mediaType,\n          data: base64Image\n        }\n      },\n      {\n        type: \"text\",\n        text: PROMPT\n      }\n    ]\n  }]\n};\n\nreturn [{ json: {\n  requestBody,\n  fileName: fileData.name,\n  fileId: fileData.id,\n  clientFolderId: prev.clientFolderId,\n  clientFolderName: prev.clientFolderName,\n  error: false\n}}];"
+        "jsCode": "const fileData = $input.first().json;\nconst prev = $('Split Files').first().json;\nconst config = $('Set Config').first().json;\n\nlet base64Image = null;\nlet mediaType = 'image/jpeg';\n\n// Try thumbnailLink first (works for HEIC)\nconst thumbnailLink = fileData.thumbnailLink;\nif (thumbnailLink) {\n  const highResUrl = thumbnailLink.replace(/=s\\d+$/, '=s2048');\n  try {\n    const response = await this.helpers.httpRequest({\n      method: 'GET',\n      url: highResUrl,\n      encoding: 'arraybuffer',\n    });\n    base64Image = Buffer.from(response).toString('base64');\n  } catch (e) {\n    // thumbnailLink failed\n  }\n}\n\n// Fallback: direct download for JPG/PNG\nif (!base64Image && !fileData.name.toLowerCase().endsWith('.heic')) {\n  try {\n    const response = await this.helpers.httpRequestWithAuthentication.call(\n      this, 'googleDriveOAuth2Api',\n      {\n        method: 'GET',\n        url: `https://www.googleapis.com/drive/v3/files/${fileData.id}?alt=media`,\n        encoding: 'arraybuffer',\n      }\n    );\n    base64Image = Buffer.from(response).toString('base64');\n    const ext = fileData.name.toLowerCase();\n    if (ext.endsWith('.png')) mediaType = 'image/png';\n  } catch (e) {}\n}\n\nif (!base64Image) {\n  return [{ json: {\n    error: true,\n    errorMessage: 'Could not download image',\n    fileName: fileData.name,\n    fileId: fileData.id,\n    clientFolderId: prev.clientFolderId,\n    clientFolderName: prev.clientFolderName\n  }}];\n}\n\nconst PROMPT = `This is a photo of a German hospital monitor screen showing a patient medical report (BIA/body composition analysis). Extract ALL visible medical measurements and return ONLY this JSON object (no other text, no markdown, no code blocks):\n{\n  \"client_id\": \"5-9 digit number visible in top area, or null\",\n  \"client_name\": \"patient full name if visible, or null\",\n  \"date\": \"date in DD.MM.YYYY format if visible, or null\",\n  \"Gewicht_kg\": number or null,\n  \"Grosse_cm\": number or null,\n  \"BMI_kg_m2\": number or null,\n  \"FM_kg\": number or null,\n  \"FM_pct\": number or null,\n  \"FMI_kg_m2\": number or null,\n  \"FFM_kg\": number or null,\n  \"FFM_pct\": number or null,\n  \"FFMI_kg_m2\": number or null,\n  \"SMM_kg\": number or null,\n  \"R_ohm\": number or null,\n  \"Xc_ohm\": number or null,\n  \"VAT_l\": number or null,\n  \"WC_cm\": number or null,\n  \"phase_angle_deg\": number or null,\n  \"perzentile\": number or null,\n  \"TBW_l\": number or null,\n  \"TBW_pct\": number or null,\n  \"ECW_l\": number or null,\n  \"ECW_pct\": number or null,\n  \"ECW_TBW_pct\": number or null\n}`;\n\n// Build OpenAI API request body\nconst requestBody = {\n  model: \"gpt-4o\",\n  max_tokens: 800,\n  messages: [{\n    role: \"system\",\n    content: \"You are a medical data extraction assistant. Extract data from hospital monitor screen photos. Always respond with valid JSON only. No explanations, no markdown, no code blocks. Just the raw JSON object.\"\n  }, {\n    role: \"user\",\n    content: [\n      {\n        type: \"image_url\",\n        image_url: {\n          url: \"data:\" + mediaType + \";base64,\" + base64Image,\n          detail: \"high\"\n        }\n      },\n      {\n        type: \"text\",\n        text: PROMPT\n      }\n    ]\n  }]\n};\n\nreturn [{ json: {\n  requestBody,\n  fileName: fileData.name,\n  fileId: fileData.id,\n  clientFolderId: prev.clientFolderId,\n  clientFolderName: prev.clientFolderName,\n  error: false\n}}];"
       }
     },
     {
@@ -313,7 +313,7 @@
     },
     {
       "id": "fe7556d8-901e59ae",
-      "name": "Claude Vision API",
+      "name": "OpenAI Vision API",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
@@ -322,16 +322,12 @@
       ],
       "parameters": {
         "method": "POST",
-        "url": "https://api.anthropic.com/v1/messages",
+        "url": "https://api.openai.com/v1/chat/completions",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpHeaderAuth",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            {
-              "name": "anthropic-version",
-              "value": "2023-06-01"
-            },
             {
               "name": "content-type",
               "value": "application/json"
@@ -347,8 +343,8 @@
       },
       "credentials": {
         "httpHeaderAuth": {
-          "id": "CONFIGURE_ME",
-          "name": "Anthropic API Key"
+          "id": "CONFIGURE_OPENAI",
+          "name": "OpenAI API Key"
         }
       }
     },
@@ -362,7 +358,7 @@
         -300
       ],
       "parameters": {
-        "jsCode": "const staticData = this.getWorkflowStaticData('global');\nif (!staticData.clients) staticData.clients = {};\n\nconst claudeResponse = $input.first().json;\nconst prev = $('Split Files').first().json;\nconst clientFolderName = prev.clientFolderName;\n\n// Parse Claude response\nlet parsed;\ntry {\n  let rawText = '';\n  if (claudeResponse.content && claudeResponse.content[0]) {\n    rawText = claudeResponse.content[0].text.trim();\n  }\n  // Remove markdown wrappers if present\n  const clean = rawText.replace(/^```json\\s*/,'').replace(/\\s*```$/,'').trim();\n  parsed = JSON.parse(clean);\n} catch(e) {\n  return [{ json: {\n    parseError: true,\n    fileName: prev.fileName,\n    fileId: prev.fileId,\n    clientFolderId: prev.clientFolderId,\n    clientFolderName: clientFolderName,\n    rawResponse: claudeResponse.content ? claudeResponse.content[0].text : JSON.stringify(claudeResponse),\n    errorMessage: e.message\n  }}];\n}\n\n// Client ID from Claude response or folder name\nconst clientId = (parsed.client_id && String(parsed.client_id).trim()) || clientFolderName;\nconst date = parsed.date || \"unbekannt\";\n\n// Initialize client\nif (!staticData.clients[clientId]) {\n  staticData.clients[clientId] = {\n    client_id: clientId,\n    client_name: \"\",\n    folderName: clientFolderName,\n    operations: {}\n  };\n}\n\n// Update name if found\nif (parsed.client_name && !staticData.clients[clientId].client_name) {\n  staticData.clients[clientId].client_name = parsed.client_name;\n}\n\n// Initialize operation (date)\nif (!staticData.clients[clientId].operations[date]) {\n  staticData.clients[clientId].operations[date] = {};\n}\n\n// Merge fields (don't overwrite real values with nulls)\nconst FIELDS = [\n  \"Gewicht_kg\",\"Grosse_cm\",\"BMI_kg_m2\",\n  \"FM_kg\",\"FM_pct\",\"FMI_kg_m2\",\n  \"FFM_kg\",\"FFM_pct\",\"FFMI_kg_m2\",\n  \"SMM_kg\",\n  \"R_ohm\",\"Xc_ohm\",\n  \"VAT_l\",\"WC_cm\",\n  \"phase_angle_deg\",\"perzentile\",\n  \"TBW_l\",\"TBW_pct\",\"ECW_l\",\"ECW_pct\",\"ECW_TBW_pct\"\n];\n\nconst op = staticData.clients[clientId].operations[date];\nfor (const field of FIELDS) {\n  if (parsed[field] !== null && parsed[field] !== undefined) {\n    op[field] = parsed[field];\n  }\n}\n\nreturn [{ json: {\n  parseError: false,\n  clientId,\n  date,\n  fileName: prev.fileName,\n  fileId: prev.fileId,\n  clientFolderId: prev.clientFolderId,\n  clientFolderName: clientFolderName\n}}];"
+        "jsCode": "const staticData = this.getWorkflowStaticData('global');\nif (!staticData.clients) staticData.clients = {};\n\nconst openaiResponse = $input.first().json;\nconst prev = $('Split Files').first().json;\nconst clientFolderName = prev.clientFolderName;\n\n// Parse OpenAI response (different format from Anthropic)\nlet parsed;\ntry {\n  let rawText = '';\n  if (openaiResponse.choices && openaiResponse.choices[0]) {\n    rawText = openaiResponse.choices[0].message.content.trim();\n  }\n  // Remove markdown wrappers if present\n  const clean = rawText.replace(/^```json\\s*/,'').replace(/\\s*```$/,'').trim();\n  parsed = JSON.parse(clean);\n} catch(e) {\n  return [{ json: {\n    parseError: true,\n    fileName: prev.fileName,\n    fileId: prev.fileId,\n    clientFolderId: prev.clientFolderId,\n    clientFolderName: clientFolderName,\n    rawResponse: openaiResponse.choices ? openaiResponse.choices[0].message.content : JSON.stringify(openaiResponse),\n    errorMessage: e.message\n  }}];\n}\n\n// Client ID from response or folder name\nconst clientId = (parsed.client_id && String(parsed.client_id).trim()) || clientFolderName;\nconst date = parsed.date || \"unbekannt\";\n\n// Initialize client\nif (!staticData.clients[clientId]) {\n  staticData.clients[clientId] = {\n    client_id: clientId,\n    client_name: \"\",\n    folderName: clientFolderName,\n    operations: {}\n  };\n}\n\nif (parsed.client_name && !staticData.clients[clientId].client_name) {\n  staticData.clients[clientId].client_name = parsed.client_name;\n}\n\nif (!staticData.clients[clientId].operations[date]) {\n  staticData.clients[clientId].operations[date] = {};\n}\n\nconst FIELDS = [\n  \"Gewicht_kg\",\"Grosse_cm\",\"BMI_kg_m2\",\n  \"FM_kg\",\"FM_pct\",\"FMI_kg_m2\",\n  \"FFM_kg\",\"FFM_pct\",\"FFMI_kg_m2\",\n  \"SMM_kg\",\n  \"R_ohm\",\"Xc_ohm\",\n  \"VAT_l\",\"WC_cm\",\n  \"phase_angle_deg\",\"perzentile\",\n  \"TBW_l\",\"TBW_pct\",\"ECW_l\",\"ECW_pct\",\"ECW_TBW_pct\"\n];\n\nconst op = staticData.clients[clientId].operations[date];\nfor (const field of FIELDS) {\n  if (parsed[field] !== null && parsed[field] !== undefined) {\n    op[field] = parsed[field];\n  }\n}\n\nreturn [{ json: {\n  parseError: false,\n  clientId,\n  date,\n  fileName: prev.fileName,\n  fileId: prev.fileId,\n  clientFolderId: prev.clientFolderId,\n  clientFolderName: clientFolderName\n}}];"
       }
     },
     {
@@ -672,7 +668,7 @@
         -700
       ],
       "parameters": {
-        "content": "## Medical Photos HEIC → Google Sheets\\n\\n**SETUP REQUIRED:**\\n1. Create **Header Auth** credential named 'Anthropic API Key' with:\\n   - Header Name: `x-api-key`\\n   - Header Value: your Anthropic API key\\n2. Ensure Google Drive OAuth2 credential has Google Sheets API scope\\n3. Create a sheet tab `_FEHLER` for error logging\\n\\n**Processes:** 8 test client folders → extracts medical data via Claude Vision → writes to Google Sheets\\n\\n**Rate limits:** 1.5s between Claude API calls, 1s between Sheet writes",
+        "content": "## Medical Photos HEIC → Google Sheets\\n\\n**SETUP REQUIRED:**\\n1. Connect **OpenAI API** credential to 'OpenAI Vision API' node\\n   (Header Auth: `Authorization: Bearer sk-...`)\\n2. Ensure Google Drive OAuth2 credential has Google Sheets API scope\\n3. Create a sheet tab `_FEHLER` for error logging\\n\\n**Model:** GPT-4o (OpenAI Vision)\\n\\n**Processes:** 8 test client folders → extracts medical data via OpenAI Vision → writes to Google Sheets\\n\\n**Rate limits:** 1.5s between OpenAI API calls, 1s between Sheet writes",
         "width": 400,
         "height": 300
       }
@@ -819,14 +815,14 @@
       "main": [
         [
           {
-            "node": "Build Claude Request",
+            "node": "Build OpenAI Request",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Build Claude Request": {
+    "Build OpenAI Request": {
       "main": [
         [
           {
@@ -841,7 +837,7 @@
       "main": [
         [
           {
-            "node": "Claude Vision API",
+            "node": "OpenAI Vision API",
             "type": "main",
             "index": 0
           }
@@ -855,7 +851,7 @@
         ]
       ]
     },
-    "Claude Vision API": {
+    "OpenAI Vision API": {
       "main": [
         [
           {
