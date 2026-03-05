@@ -44,7 +44,7 @@
                 -300
             ],
             "parameters": {
-                "jsCode": "const staticData = $getWorkflowStaticData('global');\nstaticData.clients = {};\nstaticData.allFiles = [];\n\nreturn [{ json: {\n  rootFolderId: \"1iEbSMlsHPX6Sg3y0J0znlT47ri78hk9_\",\n  spreadsheetId: \"1cgctBCQVmqpfQKdomYLfGAWVwRjT1Qw0-dl9F5RzoOg\",\n  sheetGid: 1199154574,\n  sheetName: \"Patientendaten\",\n  testClientIds: [\"1614978\",\"443974\",\"443074\",\"444571\",\"441882\",\"448515\",\"190716\",\"431306\"]\n}}];"
+                "jsCode": "const staticData = $getWorkflowStaticData('global');\nstaticData.clients = {};\nstaticData.allFiles = [];\n\nreturn [{ json: {\n  rootFolderId: \"1iEbSMlsHPX6Sg3y0J0znlT47ri78hk9_\",\n  spreadsheetId: \"1cgctBCQVmqpfQKdomYLfGAWVwRjT1Qw0-dl9F5RzoOg\",\n  sheetGid: 1199154574,\n  sheetName: \"Patientendaten\",\n  processAll: true\n}}];"
             }
         },
         {
@@ -96,7 +96,7 @@
                 -300
             ],
             "parameters": {
-                "jsCode": "const config = $('Set Config').first().json;\nconst folders = $input.first().json.files || [];\nconst allowed = config.testClientIds;\nconst filtered = folders.filter(f => allowed.includes(f.name) && !f.name.endsWith('_DONE'));\nif (!filtered.length) return [{ json: { empty: true } }];\nreturn filtered.map(f => ({ json: { clientFolderId: f.id, clientFolderName: f.name } }));"
+                "jsCode": "const config = $('Set Config').first().json;\nconst folders = $input.first().json.files || [];\nconst filtered = folders.filter(f => /^\\d+$/.test(f.name) && !f.name.endsWith('_DONE'));\nif (!filtered.length) return [{ json: { empty: true } }];\nreturn filtered.map(f => ({ json: { clientFolderId: f.id, clientFolderName: f.name } }));"
             }
         },
         {
@@ -1280,7 +1280,7 @@
                     -300
                 ],
                 "parameters": {
-                    "jsCode": "const staticData = $getWorkflowStaticData('global');\nstaticData.clients = {};\nstaticData.allFiles = [];\n\nreturn [{ json: {\n  rootFolderId: \"1iEbSMlsHPX6Sg3y0J0znlT47ri78hk9_\",\n  spreadsheetId: \"1cgctBCQVmqpfQKdomYLfGAWVwRjT1Qw0-dl9F5RzoOg\",\n  sheetGid: 1199154574,\n  sheetName: \"Patientendaten\",\n  testClientIds: [\"1614978\",\"443974\",\"443074\",\"444571\",\"441882\",\"448515\",\"190716\",\"431306\"]\n}}];"
+                    "jsCode": "const staticData = $getWorkflowStaticData('global');\nstaticData.clients = {};\nstaticData.allFiles = [];\n\nreturn [{ json: {\n  rootFolderId: \"1iEbSMlsHPX6Sg3y0J0znlT47ri78hk9_\",\n  spreadsheetId: \"1cgctBCQVmqpfQKdomYLfGAWVwRjT1Qw0-dl9F5RzoOg\",\n  sheetGid: 1199154574,\n  sheetName: \"Patientendaten\",\n  processAll: true\n}}];"
                 }
             },
             {
@@ -1332,7 +1332,7 @@
                     -300
                 ],
                 "parameters": {
-                    "jsCode": "const config = $('Set Config').first().json;\nconst folders = $input.first().json.files || [];\nconst allowed = config.testClientIds;\nconst filtered = folders.filter(f => allowed.includes(f.name) && !f.name.endsWith('_DONE'));\nif (!filtered.length) return [{ json: { empty: true } }];\nreturn filtered.map(f => ({ json: { clientFolderId: f.id, clientFolderName: f.name } }));"
+                    "jsCode": "const config = $('Set Config').first().json;\nconst folders = $input.first().json.files || [];\nconst filtered = folders.filter(f => /^\\d+$/.test(f.name) && !f.name.endsWith('_DONE'));\nif (!filtered.length) return [{ json: { empty: true } }];\nreturn filtered.map(f => ({ json: { clientFolderId: f.id, clientFolderName: f.name } }));"
                 }
             },
             {
