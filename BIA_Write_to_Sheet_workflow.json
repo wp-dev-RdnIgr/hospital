@@ -1,0 +1,188 @@
+{
+  "name": "BIA Write to Google Sheet",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "bia-write-sheet",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook_bia",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [200, 300],
+      "webhookId": "bia-write-sheet"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parse webhook body and build Google Sheets API request\nconst body = $input.first().json.body || $input.first().json;\n\nconst spreadsheetId = body.spreadsheetId || '1cgctBCQVmqpfQKdomYLfGAWVwRjT1Qw0-dl9F5RzoOg';\nconst sheetGid = body.sheetGid !== undefined ? body.sheetGid : 1199154574;\nconst sheetName = body.sheetName || 'BIA';\n\n// Expect body.rows as array of arrays, or body.row as single array\n// Also accept structured patient data\nlet valueRanges = [];\nlet mergeRequests = [];\n\nconst COLS_PER_OP = 21;\nconst START_COL = 2; // Column C (0-indexed)\n\nfunction colToLetter(col) {\n  let l = '';\n  while (col >= 0) {\n    l = String.fromCharCode(65 + (col % 26)) + l;\n    col = Math.floor(col / 26) - 1;\n  }\n  return l;\n}\n\nif (body.patients) {\n  // Structured patient data mode\n  // First, read existing sheet to find next free row\n  // For now, use startRow from body or default to 6\n  let currentRow = body.startRow || 6;\n\n  body.patients.forEach(patient => {\n    const ops = patient.operations || [];\n    const maxCols = START_COL + ops.length * COLS_PER_OP;\n\n    // Date row (merged per operation)\n    const dateVals = new Array(maxCols).fill('');\n    dateVals[0] = String(patient.id || '');\n    dateVals[1] = patient.name || '';\n\n    // Data row\n    const dataVals = new Array(maxCols).fill('');\n\n    ops.forEach((op, idx) => {\n      const co = START_COL + idx * COLS_PER_OP;\n      dateVals[co] = op.date ? 'Datum der Operation: ' + op.date : '';\n\n      // Field order: Gewicht, Groesse, BMI, FM_kg, FM_pct, FMI, FFM_kg, FFM_pct, FFMI, SMM, R, Xc, VAT, Taillenumfang, phi, Perzentile, TBW_l, TBW_pct, ECW_l, ECW_pct, ECW_TBW\n      const fields = op.fields || op.values || [];\n      fields.forEach((v, fi) => {\n        if (fi < COLS_PER_OP && v !== null && v !== undefined && v !== '') {\n          dataVals[co + fi] = v;\n        }\n      });\n\n      // Merge date row across operation columns\n      mergeRequests.push({\n        mergeCells: {\n          range: {\n            sheetId: sheetGid,\n            startRowIndex: currentRow - 1,\n            endRowIndex: currentRow,\n            startColumnIndex: co,\n            endColumnIndex: co + COLS_PER_OP\n          },\n          mergeType: 'MERGE_ALL'\n        }\n      });\n    });\n\n    const endCol = colToLetter(maxCols - 1);\n    valueRanges.push({\n      range: sheetName + '!A' + currentRow + ':' + endCol + currentRow,\n      values: [dateVals]\n    });\n    valueRanges.push({\n      range: sheetName + '!A' + (currentRow + 1) + ':' + endCol + (currentRow + 1),\n      values: [dataVals]\n    });\n\n    currentRow += 2;\n  });\n} else if (body.rows) {\n  // Raw rows mode: write rows starting at startRow\n  const startRow = body.startRow || 6;\n  const startCol = body.startCol || 'A';\n  const endCol = body.endCol || 'BM';\n  valueRanges.push({\n    range: sheetName + '!' + startCol + startRow + ':' + endCol + (startRow + body.rows.length - 1),\n    values: body.rows\n  });\n} else if (body.row) {\n  // Single row mode\n  const startRow = body.startRow || 6;\n  valueRanges.push({\n    range: sheetName + '!A' + startRow + ':' + colToLetter(body.row.length - 1) + startRow,\n    values: [body.row]\n  });\n}\n\nreturn {\n  spreadsheetId,\n  sheetGid,\n  sheetName,\n  valueRanges,\n  mergeRequests,\n  hasFormatting: mergeRequests.length > 0\n};"
+      },
+      "id": "parse_input",
+      "name": "Parse Input",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://sheets.googleapis.com/v4/spreadsheets/{{ $json.spreadsheetId }}/values:batchUpdate",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDriveOAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ valueInputOption: 'RAW', data: $json.valueRanges }) }}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "write_data",
+      "name": "Write Data",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [700, 300],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "Nl36H51nJBoCaf67",
+          "name": "Google Drive for n8n"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "has_formatting",
+              "leftValue": "={{ $('Parse Input').first().json.hasFormatting }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "check_formatting",
+      "name": "Has Formatting?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [950, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://sheets.googleapis.com/v4/spreadsheets/{{ $('Parse Input').first().json.spreadsheetId }}:batchUpdate",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDriveOAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ requests: $('Parse Input').first().json.mergeRequests }) }}",
+        "options": {}
+      },
+      "id": "apply_formatting",
+      "name": "Apply Formatting",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1200, 200],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "Nl36H51nJBoCaf67",
+          "name": "Google Drive for n8n"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: true, message: 'Data written successfully', spreadsheetId: $('Parse Input').first().json.spreadsheetId, rowsWritten: $('Parse Input').first().json.valueRanges.length }) }}",
+        "options": {}
+      },
+      "id": "respond_ok",
+      "name": "Respond OK",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1450, 300]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Parse Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Input": {
+      "main": [
+        [
+          {
+            "node": "Write Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Write Data": {
+      "main": [
+        [
+          {
+            "node": "Has Formatting?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Has Formatting?": {
+      "main": [
+        [
+          {
+            "node": "Apply Formatting",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond OK",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Apply Formatting": {
+      "main": [
+        [
+          {
+            "node": "Respond OK",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  }
+}
