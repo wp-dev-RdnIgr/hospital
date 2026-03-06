@@ -34,16 +34,18 @@ After importing the workflow `BIA_Write_to_Sheet_workflow.json` into n8n (Hospit
 
 - **Webhook URL (production):** `https://n8n.rnd.webpromo.tools/webhook/bia-write-sheet`
 - **Method:** POST
+- **n8n Workflow ID:** `oOXNiOsuAABXtTrZ`
 - **Target Spreadsheet:** `1cgctBCQVmqpfQKdomYLfGAWVwRjT1Qw0-dl9F5RzoOg`
 - **Target Sheet GID:** `1199154574`
+- **Sheet Tab Name:** `Patientendaten`
+- **Google Sheets Credential:** `googleSheetsOAuth2Api` ID=`hMp9ISVYVcdpImYl` (name: "Google Sheets account")
 
 ### Usage — structured patient data:
 
 ```json
 {
   "spreadsheetId": "1cgctBCQVmqpfQKdomYLfGAWVwRjT1Qw0-dl9F5RzoOg",
-  "sheetGid": 1199154574,
-  "sheetName": "BIA",
+  "sheetName": "Patientendaten",
   "startRow": 6,
   "patients": [
     {
@@ -62,3 +64,13 @@ After importing the workflow `BIA_Write_to_Sheet_workflow.json` into n8n (Hospit
 
 **Field order (21 fields per operation):**
 Gewicht(kg), Groesse(cm), BMI, FM(kg), FM(%), FMI, FFM(kg), FFM(%), FFMI, SMM(kg), R(Ohm), Xc(Ohm), VAT(l), Taillenumfang(cm), phi(deg), Perzentile, TBW(l), TBW(%), ECW(l), ECW(%), ECW/TBW(%)
+
+## n8n Access Credentials
+
+- **n8n Base URL:** `https://n8n.rnd.webpromo.tools`
+- **n8n API Key:** `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2Zjc3NjZjMS04ZTZkLTQ3OGYtYTY2Ny05MzYxOWJhMzVkYmUiLCJpc3MiOiJuOG4iLCJhdWQiOiJwdWJsaWMtYXBpIiwiaWF0IjoxNzcxODY0MDI1fQ.pDWUjuqs6RF51PEKQtTHOUFJPvOF4YLFFsBWaCoL5I8`
+- **MCP Server URL:** `https://n8n.rnd.webpromo.tools/mcp-server/http`
+- **MCP Access Token:** `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2Zjc3NjZjMS04ZTZkLTQ3OGYtYTY2Ny05MzYxOWJhMzVkYmUiLCJpc3MiOiJuOG4iLCJhdWQiOiJtY3Atc2VydmVyLWFwaSIsImp0aSI6IjJmYWMzY2JlLTRkM2UtNDY1MC05YzgwLTFhOWNhOGZjOTdlMCIsImlhdCI6MTc2ODgyNjU0N30.wEpv9lvPPq0cmccRzv1MPMJ4SM2Cmw0cMjL1dDBUlt4`
+- **Hospital folder workflows** are in: Personal / Test-flow / Hospital
+
+Always use `X-N8N-API-KEY` header with the API Key for REST API calls to n8n.
