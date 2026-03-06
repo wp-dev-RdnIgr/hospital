@@ -7,6 +7,7 @@ When converting HEIC photos for reading/analysis, use this approach:
 - Full resolution, quality=95, subsampling=0
 - Save to `Photo/converted/` folder
 - This produces readable, high-quality results
+- **Max confirmed viewable file size:** ~12 MB (JPEG). Tested successfully on IMG_4537.jpg (12 MB)
 
 ```python
 from pillow_heif import register_heif_opener
