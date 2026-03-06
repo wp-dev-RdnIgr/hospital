@@ -3,13 +3,16 @@
 **Workflow ID:** `AdyJp6fjXUssihTR`
 **Workflow Name:** Medical Photos v3 - Sequential
 **Date:** 2026-03-05
-**Status:** CRITICAL BUG FOUND
+**Status:** 2 CRITICAL BUGS FOUND
 
 ---
 
 ## Summary
 
-The workflow processes medical photos from Google Drive client folders, extracts data via OpenAI Vision, and writes results to Google Sheets. A critical off-by-one error causes **all client records to overwrite each other**, leaving only the last processed client in the spreadsheet.
+The workflow processes medical photos from Google Drive client folders, extracts data via OpenAI Vision, and writes results to Google Sheets. Two critical bugs found:
+
+1. **Off-by-one error** in `Build Sheet Data` causes all client records to overwrite each other, leaving only the last processed client in the spreadsheet.
+2. **OpenAI Vision extraction failure** — `gpt-4o-mini` with thumbnail images extracts almost no data (1 out of 21 fields). Need `gpt-4o` and full-resolution file download.
 
 ---
 
@@ -57,6 +60,43 @@ for (let i = 6; i < rows.length; i += 2) {
 ```
 
 Now the scan checks indices **6, 8, 10, 12...** which correctly aligns with where client data rows are written (rows 7, 9, 11... in 1-indexed = indices 6, 8, 10... in 0-indexed).
+
+---
+
+## Critical Bug #2: OpenAI Vision extracts almost no data
+
+### Problem
+
+The workflow uses `gpt-4o-mini` model and Google Drive **thumbnails** (even upscaled to 2048px) instead of full-resolution files. For photos of hospital monitor screens with small text and numbers, this combination fails catastrophically.
+
+**Evidence from test run:** Only 1 out of 21 medical fields was extracted (`ECW_TBW_pct: 50.12`). All other fields (Gewicht, Grosse, BMI, FM, FFM, SMM, BIVA, VAT, Phasenwinkel, Wasser) returned `null`.
+
+### Root Causes
+
+1. **`gpt-4o-mini` is too weak for medical screen OCR.** The mini model struggles with reading small numbers from monitor photos. `gpt-4o` is significantly better at vision tasks.
+
+2. **Thumbnail instead of actual file.** The `Build OpenAI Request` node downloads via `thumbnailLink` (with `=s2048`), which is a compressed preview. For HEIC/JPEG photos of screens, the full file has much better detail. Should use `https://www.googleapis.com/drive/v3/files/{fileId}?alt=media` to download the actual file.
+
+3. **`max_tokens: 800`** is borderline. The expected JSON response with 21+ fields can approach this limit, especially if the model adds explanatory text. Should increase to `1500`.
+
+### Fix
+
+In the **`Build OpenAI Request`** node:
+
+```javascript
+// 1. Change model from gpt-4o-mini to gpt-4o
+model: 'gpt-4o',
+
+// 2. Download actual file instead of thumbnail:
+const response = await this.helpers.httpRequestWithAuthentication.call(
+  this, 'googleDriveOAuth2Api',
+  { method: 'GET', url: `https://www.googleapis.com/drive/v3/files/${fileData.id}?alt=media`, encoding: 'arraybuffer' }
+);
+base64Image = Buffer.from(response).toString('base64');
+
+// 3. Increase max_tokens
+max_tokens: 1500,
+```
 
 ---
 
@@ -141,13 +181,18 @@ Webhook → Config → List Folders → Filter Clients → Split Clients (batch=
 | Priority | Action | Node |
 |----------|--------|------|
 | **P0 - CRITICAL** | Fix off-by-one: change `i = 5` to `i = 6` in client scan loop | `Build Sheet Data` |
+| **P0 - CRITICAL** | Change model from `gpt-4o-mini` to `gpt-4o` | `Build OpenAI Request` |
+| **P0 - CRITICAL** | Download actual file via Drive API instead of thumbnail | `Build OpenAI Request` |
+| P1 | Increase `max_tokens` from 800 to 1500 | `Build OpenAI Request` |
 | P1 | Add error handling to prevent folder rename on sheet write failure | `Rename Folder DONE` |
 | P2 | Add explicit `skipped: false` in success path | `Write Client to Sheets` |
 | P2 | Add logging/summary before sheet write | New node after `Split Files` done |
 
 ---
 
-## How to Apply the Fix
+## How to Apply the Fixes
+
+### Fix 1: Off-by-one in Build Sheet Data
 
 1. Open workflow `AdyJp6fjXUssihTR` in n8n editor
 2. Open the **`Build Sheet Data`** code node
@@ -159,5 +204,34 @@ Webhook → Config → List Folders → Filter Clients → Split Clients (batch=
    ```javascript
    for (let i = 6; i < rows.length; i += 2) {
    ```
-5. Save the workflow
-6. **Before re-running:** Use the `Cleanup - Remove _DONE` workflow (`GNXhjuIo5j0xXG2p`) to remove `_DONE` suffixes from the affected folders, so they can be re-processed
+
+### Fix 2: OpenAI Vision quality in Build OpenAI Request
+
+1. Open the **`Build OpenAI Request`** code node
+2. Change model from `gpt-4o-mini` to `gpt-4o`:
+   ```javascript
+   model: 'gpt-4o',
+   ```
+3. Change `max_tokens` from `800` to `1500`:
+   ```javascript
+   max_tokens: 1500,
+   ```
+4. Replace the thumbnail download with actual file download:
+   ```javascript
+   // Instead of using thumbnailLink, download the actual file:
+   try {
+     const response = await this.helpers.httpRequestWithAuthentication.call(
+       this, 'googleDriveOAuth2Api',
+       { method: 'GET', url: `https://www.googleapis.com/drive/v3/files/${fileData.id}?alt=media`, encoding: 'arraybuffer' }
+     );
+     base64Image = Buffer.from(response).toString('base64');
+     mediaType = fileData.mimeType || 'image/jpeg';
+   } catch (e) {}
+   ```
+
+### After applying fixes
+
+1. Save the workflow
+2. **Clear existing data:** Remove the test row from the spreadsheet
+3. **Reset folders:** Use the `Cleanup - Remove _DONE` workflow (`GNXhjuIo5j0xXG2p`) to remove `_DONE` suffixes from the affected folders
+4. Re-run the workflow and verify that all fields are populated
