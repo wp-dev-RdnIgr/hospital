@@ -3,7 +3,7 @@
 **Workflow ID:** `AdyJp6fjXUssihTR`
 **Workflow Name:** Medical Photos v3 - Sequential
 **Date:** 2026-03-05
-**Status:** 2 CRITICAL BUGS FOUND
+**Status:** 1 CRITICAL BUG (Vision model) + 1 FIXED (off-by-one)
 
 ---
 
@@ -11,8 +11,8 @@
 
 The workflow processes medical photos from Google Drive client folders, extracts data via OpenAI Vision, and writes results to Google Sheets. Two critical bugs found:
 
-1. **Off-by-one error** in `Build Sheet Data` causes all client records to overwrite each other, leaving only the last processed client in the spreadsheet.
-2. **OpenAI Vision extraction failure** — `gpt-4o-mini` with thumbnail images extracts almost no data (1 out of 21 fields). Need `gpt-4o` and full-resolution file download.
+1. **~~Off-by-one error~~** in `Build Sheet Data` — **ALREADY FIXED** in current workflow (loop starts at `i = 6`).
+2. **OpenAI Vision extraction failure** — `gpt-4o-mini` with thumbnail images extracts almost no data (1 out of 21 fields). Need `gpt-4o` and full-resolution file download. **THIS IS THE ACTIVE BUG.**
 
 ---
 
