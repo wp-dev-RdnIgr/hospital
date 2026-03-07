@@ -75,3 +75,42 @@ Gewicht(kg), Groesse(cm), BMI, FM(kg), FM(%), FMI, FFM(kg), FFM(%), FFMI, SMM(kg
 - **Hospital folder workflows** are in: Personal / Test-flow / Hospital
 
 Always use `X-N8N-API-KEY` header with the API Key for REST API calls to n8n.
+
+## Current Task — BIA Pipeline: Read Photos -> Extract Data -> Write to Google Sheet
+
+### Goal
+Автоматизировать процесс: читать HEIC-фото BIA-отчётов пациентов, извлекать числовые данные, записывать в Google Sheet через n8n webhook.
+
+### Status
+- [x] n8n workflows проверены и работают
+- [x] Тестовая запись в Google Sheet работает (данные пишутся, merge cells падает но не критично)
+- [ ] Починить merge cells в n8n workflow `8jb5CD0AuC5oXW8K` (добавить unmerge перед merge)
+- [ ] Обработать все фото пациентов из папки `Photo/`
+- [ ] Записать все данные в Google Sheet
+
+### n8n Workflows — Актуальные
+
+| Workflow | ID | Webhook path | Назначение |
+|----------|----|-------------|------------|
+| **BIA Write to Google Sheet** (NEW) | `8jb5CD0AuC5oXW8K` | `bia-write-sheet` | Запись BIA данных + форматирование |
+| **BIA Write to Google Sheet** (OLD) | `oOXNiOsuAABXtTrZ` | `bia-write-sheet` | Старая версия без форматирования (КОНФЛИКТ путей!) |
+| Hospital - List Drive Folders v5 | `X86NI7GW2JnQZdfq` | `list-drive-folders-v5` | Листинг папок Drive |
+| Hospital - Download Folder Files | `3tXFkXxsG06izpaA` | `download-folder-files` | Скачивание файлов из Drive |
+| Hospital - List Folder Files Only | `fnyPmXPx7j9E0MwM` | `list-folder-files` | Список файлов в папке |
+| Hospital - List Folders Simple | `jEaVIVJwlMFINKm1` | `list-folders-simple` | Простой список папок |
+| Hospital - Write Queue to Sheet | `YcRGMBKfFvCrn6rI` | `write-queue-sheet` | Запись очереди в Sheet |
+
+### Устаревшие (можно удалить)
+- `cLZL0ETUU8rAElYF` — List Drive Folders v2 (заменён v5)
+- `qDdP5mU4ul6FT9Nu` — List Drive Folders v3 (деактивирован)
+- `zyVBIZw2Q4NlMauL` — List Drive Folders v4 (деактивирован)
+- `ye0pydaKyjqrbDaK` — Download Folder Files (дубликат, деактивирован)
+- `YScqvP6f0kGvSkZ4` — Download Single File (деактивирован)
+
+### Known Issues
+1. **Merge cells conflict**: workflow `8jb5CD0AuC5oXW8K` падает на шаге Apply Formatting, потому что пытается объединить ячейки, которые уже объединены. Нужно добавить unmergeCells перед mergeCells.
+2. **Webhook path conflict**: оба BIA-воркфлоу (`8jb5CD0AuC5oXW8K` и `oOXNiOsuAABXtTrZ`) используют путь `bia-write-sheet`. Нужно деактивировать старый.
+
+### Test Results
+- Тест записи Nadine Plottke (237025) в строку 69: **данные записались успешно** (execution 394576), ошибка только на форматировании.
+- Структура: строка 69 = ID + имя + дата, строка 70 = 21 числовое поле BIA.
