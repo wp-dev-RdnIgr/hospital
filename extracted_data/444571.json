@@ -1,0 +1,14 @@
+{
+  "id": "444571",
+  "name": "Katrin Barth",
+  "operations": [
+    {
+      "date": "2022-08-23",
+      "fields": [150.40, 172.0, 50.84, 87.74, 58.3, 29.7, 62.66, 41.7, 21.2, 32.90, null, null, null, null, null, null, 48.3, 31.9, 22.4, 14.8, 46.3]
+    },
+    {
+      "date": "2023-08-07",
+      "fields": [122.00, 172.0, 41.24, 63.04, 51.7, 21.3, 58.96, 48.3, 19.9, null, null, null, null, null, null, null, null, null, null, null, null]
+    }
+  ]
+}

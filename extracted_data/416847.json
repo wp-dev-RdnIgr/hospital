@@ -1,0 +1,11 @@
+{
+  "id": "416847",
+  "name": "Herbert Boge",
+  "operations": [
+    {
+      "date": "2022-04-25",
+      "fields": [null, null, null, null, null, null, null, null, null, null, 455.9, 38.4, 4.2, 110.0, 4.8, 3, null, null, null, null, null],
+      "_note": "Only page 3 available (BIVA/VAT/Phasenwinkel). Pages 1 and 2 missing - BMI, Fettmasse, FFM, SMM, and Wasser data unavailable."
+    }
+  ]
+}
