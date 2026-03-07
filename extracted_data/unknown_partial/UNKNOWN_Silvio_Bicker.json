@@ -1,0 +1,14 @@
+{
+  "id": "unknown",
+  "name": "Silvio Bicker",
+  "operations": [
+    {
+      "date": "2023-09-18",
+      "fields": [121.10, 180.0, 37.38, 29.80, 24.6, 9.1, 91.30, 75.5, 28.2, 43.53, null, null, null, null, null, null, 67.0, 55.0, 30.7, 25.2, 45.2]
+    },
+    {
+      "date": "2024-04-08",
+      "fields": [null, null, null, null, null, null, null, null, null, 44.73, null, null, null, null, null, null, 69.2, 54.2, 30.7, 24.4, null]
+    }
+  ]
+}

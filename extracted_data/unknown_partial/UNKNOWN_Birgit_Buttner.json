@@ -1,0 +1,14 @@
+{
+  "id": "unknown",
+  "name": "Birgit Buttner",
+  "operations": [
+    {
+      "date": "2022-02-15",
+      "fields": [null, null, null, null, null, null, null, null, null, 27.26, 469.2, 43.1, 5.3, 126.0, 5.9, 67, 42.4, 33.5, 20.1, 15.9, 47.4]
+    },
+    {
+      "date": "2023-06-27",
+      "fields": [97.45, 157.0, 39.54, 50.73, 52.1, 20.6, 46.72, 47.9, 19.0, 21.09, null, null, null, null, null, null, 35.5, 36.2, 17.6, 17.9, 49.5]
+    }
+  ]
+}
