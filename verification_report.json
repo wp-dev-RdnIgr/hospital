@@ -1,0 +1,79 @@
+{
+  "report_date": "2026-03-08",
+  "summary": {
+    "total_patients_in_sheet": 148,
+    "total_patient_photo_folders": 198,
+    "patients_with_data_gaps": 37,
+    "operations_with_gaps": 44,
+    "total_empty_cells": 432,
+    "cells_filled_from_photos": 14,
+    "cells_unfillable_missing_photos": 418,
+    "spot_check_patients_verified": 18,
+    "mismatches_found": 0
+  },
+  "corrections_made": [
+    {
+      "patient_id": "233022",
+      "patient_name": "Simone Geßner",
+      "op_num": 1,
+      "date": "2022-09-13",
+      "sheet_data_row": 87,
+      "fields_filled": {
+        "0_Gewicht_kg": 108.1,
+        "1_Groesse_cm": 160.6,
+        "2_BMI": 41.91,
+        "3_FM_kg": 50.12,
+        "4_FM_pct": 46.4,
+        "5_FMI": 19.4,
+        "6_FFM_kg": 57.98,
+        "7_FFM_pct": 53.6,
+        "8_FFMI": 22.5
+      },
+      "confidence": "high",
+      "source_photo": "Photo/converted/233022/IMG_4328.jpg (page 1)"
+    },
+    {
+      "patient_id": "165656",
+      "patient_name": "Sandra Stark",
+      "op_num": 1,
+      "date": "2024-09-17",
+      "sheet_data_row": 61,
+      "fields_filled": {
+        "5_FMI": 21.8,
+        "8_FFMI": 20.6
+      },
+      "confidence": "medium",
+      "source_photo": "Photo/converted/165656/IMG_4675.jpg (page 2)"
+    },
+    {
+      "patient_id": "202144",
+      "patient_name": "Ursula Kaden",
+      "op_num": 1,
+      "date": "2024-04-09",
+      "sheet_data_row": 195,
+      "fields_filled": {
+        "5_FMI": 30.0,
+        "8_FFMI": 21.9,
+        "20_ECW_TBW_pct": 41.0
+      },
+      "confidence": "low",
+      "marked_light_red": true,
+      "note": "FMI=30.0 seems high for context, ECW/TBW=41.0 from blurry photo",
+      "source_photo": "Photo/converted/202144/IMG_4383_DONE.jpg (page 2)"
+    }
+  ],
+  "unfillable_gaps_reason": "Required BIA report pages were never photographed. Each BIA measurement produces 3 pages, but many patients only have 1-2 pages per operation in the photo set. The missing pages contain the data needed to fill the empty cells.",
+  "gap_details": {
+    "missing_page_2_only": ["125358 op2", "151150 op3", "190716 op3", "194282 op3", "292144 op1", "292144 op2", "302114 op3", "383157 op2", "39221 op2", "437313 op1", "454894 op2", "456968 op1", "90056 op3"],
+    "missing_page_3_only": ["244671 op3", "439155 op2", "444571 op1", "445118 op1", "445118 op2", "72298 op1", "90056 op1"],
+    "missing_pages_2_and_3": ["233002 op1", "380007 op1", "407407 op1", "441882 op1", "441882 op2", "444571 op2", "450049 op1", "453451 op1"],
+    "missing_page_1_only": ["175037 op3", "478963 op1"],
+    "missing_pages_1_and_2": ["147096 op1", "168566 op1", "302114 op2", "416847 op1", "443074 op3", "450049 op2", "72296 op1"],
+    "complex_missing": ["166566 op3", "165656 op1", "202144 op1", "30006 op1", "1614978 op1", "453434 op1"]
+  },
+  "spot_check_results": {
+    "patients_verified": ["126915", "136844", "141154", "142137", "147098", "152441", "156551", "162513", "169323", "184159", "186666", "194281", "237025", "244671"],
+    "all_matched": true,
+    "notes": ["237025 has additional photos for a second operation (20.08.2024) not recorded in the sheet"]
+  }
+}

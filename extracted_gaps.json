@@ -1,0 +1,248 @@
+[
+  {
+    "id": "125358",
+    "op_num": 2,
+    "date": "2024-11-13",
+    "extracted": {},
+    "error": "Page 2 photo (IMG_4756) missing from converted directory. Only pages 1 (IMG_4755) and 3 (IMG_4757) exist for this operation."
+  },
+  {
+    "id": "151150",
+    "op_num": 3,
+    "date": "2024-09-24",
+    "extracted": {},
+    "error": "No photos from date 2024-09-24 in converted directory. Available photos cover only op1 (06.12.2022) and op2 (22.08.2023)."
+  },
+  {
+    "id": "190716",
+    "op_num": 3,
+    "date": "2024-09-24",
+    "extracted": {},
+    "error": "Page 2 photo (IMG_4411) missing from converted directory. Only pages 1 (IMG_4410_DONE) and 3 (IMG_4412_DONE) exist for this operation."
+  },
+  {
+    "id": "194282",
+    "op_num": 3,
+    "date": "2024-07-30",
+    "extracted": {},
+    "error": "Page 2 photo (IMG_4511) missing from converted directory. Only pages 1 (IMG_4510) and 3 (IMG_4512) exist for this operation."
+  },
+  {
+    "id": "292144",
+    "op_num": 1,
+    "date": "2024-04-09",
+    "extracted": {},
+    "error": "Page 2 photo (IMG_4383) missing from converted directory. Only pages 1 (IMG_4382) and 3 (IMG_4384) exist for this operation."
+  },
+  {
+    "id": "292144",
+    "op_num": 2,
+    "date": "2025-08-12",
+    "extracted": {},
+    "error": "Page 2 photo (IMG_4386) missing from converted directory. Only pages 1 (IMG_4385) and 3 (IMG_4387) exist for this operation."
+  },
+  {
+    "id": "383157",
+    "op_num": 2,
+    "date": "2024-09-30",
+    "extracted": {},
+    "error": "Page 2 photo (IMG_4490) missing from converted directory. Only pages 1 (IMG_4489) and 3 (IMG_4491) exist for this operation."
+  },
+  {
+    "id": "39221",
+    "op_num": 2,
+    "date": "2024-11-13",
+    "extracted": {},
+    "error": "No photos from date 2024-11-13 in converted directory. Available 3 photos (IMG_5431-5433) are all from 22.12.2025."
+  },
+  {
+    "id": "302114",
+    "op_num": 2,
+    "date": "2023-09-18",
+    "extracted": {},
+    "note": "Pages 1 and 2 missing from photos. Only page 3 (date 18.09.2023) available (IMG_4238), which contains fields 10-15 already known. Fields 0-8, 9, 16-20 cannot be extracted."
+  },
+  {
+    "id": "302114",
+    "op_num": 3,
+    "date": "2024-04-08",
+    "extracted": {},
+    "note": "Page 2 missing from photos. Pages 1 (IMG_4239) and 3 (IMG_4241) available but do not contain fields 9, 16-20. Photo IMG_4240 (expected page 2) not in converted folder."
+  },
+  {
+    "id": "437313",
+    "op_num": 1,
+    "date": "2021-10-11",
+    "extracted": {},
+    "note": "Page 2 missing from photos. Pages 1 (IMG_4118_DONE) and 3 (IMG_4120_DONE) available. IMG_4119 (expected page 2) not in converted folder. Fields 9, 16-20 cannot be extracted."
+  },
+  {
+    "id": "454894",
+    "op_num": 2,
+    "date": "2024-03-12",
+    "extracted": {},
+    "note": "Page 2 missing from photos. Pages 1 (IMG_4737) and 3 (IMG_4739) available. Fields 9, 16-20 cannot be extracted."
+  },
+  {
+    "id": "456968",
+    "op_num": 1,
+    "date": "2023-01-23",
+    "extracted": {},
+    "note": "Page 2 missing from photos. Pages 1 (IMG_4761) and 3 (IMG_4763) available. Fields 9, 16-20 cannot be extracted."
+  },
+  {
+    "id": "90056",
+    "op_num": 1,
+    "date": "2022-03-18",
+    "extracted": {},
+    "note": "Page 3 missing from photos. Pages 1 (IMG_4354) and 2 (IMG_4355) available. Fields 10-15 cannot be extracted."
+  },
+  {
+    "id": "90056",
+    "op_num": 3,
+    "date": "2024-04-09",
+    "extracted": {},
+    "note": "Page 2 missing from photos. Pages 1 (IMG_4360) and 3 (IMG_4362) available. Fields 9, 16-20 cannot be extracted."
+  },
+  {
+    "id": "439155",
+    "op_num": 2,
+    "date": "2022-07-08",
+    "extracted": {},
+    "note": "Page 3 missing from photos. Pages 1 (IMG_4702) and 2 (IMG_4703) available. Fields 10-15 cannot be extracted."
+  },
+  {
+    "id": "444571",
+    "op_num": 1,
+    "date": "2022-08-23",
+    "extracted": {},
+    "note": "Page 3 top (BIVA, VAT, Phasenwinkel values) not captured. IMG_4069_DONE only shows bottom of page 3 chart + page 4. Fields 10-15 cannot be extracted."
+  },
+  {
+    "id": "444571",
+    "op_num": 2,
+    "date": "2023-08-07",
+    "extracted": {},
+    "note": "Pages 2 and 3 top missing. Only page 1 (IMG_4070_DONE) and bottom of page 3 + page 4 (IMG_4073_DONE) available. Fields 9-20 cannot be extracted."
+  },
+  {
+    "id": "445118",
+    "op_num": 1,
+    "date": "2022-06-07",
+    "extracted": "NO_DATA - page 3 photo missing from set (only pages 1-2 available for this date)"
+  },
+  {
+    "id": "445118",
+    "op_num": 2,
+    "date": "2023-04-27",
+    "extracted": "NO_DATA - page 3 photo missing from set (only pages 1-2 available for this date)"
+  },
+  {
+    "id": "72298",
+    "op_num": 1,
+    "date": "2021-10-12",
+    "extracted": "NO_DATA - page 3 photo missing from set (only pages 1-2 available for this date)"
+  },
+  {
+    "id": "244671",
+    "op_num": 3,
+    "date": "2026-01-13",
+    "extracted": "NO_DATA - page 3 photo missing from set (only pages 1-2 available for this date)"
+  },
+  {
+    "id": "233002",
+    "op_num": 1,
+    "date": "2022-09-13",
+    "extracted": "NO_DATA - only page 1 photo exists (IMG_4327_DONE shows ID 233022 not 233002), pages 2+3 not available"
+  },
+  {
+    "id": "233022",
+    "op_num": 1,
+    "date": "2022-09-13",
+    "extracted": {
+      "0": 108.1,
+      "1": 160.6,
+      "2": 41.91,
+      "3": 50.12,
+      "4": 46.4,
+      "5": 19.4,
+      "6": 57.98,
+      "7": 53.6,
+      "8": 22.5
+    }
+  },
+  {
+    "id": "175037",
+    "op_num": 3,
+    "date": "2024-06-10",
+    "extracted": "NO_DATA - page 1 photo missing from set (only pages 2-3 available for this date)"
+  },
+  {
+    "id": "478963",
+    "op_num": 1,
+    "date": "2024-03-12",
+    "extracted": "NO_DATA - page 1 photo missing from set (only pages 2-3 available for this date)"
+  },
+  {
+    "id": "380007",
+    "op_num": 1,
+    "date": "2024-05-27",
+    "extracted": "NO_DATA - only page 1 photo exists (shows ID 389007), pages 2+3 not available"
+  },
+  {
+    "id": "166566",
+    "op_num": 3,
+    "date": "2024-09-17",
+    "extracted": "MISSING_PHOTOS",
+    "note": "Only page 1 (IMG_4674.jpg, date 17.09.2024) is available for op3. Pages 2+3 with fields 9-20 (SMM, Water, BIVA, VAT, Phasenwinkel) are not present in the photo set. The other 6 photos belong to dates 05.04.2022 (3 pages) and 18.09.2023 (3 pages)."
+  },
+  {
+    "id": "407407",
+    "op_num": 1,
+    "date": "2024-12-02",
+    "extracted": "MISSING_PHOTOS",
+    "note": "Only 1 photo available (IMG_5300.jpg) showing page 1 (BMI/FM/FFM) for date 02.12.2024. Pages 2+3 with fields 9-20 are not available."
+  },
+  {
+    "id": "441882",
+    "op_num": 1,
+    "date": "2024-12-10",
+    "extracted": "MISSING_PHOTOS",
+    "note": "IMG_4051_DONE.jpg = page 1 (10.12.2024), IMG_4054_DONE.jpg = page 4 Energie (10.12.2024). Pages 2+3 with fields 9-20 are not present."
+  },
+  {
+    "id": "441882",
+    "op_num": 2,
+    "date": "2025-07-10",
+    "extracted": "MISSING_PHOTOS",
+    "note": "IMG_4055_DONE.jpg = page 1 (10.07.2025), IMG_4058_DONE.jpg = page 4 Energie (10.07.2025). Pages 2+3 with fields 9-20 are not present."
+  },
+  {
+    "id": "450049",
+    "op_num": 1,
+    "date": "2022-02-15",
+    "extracted": "MISSING_PHOTOS",
+    "note": "IMG_4245_DONE.jpg = page 1 (15.02.2022). Pages 2+3 for this date with fields 9-20 are not present. The other 4 photos belong to dates 27.06.2023 (page 3 only) and 18.06.2024 (pages 1-3)."
+  },
+  {
+    "id": "450049",
+    "op_num": 2,
+    "date": "2023-06-27",
+    "extracted": "MISSING_PHOTOS",
+    "note": "IMG_4250_DONE.jpg = page 3 (27.06.2023) with BIVA/VAT/Phasenwinkel (fields 10-15 which are NOT missing). Pages 1+2 for this date with missing fields 0-9, 16-20 are not present."
+  },
+  {
+    "id": "453451",
+    "op_num": 1,
+    "date": "2023-03-20",
+    "extracted": "MISSING_PHOTOS",
+    "note": "IMG_4619.jpg = page 1 (20.03.2023). Pages 2+3 for this date with fields 9-20 are not present. Other photos belong to dates 22.04.2024 (pages 1-3) and 14.04.2025 (pages 1-2)."
+  },
+  {
+    "id": "453434",
+    "op_num": 1,
+    "date": "2022-10-28",
+    "extracted": "MISSING_PHOTOS",
+    "note": "IMG_4259.jpg = page 2 (28.10.2022) with SMM and Water data (fields 9, 16-20 which are NOT missing). Pages 1+3 for this date with missing fields 0-8, 10-15 are not present. Other photos belong to dates 15.06.2023, 15.08.2023, and 25.11.2024."
+  }
+]
