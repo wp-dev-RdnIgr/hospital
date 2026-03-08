@@ -1,0 +1,317 @@
+{
+  "summary": {
+    "total_fields": 9342,
+    "matched": 8571,
+    "mismatched": 12,
+    "csv_only": 291,
+    "json_only": 21,
+    "patients_no_json": [
+      "380007",
+      "437143"
+    ]
+  },
+  "mismatches": [
+    {
+      "pid": "494354",
+      "name": "Katja Kallenbach",
+      "op_idx": 1,
+      "date": "2025-03-18",
+      "field": "Gewicht",
+      "field_idx": 0,
+      "json_val": 102.85,
+      "csv_val": 102.55,
+      "diff": 0.29999999999999716
+    },
+    {
+      "pid": "494354",
+      "name": "Katja Kallenbach",
+      "op_idx": 1,
+      "date": "2025-03-18",
+      "field": "BMI",
+      "field_idx": 2,
+      "json_val": 44.5,
+      "csv_val": 44.39,
+      "diff": 0.10999999999999943
+    },
+    {
+      "pid": "494354",
+      "name": "Katja Kallenbach",
+      "op_idx": 1,
+      "date": "2025-03-18",
+      "field": "FM(kg)",
+      "field_idx": 3,
+      "json_val": 59.43,
+      "csv_val": 63.2,
+      "diff": 3.770000000000003
+    },
+    {
+      "pid": "494354",
+      "name": "Katja Kallenbach",
+      "op_idx": 1,
+      "date": "2025-03-18",
+      "field": "FM(%)",
+      "field_idx": 4,
+      "json_val": 57.8,
+      "csv_val": 61.6,
+      "diff": 3.8000000000000043
+    },
+    {
+      "pid": "494354",
+      "name": "Katja Kallenbach",
+      "op_idx": 1,
+      "date": "2025-03-18",
+      "field": "FMI",
+      "field_idx": 5,
+      "json_val": 25.7,
+      "csv_val": 27.4,
+      "diff": 1.6999999999999993
+    },
+    {
+      "pid": "494354",
+      "name": "Katja Kallenbach",
+      "op_idx": 1,
+      "date": "2025-03-18",
+      "field": "FFM(kg)",
+      "field_idx": 6,
+      "json_val": 43.42,
+      "csv_val": 39.35,
+      "diff": 4.07
+    },
+    {
+      "pid": "494354",
+      "name": "Katja Kallenbach",
+      "op_idx": 1,
+      "date": "2025-03-18",
+      "field": "FFM(%)",
+      "field_idx": 7,
+      "json_val": 42.2,
+      "csv_val": 38.4,
+      "diff": 3.8000000000000043
+    },
+    {
+      "pid": "494354",
+      "name": "Katja Kallenbach",
+      "op_idx": 1,
+      "date": "2025-03-18",
+      "field": "FFMI",
+      "field_idx": 8,
+      "json_val": 18.8,
+      "csv_val": 17.0,
+      "diff": 1.8000000000000007
+    },
+    {
+      "pid": "497264",
+      "name": "Miroslava Ibourg",
+      "op_idx": 1,
+      "date": "2025-03-06",
+      "field": "TBW(l)",
+      "field_idx": 16,
+      "json_val": 38.2,
+      "csv_val": 39.2,
+      "diff": 1.0
+    },
+    {
+      "pid": "69718",
+      "name": "Sarah Mehl",
+      "op_idx": 1,
+      "date": "2023-09-11",
+      "field": "φ(deg)",
+      "field_idx": 14,
+      "json_val": 4.6,
+      "csv_val": 4.8,
+      "diff": 0.20000000000000018
+    },
+    {
+      "pid": "69718",
+      "name": "Sarah Mehl",
+      "op_idx": 1,
+      "date": "2023-09-11",
+      "field": "TBW(%)",
+      "field_idx": 17,
+      "json_val": 36.0,
+      "csv_val": 36.2,
+      "diff": 0.20000000000000284
+    },
+    {
+      "pid": "69718",
+      "name": "Sarah Mehl",
+      "op_idx": 1,
+      "date": "2023-09-11",
+      "field": "ECW(%)",
+      "field_idx": 19,
+      "json_val": 16.6,
+      "csv_val": 16.8,
+      "diff": 0.1999999999999993
+    }
+  ],
+  "json_only_values": [
+    {
+      "pid": "237025",
+      "name": "Nadine Plottke",
+      "op_idx": 2,
+      "date": "2024-08-20",
+      "field": "Gewicht",
+      "json_val": 109.95
+    },
+    {
+      "pid": "237025",
+      "name": "Nadine Plottke",
+      "op_idx": 2,
+      "date": "2024-08-20",
+      "field": "Größe",
+      "json_val": 162.0
+    },
+    {
+      "pid": "237025",
+      "name": "Nadine Plottke",
+      "op_idx": 2,
+      "date": "2024-08-20",
+      "field": "BMI",
+      "json_val": 41.9
+    },
+    {
+      "pid": "237025",
+      "name": "Nadine Plottke",
+      "op_idx": 2,
+      "date": "2024-08-20",
+      "field": "FM(kg)",
+      "json_val": 49.14
+    },
+    {
+      "pid": "237025",
+      "name": "Nadine Plottke",
+      "op_idx": 2,
+      "date": "2024-08-20",
+      "field": "FM(%)",
+      "json_val": 44.7
+    },
+    {
+      "pid": "237025",
+      "name": "Nadine Plottke",
+      "op_idx": 2,
+      "date": "2024-08-20",
+      "field": "FMI",
+      "json_val": 18.7
+    },
+    {
+      "pid": "237025",
+      "name": "Nadine Plottke",
+      "op_idx": 2,
+      "date": "2024-08-20",
+      "field": "FFM(kg)",
+      "json_val": 60.81
+    },
+    {
+      "pid": "237025",
+      "name": "Nadine Plottke",
+      "op_idx": 2,
+      "date": "2024-08-20",
+      "field": "FFM(%)",
+      "json_val": 55.3
+    },
+    {
+      "pid": "237025",
+      "name": "Nadine Plottke",
+      "op_idx": 2,
+      "date": "2024-08-20",
+      "field": "FFMI",
+      "json_val": 23.2
+    },
+    {
+      "pid": "237025",
+      "name": "Nadine Plottke",
+      "op_idx": 2,
+      "date": "2024-08-20",
+      "field": "SMM",
+      "json_val": 27.21
+    },
+    {
+      "pid": "237025",
+      "name": "Nadine Plottke",
+      "op_idx": 2,
+      "date": "2024-08-20",
+      "field": "R(Ohm)",
+      "json_val": 446.2
+    },
+    {
+      "pid": "237025",
+      "name": "Nadine Plottke",
+      "op_idx": 2,
+      "date": "2024-08-20",
+      "field": "Xc(Ohm)",
+      "json_val": 34.0
+    },
+    {
+      "pid": "237025",
+      "name": "Nadine Plottke",
+      "op_idx": 2,
+      "date": "2024-08-20",
+      "field": "VAT(l)",
+      "json_val": 6.3
+    },
+    {
+      "pid": "237025",
+      "name": "Nadine Plottke",
+      "op_idx": 2,
+      "date": "2024-08-20",
+      "field": "Taillenumfang",
+      "json_val": 138.0
+    },
+    {
+      "pid": "237025",
+      "name": "Nadine Plottke",
+      "op_idx": 2,
+      "date": "2024-08-20",
+      "field": "φ(deg)",
+      "json_val": 4.4
+    },
+    {
+      "pid": "237025",
+      "name": "Nadine Plottke",
+      "op_idx": 2,
+      "date": "2024-08-20",
+      "field": "Perzentile",
+      "json_val": 2
+    },
+    {
+      "pid": "237025",
+      "name": "Nadine Plottke",
+      "op_idx": 2,
+      "date": "2024-08-20",
+      "field": "TBW(l)",
+      "json_val": 44.9
+    },
+    {
+      "pid": "237025",
+      "name": "Nadine Plottke",
+      "op_idx": 2,
+      "date": "2024-08-20",
+      "field": "TBW(%)",
+      "json_val": 40.6
+    },
+    {
+      "pid": "237025",
+      "name": "Nadine Plottke",
+      "op_idx": 2,
+      "date": "2024-08-20",
+      "field": "ECW(l)",
+      "json_val": 21.8
+    },
+    {
+      "pid": "237025",
+      "name": "Nadine Plottke",
+      "op_idx": 2,
+      "date": "2024-08-20",
+      "field": "ECW(%)",
+      "json_val": 19.7
+    },
+    {
+      "pid": "237025",
+      "name": "Nadine Plottke",
+      "op_idx": 2,
+      "date": "2024-08-20",
+      "field": "ECW/TBW(%)",
+      "json_val": 48.5
+    }
+  ]
+}

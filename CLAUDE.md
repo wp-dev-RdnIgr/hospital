@@ -76,17 +76,69 @@ Gewicht(kg), Groesse(cm), BMI, FM(kg), FM(%), FMI, FFM(kg), FFM(%), FFMI, SMM(kg
 
 Always use `X-N8N-API-KEY` header with the API Key for REST API calls to n8n.
 
-## Current Task — BIA Pipeline: Read Photos -> Extract Data -> Write to Google Sheet
+## Current Task — Верификация данных таблицы по фото + цветовая маркировка
 
 ### Goal
-Автоматизировать процесс: читать HEIC-фото BIA-отчётов пациентов, извлекать числовые данные, записывать в Google Sheet через n8n webhook.
+Проверить ВСЕ данные в Google Sheet (Patientendaten) по фото BIA-отчётов из `Photo/converted/`. Пометить ячейки цветом по уровню уверенности:
+- **Светло-красный** — низкая уверенность (данные скорее всего неправильные / от другого пациента)
+- **Светло-жёлтый** — средняя уверенность (не удалось проверить по фото / мелкие расхождения)
+- **Без цвета** — высокая уверенность (JSON из фото совпадает с CSV)
 
-### Status
-- [x] n8n workflows проверены и работают
-- [x] Тестовая запись в Google Sheet работает (данные пишутся, merge cells падает но не критично)
-- [ ] Починить merge cells в n8n workflow `8jb5CD0AuC5oXW8K` (добавить unmerge перед merge)
-- [ ] Обработать все фото пациентов из папки `Photo/`
-- [ ] Записать все данные в Google Sheet
+### Status (2026-03-08)
+- [x] Скачаны данные из Google Sheet → `sheet_data_fresh.csv` (190 пациентов, 384 строки)
+- [x] Сравнение JSON-извлечений (188 файлов) с CSV: **91.7% совпадение** (8571 из 9342 полей)
+- [x] Проверка расхождений по фото (494354 — CSV правильный, JSON был неверный)
+- [x] Проверка консистентности роста → **8 пациентов с несовпадением роста** (данные другого пациента!)
+- [x] Закрашены **295 жёлтых ячеек** (средняя уверенность)
+- [x] Закрашены **156 красных ячеек** (низкая уверенность — данные другого пациента)
+
+### Результаты верификации
+
+#### КРАСНЫЕ ячейки (156 шт.) — данные скорее всего от ДРУГОГО пациента:
+
+| Пациент | Строка | Операция | Проблема |
+|---------|--------|----------|----------|
+| 151150 Nico Weinigel | 49 | Op3 | Рост 164 vs 180 cm (diff=16!) |
+| 141154 Daniel Sanchez-Almeida | 43 | Op1 | Рост 182 vs 168 cm (diff=14!) |
+| 90056 Sabrina Hamadi | 27 | Op1 | Рост 155 vs 165 cm (diff=10!) |
+| 39221 Lutz Dittmann | 13 | Op1 | Рост 189 vs 180.4 cm (diff=8.6!) |
+| 59183 Iris Becher | 17 | Op3 | Рост 172 vs 165 cm (diff=7!) |
+| 97934 Dandy Menzel | 29 | Op3 | Рост 166 vs 173 cm (diff=7!) |
+| 443074 Claudia Becker | 181 | Op2 | Рост 159 vs 165 cm (diff=6!) |
+| 32514 Claudia Puhlfuerst | 11 | Op1 | Рост 167.1 vs 172 cm (diff=4.9) |
+
+#### ЖЁЛТЫЕ ячейки (295 шт.) — не проверено по фото:
+
+| Причина | Кол-во ячеек |
+|---------|-------------|
+| Нет JSON-данных для даты операции (фото отсутствуют или не извлечены) | ~280 |
+| Мелкие расхождения JSON/CSV (<1.0) | ~5 |
+| Нет JSON-извлечения вообще (380007) | ~9 |
+
+#### Пациенты с жёлтыми ячейками:
+32514, 39221, 48951, 59183, 69718, 97934, 141154, 151150, 165656, 494354, 1614978, 380007
+
+### Скрипты верификации
+
+| Скрипт | Назначение |
+|--------|-----------|
+| `scripts/compare_json_csv.py` | Сравнение JSON-извлечений с CSV таблицы |
+| `scripts/build_color_map.py` | Построение карты ячеек для закраски |
+| `scripts/apply_colors.py` | Применение жёлтой закраски через webhook |
+| `scripts/apply_red_colors.py` | Применение красной закраски (несовпадение роста) |
+| `scripts/check_height_consistency.py` | Проверка консистентности роста между операциями |
+
+### Файлы с результатами
+
+| Файл | Содержание |
+|------|-----------|
+| `comparison_report.json` | Детальный отчёт сравнения JSON vs CSV |
+| `color_map.json` | Карта ячеек для закраски (координаты + причины) |
+| `format_requests.json` | Запросы форматирования для Google Sheets API |
+
+---
+
+## Предыдущая задача — BIA Pipeline: Read Photos -> Extract Data -> Write to Google Sheet
 
 ### n8n Workflows — Актуальные
 
@@ -100,17 +152,6 @@ Always use `X-N8N-API-KEY` header with the API Key for REST API calls to n8n.
 | Hospital - List Folders Simple | `jEaVIVJwlMFINKm1` | `list-folders-simple` | Простой список папок |
 | Hospital - Write Queue to Sheet | `YcRGMBKfFvCrn6rI` | `write-queue-sheet` | Запись очереди в Sheet |
 
-### Устаревшие (можно удалить)
-- `cLZL0ETUU8rAElYF` — List Drive Folders v2 (заменён v5)
-- `qDdP5mU4ul6FT9Nu` — List Drive Folders v3 (деактивирован)
-- `zyVBIZw2Q4NlMauL` — List Drive Folders v4 (деактивирован)
-- `ye0pydaKyjqrbDaK` — Download Folder Files (дубликат, деактивирован)
-- `YScqvP6f0kGvSkZ4` — Download Single File (деактивирован)
-
 ### Known Issues
 1. **Merge cells conflict**: workflow `8jb5CD0AuC5oXW8K` падает на шаге Apply Formatting, потому что пытается объединить ячейки, которые уже объединены. Нужно добавить unmergeCells перед mergeCells.
 2. **Webhook path conflict**: оба BIA-воркфлоу (`8jb5CD0AuC5oXW8K` и `oOXNiOsuAABXtTrZ`) используют путь `bia-write-sheet`. Нужно деактивировать старый.
-
-### Test Results
-- Тест записи Nadine Plottke (237025) в строку 69: **данные записались успешно** (execution 394576), ошибка только на форматировании.
-- Структура: строка 69 = ID + имя + дата, строка 70 = 21 числовое поле BIA.
