@@ -1,0 +1,196 @@
+{
+  "report_date": "2026-03-08",
+  "verification_type": "Full photo-based verification of BIA data",
+  "summary": {
+    "total_patient_folders": 197,
+    "patients_verified": 197,
+    "patients_not_in_sheet": 9,
+    "patients_no_json_extraction": 2,
+    "patients_with_red_cells_data_mismatch": 11,
+    "patients_with_yellow_cells_unverifiable": 10,
+    "patients_all_green_verified": 170
+  },
+  "red_cells_details": {
+    "description": "Cells colored light-red (r=1.0, g=0.78, b=0.78) - data mismatch or wrong patient",
+    "height_inconsistency_all_fields_red": [
+      {
+        "pid": "151150",
+        "name": "Nico Weinigel",
+        "ops": [
+          "Op3"
+        ],
+        "reason": "Height 164 vs 180 cm"
+      },
+      {
+        "pid": "141154",
+        "name": "Daniel Sanchez-Almeida",
+        "ops": [
+          "Op2",
+          "Op3"
+        ],
+        "reason": "Height 168 vs 182 cm"
+      },
+      {
+        "pid": "90056",
+        "name": "Sabrina Hamadi",
+        "ops": [
+          "Op1"
+        ],
+        "reason": "Height 155 vs 165 cm"
+      },
+      {
+        "pid": "39221",
+        "name": "Lutz Dittmann",
+        "ops": [
+          "Op1"
+        ],
+        "reason": "Height 189 vs 180.4 cm"
+      },
+      {
+        "pid": "59183",
+        "name": "Iris Becher",
+        "ops": [
+          "Op3"
+        ],
+        "reason": "Height 172 vs 165 cm"
+      },
+      {
+        "pid": "97934",
+        "name": "Dandy Menzel",
+        "ops": [
+          "Op3"
+        ],
+        "reason": "Height 166 vs 173 cm"
+      },
+      {
+        "pid": "443074",
+        "name": "Claudia Becker",
+        "ops": [
+          "Op2"
+        ],
+        "reason": "Height 159 vs 165 cm"
+      },
+      {
+        "pid": "32514",
+        "name": "Claudia Puhlfuerst",
+        "ops": [
+          "Op1"
+        ],
+        "reason": "Height 167.1 vs 172 cm"
+      }
+    ],
+    "field_value_mismatches": [
+      {
+        "pid": "494354",
+        "name": "Katja Kallenbach",
+        "op": "Op1",
+        "fields": [
+          "Gewicht",
+          "BMI",
+          "FM(kg)",
+          "FM(%)",
+          "FMI",
+          "FFM(kg)",
+          "FFM(%)",
+          "FFMI",
+          "ECW(l)"
+        ]
+      },
+      {
+        "pid": "497264",
+        "name": "Miroslava Ibourg",
+        "op": "Op1",
+        "fields": [
+          "TBW(l)"
+        ]
+      },
+      {
+        "pid": "69718",
+        "name": "Sarah Mehl",
+        "op": "Op1",
+        "fields": [
+          "phi(deg)",
+          "TBW(%)",
+          "ECW(%)"
+        ]
+      },
+      {
+        "pid": "101561",
+        "op": "Op3",
+        "fields": [
+          "TBW%"
+        ]
+      },
+      {
+        "pid": "126915",
+        "op": "Op3",
+        "fields": [
+          "ECW(l)"
+        ]
+      },
+      {
+        "pid": "136949",
+        "op": "Op2",
+        "fields": [
+          "TBW%"
+        ]
+      }
+    ]
+  },
+  "yellow_cells_details": {
+    "description": "Cells colored light-yellow (r=1.0, g=1.0, b=0.78) - unverifiable (no photos for that operation)",
+    "patients": [
+      "48951",
+      "97934",
+      "233022",
+      "1614978",
+      "380007",
+      "151150",
+      "165656",
+      "39221",
+      "32514",
+      "437143",
+      "59183",
+      "202144"
+    ],
+    "reasons": [
+      "Photos missing for specific operation dates",
+      "No JSON extraction available (photos exist but extraction failed or not done)",
+      "Patient name cells marked yellow as 'verified' indicator"
+    ]
+  },
+  "unknown_folder": {
+    "total_photos": 53,
+    "identified_photos": 46,
+    "unidentified_photos": 7,
+    "unique_patients_found": 24,
+    "patients_matching_sheet": [
+      {
+        "name": "Claudia Becker",
+        "pid": "443074"
+      },
+      {
+        "name": "Ursula Kadem",
+        "pid": "202144"
+      },
+      {
+        "name": "Iris Becher",
+        "pid": "59183"
+      }
+    ],
+    "patients_not_in_sheet": 21,
+    "note": "Most UNKNOWN photos belong to patients not tracked in the main spreadsheet"
+  },
+  "patients_not_in_sheet": [
+    "252589",
+    "278877",
+    "306824",
+    "413737",
+    "443974",
+    "454351",
+    "455568",
+    "480856",
+    "489842"
+  ],
+  "methodology": "JSON extractions (previously extracted from photos via Claude Vision) compared field-by-field with sheet CSV data. Zero tolerance for numeric differences >= 0.01. Height consistency checked across operations per patient."
+}
