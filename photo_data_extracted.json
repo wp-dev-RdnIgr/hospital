@@ -1,0 +1,4786 @@
+{
+  "72298|2023-06-26": {
+    "TBW": {
+      "photo": "60.0",
+      "sheet": "60.01"
+    }
+  },
+  "32514|2025-12-22": {
+    "Gewicht": {
+      "photo": "140.80",
+      "sheet": "124.5"
+    },
+    "Groesse": {
+      "photo": "189.0",
+      "sheet": "184.8"
+    },
+    "BMI": {
+      "photo": "39.42",
+      "sheet": "36.47"
+    },
+    "FMI": {
+      "photo": "12.2",
+      "sheet": "11.3"
+    },
+    "FFMI": {
+      "photo": "27.2",
+      "sheet": "25.1"
+    },
+    "SMM": {
+      "photo": "46.06",
+      "sheet": "42.52"
+    },
+    "R(Ohm)": {
+      "photo": "374.2",
+      "sheet": "390.2"
+    },
+    "Xc": {
+      "photo": "29.2",
+      "sheet": "30.2"
+    },
+    "VAT": {
+      "photo": "7.1",
+      "sheet": "6.1"
+    },
+    "Taillenumfang": {
+      "photo": "130",
+      "sheet": "123"
+    },
+    "phi": {
+      "photo": "4.5",
+      "sheet": "4.4"
+    },
+    "Perzentile": {
+      "photo": "1",
+      "sheet": "5"
+    },
+    "TBW": {
+      "photo": "49.7",
+      "sheet": "49.6"
+    },
+    "ECW": {
+      "photo": "22.9",
+      "sheet": "22.4"
+    },
+    "ECW/TBW": {
+      "photo": "46.1",
+      "sheet": "45.1"
+    }
+  },
+  "39221|2023-06-13": {
+    "Gewicht": {
+      "photo": "111.90",
+      "sheet": "82.35"
+    },
+    "Groesse": {
+      "photo": "157.0",
+      "sheet": "172.5"
+    },
+    "BMI": {
+      "photo": "45.40",
+      "sheet": "32.17"
+    },
+    "FMI": {
+      "photo": "23.9",
+      "sheet": "19.1"
+    },
+    "FFMI": {
+      "photo": "21.5",
+      "sheet": "18.9"
+    },
+    "SMM": {
+      "photo": "23.00",
+      "sheet": "23.06"
+    },
+    "R(Ohm)": {
+      "photo": "512.2",
+      "sheet": "545.2"
+    },
+    "Xc": {
+      "photo": "41.4",
+      "sheet": "50.2"
+    },
+    "Taillenumfang": {
+      "photo": "131.00",
+      "sheet": "96"
+    },
+    "phi": {
+      "photo": "4.6",
+      "sheet": "4.9"
+    },
+    "Perzentile": {
+      "photo": "5",
+      "sheet": "22"
+    },
+    "TBW": {
+      "photo": "34.2",
+      "sheet": "41.3"
+    },
+    "ECW": {
+      "photo": "49.6",
+      "sheet": "43.2"
+    },
+    "ECW/TBW": {
+      "photo": "49.6",
+      "sheet": "46.9"
+    },
+    "Größe": {
+      "photo": "157.0",
+      "sheet": "160"
+    },
+    "FM": {
+      "photo": "23.9",
+      "sheet": "13.9"
+    },
+    "FFM": {
+      "photo": "21.5",
+      "sheet": "18.3"
+    },
+    "R": {
+      "photo": "512.2",
+      "sheet": "582.2"
+    },
+    "VAT": {
+      "photo": "5.8",
+      "sheet": "3.9"
+    }
+  },
+  "39221|2024-06-24": {
+    "Gewicht": {
+      "photo": "69.15",
+      "sheet": "66.3"
+    },
+    "Groesse": {
+      "photo": "157.0",
+      "sheet": "172.5"
+    },
+    "BMI": {
+      "photo": "28.05",
+      "sheet": "25.9"
+    },
+    "FMI": {
+      "photo": "9.8",
+      "sheet": "12.4"
+    },
+    "FFMI": {
+      "photo": "18.3",
+      "sheet": "18.7"
+    },
+    "SMM": {
+      "photo": "17.45",
+      "sheet": "23.62"
+    },
+    "R(Ohm)": {
+      "photo": "543.7",
+      "sheet": "561"
+    },
+    "Xc": {
+      "photo": "35.1",
+      "sheet": "55.1"
+    },
+    "VAT": {
+      "photo": "2.1",
+      "sheet": "0.5"
+    },
+    "Taillenumfang": {
+      "photo": "107.00",
+      "sheet": "79.5"
+    },
+    "phi": {
+      "photo": "3.7",
+      "sheet": "4.9"
+    },
+    "Perzentile": {
+      "photo": "1",
+      "sheet": "22"
+    },
+    "TBW": {
+      "photo": "47.5",
+      "sheet": "52.4"
+    },
+    "ECW": {
+      "photo": "50.9",
+      "sheet": "42.7"
+    },
+    "ECW/TBW": {
+      "photo": "50.9",
+      "sheet": "46.8"
+    },
+    "Größe": {
+      "photo": "157.0",
+      "sheet": "160"
+    },
+    "FM": {
+      "photo": "9.8",
+      "sheet": "7.3"
+    },
+    "FFM": {
+      "photo": "18.3",
+      "sheet": "18.6"
+    },
+    "R": {
+      "photo": "543.7",
+      "sheet": "640"
+    }
+  },
+  "48951|2025-12-09": {
+    "Gewicht": {
+      "photo": "113.80",
+      "sheet": "82.1"
+    },
+    "Groesse": {
+      "photo": "165.0",
+      "sheet": "163.4"
+    },
+    "BMI": {
+      "photo": "41.80",
+      "sheet": "30.74"
+    },
+    "FMI": {
+      "photo": "19.6",
+      "sheet": "12.2"
+    },
+    "FFMI": {
+      "photo": "22.2",
+      "sheet": "18.5"
+    },
+    "R(Ohm)": {
+      "photo": "427.1",
+      "sheet": "577.2"
+    },
+    "Xc": {
+      "photo": "24.1",
+      "sheet": "44.7"
+    },
+    "VAT": {
+      "photo": "4.4",
+      "sheet": "2.5"
+    },
+    "Taillenumfang": {
+      "photo": "123",
+      "sheet": "93"
+    },
+    "phi": {
+      "photo": "3.2",
+      "sheet": "4.4"
+    },
+    "Perzentile": {
+      "photo": "1",
+      "sheet": "10"
+    }
+  },
+  "48951|2024-11-13": {
+    "Gewicht": {
+      "photo": "196.30",
+      "sheet": "83.25"
+    },
+    "Groesse": {
+      "photo": "165.0",
+      "sheet": "163.4"
+    },
+    "BMI": {
+      "photo": "72.10",
+      "sheet": "31.17"
+    },
+    "FMI": {
+      "photo": "42.4",
+      "sheet": "12.7"
+    },
+    "FFMI": {
+      "photo": "29.7",
+      "sheet": "18.5"
+    },
+    "SMM": {
+      "photo": "36.16",
+      "sheet": "21.37"
+    },
+    "R(Ohm)": {
+      "photo": "354.5",
+      "sheet": "576.2"
+    },
+    "Xc": {
+      "photo": "30.2",
+      "sheet": "43.2"
+    },
+    "VAT": {
+      "photo": "10.5",
+      "sheet": "3.3"
+    },
+    "Taillenumfang": {
+      "photo": "155",
+      "sheet": "100"
+    },
+    "phi": {
+      "photo": "4.9",
+      "sheet": "4.3"
+    },
+    "Perzentile": {
+      "photo": "26",
+      "sheet": "10"
+    },
+    "TBW": {
+      "photo": "28.4",
+      "sheet": "43.1"
+    },
+    "ECW": {
+      "photo": "14.5",
+      "sheet": "19.2"
+    },
+    "ECW/TBW": {
+      "photo": "51.0",
+      "sheet": "44.4"
+    }
+  },
+  "59183|2025-04-28": {
+    "Gewicht": {
+      "photo": "91.50",
+      "sheet": "101.85"
+    },
+    "Groesse": {
+      "photo": "171.0",
+      "sheet": "165.1"
+    },
+    "BMI": {
+      "photo": "31.29",
+      "sheet": "37.38"
+    },
+    "FMI": {
+      "photo": "12.9",
+      "sheet": "18.5"
+    },
+    "FFMI": {
+      "photo": "18.4",
+      "sheet": "18.9"
+    },
+    "SMM": {
+      "photo": "24.16",
+      "sheet": "22.75"
+    },
+    "R(Ohm)": {
+      "photo": "557.9",
+      "sheet": "530.2"
+    },
+    "Xc": {
+      "photo": "40.8",
+      "sheet": "41.4"
+    },
+    "VAT": {
+      "photo": "4.1",
+      "sheet": "5.2"
+    },
+    "Taillenumfang": {
+      "photo": "122",
+      "sheet": "119"
+    },
+    "phi": {
+      "photo": "4.2",
+      "sheet": "4.5"
+    },
+    "Perzentile": {
+      "photo": "0",
+      "sheet": "25"
+    },
+    "TBW": {
+      "photo": "44.3",
+      "sheet": "36.4"
+    },
+    "ECW": {
+      "photo": "21.6",
+      "sheet": "16.4"
+    },
+    "ECW/TBW": {
+      "photo": "48.8",
+      "sheet": "45.1"
+    }
+  },
+  "59183|2026-02-03": {
+    "Gewicht": {
+      "photo": "72.75",
+      "sheet": "90.85"
+    },
+    "Groesse": {
+      "photo": "171.0",
+      "sheet": "165.1"
+    },
+    "BMI": {
+      "photo": "24.88",
+      "sheet": "33.34"
+    },
+    "FMI": {
+      "photo": "7.8",
+      "sheet": "14.1"
+    },
+    "FFMI": {
+      "photo": "17.0",
+      "sheet": "19.2"
+    },
+    "SMM": {
+      "photo": "21.27",
+      "sheet": "22.91"
+    },
+    "R(Ohm)": {
+      "photo": "575.2",
+      "sheet": "509.2"
+    },
+    "Xc": {
+      "photo": "40.8",
+      "sheet": "42.2"
+    },
+    "VAT": {
+      "photo": "1.9",
+      "sheet": "3.3"
+    },
+    "Taillenumfang": {
+      "photo": "104",
+      "sheet": "108"
+    },
+    "phi": {
+      "photo": "4.1",
+      "sheet": "4.7"
+    },
+    "Perzentile": {
+      "photo": "0",
+      "sheet": "50"
+    },
+    "TBW": {
+      "photo": "51.3",
+      "sheet": "41.7"
+    },
+    "ECW": {
+      "photo": "25.2",
+      "sheet": "18.4"
+    },
+    "ECW/TBW": {
+      "photo": "49.2",
+      "sheet": "44"
+    }
+  },
+  "72296|2021-10-12": {
+    "Gewicht": {
+      "photo": "167.40",
+      "sheet": "88.2"
+    },
+    "Groesse": {
+      "photo": "169.0",
+      "sheet": "173"
+    },
+    "BMI": {
+      "photo": "58.61",
+      "sheet": "29.47"
+    },
+    "FMI": {
+      "photo": "35.0",
+      "sheet": "11"
+    },
+    "FFMI": {
+      "photo": "23.6",
+      "sheet": "18.5"
+    },
+    "SMM": {
+      "photo": "33.84",
+      "sheet": "21.88"
+    },
+    "R(Ohm)": {
+      "photo": "508.6",
+      "sheet": "582.3"
+    },
+    "Xc": {
+      "photo": "44.1",
+      "sheet": "39.2"
+    },
+    "VAT": {
+      "photo": "7.6",
+      "sheet": "3.3"
+    },
+    "Taillenumfang": {
+      "photo": "141",
+      "sheet": "96"
+    },
+    "phi": {
+      "photo": "5.0",
+      "sheet": "3.9"
+    },
+    "Perzentile": {
+      "photo": "35",
+      "sheet": "1"
+    },
+    "TBW": {
+      "photo": "30.0",
+      "sheet": "47.1"
+    },
+    "ECW": {
+      "photo": "14.2",
+      "sheet": "21.6"
+    },
+    "ECW/TBW": {
+      "photo": "47.2",
+      "sheet": "45.8"
+    }
+  },
+  "72296|2023-01-02": {
+    "Gewicht": {
+      "photo": "127.65",
+      "sheet": "86.6"
+    },
+    "Groesse": {
+      "photo": "169.0",
+      "sheet": "173"
+    },
+    "BMI": {
+      "photo": "44.69",
+      "sheet": "28.93"
+    },
+    "FMI": {
+      "photo": "22.0",
+      "sheet": "10.6"
+    },
+    "FFMI": {
+      "photo": "22.6",
+      "sheet": "18.3"
+    },
+    "SMM": {
+      "photo": "30.48",
+      "sheet": "21.78"
+    },
+    "R(Ohm)": {
+      "photo": "490.0",
+      "sheet": "596"
+    },
+    "Xc": {
+      "photo": "39.8",
+      "sheet": "38.2"
+    },
+    "VAT": {
+      "photo": "5.8",
+      "sheet": "3"
+    },
+    "Taillenumfang": {
+      "photo": "135",
+      "sheet": "97"
+    },
+    "phi": {
+      "photo": "4.6",
+      "sheet": "3.7"
+    },
+    "Perzentile": {
+      "photo": "13",
+      "sheet": "1"
+    },
+    "TBW": {
+      "photo": "37.6",
+      "sheet": "47.3"
+    },
+    "ECW": {
+      "photo": "17.8",
+      "sheet": "21.8"
+    },
+    "ECW/TBW": {
+      "photo": "47.3",
+      "sheet": "46.2"
+    }
+  },
+  "72296|2023-12-18": {
+    "Gewicht": {
+      "photo": "108.55",
+      "sheet": "77.1"
+    },
+    "Groesse": {
+      "photo": "169.0",
+      "sheet": "173"
+    },
+    "BMI": {
+      "photo": "38.01",
+      "sheet": "25.76"
+    },
+    "FMI": {
+      "photo": "16.2",
+      "sheet": "7"
+    },
+    "FFMI": {
+      "photo": "21.8",
+      "sheet": "18.7"
+    },
+    "SMM": {
+      "photo": "27.65",
+      "sheet": "21.48"
+    },
+    "R(Ohm)": {
+      "photo": "473.9",
+      "sheet": "549.2"
+    },
+    "Xc": {
+      "photo": "35.0",
+      "sheet": "40.2"
+    },
+    "VAT": {
+      "photo": "1.6",
+      "sheet": "1.3"
+    },
+    "Taillenumfang": {
+      "photo": "105",
+      "sheet": "82"
+    },
+    "Perzentile": {
+      "photo": "2",
+      "sheet": "3"
+    },
+    "TBW": {
+      "photo": "41.9",
+      "sheet": "54.1"
+    },
+    "ECW": {
+      "photo": "20.4",
+      "sheet": "24.1"
+    },
+    "ECW/TBW": {
+      "photo": "48.6",
+      "sheet": "44.8"
+    }
+  },
+  "72298|2021-11-15": {
+    "Gewicht": {
+      "photo": "172.70",
+      "sheet": "172.55"
+    },
+    "Groesse": {
+      "photo": "169.0",
+      "sheet": "178.5"
+    },
+    "BMI": {
+      "photo": "60.47",
+      "sheet": "54.45"
+    },
+    "FMI": {
+      "photo": "32.8",
+      "sheet": "17.3"
+    },
+    "FFMI": {
+      "photo": "27.7",
+      "sheet": "24.6"
+    },
+    "SMM": {
+      "photo": "42.66",
+      "sheet": "37.48"
+    },
+    "R(Ohm)": {
+      "photo": "381.9",
+      "sheet": "385"
+    },
+    "Xc": {
+      "photo": "36.6",
+      "sheet": "22.7"
+    },
+    "VAT": {
+      "photo": "13.5",
+      "sheet": "14.1"
+    },
+    "Taillenumfang": {
+      "photo": "146",
+      "sheet": "157"
+    },
+    "phi": {
+      "photo": "5.5",
+      "sheet": "4"
+    },
+    "Perzentile": {
+      "photo": "5",
+      "sheet": "1"
+    },
+    "TBW": {
+      "photo": "34.1",
+      "sheet": "34.9"
+    },
+    "ECW": {
+      "photo": "43.4",
+      "sheet": "48.4"
+    },
+    "ECW/TBW": {
+      "photo": "43.4",
+      "sheet": "46.5"
+    },
+    "Größe": {
+      "photo": "169.0",
+      "sheet": "178"
+    },
+    "FM": {
+      "photo": "32.8",
+      "sheet": "28.3"
+    },
+    "FFM": {
+      "photo": "27.7",
+      "sheet": "26.1"
+    },
+    "R": {
+      "photo": "381.9",
+      "sheet": "325.1"
+    }
+  },
+  "72298|2023-01-30": {
+    "Gewicht": {
+      "photo": "99.95",
+      "sheet": "144.2"
+    },
+    "Groesse": {
+      "photo": "169.0",
+      "sheet": "178"
+    },
+    "BMI": {
+      "photo": "35.00",
+      "sheet": "45.51"
+    },
+    "FMI": {
+      "photo": "11.8",
+      "sheet": "10.7"
+    },
+    "FFMI": {
+      "photo": "23.2",
+      "sheet": "24.4"
+    },
+    "SMM": {
+      "photo": "31.74",
+      "sheet": "35.66"
+    },
+    "R(Ohm)": {
+      "photo": "462.0",
+      "sheet": "370.3"
+    },
+    "Xc": {
+      "photo": "40.8",
+      "sheet": "23.7"
+    },
+    "VAT": {
+      "photo": "5.2",
+      "sheet": "10.9"
+    },
+    "Taillenumfang": {
+      "photo": "116",
+      "sheet": "143"
+    },
+    "phi": {
+      "photo": "5.0",
+      "sheet": "4.1"
+    },
+    "Perzentile": {
+      "photo": "1",
+      "sheet": "1"
+    },
+    "TBW": {
+      "photo": "48.9",
+      "sheet": "40.6"
+    },
+    "ECW": {
+      "photo": "44.2",
+      "sheet": "48.3"
+    },
+    "ECW/TBW": {
+      "photo": "44.2",
+      "sheet": "45.5"
+    },
+    "Größe": {
+      "photo": "169.0",
+      "sheet": "178"
+    },
+    "FM": {
+      "photo": "11.8",
+      "sheet": "20.1"
+    },
+    "FFM": {
+      "photo": "23.2",
+      "sheet": "25.4"
+    },
+    "R": {
+      "photo": "462.0",
+      "sheet": "333.4"
+    }
+  },
+  "72298|2024-01-15": {
+    "Gewicht": {
+      "sheet": "131.15",
+      "photo": "78.80"
+    },
+    "Groesse": {
+      "sheet": "178",
+      "photo": "169.0"
+    },
+    "BMI": {
+      "sheet": "41.39",
+      "photo": "27.59"
+    },
+    "FMI": {
+      "photo": "6.2",
+      "sheet": "10.5"
+    },
+    "FFMI": {
+      "photo": "21.4",
+      "sheet": "24.1"
+    },
+    "SMM": {
+      "photo": "27.60",
+      "sheet": "35.3"
+    },
+    "R(Ohm)": {
+      "photo": "487.7",
+      "sheet": "382.2"
+    },
+    "Xc": {
+      "photo": "41.0",
+      "sheet": "26.2"
+    },
+    "VAT": {
+      "photo": "1.7",
+      "sheet": "7.7"
+    },
+    "Taillenumfang": {
+      "photo": "94",
+      "sheet": "131.5"
+    },
+    "phi": {
+      "photo": "4.8",
+      "sheet": "4.3"
+    },
+    "TBW": {
+      "photo": "56.2",
+      "sheet": "43.6"
+    },
+    "ECW": {
+      "photo": "44.6",
+      "sheet": "48.2"
+    },
+    "ECW/TBW": {
+      "photo": "44.6",
+      "sheet": "46"
+    },
+    "Größe": {
+      "photo": "169.0",
+      "sheet": "178"
+    },
+    "FM": {
+      "photo": "6.2",
+      "sheet": "16.6"
+    },
+    "FFM": {
+      "photo": "21.4",
+      "sheet": "24.8"
+    },
+    "R": {
+      "photo": "487.7",
+      "sheet": "347.2"
+    },
+    "Perzentile": {
+      "photo": "1",
+      "sheet": "2"
+    },
+    "FM(kg)": {
+      "sheet": "52.48",
+      "photo": "17.78"
+    }
+  },
+  "90056|2025-04-01": {
+    "BMI": {
+      "photo": "53.58",
+      "sheet": "53.58"
+    },
+    "FM": {
+      "photo": "29.9",
+      "sheet": "29.9"
+    },
+    "FFM": {
+      "photo": "23.7",
+      "sheet": "23.7"
+    },
+    "Perzentile": {
+      "photo": "20",
+      "sheet": "20"
+    }
+  },
+  "59183|2024-11-13": {
+    "Gewicht": {
+      "photo": "196.30",
+      "sheet": "131.15"
+    },
+    "Größe": {
+      "photo": "165.0",
+      "sheet": "168.5"
+    },
+    "BMI": {
+      "photo": "72.10",
+      "sheet": "46.19"
+    },
+    "FM": {
+      "photo": "42.4",
+      "sheet": "22.4"
+    },
+    "FFM": {
+      "photo": "29.7",
+      "sheet": "23.8"
+    },
+    "SMM": {
+      "photo": "36.16",
+      "sheet": "28.28"
+    },
+    "R": {
+      "photo": "354.5",
+      "sheet": "389.2"
+    },
+    "Xc": {
+      "photo": "30.2",
+      "sheet": "31.2"
+    },
+    "VAT": {
+      "photo": "10.5",
+      "sheet": "5.7"
+    },
+    "Taillenumfang": {
+      "photo": "155",
+      "sheet": "125"
+    },
+    "phi": {
+      "photo": "4.9",
+      "sheet": "4.6"
+    },
+    "Perzentile": {
+      "photo": "26",
+      "sheet": "15"
+    },
+    "TBW": {
+      "photo": "28.4",
+      "sheet": "37.7"
+    },
+    "ECW": {
+      "photo": "51.0",
+      "sheet": "48.2"
+    }
+  },
+  "59183|2025-12-09": {
+    "Gewicht": {
+      "photo": "113.80",
+      "sheet": "117.35"
+    },
+    "Größe": {
+      "photo": "165.0",
+      "sheet": "168.5"
+    },
+    "BMI": {
+      "photo": "41.80",
+      "sheet": "41.33"
+    },
+    "FM": {
+      "photo": "19.6",
+      "sheet": "18.6"
+    },
+    "FFM": {
+      "photo": "22.2",
+      "sheet": "22.8"
+    },
+    "R": {
+      "photo": "427.1",
+      "sheet": "404"
+    },
+    "Xc": {
+      "photo": "24.1",
+      "sheet": "32.2"
+    },
+    "VAT": {
+      "photo": "4.4",
+      "sheet": "4.3"
+    },
+    "Taillenumfang": {
+      "photo": "123",
+      "sheet": "124"
+    },
+    "phi": {
+      "photo": "3.2",
+      "sheet": "4.6"
+    },
+    "Perzentile": {
+      "photo": "1",
+      "sheet": "14"
+    }
+  },
+  "63923|2025-04-28": {
+    "Gewicht": {
+      "photo": "91.50",
+      "sheet": "98.2"
+    },
+    "Größe": {
+      "photo": "171.0",
+      "sheet": "170"
+    },
+    "BMI": {
+      "photo": "31.29",
+      "sheet": "33.97"
+    },
+    "FM": {
+      "photo": "12.9",
+      "sheet": "13.7"
+    },
+    "FFM": {
+      "photo": "18.4",
+      "sheet": "20.3"
+    },
+    "SMM": {
+      "photo": "24.16",
+      "sheet": "27.14"
+    },
+    "R": {
+      "photo": "557.9",
+      "sheet": "498.3"
+    },
+    "Xc": {
+      "photo": "40.8",
+      "sheet": "44.1"
+    },
+    "VAT": {
+      "photo": "4.1",
+      "sheet": "4.2"
+    },
+    "Taillenumfang": {
+      "photo": "122",
+      "sheet": "108"
+    },
+    "phi": {
+      "photo": "4.2",
+      "sheet": "5.1"
+    },
+    "Perzentile": {
+      "photo": "0",
+      "sheet": "39"
+    },
+    "TBW": {
+      "photo": "44.3",
+      "sheet": "43.2"
+    },
+    "ECW": {
+      "photo": "48.8",
+      "sheet": "45.6"
+    }
+  },
+  "63923|2026-02-03": {
+    "Gewicht": {
+      "photo": "72.75",
+      "sheet": "86.5"
+    },
+    "Größe": {
+      "photo": "171.0",
+      "sheet": "170"
+    },
+    "BMI": {
+      "photo": "24.88",
+      "sheet": "29.93"
+    },
+    "FM": {
+      "photo": "7.8",
+      "sheet": "10.2"
+    },
+    "FFM": {
+      "photo": "17.0",
+      "sheet": "19.8"
+    },
+    "SMM": {
+      "photo": "21.27",
+      "sheet": "26.22"
+    },
+    "R": {
+      "photo": "575.2",
+      "sheet": "499.1"
+    },
+    "Xc": {
+      "photo": "40.8",
+      "sheet": "45.4"
+    },
+    "VAT": {
+      "photo": "1.9",
+      "sheet": "2"
+    },
+    "Taillenumfang": {
+      "photo": "104",
+      "sheet": "97"
+    },
+    "phi": {
+      "photo": "4.1",
+      "sheet": "5.2"
+    },
+    "Perzentile": {
+      "photo": "0",
+      "sheet": "43"
+    },
+    "TBW": {
+      "photo": "51.3",
+      "sheet": "48.4"
+    },
+    "ECW": {
+      "photo": "49.2",
+      "sheet": "45.5"
+    }
+  },
+  "72298|2021-10-12": {
+    "Gewicht": {
+      "sheet": "103.65",
+      "photo": "167.40"
+    },
+    "Größe": {
+      "photo": "169.0",
+      "sheet": "171"
+    },
+    "BMI": {
+      "sheet": "35.43",
+      "photo": "58.61"
+    },
+    "FM": {
+      "photo": "35.0",
+      "sheet": "16.2"
+    },
+    "FFM": {
+      "photo": "23.6",
+      "sheet": "19.2"
+    },
+    "SMM": {
+      "photo": "33.84",
+      "sheet": "24.36"
+    },
+    "Xc": {
+      "photo": "44.1",
+      "sheet": "40.1"
+    },
+    "VAT": {
+      "photo": "7.6",
+      "sheet": "6.1"
+    },
+    "Taillenumfang": {
+      "photo": "141",
+      "sheet": "118"
+    },
+    "phi": {
+      "photo": "5.0",
+      "sheet": "4.6"
+    },
+    "Perzentile": {
+      "photo": "35",
+      "sheet": "14"
+    },
+    "TBW": {
+      "photo": "30.0",
+      "sheet": "40.2"
+    },
+    "ECW": {
+      "photo": "47.2",
+      "sheet": "46"
+    },
+    "Groesse": {
+      "sheet": "171",
+      "photo": "169.0"
+    }
+  },
+  "72298|2023-01-02": {
+    "Gewicht": {
+      "photo": "127.65",
+      "sheet": "84"
+    },
+    "Größe": {
+      "photo": "169.0",
+      "sheet": "171"
+    },
+    "BMI": {
+      "photo": "44.69",
+      "sheet": "28.72"
+    },
+    "FM": {
+      "photo": "22.0",
+      "sheet": "10.1"
+    },
+    "FFM": {
+      "photo": "22.6",
+      "sheet": "18.6"
+    },
+    "SMM": {
+      "photo": "30.48",
+      "sheet": "23.93"
+    },
+    "R": {
+      "photo": "490.0",
+      "sheet": "548"
+    },
+    "Xc": {
+      "photo": "39.8",
+      "sheet": "44.2"
+    },
+    "VAT": {
+      "photo": "5.8",
+      "sheet": "2"
+    },
+    "Taillenumfang": {
+      "photo": "135",
+      "sheet": "97"
+    },
+    "phi": {
+      "photo": "4.6",
+      "sheet": "4.6"
+    },
+    "Perzentile": {
+      "photo": "13",
+      "sheet": "14"
+    },
+    "TBW": {
+      "photo": "37.6",
+      "sheet": "47.2"
+    },
+    "ECW": {
+      "photo": "47.3",
+      "sheet": "44.1"
+    }
+  },
+  "72298|2023-12-18": {
+    "Gewicht": {
+      "photo": "108.55",
+      "sheet": "85.4"
+    },
+    "Größe": {
+      "photo": "169.0",
+      "sheet": "172"
+    },
+    "BMI": {
+      "photo": "38.01",
+      "sheet": "28.86"
+    },
+    "FM": {
+      "photo": "16.2",
+      "sheet": "10.3"
+    },
+    "FFM": {
+      "photo": "21.8",
+      "sheet": "18.6"
+    },
+    "SMM": {
+      "photo": "27.65",
+      "sheet": "24.01"
+    },
+    "R": {
+      "photo": "473.9",
+      "sheet": "542"
+    },
+    "Xc": {
+      "photo": "35.0",
+      "sheet": "44.2"
+    },
+    "VAT": {
+      "photo": "1.6",
+      "sheet": "2.3"
+    },
+    "Taillenumfang": {
+      "photo": "105",
+      "sheet": "104"
+    },
+    "phi": {
+      "photo": "4.2",
+      "sheet": "4.7"
+    },
+    "Perzentile": {
+      "photo": "2",
+      "sheet": "14"
+    },
+    "TBW": {
+      "photo": "41.9",
+      "sheet": "47.1"
+    },
+    "ECW": {
+      "photo": "48.6",
+      "sheet": "44.2"
+    }
+  },
+  "90056|2025-12-22": {
+    "Gewicht": {
+      "sheet": "105.85",
+      "photo": "140.80"
+    },
+    "Groesse": {
+      "sheet": "170",
+      "photo": "189.0"
+    },
+    "BMI": {
+      "sheet": "36.63",
+      "photo": "39.42"
+    },
+    "FM(kg)": {
+      "sheet": "39.55",
+      "photo": "43.47"
+    },
+    "FM(%)": {
+      "sheet": "37.4",
+      "photo": "30.9"
+    },
+    "FMI": {
+      "sheet": "13.7",
+      "photo": "12.2"
+    },
+    "FFM(kg)": {
+      "sheet": "66.3",
+      "photo": "97.33"
+    },
+    "FFM(%)": {
+      "sheet": "62.6",
+      "photo": "69.1"
+    },
+    "FFMI": {
+      "sheet": "22.9",
+      "photo": "27.2"
+    },
+    "Perzentile": {
+      "sheet": "4",
+      "photo": "1"
+    },
+    "TBW(l)": {
+      "sheet": "48.5",
+      "photo": "70.4"
+    },
+    "TBW(%)": {
+      "sheet": "45.7",
+      "photo": "49.7"
+    },
+    "ECW(l)": {
+      "sheet": "24.7",
+      "photo": "32.4"
+    },
+    "ECW(%)": {
+      "sheet": "23.2",
+      "photo": "22.9"
+    }
+  },
+  "90056|2023-06-13": {
+    "Gewicht": {
+      "sheet": "82.35",
+      "photo": "111.90"
+    },
+    "Groesse": {
+      "sheet": "160",
+      "photo": "157.0"
+    },
+    "BMI": {
+      "sheet": "32.17",
+      "photo": "45.40"
+    },
+    "FM(kg)": {
+      "sheet": "35.58",
+      "photo": "58.87"
+    },
+    "FM(%)": {
+      "sheet": "43.2",
+      "photo": "52.6"
+    },
+    "FMI": {
+      "sheet": "13.9",
+      "photo": "23.9"
+    },
+    "FFM(kg)": {
+      "sheet": "46.77",
+      "photo": "53.03"
+    },
+    "FFM(%)": {
+      "sheet": "56.8",
+      "photo": "47.4"
+    },
+    "FFMI": {
+      "sheet": "18.3",
+      "photo": "21.5"
+    },
+    "Perzentile": {
+      "sheet": "22",
+      "photo": "5"
+    },
+    "TBW(l)": {
+      "sheet": "34.2",
+      "photo": "38.5"
+    },
+    "TBW(%)": {
+      "sheet": "41.3",
+      "photo": "34.2"
+    },
+    "ECW(l)": {
+      "sheet": "14.8",
+      "photo": "19.1"
+    },
+    "ECW(%)": {
+      "sheet": "17.9",
+      "photo": "17.0"
+    }
+  },
+  "90056|2024-11-13": {
+    "Gewicht": {
+      "sheet": "131.15",
+      "photo": "196.30"
+    },
+    "Groesse": {
+      "sheet": "168.5",
+      "photo": "165.0"
+    },
+    "BMI": {
+      "sheet": "46.19",
+      "photo": "72.10"
+    },
+    "FM(kg)": {
+      "sheet": "63.67",
+      "photo": "115.45"
+    },
+    "FM(%)": {
+      "sheet": "48.5",
+      "photo": "58.8"
+    },
+    "FMI": {
+      "sheet": "22.4",
+      "photo": "42.4"
+    },
+    "FFM(kg)": {
+      "sheet": "67.48",
+      "photo": "80.85"
+    },
+    "FFM(%)": {
+      "sheet": "51.5",
+      "photo": "41.2"
+    },
+    "FFMI": {
+      "sheet": "23.8",
+      "photo": "29.7"
+    },
+    "Perzentile": {
+      "sheet": "15",
+      "photo": "26"
+    },
+    "TBW(l)": {
+      "sheet": "49.6",
+      "photo": "56.1"
+    },
+    "TBW(%)": {
+      "sheet": "37.7",
+      "photo": "28.4"
+    },
+    "ECW(l)": {
+      "sheet": "23.9",
+      "photo": "28.6"
+    },
+    "ECW(%)": {
+      "sheet": "18.2",
+      "photo": "14.5"
+    }
+  },
+  "90056|2025-04-28": {
+    "Gewicht": {
+      "sheet": "98.2",
+      "photo": "91.50"
+    },
+    "Groesse": {
+      "sheet": "170",
+      "photo": "171.0"
+    },
+    "BMI": {
+      "sheet": "33.97",
+      "photo": "31.29"
+    },
+    "FM(kg)": {
+      "sheet": "39.61",
+      "photo": "37.77"
+    },
+    "FM(%)": {
+      "sheet": "40.3",
+      "photo": "41.3"
+    },
+    "FMI": {
+      "sheet": "13.7",
+      "photo": "12.9"
+    },
+    "FFM(kg)": {
+      "sheet": "58.59",
+      "photo": "53.73"
+    },
+    "FFM(%)": {
+      "sheet": "59.7",
+      "photo": "58.7"
+    },
+    "FFMI": {
+      "sheet": "20.3",
+      "photo": "18.4"
+    },
+    "Perzentile": {
+      "sheet": "39",
+      "photo": "0"
+    },
+    "TBW(l)": {
+      "sheet": "42.4",
+      "photo": "40.8"
+    },
+    "TBW(%)": {
+      "sheet": "43.2",
+      "photo": "44.3"
+    },
+    "ECW(l)": {
+      "sheet": "19.3",
+      "photo": "19.9"
+    },
+    "ECW(%)": {
+      "sheet": "19.7",
+      "photo": "21.6"
+    }
+  },
+  "72298|2022-03-18": {
+    "Gewicht": {
+      "sheet": "103.15",
+      "photo": "96.45"
+    },
+    "Groesse": {
+      "sheet": "172",
+      "photo": "165.0"
+    },
+    "BMI": {
+      "sheet": "34.88",
+      "photo": "35.43"
+    },
+    "FM(kg)": {
+      "sheet": "42.61",
+      "photo": "39.54"
+    },
+    "FM(%)": {
+      "sheet": "41.3",
+      "photo": "41.0"
+    },
+    "FMI": {
+      "sheet": "14.4",
+      "photo": "14.5"
+    },
+    "FFM(kg)": {
+      "sheet": "60.54",
+      "photo": "56.91"
+    },
+    "FFM(%)": {
+      "sheet": "58.7",
+      "photo": "59.0"
+    },
+    "FFMI": {
+      "sheet": "20.5",
+      "photo": "20.9"
+    },
+    "TBW(l)": {
+      "sheet": "44",
+      "photo": "41.5"
+    },
+    "TBW(%)": {
+      "sheet": "42.6",
+      "photo": "42.8"
+    },
+    "ECW(l)": {
+      "sheet": "20.7",
+      "photo": "19.6"
+    },
+    "ECW(%)": {
+      "sheet": "20",
+      "photo": "20.2"
+    },
+    "Perzentile": {
+      "sheet": "9",
+      "photo": "24"
+    }
+  },
+  "72298|2024-04-09": {
+    "Gewicht": {
+      "sheet": "96.55",
+      "photo": "96.20"
+    },
+    "Groesse": {
+      "sheet": "172",
+      "photo": "165.0"
+    },
+    "BMI": {
+      "sheet": "32.64",
+      "photo": "35.34"
+    },
+    "FM(kg)": {
+      "sheet": "33.37",
+      "photo": "37.36"
+    },
+    "FM(%)": {
+      "sheet": "34.6",
+      "photo": "38.8"
+    },
+    "FMI": {
+      "sheet": "11.3",
+      "photo": "13.7"
+    },
+    "FFM(kg)": {
+      "sheet": "63.18",
+      "photo": "58.84"
+    },
+    "FFM(%)": {
+      "sheet": "65.4",
+      "photo": "61.2"
+    },
+    "FFMI": {
+      "sheet": "21.4",
+      "photo": "21.6"
+    },
+    "Perzentile": {
+      "sheet": "3",
+      "photo": "49"
+    },
+    "TBW(l)": {
+      "sheet": "43.7",
+      "photo": "43.7"
+    },
+    "TBW(%)": {
+      "sheet": "45.1",
+      "photo": "45.1"
+    },
+    "ECW(l)": {
+      "sheet": "19.8",
+      "photo": "19.8"
+    },
+    "ECW(%)": {
+      "sheet": "20.5",
+      "photo": "20.5"
+    }
+  },
+  "72298|2025-04-03": {
+    "Gewicht": {
+      "sheet": "121.3",
+      "photo": "151.00"
+    },
+    "Groesse": {
+      "sheet": "172",
+      "photo": "173.0"
+    },
+    "BMI": {
+      "sheet": "41.02",
+      "photo": "50.45"
+    },
+    "FM(kg)": {
+      "sheet": "56.45",
+      "photo": "67.71"
+    },
+    "FM(%)": {
+      "sheet": "46.5",
+      "photo": "44.8"
+    },
+    "FMI": {
+      "sheet": "19.1",
+      "photo": "22.6"
+    },
+    "FFM(kg)": {
+      "sheet": "64.85",
+      "photo": "83.29"
+    },
+    "FFM(%)": {
+      "sheet": "53.5",
+      "photo": "55.2"
+    },
+    "FFMI": {
+      "sheet": "21.9",
+      "photo": "27.8"
+    },
+    "Perzentile": {
+      "sheet": "6",
+      "photo": "68"
+    },
+    "TBW(l)": {
+      "sheet": "47.3",
+      "photo": "61.4"
+    },
+    "TBW(%)": {
+      "sheet": "38.8",
+      "photo": "40.4"
+    },
+    "ECW(l)": {
+      "sheet": "22",
+      "photo": "25.9"
+    },
+    "ECW(%)": {
+      "sheet": "18.1",
+      "photo": "17.0"
+    }
+  },
+  "72298|2026-01-26": {
+    "Gewicht": {
+      "sheet": "118.7",
+      "photo": "97.00"
+    },
+    "Groesse": {
+      "sheet": "172",
+      "photo": "173.0"
+    },
+    "BMI": {
+      "sheet": "40.14",
+      "photo": "32.41"
+    },
+    "FM(kg)": {
+      "sheet": "52.31",
+      "photo": "24.60"
+    },
+    "FM(%)": {
+      "sheet": "44.1",
+      "photo": "25.4"
+    },
+    "FMI": {
+      "sheet": "17.7",
+      "photo": "8.2"
+    },
+    "FFM(kg)": {
+      "sheet": "66.39",
+      "photo": "72.40"
+    },
+    "FFM(%)": {
+      "sheet": "55.9",
+      "photo": "74.6"
+    },
+    "FFMI": {
+      "sheet": "22.4",
+      "photo": "24.2"
+    },
+    "Perzentile": {
+      "sheet": "11",
+      "photo": "40"
+    },
+    "TBW(l)": {
+      "sheet": "48.7",
+      "photo": "52.8"
+    },
+    "TBW(%)": {
+      "sheet": "40.8",
+      "photo": "54.0"
+    },
+    "ECW(l)": {
+      "sheet": "22.3",
+      "photo": "22.1"
+    },
+    "ECW(%)": {
+      "sheet": "18.7",
+      "photo": "22.7"
+    }
+  },
+  "72298|2023-08-08": {
+    "Gewicht": {
+      "sheet": "188.65",
+      "photo": "139.15"
+    },
+    "Groesse": {
+      "sheet": "180",
+      "photo": "174.0"
+    },
+    "BMI": {
+      "sheet": "58.22",
+      "photo": "45.96"
+    },
+    "FM(kg)": {
+      "sheet": "101.27",
+      "photo": "56.51"
+    },
+    "FM(%)": {
+      "sheet": "53.7",
+      "photo": "40.6"
+    },
+    "FMI": {
+      "sheet": "31.3",
+      "photo": "18.7"
+    },
+    "FFM(kg)": {
+      "sheet": "87.38",
+      "photo": "82.64"
+    },
+    "FFM(%)": {
+      "sheet": "46.3",
+      "photo": "59.4"
+    },
+    "FFMI": {
+      "sheet": "27",
+      "photo": "27.3"
+    },
+    "Perzentile": {
+      "sheet": "1",
+      "photo": "1"
+    },
+    "TBW(l)": {
+      "sheet": "64.3",
+      "photo": "61.6"
+    },
+    "TBW(%)": {
+      "sheet": "34.1",
+      "photo": "44.0"
+    },
+    "ECW(l)": {
+      "sheet": "30.2",
+      "photo": "27.6"
+    },
+    "ECW(%)": {
+      "sheet": "16",
+      "photo": "19.7"
+    }
+  },
+  "72298|2023-10-23": {
+    "Gewicht": {
+      "sheet": "84.35",
+      "photo": "119.25"
+    },
+    "Groesse": {
+      "sheet": "167",
+      "photo": "162.0"
+    },
+    "BMI": {
+      "sheet": "30.24",
+      "photo": "45.44"
+    },
+    "FM(kg)": {
+      "sheet": "30.52",
+      "photo": "60.31"
+    },
+    "FM(%)": {
+      "sheet": "36.2",
+      "photo": "50.6"
+    },
+    "FMI": {
+      "sheet": "10.9",
+      "photo": "23.0"
+    },
+    "FFM(kg)": {
+      "sheet": "53.83",
+      "photo": "58.94"
+    },
+    "FFM(%)": {
+      "sheet": "63.8",
+      "photo": "49.4"
+    },
+    "FFMI": {
+      "sheet": "19.3",
+      "photo": "22.5"
+    },
+    "Perzentile": {
+      "sheet": "24",
+      "photo": "0"
+    },
+    "TBW(l)": {
+      "sheet": "39.5",
+      "photo": "45.0"
+    },
+    "TBW(%)": {
+      "sheet": "46.8",
+      "photo": "37.5"
+    },
+    "ECW(l)": {
+      "sheet": "17.4",
+      "photo": "22.0"
+    },
+    "ECW(%)": {
+      "sheet": "20.6",
+      "photo": "18.3"
+    }
+  },
+  "72298|2024-09-24": {
+    "Gewicht": {
+      "sheet": "65.15",
+      "photo": "92.10"
+    },
+    "Groesse": {
+      "sheet": "167",
+      "photo": "162.0"
+    },
+    "BMI": {
+      "sheet": "23.36",
+      "photo": "35.09"
+    },
+    "FM(kg)": {
+      "sheet": "14.14",
+      "photo": "36.66"
+    },
+    "FM(%)": {
+      "sheet": "21.7",
+      "photo": "39.8"
+    },
+    "FMI": {
+      "sheet": "5.1",
+      "photo": "14.0"
+    },
+    "FFM(kg)": {
+      "sheet": "51.01",
+      "photo": "55.44"
+    },
+    "FFM(%)": {
+      "sheet": "78.3",
+      "photo": "60.2"
+    },
+    "FFMI": {
+      "sheet": "18.3",
+      "photo": "21.1"
+    },
+    "Perzentile": {
+      "sheet": "38",
+      "photo": "0"
+    },
+    "TBW(l)": {
+      "sheet": "37.5",
+      "photo": "41.8"
+    },
+    "TBW(%)": {
+      "sheet": "57.6",
+      "photo": "45.1"
+    },
+    "ECW(l)": {
+      "sheet": "16",
+      "photo": "21.1"
+    },
+    "ECW(%)": {
+      "sheet": "24.6",
+      "photo": "22.8"
+    }
+  },
+  "72298|2025-12-01": {
+    "Gewicht": {
+      "sheet": "68.2",
+      "photo": "97.95"
+    },
+    "Groesse": {
+      "sheet": "167",
+      "photo": "162.0"
+    },
+    "BMI": {
+      "sheet": "24.46",
+      "photo": "37.32"
+    },
+    "FM(kg)": {
+      "sheet": "17.59",
+      "photo": "43.83"
+    },
+    "FM(%)": {
+      "sheet": "25.8",
+      "photo": "44.7"
+    },
+    "FMI": {
+      "sheet": "6.3",
+      "photo": "16.7"
+    },
+    "FFM(kg)": {
+      "sheet": "50.61",
+      "photo": "54.12"
+    },
+    "FFM(%)": {
+      "sheet": "74.2",
+      "photo": "55.3"
+    },
+    "FFMI": {
+      "sheet": "18.1",
+      "photo": "20.6"
+    },
+    "Perzentile": {
+      "sheet": "21",
+      "photo": "0"
+    },
+    "TBW(l)": {
+      "sheet": "37.1",
+      "photo": "40.4"
+    },
+    "TBW(%)": {
+      "sheet": "54.4",
+      "photo": "41.0"
+    },
+    "ECW(l)": {
+      "sheet": "16.1",
+      "photo": "20.8"
+    },
+    "ECW(%)": {
+      "sheet": "23.6",
+      "photo": "21.1"
+    }
+  },
+  "72298|2022-11-08": {
+    "Gewicht": {
+      "sheet": "181",
+      "photo": "143.50"
+    },
+    "Groesse": {
+      "sheet": "180",
+      "photo": "172.0"
+    },
+    "BMI": {
+      "sheet": "55.86",
+      "photo": "48.51"
+    },
+    "FM(kg)": {
+      "sheet": "88.71",
+      "photo": "55.79"
+    },
+    "FM(%)": {
+      "sheet": "49",
+      "photo": "38.9"
+    },
+    "FMI": {
+      "sheet": "27.4",
+      "photo": "18.9"
+    },
+    "FFM(kg)": {
+      "sheet": "92.29",
+      "photo": "87.71"
+    },
+    "FFM(%)": {
+      "sheet": "51",
+      "photo": "61.1"
+    },
+    "FFMI": {
+      "sheet": "28.5",
+      "photo": "29.6"
+    },
+    "Perzentile": {
+      "sheet": "2",
+      "photo": "1"
+    },
+    "TBW(l)": {
+      "sheet": "67.2",
+      "photo": "65.3"
+    },
+    "TBW(%)": {
+      "sheet": "37",
+      "photo": "45.2"
+    },
+    "ECW(l)": {
+      "sheet": "32.4",
+      "photo": "29.6"
+    },
+    "ECW(%)": {
+      "sheet": "17.8",
+      "photo": "20.5"
+    }
+  },
+  "72298|2023-09-26": {
+    "Gewicht": {
+      "sheet": "152.4",
+      "photo": "97.90"
+    },
+    "Groesse": {
+      "sheet": "180",
+      "photo": "172.0"
+    },
+    "BMI": {
+      "sheet": "47.04",
+      "photo": "33.09"
+    },
+    "FM(kg)": {
+      "sheet": "64.49",
+      "photo": "21.82"
+    },
+    "FM(%)": {
+      "sheet": "42.3",
+      "photo": "22.3"
+    },
+    "FMI": {
+      "sheet": "19.9",
+      "photo": "7.4"
+    },
+    "FFM(kg)": {
+      "sheet": "87.91",
+      "photo": "76.08"
+    },
+    "FFM(%)": {
+      "sheet": "57.7",
+      "photo": "77.7"
+    },
+    "FFMI": {
+      "sheet": "27.1",
+      "photo": "25.7"
+    },
+    "Perzentile": {
+      "sheet": "1",
+      "photo": "1"
+    },
+    "TBW(l)": {
+      "sheet": "64.3",
+      "photo": "55.5"
+    },
+    "TBW(%)": {
+      "sheet": "42.1",
+      "photo": "56.3"
+    },
+    "ECW(l)": {
+      "sheet": "31.6",
+      "photo": "25.5"
+    },
+    "ECW(%)": {
+      "sheet": "20.7",
+      "photo": "25.9"
+    }
+  },
+  "72298|2024-11-26": {
+    "Gewicht": {
+      "sheet": "146.45",
+      "photo": "100.35"
+    },
+    "Groesse": {
+      "sheet": "180",
+      "photo": "172.0"
+    }
+  },
+  "72298|2023-10-17": {
+    "Gewicht": {
+      "sheet": "118.7",
+      "photo": "120.75"
+    },
+    "Groesse": {
+      "sheet": "180",
+      "photo": "180.4"
+    },
+    "BMI": {
+      "sheet": "36.63",
+      "photo": "37.10"
+    },
+    "FM(kg)": {
+      "sheet": "41.26",
+      "photo": "42.92"
+    },
+    "FM(%)": {
+      "sheet": "34.8",
+      "photo": "35.5"
+    },
+    "FMI": {
+      "sheet": "12.7",
+      "photo": "13.2"
+    },
+    "FFM(kg)": {
+      "sheet": "77.44",
+      "photo": "77.83"
+    },
+    "FFM(%)": {
+      "sheet": "65.2",
+      "photo": "64.5"
+    },
+    "FFMI": {
+      "sheet": "23.9",
+      "photo": "23.9"
+    },
+    "Perzentile": {
+      "sheet": "1",
+      "photo": "4"
+    },
+    "TBW(l)": {
+      "sheet": "57",
+      "photo": "56.9"
+    },
+    "TBW(%)": {
+      "sheet": "48",
+      "photo": "46.8"
+    },
+    "ECW(l)": {
+      "sheet": "26.1",
+      "photo": "24.9"
+    },
+    "ECW(%)": {
+      "sheet": "22",
+      "photo": "20.5"
+    }
+  },
+  "72298|2024-11-13": {
+    "Gewicht": {
+      "sheet": "113.65",
+      "photo": "102.40"
+    },
+    "Groesse": {
+      "sheet": "180",
+      "photo": "180.4"
+    },
+    "BMI": {
+      "sheet": "35.07",
+      "photo": "31.46"
+    },
+    "FM(kg)": {
+      "sheet": "35.34",
+      "photo": "25.09"
+    },
+    "FM(%)": {
+      "sheet": "31.1",
+      "photo": "24.5"
+    },
+    "FMI": {
+      "sheet": "10.9",
+      "photo": "7.7"
+    },
+    "FFM(kg)": {
+      "sheet": "78.31",
+      "photo": "77.31"
+    },
+    "FFM(%)": {
+      "sheet": "68.9",
+      "photo": "75.5"
+    },
+    "FFMI": {
+      "sheet": "24.2",
+      "photo": "23.8"
+    },
+    "Perzentile": {
+      "sheet": "1",
+      "photo": "6"
+    }
+  },
+  "72298|2025-09-02": {
+    "Gewicht": {
+      "sheet": "116.6",
+      "photo": "92.65"
+    },
+    "Groesse": {
+      "sheet": "180",
+      "photo": "180.4"
+    },
+    "BMI": {
+      "sheet": "35.99",
+      "photo": "28.47"
+    },
+    "FM(kg)": {
+      "sheet": "38.02",
+      "photo": "22.84"
+    },
+    "FM(%)": {
+      "sheet": "32.6",
+      "photo": "24.7"
+    },
+    "FMI": {
+      "sheet": "11.7",
+      "photo": "7.0"
+    },
+    "FFM(kg)": {
+      "sheet": "78.58",
+      "photo": "69.81"
+    },
+    "FFM(%)": {
+      "sheet": "67.4",
+      "photo": "75.3"
+    },
+    "FFMI": {
+      "sheet": "24.2",
+      "photo": "21.4"
+    },
+    "Perzentile": {
+      "sheet": "1",
+      "photo": "9"
+    },
+    "TBW(l)": {
+      "sheet": "57.1",
+      "photo": "51.4"
+    },
+    "TBW(%)": {
+      "sheet": "48.9",
+      "photo": "55.2"
+    },
+    "ECW(l)": {
+      "sheet": "26",
+      "photo": "21.8"
+    },
+    "ECW(%)": {
+      "sheet": "22.3",
+      "photo": "23.4"
+    }
+  },
+  "72298|2023-06-19": {
+    "Gewicht": {
+      "sheet": "143.8",
+      "photo": "156.20"
+    },
+    "Groesse": {
+      "sheet": "182",
+      "photo": "172.0"
+    },
+    "BMI": {
+      "sheet": "43.42",
+      "photo": "52.80"
+    },
+    "FM(kg)": {
+      "sheet": "59.17",
+      "photo": "86.54"
+    },
+    "FM(%)": {
+      "sheet": "41.1",
+      "photo": "55.4"
+    },
+    "FMI": {
+      "sheet": "17.9",
+      "photo": "29.3"
+    },
+    "FFM(kg)": {
+      "sheet": "84.63",
+      "photo": "69.66"
+    },
+    "FFM(%)": {
+      "sheet": "58.9",
+      "photo": "44.6"
+    },
+    "FFMI": {
+      "sheet": "25.6",
+      "photo": "23.5"
+    },
+    "Perzentile": {
+      "sheet": "3",
+      "photo": "18"
+    },
+    "TBW(l)": {
+      "sheet": "62",
+      "photo": "51.2"
+    },
+    "TBW(%)": {
+      "sheet": "43",
+      "photo": "32.6"
+    },
+    "ECW(l)": {
+      "sheet": "29.2",
+      "photo": "22.1"
+    },
+    "ECW(%)": {
+      "sheet": "20.3",
+      "photo": "14.1"
+    }
+  },
+  "72298|2024-07-22": {
+    "Gewicht": {
+      "sheet": "121.3",
+      "photo": "93.35"
+    },
+    "Groesse": {
+      "sheet": "182",
+      "photo": "172.0"
+    },
+    "BMI": {
+      "sheet": "36.63",
+      "photo": "31.55"
+    },
+    "FM(kg)": {
+      "sheet": "41.84",
+      "photo": "31.87"
+    },
+    "FM(%)": {
+      "sheet": "34.5",
+      "photo": "34.1"
+    },
+    "FMI": {
+      "sheet": "12.6",
+      "photo": "10.8"
+    },
+    "FFM(kg)": {
+      "sheet": "79.46",
+      "photo": "61.48"
+    },
+    "FFM(%)": {
+      "sheet": "65.5",
+      "photo": "65.9"
+    },
+    "FFMI": {
+      "sheet": "24",
+      "photo": "20.8"
+    },
+    "Perzentile": {
+      "sheet": "2",
+      "photo": "2"
+    },
+    "TBW(l)": {
+      "sheet": "58.1",
+      "photo": "44.1"
+    },
+    "TBW(%)": {
+      "sheet": "47.9",
+      "photo": "47.0"
+    },
+    "ECW(l)": {
+      "sheet": "27.4",
+      "photo": "19.3"
+    },
+    "ECW(%)": {
+      "sheet": "22.6",
+      "photo": "20.6"
+    }
+  },
+  "72298|2025-07-07": {
+    "Gewicht": {
+      "sheet": "114.3",
+      "photo": "97.50"
+    },
+    "Groesse": {
+      "sheet": "182",
+      "photo": "172.0"
+    },
+    "BMI": {
+      "sheet": "34.52",
+      "photo": "32.96"
+    },
+    "FM(kg)": {
+      "sheet": "37.85",
+      "photo": "37.75"
+    },
+    "FM(%)": {
+      "sheet": "33.1",
+      "photo": "38.7"
+    },
+    "FMI": {
+      "sheet": "11.4",
+      "photo": "12.8"
+    },
+    "FFM(kg)": {
+      "sheet": "76.45",
+      "photo": "59.75"
+    },
+    "FFM(%)": {
+      "sheet": "66.9",
+      "photo": "61.3"
+    },
+    "FFMI": {
+      "sheet": "23.1",
+      "photo": "20.2"
+    },
+    "Perzentile": {
+      "sheet": "3",
+      "photo": "8"
+    },
+    "TBW(l)": {
+      "sheet": "56",
+      "photo": "43.0"
+    },
+    "TBW(%)": {
+      "sheet": "49",
+      "photo": "43.8"
+    },
+    "ECW(l)": {
+      "sheet": "26.3",
+      "photo": "18.5"
+    },
+    "ECW(%)": {
+      "sheet": "23",
+      "photo": "18.8"
+    }
+  },
+  "72298|2025-03-24": {
+    "Gewicht": {
+      "sheet": "84.05",
+      "photo": "103.60"
+    },
+    "Groesse": {
+      "sheet": "165",
+      "photo": "162.0"
+    },
+    "BMI": {
+      "sheet": "30.87",
+      "photo": "39.48"
+    },
+    "FM(kg)": {
+      "sheet": "29.27",
+      "photo": "49.09"
+    },
+    "FM(%)": {
+      "sheet": "34.8",
+      "photo": "47.4"
+    },
+    "FMI": {
+      "sheet": "10.8",
+      "photo": "18.7"
+    },
+    "FFM(kg)": {
+      "sheet": "54.78",
+      "photo": "54.51"
+    },
+    "FFM(%)": {
+      "sheet": "65.2",
+      "photo": "52.6"
+    },
+    "FFMI": {
+      "sheet": "20.1",
+      "photo": "20.8"
+    },
+    "Perzentile": {
+      "sheet": "34",
+      "photo": "64"
+    },
+    "TBW(l)": {
+      "sheet": "40.1",
+      "photo": "40.3"
+    },
+    "TBW(%)": {
+      "sheet": "47.6",
+      "photo": "38.6"
+    },
+    "ECW(l)": {
+      "sheet": "17.3",
+      "photo": "18.9"
+    },
+    "ECW(%)": {
+      "sheet": "20.6",
+      "photo": "18.1"
+    }
+  },
+  "72298|2026-02-24": {
+    "Gewicht": {
+      "sheet": "76.4",
+      "photo": "88.65"
+    },
+    "Groesse": {
+      "sheet": "165",
+      "photo": "162.0"
+    },
+    "BMI": {
+      "sheet": "28.07",
+      "photo": "33.78"
+    },
+    "FM(kg)": {
+      "sheet": "23.11",
+      "photo": "37.67"
+    },
+    "FM(%)": {
+      "sheet": "30.2",
+      "photo": "42.5"
+    },
+    "FMI": {
+      "sheet": "8.5",
+      "photo": "14.4"
+    },
+    "FFM(kg)": {
+      "sheet": "53.29",
+      "photo": "50.98"
+    },
+    "FFM(%)": {
+      "sheet": "69.8",
+      "photo": "57.5"
+    },
+    "FFMI": {
+      "sheet": "19.6",
+      "photo": "19.4"
+    },
+    "Perzentile": {
+      "sheet": "31",
+      "photo": "47"
+    },
+    "TBW(l)": {
+      "sheet": "39.1",
+      "photo": "37.4"
+    },
+    "TBW(%)": {
+      "sheet": "51.2",
+      "photo": "41.9"
+    },
+    "ECW(l)": {
+      "sheet": "17",
+      "photo": "17.7"
+    },
+    "ECW(%)": {
+      "sheet": "22.3",
+      "photo": "19.9"
+    }
+  },
+  "109484|2025-04-29": {
+    "Gewicht": {
+      "photo": "155.50",
+      "sheet": "135.5"
+    },
+    "Größe": {
+      "photo": "182.0",
+      "sheet": "177"
+    },
+    "BMI": {
+      "photo": "46.94",
+      "sheet": "43.26"
+    },
+    "FM": {
+      "photo": "22.8",
+      "sheet": "17.9"
+    },
+    "FFM": {
+      "photo": "24.2",
+      "sheet": "25.3"
+    },
+    "SMM": {
+      "photo": "40.34",
+      "sheet": "38"
+    },
+    "R": {
+      "photo": "496.1",
+      "sheet": "395"
+    },
+    "Xc": {
+      "photo": "46.8",
+      "sheet": "28.3"
+    },
+    "VAT": {
+      "photo": "12.8",
+      "sheet": "12.1"
+    },
+    "Taillenumfang": {
+      "photo": "147",
+      "sheet": "138"
+    },
+    "phi": {
+      "photo": "5.4",
+      "sheet": "4.1"
+    },
+    "Perzentile": {
+      "photo": "12",
+      "sheet": "1"
+    },
+    "TBW": {
+      "photo": "59.2",
+      "sheet": "58.3"
+    },
+    "ECW": {
+      "photo": "26.0",
+      "sheet": "28.5"
+    }
+  },
+  "147098|2025-04-29": {
+    "Gewicht": {
+      "sheet": "135.5",
+      "photo": "155.50"
+    },
+    "Groesse": {
+      "sheet": "177",
+      "photo": "182.0"
+    },
+    "BMI": {
+      "sheet": "43.26",
+      "photo": "46.94"
+    },
+    "FM(kg)": {
+      "sheet": "56.17",
+      "photo": "75.44"
+    },
+    "FM(%)": {
+      "sheet": "41.5",
+      "photo": "48.5"
+    },
+    "FMI": {
+      "sheet": "17.9",
+      "photo": "22.8"
+    },
+    "FFM(kg)": {
+      "sheet": "79.33",
+      "photo": "80.06"
+    },
+    "FFM(%)": {
+      "sheet": "58.5",
+      "photo": "51.5"
+    },
+    "FFMI": {
+      "sheet": "25.3",
+      "photo": "24.2"
+    },
+    "SMM(kg)": {
+      "sheet": "38",
+      "photo": "40.34"
+    },
+    "R(Ohm)": {
+      "sheet": "395",
+      "photo": "496.1"
+    },
+    "Xc(Ohm)": {
+      "sheet": "28.3",
+      "photo": "46.8"
+    },
+    "VAT(l)": {
+      "sheet": "12.1",
+      "photo": "12.8"
+    },
+    "Taillenumfang(cm)": {
+      "sheet": "138",
+      "photo": "147"
+    },
+    "phi(deg)": {
+      "sheet": "4.1",
+      "photo": "5.4"
+    },
+    "Perzentile": {
+      "sheet": "1",
+      "photo": "12"
+    },
+    "TBW(l)": {
+      "sheet": "58.3",
+      "photo": "59.2"
+    },
+    "TBW(%)": {
+      "sheet": "42.9",
+      "photo": "37.8"
+    },
+    "ECW(l)": {
+      "sheet": "28.5",
+      "photo": "26.0"
+    },
+    "ECW(%)": {
+      "sheet": "21",
+      "photo": "16.6"
+    },
+    "ECW/TBW(%)": {
+      "sheet": "48.9",
+      "photo": "43.9"
+    }
+  },
+  "147098|2022-05-10": {
+    "Gewicht": {
+      "sheet": "98.1",
+      "photo": "125.10"
+    },
+    "Groesse": {
+      "sheet": "168",
+      "photo": "157.0"
+    },
+    "BMI": {
+      "sheet": "34.75",
+      "photo": "50.75"
+    },
+    "FM(kg)": {
+      "sheet": "39.27",
+      "photo": "72.36"
+    },
+    "FM(%)": {
+      "sheet": "40",
+      "photo": "57.8"
+    },
+    "FMI": {
+      "sheet": "13.9",
+      "photo": "29.4"
+    },
+    "FFM(kg)": {
+      "sheet": "58.83",
+      "photo": "52.74"
+    },
+    "FFM(%)": {
+      "sheet": "60",
+      "photo": "42.2"
+    },
+    "FFMI": {
+      "sheet": "20.8",
+      "photo": "21.4"
+    },
+    "SMM(kg)": {
+      "sheet": "27.17",
+      "photo": "25.63"
+    },
+    "R(Ohm)": {
+      "sheet": "485.2",
+      "photo": "479.3"
+    },
+    "Xc(Ohm)": {
+      "sheet": "35.5",
+      "photo": "39.0"
+    },
+    "VAT(l)": {
+      "sheet": "3.9",
+      "photo": "4.1"
+    },
+    "Taillenumfang(cm)": {
+      "sheet": "112",
+      "photo": "115"
+    },
+    "phi(deg)": {
+      "sheet": "4.2",
+      "photo": "4.7"
+    },
+    "Perzentile": {
+      "sheet": "6",
+      "photo": "40"
+    },
+    "TBW(l)": {
+      "sheet": "42.9",
+      "photo": "40.2"
+    },
+    "TBW(%)": {
+      "sheet": "43.6",
+      "photo": "32.0"
+    },
+    "ECW(l)": {
+      "sheet": "19.9",
+      "photo": "19.6"
+    },
+    "ECW(%)": {
+      "sheet": "20.2",
+      "photo": "15.6"
+    },
+    "ECW/TBW(%)": {
+      "sheet": "46.3",
+      "photo": "48.8"
+    }
+  },
+  "147098|2023-08-08": {
+    "Gewicht": {
+      "sheet": "72.3",
+      "photo": "107.90"
+    },
+    "Groesse": {
+      "sheet": "168",
+      "photo": "157.0"
+    },
+    "BMI": {
+      "sheet": "25.62",
+      "photo": "43.77"
+    },
+    "FM(kg)": {
+      "sheet": "16.41",
+      "photo": "55.72"
+    },
+    "FM(%)": {
+      "sheet": "22.7",
+      "photo": "51.6"
+    },
+    "FMI": {
+      "sheet": "5.8",
+      "photo": "22.6"
+    },
+    "FFM(kg)": {
+      "sheet": "55.89",
+      "photo": "52.18"
+    },
+    "FFM(%)": {
+      "sheet": "77.3",
+      "photo": "48.4"
+    },
+    "FFMI": {
+      "sheet": "19.8",
+      "photo": "21.2"
+    },
+    "SMM(kg)": {
+      "sheet": "26.05",
+      "photo": "24.03"
+    },
+    "R(Ohm)": {
+      "sheet": "524.7",
+      "photo": "461.2"
+    },
+    "Xc(Ohm)": {
+      "sheet": "42.1",
+      "photo": "35.4"
+    },
+    "VAT(l)": {
+      "sheet": "0.01",
+      "photo": "2.4"
+    },
+    "Taillenumfang(cm)": {
+      "sheet": "87",
+      "photo": "102"
+    },
+    "phi(deg)": {
+      "sheet": "4.6",
+      "photo": "4.4"
+    },
+    "Perzentile": {
+      "sheet": "14",
+      "photo": "0"
+    },
+    "TBW(l)": {
+      "sheet": "40.7",
+      "photo": "39.5"
+    },
+    "TBW(%)": {
+      "sheet": "56.3",
+      "photo": "36.4"
+    },
+    "ECW(l)": {
+      "sheet": "17.6",
+      "photo": "19.6"
+    },
+    "ECW(%)": {
+      "sheet": "24.4",
+      "photo": "18.0"
+    },
+    "ECW/TBW(%)": {
+      "sheet": "43.3",
+      "photo": "49.5"
+    }
+  },
+  "147098|2024-02-06": {
+    "Gewicht": {
+      "sheet": "72.5",
+      "photo": "104.45"
+    },
+    "Groesse": {
+      "sheet": "168",
+      "photo": "157.0"
+    },
+    "BMI": {
+      "sheet": "25.69",
+      "photo": "42.37"
+    },
+    "FM(kg)": {
+      "sheet": "17.5",
+      "photo": "55.56"
+    },
+    "FM(%)": {
+      "sheet": "24.1",
+      "photo": "53.2"
+    },
+    "FMI": {
+      "sheet": "6.2",
+      "photo": "22.5"
+    },
+    "FFM(kg)": {
+      "sheet": "55",
+      "photo": "48.89"
+    },
+    "FFM(%)": {
+      "sheet": "75.9",
+      "photo": "46.8"
+    },
+    "FFMI": {
+      "sheet": "19.5",
+      "photo": "19.8"
+    },
+    "SMM(kg)": {
+      "sheet": "25.37",
+      "photo": "21.78"
+    },
+    "R(Ohm)": {
+      "sheet": "535",
+      "photo": "490.4"
+    },
+    "Xc(Ohm)": {
+      "sheet": "42",
+      "photo": "35.5"
+    },
+    "VAT(l)": {
+      "sheet": "0.01",
+      "photo": "2.5"
+    },
+    "Taillenumfang(cm)": {
+      "sheet": "86",
+      "photo": "102"
+    },
+    "phi(deg)": {
+      "sheet": "4.5",
+      "photo": "4.1"
+    },
+    "Perzentile": {
+      "sheet": "11",
+      "photo": "0"
+    },
+    "TBW(l)": {
+      "sheet": "40.2",
+      "photo": "36.1"
+    },
+    "TBW(%)": {
+      "sheet": "55.4",
+      "photo": "34.9"
+    },
+    "ECW(l)": {
+      "sheet": "17.4",
+      "photo": "18.6"
+    },
+    "ECW(%)": {
+      "sheet": "23.9",
+      "photo": "17.7"
+    },
+    "ECW/TBW(%)": {
+      "sheet": "43.2",
+      "photo": "50.7"
+    }
+  },
+  "147098|2022-12-06": {
+    "Gewicht": {
+      "sheet": "142.4",
+      "photo": "151.70"
+    },
+    "Groesse": {
+      "sheet": "187",
+      "photo": "180.0"
+    },
+    "BMI": {
+      "sheet": "40.7",
+      "photo": "46.82"
+    },
+    "FM(kg)": {
+      "sheet": "53.1",
+      "photo": "73.18"
+    },
+    "FM(%)": {
+      "sheet": "37.3",
+      "photo": "48.2"
+    },
+    "FMI": {
+      "sheet": "15.2",
+      "photo": "22.6"
+    },
+    "FFM(kg)": {
+      "sheet": "89.3",
+      "photo": "78.52"
+    },
+    "FFM(%)": {
+      "sheet": "62.7",
+      "photo": "51.8"
+    },
+    "FFMI": {
+      "sheet": "25.5",
+      "photo": "24.2"
+    },
+    "SMM(kg)": {
+      "sheet": "42.96",
+      "photo": "37.81"
+    },
+    "R(Ohm)": {
+      "sheet": "343",
+      "photo": "461.1"
+    },
+    "Xc(Ohm)": {
+      "sheet": "26.1",
+      "photo": "43.8"
+    },
+    "VAT(l)": {
+      "sheet": "11.3",
+      "photo": "8.4"
+    },
+    "Taillenumfang(cm)": {
+      "sheet": "129",
+      "photo": "128"
+    },
+    "phi(deg)": {
+      "sheet": "4.4",
+      "photo": "5.4"
+    },
+    "Perzentile": {
+      "sheet": "3",
+      "photo": "5"
+    },
+    "TBW(l)": {
+      "sheet": "65.2",
+      "photo": "55.7"
+    },
+    "TBW(%)": {
+      "sheet": "45.8",
+      "photo": "36.5"
+    },
+    "ECW(l)": {
+      "sheet": "30.3",
+      "photo": "24.9"
+    },
+    "ECW(%)": {
+      "sheet": "21.3",
+      "photo": "16.3"
+    },
+    "ECW/TBW(%)": {
+      "sheet": "46.5",
+      "photo": "44.6"
+    }
+  },
+  "147098|2023-08-22": {
+    "Gewicht": {
+      "sheet": "127.05",
+      "photo": "119.80"
+    },
+    "Groesse": {
+      "sheet": "187",
+      "photo": "180.0"
+    },
+    "BMI": {
+      "sheet": "36.31",
+      "photo": "36.98"
+    },
+    "FM(kg)": {
+      "sheet": "36.87",
+      "photo": "46.71"
+    },
+    "FM(%)": {
+      "sheet": "29",
+      "photo": "39.0"
+    },
+    "FMI": {
+      "sheet": "10.5",
+      "photo": "14.4"
+    },
+    "FFM(kg)": {
+      "sheet": "90.18",
+      "photo": "73.09"
+    },
+    "FFM(%)": {
+      "sheet": "71",
+      "photo": "61.0"
+    },
+    "FFMI": {
+      "sheet": "25.8",
+      "photo": "22.6"
+    },
+    "SMM(kg)": {
+      "sheet": "43.2",
+      "photo": "35.37"
+    },
+    "R(Ohm)": {
+      "sheet": "315.5",
+      "photo": "476.6"
+    },
+    "Xc(Ohm)": {
+      "sheet": "24.2",
+      "photo": "41.6"
+    },
+    "VAT(l)": {
+      "sheet": "6.7",
+      "photo": "7.11"
+    },
+    "Taillenumfang(cm)": {
+      "sheet": "122",
+      "photo": "123"
+    },
+    "phi(deg)": {
+      "sheet": "4.4",
+      "photo": "5.0"
+    },
+    "Perzentile": {
+      "sheet": "3",
+      "photo": "1"
+    },
+    "TBW(l)": {
+      "sheet": "66.2",
+      "photo": "53.0"
+    },
+    "TBW(%)": {
+      "sheet": "51.9",
+      "photo": "44.0"
+    },
+    "ECW(l)": {
+      "sheet": "30.3",
+      "photo": "23.1"
+    },
+    "ECW(%)": {
+      "sheet": "23.8",
+      "photo": "19.2"
+    },
+    "ECW/TBW(%)": {
+      "sheet": "45.8",
+      "photo": "43.7"
+    }
+  },
+  "147098|2023-11-27": {
+    "Gewicht": {
+      "sheet": "150.25",
+      "photo": "107.80"
+    },
+    "Groesse": {
+      "sheet": "180",
+      "photo": "179.0"
+    },
+    "BMI": {
+      "sheet": "46.36",
+      "photo": "33.64"
+    },
+    "FM(kg)": {
+      "sheet": "66.41",
+      "photo": "37.62"
+    },
+    "FM(%)": {
+      "sheet": "44.2",
+      "photo": "34.9"
+    },
+    "FMI": {
+      "sheet": "20.5",
+      "photo": "11.7"
+    },
+    "FFM(kg)": {
+      "sheet": "83.84",
+      "photo": "70.18"
+    },
+    "FFM(%)": {
+      "sheet": "55.8",
+      "photo": "65.1"
+    },
+    "FFMI": {
+      "sheet": "25.9",
+      "photo": "21.9"
+    },
+    "SMM(kg)": {
+      "sheet": "39.27",
+      "photo": "35.10"
+    },
+    "R(Ohm)": {
+      "sheet": "336.5",
+      "photo": "450.2"
+    },
+    "Xc(Ohm)": {
+      "sheet": "25",
+      "photo": "32.6"
+    },
+    "VAT(l)": {
+      "sheet": "10.1",
+      "photo": "3.7"
+    },
+    "Taillenumfang(cm)": {
+      "sheet": "136",
+      "photo": "104"
+    },
+    "phi(deg)": {
+      "sheet": "4.3",
+      "photo": "4.1"
+    },
+    "Perzentile": {
+      "sheet": "2",
+      "photo": "1"
+    },
+    "TBW(l)": {
+      "sheet": "61.2",
+      "photo": "53.0"
+    },
+    "TBW(%)": {
+      "sheet": "40.7",
+      "photo": "48.9"
+    },
+    "ECW(l)": {
+      "sheet": "29.7",
+      "photo": "23.9"
+    },
+    "ECW(%)": {
+      "sheet": "19.7",
+      "photo": "22.1"
+    },
+    "ECW/TBW(%)": {
+      "sheet": "48.4",
+      "photo": "45.1"
+    }
+  },
+  "147098|2024-08-05": {
+    "Gewicht": {
+      "sheet": "150.25",
+      "photo": "107.80."
+    },
+    "Groesse": {
+      "sheet": "180",
+      "photo": "179.0"
+    },
+    "BMI": {
+      "sheet": "43.01",
+      "photo": "28.07"
+    },
+    "FM(kg)": {
+      "sheet": "53.97",
+      "photo": "25.80"
+    },
+    "FM(%)": {
+      "sheet": "38.7",
+      "photo": "28.7"
+    },
+    "FMI": {
+      "sheet": "16.7",
+      "photo": "8.1"
+    },
+    "FFM(kg)": {
+      "sheet": "85.33",
+      "photo": "64.15"
+    },
+    "FFM(%)": {
+      "sheet": "61.3",
+      "photo": "71.3"
+    },
+    "FFMI": {
+      "sheet": "26.3",
+      "photo": "20.0"
+    },
+    "SMM(kg)": {
+      "sheet": "40.2",
+      "photo": "30.14"
+    },
+    "R(Ohm)": {
+      "sheet": "336.1",
+      "photo": "486.1"
+    },
+    "Xc(Ohm)": {
+      "sheet": "24.9",
+      "photo": "32.8"
+    },
+    "VAT(l)": {
+      "sheet": "8.3",
+      "photo": "2.5"
+    },
+    "Taillenumfang(cm)": {
+      "sheet": "136",
+      "photo": "96"
+    },
+    "phi(deg)": {
+      "sheet": "4.2",
+      "photo": "3.9"
+    },
+    "Perzentile": {
+      "sheet": "2",
+      "photo": "1"
+    },
+    "TBW(l)": {
+      "sheet": "62.6",
+      "photo": "47.7"
+    },
+    "TBW(%)": {
+      "sheet": "44.9",
+      "photo": "52.7"
+    },
+    "ECW(l)": {
+      "sheet": "30.3",
+      "photo": "22.0"
+    },
+    "ECW(%)": {
+      "sheet": "21.7",
+      "photo": "24.2"
+    },
+    "ECW/TBW(%)": {
+      "sheet": "48.4",
+      "photo": "46.1"
+    }
+  },
+  "147098|2023-02-27": {
+    "Gewicht": {
+      "sheet": "87.5",
+      "photo": "141.45"
+    },
+    "Groesse": {
+      "sheet": "167",
+      "photo": "165.0"
+    },
+    "BMI": {
+      "sheet": "31.37",
+      "photo": "51.96"
+    },
+    "FM(kg)": {
+      "sheet": "34.47",
+      "photo": "72.79"
+    },
+    "FM(%)": {
+      "sheet": "39.4",
+      "photo": "51.5"
+    },
+    "FMI": {
+      "sheet": "12.4",
+      "photo": "26.7"
+    },
+    "FFM(kg)": {
+      "sheet": "53.03",
+      "photo": "68.66"
+    },
+    "FFM(%)": {
+      "sheet": "60.6",
+      "photo": "48.5"
+    },
+    "FFMI": {
+      "sheet": "19",
+      "photo": "25.2"
+    },
+    "SMM(kg)": {
+      "sheet": "24.3",
+      "photo": "34.37"
+    },
+    "R(Ohm)": {
+      "sheet": "494",
+      "photo": "456.5"
+    },
+    "Xc(Ohm)": {
+      "sheet": "38.1",
+      "photo": "47.8"
+    },
+    "VAT(l)": {
+      "sheet": "3.9",
+      "photo": "4.8"
+    },
+    "Taillenumfang(cm)": {
+      "sheet": "106",
+      "photo": "128"
+    },
+    "phi(deg)": {
+      "sheet": "4.4",
+      "photo": "6.0"
+    },
+    "Perzentile": {
+      "sheet": "9",
+      "photo": "95"
+    },
+    "TBW(l)": {
+      "sheet": "38.6",
+      "photo": "51.6"
+    },
+    "TBW(%)": {
+      "sheet": "44.1",
+      "photo": "36.3"
+    },
+    "ECW(l)": {
+      "sheet": "17.7",
+      "photo": "23.2"
+    },
+    "ECW(%)": {
+      "sheet": "20.2",
+      "photo": "16.3"
+    },
+    "ECW/TBW(%)": {
+      "sheet": "45.8",
+      "photo": "44.9"
+    }
+  },
+  "147098|2024-02-13": {
+    "Gewicht": {
+      "sheet": "68.55",
+      "photo": "90.65"
+    },
+    "Groesse": {
+      "sheet": "165",
+      "photo": "162.0"
+    },
+    "BMI": {
+      "sheet": "25.18",
+      "photo": "34.54"
+    },
+    "FM(kg)": {
+      "sheet": "21.36",
+      "photo": "38.10"
+    },
+    "FM(%)": {
+      "sheet": "31.2",
+      "photo": "42.0"
+    },
+    "FMI": {
+      "sheet": "7.8",
+      "photo": "14.5"
+    },
+    "FFM(kg)": {
+      "sheet": "47.19",
+      "photo": "52.55"
+    },
+    "FFM(%)": {
+      "sheet": "68.8",
+      "photo": "58.0"
+    },
+    "FFMI": {
+      "sheet": "17.3",
+      "photo": "20.0"
+    },
+    "SMM(kg)": {
+      "sheet": "22.01",
+      "photo": "22.58"
+    },
+    "R(Ohm)": {
+      "sheet": "600",
+      "photo": "493.9"
+    },
+    "Xc(Ohm)": {
+      "sheet": "49.3",
+      "photo": "31.7"
+    },
+    "VAT(l)": {
+      "sheet": "0.6",
+      "photo": "1.3"
+    },
+    "Taillenumfang(cm)": {
+      "sheet": "85",
+      "photo": "100"
+    },
+    "phi(deg)": {
+      "sheet": "4.7",
+      "photo": "3.7"
+    },
+    "Perzentile": {
+      "sheet": "19",
+      "photo": "1"
+    },
+    "TBW(l)": {
+      "sheet": "34.7",
+      "photo": "39.7"
+    },
+    "TBW(%)": {
+      "sheet": "50.6",
+      "photo": "43.5"
+    },
+    "ECW(l)": {
+      "sheet": "14.7",
+      "photo": "20.0"
+    },
+    "ECW(%)": {
+      "sheet": "21.4",
+      "photo": "21.9"
+    },
+    "ECW/TBW(%)": {
+      "sheet": "42.3",
+      "photo": "50.4"
+    }
+  },
+  "147098|2025-01-27": {
+    "Gewicht": {
+      "sheet": "60.7",
+      "photo": "63.35"
+    },
+    "Groesse": {
+      "sheet": "157.8",
+      "photo": "157.8"
+    },
+    "BMI": {
+      "sheet": "24.38",
+      "photo": "25.44"
+    },
+    "FM(kg)": {
+      "sheet": "12.67",
+      "photo": "12.18"
+    },
+    "FM(%)": {
+      "sheet": "20.9",
+      "photo": "18.2"
+    },
+    "FMI": {
+      "sheet": "5.1",
+      "photo": "4.9"
+    },
+    "FFM(kg)": {
+      "sheet": "48.03",
+      "photo": "51.17"
+    },
+    "FFM(%)": {
+      "sheet": "79.1",
+      "photo": "80.8"
+    },
+    "FFMI": {
+      "sheet": "19.3",
+      "photo": "20.6"
+    },
+    "SMM(kg)": {
+      "sheet": "19.73",
+      "photo": "20.96"
+    },
+    "R(Ohm)": {
+      "sheet": "537",
+      "photo": "466.5"
+    },
+    "Xc(Ohm)": {
+      "sheet": "43.3",
+      "photo": "38.4"
+    },
+    "VAT(l)": {
+      "sheet": "0.01",
+      "photo": "0.01"
+    },
+    "Taillenumfang(cm)": {
+      "sheet": "72",
+      "photo": "71"
+    },
+    "phi(deg)": {
+      "sheet": "4.6",
+      "photo": "4.7"
+    },
+    "Perzentile": {
+      "sheet": "7",
+      "photo": "9"
+    },
+    "TBW(l)": {
+      "sheet": "35.2",
+      "photo": "37.5"
+    },
+    "TBW(%)": {
+      "sheet": "58",
+      "photo": "58.9"
+    },
+    "ECW(l)": {
+      "sheet": "15.6",
+      "photo": "18.1"
+    },
+    "ECW(%)": {
+      "sheet": "25.8",
+      "photo": "28.3"
+    },
+    "ECW/TBW(%)": {
+      "sheet": "44.4",
+      "photo": "48.1"
+    }
+  },
+  "147098|2023-05-16": {
+    "Gewicht": {
+      "sheet": "63.35",
+      "photo": "68.75"
+    },
+    "Groesse": {
+      "sheet": "157.8",
+      "photo": "157.8"
+    },
+    "BMI": {
+      "sheet": "25.44",
+      "photo": "27.61"
+    },
+    "FM(kg)": {
+      "sheet": "12.18",
+      "photo": "19.93"
+    },
+    "FM(%)": {
+      "sheet": "19.2",
+      "photo": "29.0"
+    },
+    "FMI": {
+      "sheet": "4.9",
+      "photo": "8.0"
+    },
+    "FFM(kg)": {
+      "sheet": "51.17",
+      "photo": "48.82"
+    },
+    "FFM(%)": {
+      "sheet": "80.8",
+      "photo": "71.0"
+    },
+    "FFMI": {
+      "sheet": "20.6",
+      "photo": "19.6"
+    },
+    "SMM(kg)": {
+      "sheet": "20.96",
+      "photo": "22.17"
+    },
+    "R(Ohm)": {
+      "sheet": "466.5",
+      "photo": "534.9"
+    },
+    "Xc(Ohm)": {
+      "sheet": "38.4",
+      "photo": "56.1"
+    },
+    "VAT(l)": {
+      "sheet": "0.01",
+      "photo": "1.1"
+    },
+    "Taillenumfang(cm)": {
+      "sheet": "71",
+      "photo": "93"
+    },
+    "phi(deg)": {
+      "sheet": "4.7",
+      "photo": "6.0"
+    },
+    "Perzentile": {
+      "sheet": "9",
+      "photo": "93"
+    },
+    "TBW(l)": {
+      "sheet": "37.5",
+      "photo": "38.1"
+    },
+    "TBW(%)": {
+      "sheet": "58.9",
+      "photo": "52.4"
+    },
+    "ECW(l)": {
+      "sheet": "18.1",
+      "photo": "15.9"
+    },
+    "ECW(%)": {
+      "sheet": "28.3",
+      "photo": "23.0"
+    },
+    "ECW/TBW(%)": {
+      "sheet": "48.1",
+      "photo": "43.9"
+    }
+  },
+  "147098|2024-04-10": {
+    "Gewicht": {
+      "sheet": "62.9",
+      "photo": "63.30"
+    },
+    "Groesse": {
+      "sheet": "157.8",
+      "photo": "157.8"
+    },
+    "BMI": {
+      "sheet": "25.26",
+      "photo": "25.42"
+    },
+    "FM(kg)": {
+      "sheet": "14.28",
+      "photo": "14.00"
+    },
+    "FM(%)": {
+      "sheet": "22.7",
+      "photo": "22.1"
+    },
+    "FMI": {
+      "sheet": "5.7",
+      "photo": "5.6"
+    },
+    "FFM(kg)": {
+      "sheet": "48.62",
+      "photo": "49.30"
+    },
+    "FFM(%)": {
+      "sheet": "77.3",
+      "photo": "77.9"
+    },
+    "FFMI": {
+      "sheet": "19.5",
+      "photo": "19.8"
+    },
+    "SMM(kg)": {
+      "sheet": "19.99",
+      "photo": "20.81"
+    },
+    "R(Ohm)": {
+      "sheet": "527.6",
+      "photo": "508.6"
+    },
+    "Xc(Ohm)": {
+      "sheet": "42.2",
+      "photo": "48.5"
+    },
+    "VAT(l)": {
+      "sheet": "0.01",
+      "photo": "0.5"
+    },
+    "Taillenumfang(cm)": {
+      "sheet": "76",
+      "photo": "81"
+    },
+    "phi(deg)": {
+      "sheet": "4.6",
+      "photo": "5.5"
+    },
+    "Perzentile": {
+      "sheet": "7",
+      "photo": "82"
+    },
+    "TBW(l)": {
+      "sheet": "35.5",
+      "photo": "36.1"
+    },
+    "TBW(%)": {
+      "sheet": "56.4",
+      "photo": "56.7"
+    },
+    "ECW(l)": {
+      "sheet": "15.9",
+      "photo": "16.7"
+    },
+    "ECW(%)": {
+      "sheet": "25.3",
+      "photo": "26.2"
+    },
+    "ECW/TBW(%)": {
+      "sheet": "44.8",
+      "photo": "46.2"
+    }
+  },
+  "147098|2024-01-22": {
+    "Gewicht": {
+      "sheet": "78.1",
+      "photo": "98.35"
+    },
+    "Groesse": {
+      "sheet": "167",
+      "photo": "165.0"
+    },
+    "BMI": {
+      "sheet": "28",
+      "photo": "36.12"
+    },
+    "FM(kg)": {
+      "sheet": "24.55",
+      "photo": "38.20"
+    },
+    "FM(%)": {
+      "sheet": "31.4",
+      "photo": "38.8"
+    },
+    "FMI": {
+      "sheet": "8.8",
+      "photo": "14.0"
+    },
+    "FFM(kg)": {
+      "sheet": "53.55",
+      "photo": "60.15"
+    },
+    "FFM(%)": {
+      "sheet": "68.6",
+      "photo": "61.2"
+    },
+    "FFMI": {
+      "sheet": "19.2",
+      "photo": "22.1"
+    },
+    "SMM(kg)": {
+      "sheet": "24.66",
+      "photo": "28.22"
+    },
+    "R(Ohm)": {
+      "sheet": "507",
+      "photo": "507.1"
+    },
+    "Xc(Ohm)": {
+      "sheet": "41",
+      "photo": "49.9"
+    },
+    "VAT(l)": {
+      "sheet": "1.6",
+      "photo": "4.9"
+    },
+    "Taillenumfang(cm)": {
+      "sheet": "95",
+      "photo": "132"
+    },
+    "phi(deg)": {
+      "sheet": "4.6",
+      "photo": "5.6"
+    },
+    "Perzentile": {
+      "sheet": "14",
+      "photo": "81"
+    },
+    "TBW(l)": {
+      "sheet": "39.1",
+      "photo": "45.0"
+    },
+    "TBW(%)": {
+      "sheet": "50.1",
+      "photo": "45.5"
+    },
+    "ECW(l)": {
+      "sheet": "17.4",
+      "photo": "20.2"
+    },
+    "ECW(%)": {
+      "sheet": "22.3",
+      "photo": "20.4"
+    },
+    "ECW/TBW(%)": {
+      "sheet": "44.5",
+      "photo": "44.9"
+    }
+  },
+  "147098|2025-03-25": {
+    "Gewicht": {
+      "sheet": "73.55",
+      "photo": "94.70"
+    },
+    "Groesse": {
+      "sheet": "167",
+      "photo": "165.0"
+    },
+    "BMI": {
+      "sheet": "26.38",
+      "photo": "34.78"
+    },
+    "FM(kg)": {
+      "sheet": "20.76",
+      "photo": "35.04"
+    },
+    "FM(%)": {
+      "sheet": "28.2",
+      "photo": "37.0"
+    },
+    "FMI": {
+      "sheet": "7.4",
+      "photo": "12.9"
+    },
+    "FFM(kg)": {
+      "sheet": "52.79",
+      "photo": "59.66"
+    },
+    "FFM(%)": {
+      "sheet": "71.8",
+      "photo": "63.0"
+    },
+    "FFMI": {
+      "sheet": "18.9",
+      "photo": "21.9"
+    },
+    "SMM(kg)": {
+      "sheet": "24.05",
+      "photo": "27.11"
+    },
+    "R(Ohm)": {
+      "sheet": "515.6",
+      "photo": "498.5"
+    },
+    "Xc(Ohm)": {
+      "sheet": "41.7",
+      "photo": "46.3"
+    },
+    "VAT(l)": {
+      "sheet": "0.7",
+      "photo": "0.8"
+    },
+    "Taillenumfang(cm)": {
+      "sheet": "87",
+      "photo": "101"
+    },
+    "phi(deg)": {
+      "sheet": "4.6",
+      "photo": "5.3"
+    },
+    "Perzentile": {
+      "sheet": "14",
+      "photo": "57"
+    },
+    "TBW(l)": {
+      "sheet": "38.8",
+      "photo": "44.3"
+    },
+    "TBW(%)": {
+      "sheet": "52.7",
+      "photo": "46.5"
+    },
+    "ECW(l)": {
+      "sheet": "17.2",
+      "photo": "20.3"
+    },
+    "ECW(%)": {
+      "sheet": "23.4",
+      "photo": "21.3"
+    },
+    "ECW/TBW(%)": {
+      "sheet": "44.3",
+      "photo": "45.8"
+    }
+  },
+  "166566|2022-04-26": {
+    "Gewicht": {
+      "sheet": "97.05",
+      "photo": "125.00"
+    },
+    "Groesse": {
+      "sheet": "164",
+      "photo": "162.0"
+    },
+    "BMI": {
+      "sheet": "36.09",
+      "photo": "47.63"
+    },
+    "FM(kg)": {
+      "sheet": "39.13",
+      "photo": "63.65"
+    },
+    "FM(%)": {
+      "sheet": "40.3",
+      "photo": "50.9"
+    },
+    "FMI": {
+      "sheet": "14.5",
+      "photo": "24.3"
+    },
+    "FFM(kg)": {
+      "sheet": "57.92",
+      "photo": "61.35"
+    },
+    "FFM(%)": {
+      "sheet": "59.7",
+      "photo": "49.1"
+    },
+    "FFMI": {
+      "sheet": "21.5",
+      "photo": "23.4"
+    },
+    "SMM(kg)": {
+      "sheet": "27.25",
+      "photo": "29.70"
+    },
+    "R(Ohm)": {
+      "sheet": "460",
+      "photo": "451.8"
+    },
+    "Xc(Ohm)": {
+      "sheet": "36",
+      "photo": "37.6"
+    },
+    "VAT(l)": {
+      "sheet": "5.2",
+      "photo": "3.4"
+    },
+    "Taillenumfang(cm)": {
+      "sheet": "117",
+      "photo": "116"
+    },
+    "phi(deg)": {
+      "sheet": "4.5",
+      "photo": "4.8"
+    },
+    "Perzentile": {
+      "sheet": "10",
+      "photo": "11"
+    },
+    "TBW(l)": {
+      "sheet": "42.2",
+      "photo": "46.2"
+    },
+    "TBW(%)": {
+      "sheet": "43.5",
+      "photo": "36.7"
+    },
+    "ECW(l)": {
+      "sheet": "19.5",
+      "photo": "21.6"
+    },
+    "ECW(%)": {
+      "sheet": "20.1",
+      "photo": "17.2"
+    },
+    "ECW/TBW(%)": {
+      "sheet": "46.2",
+      "photo": "46.9"
+    }
+  },
+  "166566|2023-02-06": {
+    "Gewicht": {
+      "sheet": "75.5",
+      "photo": "82.75"
+    },
+    "Groesse": {
+      "sheet": "164",
+      "photo": "162.0"
+    },
+    "BMI": {
+      "sheet": "28.07",
+      "photo": "31.53"
+    },
+    "FM(kg)": {
+      "sheet": "22.12",
+      "photo": "27.57"
+    },
+    "FM(%)": {
+      "sheet": "29.3",
+      "photo": "33.3"
+    },
+    "FMI": {
+      "sheet": "8.2",
+      "photo": "10.5"
+    },
+    "FFM(kg)": {
+      "sheet": "53.38",
+      "photo": "55.18"
+    },
+    "FFM(%)": {
+      "sheet": "70.7",
+      "photo": "66.7"
+    },
+    "FFMI": {
+      "sheet": "19.8",
+      "photo": "21.0"
+    },
+    "SMM(kg)": {
+      "sheet": "25",
+      "photo": "25.34"
+    },
+    "R(Ohm)": {
+      "sheet": "530",
+      "photo": "451.5"
+    },
+    "Xc(Ohm)": {
+      "sheet": "44.2",
+      "photo": "36.9"
+    },
+    "VAT(l)": {
+      "sheet": "0.7",
+      "photo": "0.3"
+    },
+    "Taillenumfang(cm)": {
+      "sheet": "93",
+      "photo": "84"
+    },
+    "phi(deg)": {
+      "sheet": "4.8",
+      "photo": "4.7"
+    },
+    "Perzentile": {
+      "sheet": "24",
+      "photo": "9"
+    },
+    "TBW(l)": {
+      "sheet": "39.1",
+      "photo": "41.3"
+    },
+    "TBW(%)": {
+      "sheet": "51.8",
+      "photo": "49.6"
+    },
+    "ECW(l)": {
+      "sheet": "16.7",
+      "photo": "19.1"
+    },
+    "ECW(%)": {
+      "sheet": "22.1",
+      "photo": "22.9"
+    },
+    "ECW/TBW(%)": {
+      "sheet": "42.6",
+      "photo": "46.2"
+    }
+  },
+  "166566|2025-04-14": {
+    "Gewicht": {
+      "sheet": "76.65",
+      "photo": "89.45"
+    },
+    "Groesse": {
+      "sheet": "164",
+      "photo": "162.0"
+    },
+    "BMI": {
+      "sheet": "28.5",
+      "photo": "34.08"
+    },
+    "FM(kg)": {
+      "sheet": "23.18",
+      "photo": "30.70"
+    },
+    "FM(%)": {
+      "sheet": "30.2",
+      "photo": "34.3"
+    },
+    "FMI": {
+      "sheet": "8.6",
+      "photo": "11.7"
+    },
+    "FFM(kg)": {
+      "sheet": "53.47",
+      "photo": "58.75"
+    },
+    "FFM(%)": {
+      "sheet": "69.8",
+      "photo": "65.7"
+    },
+    "FFMI": {
+      "sheet": "19.9",
+      "photo": "22.4"
+    },
+    "SMM(kg)": {
+      "sheet": "25.02",
+      "photo": "28.07"
+    },
+    "R(Ohm)": {
+      "sheet": "521",
+      "photo": "433.9"
+    },
+    "Xc(Ohm)": {
+      "sheet": "44.2",
+      "photo": "37.2"
+    },
+    "VAT(l)": {
+      "sheet": "0.8",
+      "photo": "0.5"
+    },
+    "Taillenumfang(cm)": {
+      "sheet": "93",
+      "photo": "91"
+    },
+    "phi(deg)": {
+      "sheet": "4.9",
+      "photo": "4.9"
+    },
+    "Perzentile": {
+      "sheet": "25",
+      "photo": "21"
+    },
+    "TBW(l)": {
+      "sheet": "39.3",
+      "photo": "44.7"
+    },
+    "TBW(%)": {
+      "sheet": "51.2",
+      "photo": "49.6"
+    },
+    "ECW(l)": {
+      "sheet": "16.8",
+      "photo": "20.3"
+    },
+    "ECW(%)": {
+      "sheet": "21.9",
+      "photo": "22.6"
+    },
+    "ECW/TBW(%)": {
+      "sheet": "42.8",
+      "photo": "45.5"
+    }
+  },
+  "166566|2023-05-16": {
+    "Gewicht": {
+      "sheet": "153.3",
+      "photo": "222.00"
+    },
+    "Groesse": {
+      "sheet": "183",
+      "photo": "194.0"
+    },
+    "BMI": {
+      "sheet": "45.76",
+      "photo": "58.99"
+    },
+    "FM(kg)": {
+      "sheet": "62.59",
+      "photo": "103.56"
+    },
+    "FM(%)": {
+      "sheet": "40.8",
+      "photo": "46.6"
+    },
+    "FMI": {
+      "sheet": "18.7",
+      "photo": "27.5"
+    },
+    "FFM(kg)": {
+      "sheet": "90.71",
+      "photo": "118.44"
+    },
+    "FFM(%)": {
+      "sheet": "59.2",
+      "photo": "53.4"
+    },
+    "FFMI": {
+      "sheet": "27.1",
+      "photo": "31.5"
+    },
+    "SMM(kg)": {
+      "sheet": "43.52",
+      "photo": "61.92"
+    },
+    "R(Ohm)": {
+      "sheet": "308.3",
+      "photo": "359.1"
+    },
+    "Xc(Ohm)": {
+      "sheet": "22",
+      "photo": "36.4"
+    },
+    "VAT(l)": {
+      "sheet": "12.3",
+      "photo": "18.9"
+    },
+    "Taillenumfang(cm)": {
+      "sheet": "143",
+      "photo": "169"
+    },
+    "phi(deg)": {
+      "sheet": "4.1",
+      "photo": "5.8"
+    },
+    "Perzentile": {
+      "sheet": "1",
+      "photo": "44"
+    },
+    "TBW(l)": {
+      "sheet": "66.3",
+      "photo": "87.3"
+    },
+    "TBW(%)": {
+      "sheet": "43.3",
+      "photo": "39.1"
+    },
+    "ECW(l)": {
+      "sheet": "31.5",
+      "photo": "38.0"
+    },
+    "ECW(%)": {
+      "sheet": "20.5",
+      "photo": "17.5"
+    },
+    "ECW/TBW(%)": {
+      "sheet": "47.5",
+      "photo": "43.5"
+    }
+  },
+  "166566|2024-08-16": {
+    "Gewicht": {
+      "sheet": "120.2",
+      "photo": "162.40"
+    },
+    "Groesse": {
+      "sheet": "183",
+      "photo": "194.0"
+    },
+    "BMI": {
+      "sheet": "35.88",
+      "photo": "43.15"
+    },
+    "FM(kg)": {
+      "sheet": "34.67",
+      "photo": "58.62"
+    },
+    "FM(%)": {
+      "sheet": "28.8",
+      "photo": "36.1"
+    },
+    "FMI": {
+      "sheet": "10.3",
+      "photo": "15.6"
+    },
+    "FFM(kg)": {
+      "sheet": "85.53",
+      "photo": "103.78"
+    },
+    "FFM(%)": {
+      "sheet": "71.2",
+      "photo": "63.9"
+    },
+    "FFMI": {
+      "sheet": "25.5",
+      "photo": "27.6"
+    },
+    "SMM(kg)": {
+      "sheet": "40.85",
+      "photo": "52.03"
+    },
+    "R(Ohm)": {
+      "sheet": "323.5",
+      "photo": "394.9"
+    },
+    "Xc(Ohm)": {
+      "sheet": "23.7",
+      "photo": "37.5"
+    },
+    "VAT(l)": {
+      "sheet": "4.9",
+      "photo": "10.3"
+    },
+    "Taillenumfang(cm)": {
+      "sheet": "114",
+      "photo": "143"
+    },
+    "phi(deg)": {
+      "sheet": "4.2",
+      "photo": "5.4"
+    },
+    "Perzentile": {
+      "sheet": "1",
+      "photo": "16"
+    },
+    "TBW(l)": {
+      "sheet": "62.4",
+      "photo": "76.0"
+    },
+    "TBW(%)": {
+      "sheet": "51.9",
+      "photo": "46.5"
+    },
+    "ECW(l)": {
+      "sheet": "28.4",
+      "photo": "33.1"
+    },
+    "ECW(%)": {
+      "sheet": "23.6",
+      "photo": "20.2"
+    },
+    "ECW/TBW(%)": {
+      "sheet": "45.5",
+      "photo": "43.5"
+    }
+  },
+  "166566|2022-04-05": {
+    "Gewicht": {
+      "sheet": "134.55",
+      "photo": "106.20"
+    },
+    "Groesse": {
+      "sheet": "168",
+      "photo": "154.0"
+    },
+    "BMI": {
+      "sheet": "47.66",
+      "photo": "44.78"
+    },
+    "FM(kg)": {
+      "sheet": "68.54",
+      "photo": "55.17"
+    },
+    "FM(%)": {
+      "sheet": "50.9",
+      "photo": "51.9"
+    },
+    "FMI": {
+      "sheet": "24.3",
+      "photo": "23.3"
+    },
+    "FFM(kg)": {
+      "sheet": "66.01",
+      "photo": "51.03"
+    },
+    "FFM(%)": {
+      "sheet": "49.1",
+      "photo": "48.1"
+    },
+    "FFMI": {
+      "sheet": "23.4",
+      "photo": "21.5"
+    },
+    "SMM(kg)": {
+      "sheet": "29.18",
+      "photo": "22.44"
+    },
+    "R(Ohm)": {
+      "sheet": "404",
+      "photo": "495.7"
+    },
+    "Xc(Ohm)": {
+      "sheet": "31.3",
+      "photo": "34.0"
+    },
+    "VAT(l)": {
+      "sheet": "5.7",
+      "photo": "2.3"
+    },
+    "Taillenumfang(cm)": {
+      "sheet": "130",
+      "photo": "107"
+    },
+    "phi(deg)": {
+      "sheet": "4.4",
+      "photo": "3.9"
+    },
+    "Perzentile": {
+      "sheet": "10",
+      "photo": "1"
+    },
+    "TBW(l)": {
+      "sheet": "48.1",
+      "photo": "38.3"
+    },
+    "TBW(%)": {
+      "sheet": "35.7",
+      "photo": "35.8"
+    },
+    "ECW(l)": {
+      "sheet": "23.7",
+      "photo": "19.2"
+    },
+    "ECW(%)": {
+      "sheet": "17.6",
+      "photo": "17.9"
+    },
+    "ECW/TBW(%)": {
+      "sheet": "49.3",
+      "photo": "50.1"
+    }
+  },
+  "166566|2023-09-18": {
+    "Gewicht": {
+      "sheet": "110.7",
+      "photo": "96.15"
+    },
+    "Groesse": {
+      "sheet": "168",
+      "photo": "154.0"
+    },
+    "BMI": {
+      "sheet": "39.22",
+      "photo": "40.54"
+    },
+    "FM(kg)": {
+      "sheet": "48.2",
+      "photo": "44.58"
+    },
+    "FM(%)": {
+      "sheet": "43.5",
+      "photo": "46.4"
+    },
+    "FMI": {
+      "sheet": "17.1",
+      "photo": "18.8"
+    },
+    "FFM(kg)": {
+      "sheet": "62.5",
+      "photo": "51.57"
+    },
+    "FFM(%)": {
+      "sheet": "56.5",
+      "photo": "53.6"
+    },
+    "FFMI": {
+      "sheet": "22.1",
+      "photo": "21.7"
+    },
+    "SMM(kg)": {
+      "sheet": "27.73",
+      "photo": "23.03"
+    },
+    "R(Ohm)": {
+      "sheet": "426",
+      "photo": "492.4"
+    },
+    "Xc(Ohm)": {
+      "sheet": "33.2",
+      "photo": "37.9"
+    },
+    "VAT(l)": {
+      "sheet": "3.5",
+      "photo": "1.2"
+    },
+    "Taillenumfang(cm)": {
+      "sheet": "112",
+      "photo": "100"
+    },
+    "phi(deg)": {
+      "sheet": "4.5",
+      "photo": "4.4"
+    },
+    "Perzentile": {
+      "sheet": "11",
+      "photo": "1"
+    },
+    "TBW(l)": {
+      "sheet": "45.7",
+      "photo": "39.0"
+    },
+    "TBW(%)": {
+      "sheet": "41.2",
+      "photo": "40.3"
+    },
+    "ECW(l)": {
+      "sheet": "21.7",
+      "photo": "18.8"
+    },
+    "ECW(%)": {
+      "sheet": "19.5",
+      "photo": "19.5"
+    },
+    "ECW/TBW(%)": {
+      "sheet": "47.4",
+      "photo": "48.2"
+    }
+  },
+  "166566|2024-09-17": {
+    "Gewicht": {
+      "sheet": "106.7",
+      "photo": "100.60"
+    },
+    "Groesse": {
+      "sheet": "168",
+      "photo": "154.0"
+    },
+    "BMI": {
+      "sheet": "37.81",
+      "photo": "42.42"
+    },
+    "FM(kg)": {
+      "sheet": "44.81",
+      "photo": "51.64"
+    },
+    "FM(%)": {
+      "sheet": "42",
+      "photo": "51.3"
+    },
+    "FMI": {
+      "sheet": "15.9",
+      "photo": "21.8"
+    },
+    "FFM(kg)": {
+      "sheet": "61.89",
+      "photo": "48.96"
+    },
+    "FFM(%)": {
+      "sheet": "58",
+      "photo": "48.7"
+    },
+    "FFMI": {
+      "sheet": "21.9",
+      "photo": "20.6"
+    },
+    "SMM(kg)": {
+      "sheet": "27.28",
+      "photo": "22.50"
+    },
+    "R(Ohm)": {
+      "sheet": "437",
+      "photo": "527.2"
+    },
+    "Xc(Ohm)": {
+      "sheet": "33.7",
+      "photo": "42.0"
+    },
+    "VAT(l)": {
+      "sheet": "3.1",
+      "photo": "2.11"
+    },
+    "Taillenumfang(cm)": {
+      "sheet": "112",
+      "photo": "103"
+    },
+    "phi(deg)": {
+      "sheet": "4.4",
+      "photo": "4.6"
+    },
+    "Perzentile": {
+      "sheet": "10",
+      "photo": "4."
+    }
+  },
+  "166566|2022-06-14": {
+    "Gewicht": {
+      "sheet": "106.65",
+      "photo": "95.05"
+    },
+    "BMI": {
+      "sheet": "37.78",
+      "photo": "33.68"
+    },
+    "FM(kg)": {
+      "sheet": "53.77",
+      "photo": "42.16"
+    },
+    "FM(%)": {
+      "sheet": "50.4",
+      "photo": "44.4"
+    },
+    "FMI": {
+      "sheet": "19",
+      "photo": "14.9"
+    },
+    "FFM(%)": {
+      "sheet": "49.6",
+      "photo": "55.6"
+    },
+    "SMM(kg)": {
+      "sheet": "24.31",
+      "photo": "23.03"
+    },
+    "R(Ohm)": {
+      "sheet": "502.7",
+      "photo": "535.6"
+    },
+    "Xc(Ohm)": {
+      "sheet": "39.1",
+      "photo": "37.7"
+    },
+    "VAT(l)": {
+      "sheet": "3.9",
+      "photo": "1.5"
+    },
+    "Taillenumfang(cm)": {
+      "sheet": "108",
+      "photo": "97"
+    },
+    "phi(deg)": {
+      "sheet": "4.5",
+      "photo": "4.0"
+    },
+    "Perzentile": {
+      "sheet": "10",
+      "photo": "5"
+    },
+    "TBW(l)": {
+      "sheet": "38.4",
+      "photo": "39.4"
+    },
+    "TBW(%)": {
+      "sheet": "36",
+      "photo": "41.2"
+    },
+    "ECW(l)": {
+      "sheet": "17.3",
+      "photo": "19.6"
+    },
+    "ECW(%)": {
+      "sheet": "16.2",
+      "photo": "20.5"
+    },
+    "ECW/TBW(%)": {
+      "sheet": "45",
+      "photo": "49.8"
+    }
+  },
+  "166566|2023-06-19": {
+    "Gewicht": {
+      "sheet": "84.6",
+      "photo": "88.15"
+    },
+    "BMI": {
+      "sheet": "29.97",
+      "photo": "31.23"
+    },
+    "FM(kg)": {
+      "sheet": "31.02",
+      "photo": "36.68"
+    },
+    "FM(%)": {
+      "sheet": "36.7",
+      "photo": "41.6"
+    },
+    "FMI": {
+      "sheet": "11",
+      "photo": "13.0"
+    },
+    "FFM(kg)": {
+      "sheet": "53.58",
+      "photo": "51.47"
+    },
+    "FFM(%)": {
+      "sheet": "63.3",
+      "photo": "58.4"
+    },
+    "FFMI": {
+      "sheet": "19",
+      "photo": "18.2"
+    },
+    "SMM(kg)": {
+      "sheet": "24.82",
+      "photo": "22.95"
+    },
+    "R(Ohm)": {
+      "sheet": "503",
+      "photo": "548.7"
+    },
+    "Xc(Ohm)": {
+      "sheet": "43.3",
+      "photo": "41.0"
+    },
+    "VAT(l)": {
+      "sheet": "1.4",
+      "photo": "1.6"
+    },
+    "Taillenumfang(cm)": {
+      "sheet": "92",
+      "photo": "97"
+    },
+    "phi(deg)": {
+      "sheet": "5",
+      "photo": "4.3"
+    },
+    "Perzentile": {
+      "sheet": "33",
+      "photo": "18"
+    },
+    "TBW(%)": {
+      "sheet": "46.5",
+      "photo": "43.7"
+    },
+    "ECW(l)": {
+      "sheet": "16.7",
+      "photo": "18.9"
+    },
+    "ECW(%)": {
+      "sheet": "19.7",
+      "photo": "21.3"
+    },
+    "ECW/TBW(%)": {
+      "sheet": "42.4",
+      "photo": "48.7"
+    }
+  },
+  "166566|2025-05-08": {
+    "Gewicht": {
+      "sheet": "173.15",
+      "photo": "203.80"
+    },
+    "BMI": {
+      "sheet": "52.28",
+      "photo": "61.53"
+    },
+    "FM(kg)": {
+      "sheet": "81.47",
+      "photo": "96.28"
+    },
+    "FMI": {
+      "sheet": "24.6",
+      "photo": "29.1"
+    },
+    "FFM(kg)": {
+      "sheet": "91.68",
+      "photo": "107.52"
+    },
+    "FFMI": {
+      "sheet": "27.7",
+      "photo": "32.5"
+    },
+    "SMM(kg)": {
+      "sheet": "43.95",
+      "photo": "56.67"
+    },
+    "R(Ohm)": {
+      "sheet": "313.9",
+      "photo": "335.8"
+    },
+    "Xc(Ohm)": {
+      "sheet": "22.9",
+      "photo": "28.6"
+    },
+    "VAT(l)": {
+      "sheet": "15.3",
+      "photo": "17.5"
+    },
+    "Taillenumfang(cm)": {
+      "sheet": "152",
+      "photo": "164"
+    },
+    "phi(deg)": {
+      "sheet": "4.2",
+      "photo": "4.9"
+    },
+    "TBW(l)": {
+      "sheet": "66.6",
+      "photo": "80.6"
+    },
+    "ECW(l)": {
+      "sheet": "32.3",
+      "photo": "35.7"
+    }
+  }
+}
