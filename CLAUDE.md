@@ -1,5 +1,80 @@
 # Hospital Project Notes
 
+## Current Task — Заполнение пустых ячеек по фото (2026-03-09)
+
+### Goal
+Найти все пустые ячейки у пациентов в таблице, проверить фото в папке каждого пациента, заполнить данные или пометить серым.
+
+### Algorithm
+1. Определить пустые ячейки у пациента
+2. Проверить фото в папке `Photo/converted/{patient_id}/`
+3. Если данные найдены → записать в таблицу через webhook
+4. Если данных нет → пометить серым цветом
+5. Перейти к следующему пациенту
+
+### Status: ЗАВЕРШЕНО (2026-03-09)
+- **Всего пациентов с пробелами:** 44 (43 частичных + 1 полностью пустой)
+- **Обработано:** 44/44 ✅
+
+### Результаты
+- **Данные найдены и записаны:** ~30 пациентов (полностью или частично заполнены пустые ячейки)
+- **Помечено серым (данных нет в фото):** ~14 пациентов (отсутствующие страницы BIA-отчёта)
+- **Найдены фото в UNKNOWN:** IMG_4071 и IMG_4072 опознаны как страницы 2 и 3 для 444571 Katrin Barth Op2
+
+### Ключевые находки
+- 237025 Nadine Plottke: Op2 был полностью пустой (21 поле) — все 3 страницы найдены, все заполнены
+- 445118 Claudia Renke-Albert: Op1 и Op2 — страницы 3 найдены, все 12 полей заполнены
+- 444571 Katrin Barth: Op2 — 12 полей заполнены из UNKNOWN-фото (IMG_4071, IMG_4072)
+- Несколько пациентов с отсутствующими страницами 1 или 3 помечены серым
+
+### Patients Queue (по порядку)
+1. 30006 Sabrina Hamadi - Op1 (13 empty)
+2. 39221 Lutz Dittmann - Op2 (6 empty)
+3. 72296 Sabrina Reichelt - Op1 (15 empty)
+4. 72298 Sabrina Liebig - Op1 (6 empty)
+5. 90056 Sabrina Hamadi - Op1 (6 empty), Op3 (6 empty)
+6. 125358 Ricardo Liebl - Op2 (6 empty)
+7. 147096 Juliane Folganty - Op1 (15 empty)
+8. 151150 Nico Weinigel - Op3 (6 empty)
+9. 1614978 Unknown - Op1 (13 empty)
+10. 165656 Sandra Stark - Op1 (13 empty)
+11. 166566 Sandra Stark - Op3 (12 empty)
+12. 168566 Sandra Stark - Op1 (15 empty)
+13. 175037 Petra Paul - Op3 (9 empty)
+14. 244671 Petra Lindner - Op3 (6 empty)
+15. 441882 Lidija Barjamovic - Op1 (12 empty), Op2 (12 empty)
+16. 450049 Birgit Büttner - Op1 (12 empty), Op2 (15 empty)
+17. 380007 Angela Keil - Op1 (12 empty)
+18. 416847 Herbert Boge - Op1 (15 empty)
+19. 437313 Daniela Bernhardt - Op1 (6 empty)
+20. 443074 Claudia Becker - Op3 (15 empty)
+21. 453434 René Dony - Op1 (15 empty)
+22. 456968 Anett Friedrich - Op1 (6 empty)
+23. 190716 Ellen Kroll - Op3 (6 empty)
+24. 194282 Ramona Nemes - Op3 (6 empty)
+25. 202144 Ursula Kaden - Op1 (13 empty)
+26. 233002 Simone Gessner - Op1 (12 empty)
+27. 292144 Ursula Kaden - Op1 (6 empty), Op2 (6 empty)
+28. 302114 Silvio Bicker - Op2 (15 empty), Op3 (6 empty)
+29. 383157 Wilfried Merres - Op2 (6 empty)
+30. 407407 Jasmin Germann - Op1 (12 empty)
+31. 439155 Ramona Weisse - Op2 (6 empty)
+32. 444571 Katrin Barth - Op1 (6 empty), Op2 (12 empty)
+33. 445118 Claudia Renke-Albert - Op1 (6 empty), Op2 (6 empty)
+34. 453451 Elke Rössel - Op1 (12 empty)
+35. 454894 Stefan Georgi - Op2 (6 empty)
+36. 478963 Andre Wolf - Op1 (9 empty)
+37. 482715 Madlen Michel - Op2 (6 empty)
+38. 482936 Katja Mayer - Op2 (7 empty)
+39. 485760 Doreen Brudek - Op2 (6 empty)
+40. 487487 Jasmin Germann - Op1 (7 empty)
+41. 489265 Heidi Glaser - Op2 (1 empty)
+42. 492327 Sebastian Frey - Op1 (6 empty)
+43. 460150 Tony Backhaus - Op1 (6 empty)
+44. 237025 Nadine Plottke - Op2 (21 empty - fully empty)
+
+---
+
 ## HEIC Photo Conversion Method
 
 When converting HEIC photos for reading/analysis, use this approach:

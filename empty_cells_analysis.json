@@ -1,0 +1,3976 @@
+{
+  "partial_data_patients": [
+    {
+      "id": "30006",
+      "name": "Sabrina Hamadi",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2024-04-09",
+          "empty_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FFM(kg)",
+            "FFM(%)",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "filled_fields": [
+            "FMI",
+            "FFMI",
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "empty_count": 13,
+          "filled_count": 8,
+          "sheet_row": 9
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "39221",
+      "name": "Lutz Dittmann",
+      "operations": [
+        {
+          "op_num": 2,
+          "date": "2024-11-13",
+          "empty_fields": [
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 13
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "72296",
+      "name": "Sabrina Reichelt",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2021-10-12",
+          "empty_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 15,
+          "filled_count": 6,
+          "sheet_row": 21
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "72298",
+      "name": "Sabrina Liebig",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2021-10-12",
+          "empty_fields": [
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 23
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "90056",
+      "name": "Sabrina Hamadi",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2022-03-18",
+          "empty_fields": [
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 27
+        },
+        {
+          "op_num": 3,
+          "date": "2024-04-09",
+          "empty_fields": [
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 27
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "125358",
+      "name": "Ricardo Liebl",
+      "operations": [
+        {
+          "op_num": 2,
+          "date": "2024-11-13",
+          "empty_fields": [
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 37
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "147096",
+      "name": "Juliane Folganty",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2023-02-27",
+          "empty_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 15,
+          "filled_count": 6,
+          "sheet_row": 47
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "151150",
+      "name": "Nico Weinigel",
+      "operations": [
+        {
+          "op_num": 3,
+          "date": "2024-09-24",
+          "empty_fields": [
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 49
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "1614978",
+      "name": "Unknown",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2025-07-10",
+          "empty_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FFM(kg)",
+            "FFM(%)",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "filled_fields": [
+            "FMI",
+            "FFMI",
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "empty_count": 13,
+          "filled_count": 8,
+          "sheet_row": 59
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "165656",
+      "name": "Sandra Stark",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2024-09-17",
+          "empty_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FFM(kg)",
+            "FFM(%)",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "filled_fields": [
+            "FMI",
+            "FFMI",
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "empty_count": 13,
+          "filled_count": 8,
+          "sheet_row": 61
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "166566",
+      "name": "Sandra Stark",
+      "operations": [
+        {
+          "op_num": 3,
+          "date": "2024-09-17",
+          "empty_fields": [
+            "SMM",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI"
+          ],
+          "empty_count": 12,
+          "filled_count": 9,
+          "sheet_row": 67
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "168566",
+      "name": "Sandra Stark",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2024-09-17",
+          "empty_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 15,
+          "filled_count": 6,
+          "sheet_row": 73
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "175037",
+      "name": "Petra Paul",
+      "operations": [
+        {
+          "op_num": 3,
+          "date": "2024-06-10",
+          "empty_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI"
+          ],
+          "filled_fields": [
+            "SMM",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "empty_count": 9,
+          "filled_count": 12,
+          "sheet_row": 77
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "244671",
+      "name": "Petra Lindner",
+      "operations": [
+        {
+          "op_num": 3,
+          "date": "2026-01-13",
+          "empty_fields": [
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 93
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "441882",
+      "name": "Lidija Barjamovic",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2024-12-10",
+          "empty_fields": [
+            "SMM",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI"
+          ],
+          "empty_count": 12,
+          "filled_count": 9,
+          "sheet_row": 129
+        },
+        {
+          "op_num": 2,
+          "date": "2025-07-10",
+          "empty_fields": [
+            "SMM",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI"
+          ],
+          "empty_count": 12,
+          "filled_count": 9,
+          "sheet_row": 129
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "450049",
+      "name": "Birgit Büttner",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2022-02-15",
+          "empty_fields": [
+            "SMM",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI"
+          ],
+          "empty_count": 12,
+          "filled_count": 9,
+          "sheet_row": 135
+        },
+        {
+          "op_num": 2,
+          "date": "2023-06-27",
+          "empty_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 15,
+          "filled_count": 6,
+          "sheet_row": 135
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "380007",
+      "name": "Angela Keil",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2024-05-27",
+          "empty_fields": [
+            "SMM",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI"
+          ],
+          "empty_count": 12,
+          "filled_count": 9,
+          "sheet_row": 169
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "416847",
+      "name": "Herbert Boge",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2022-04-25",
+          "empty_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 15,
+          "filled_count": 6,
+          "sheet_row": 175
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "437313",
+      "name": "Daniela Bernhardt",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2021-10-11",
+          "empty_fields": [
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 179
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "443074",
+      "name": "Claudia Becker",
+      "operations": [
+        {
+          "op_num": 3,
+          "date": "2024-05-13",
+          "empty_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 15,
+          "filled_count": 6,
+          "sheet_row": 181
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "453434",
+      "name": "René Dony",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2022-10-28",
+          "empty_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "filled_fields": [
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "empty_count": 15,
+          "filled_count": 6,
+          "sheet_row": 183
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "456968",
+      "name": "Anett Friedrich",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2023-01-23",
+          "empty_fields": [
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 185
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "190716",
+      "name": "Ellen Kroll",
+      "operations": [
+        {
+          "op_num": 3,
+          "date": "2024-09-24",
+          "empty_fields": [
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 191
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "194282",
+      "name": "Ramona Nemes",
+      "operations": [
+        {
+          "op_num": 3,
+          "date": "2024-07-30",
+          "empty_fields": [
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 193
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "202144",
+      "name": "Ursula Kaden",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2024-04-09",
+          "empty_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FFM(kg)",
+            "FFM(%)",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "filled_fields": [
+            "FMI",
+            "FFMI",
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "empty_count": 13,
+          "filled_count": 8,
+          "sheet_row": 195
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "233002",
+      "name": "Simone Gessner",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2022-09-13",
+          "empty_fields": [
+            "SMM",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI"
+          ],
+          "empty_count": 12,
+          "filled_count": 9,
+          "sheet_row": 201
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "292144",
+      "name": "Ursula Kaden",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2024-04-09",
+          "empty_fields": [
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 217
+        },
+        {
+          "op_num": 2,
+          "date": "2025-08-12",
+          "empty_fields": [
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 217
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "302114",
+      "name": "Silvio Bicker",
+      "operations": [
+        {
+          "op_num": 2,
+          "date": "2023-09-18",
+          "empty_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 15,
+          "filled_count": 6,
+          "sheet_row": 221
+        },
+        {
+          "op_num": 3,
+          "date": "2024-04-08",
+          "empty_fields": [
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 221
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "383157",
+      "name": "Wilfried Merres",
+      "operations": [
+        {
+          "op_num": 2,
+          "date": "2024-09-30",
+          "empty_fields": [
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 231
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "407407",
+      "name": "Jasmin Germann",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2024-12-02",
+          "empty_fields": [
+            "SMM",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI"
+          ],
+          "empty_count": 12,
+          "filled_count": 9,
+          "sheet_row": 235
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "439155",
+      "name": "Ramona Weisse",
+      "operations": [
+        {
+          "op_num": 2,
+          "date": "2022-07-08",
+          "empty_fields": [
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 245
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "444571",
+      "name": "Katrin Barth",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2022-08-23",
+          "empty_fields": [
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 249
+        },
+        {
+          "op_num": 2,
+          "date": "2023-08-07",
+          "empty_fields": [
+            "SMM",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI"
+          ],
+          "empty_count": 12,
+          "filled_count": 9,
+          "sheet_row": 249
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "445118",
+      "name": "Claudia Renke-Albert",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2022-06-07",
+          "empty_fields": [
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 251
+        },
+        {
+          "op_num": 2,
+          "date": "2023-04-27",
+          "empty_fields": [
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 251
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "453451",
+      "name": "Elke Rössel",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2023-03-20",
+          "empty_fields": [
+            "SMM",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI"
+          ],
+          "empty_count": 12,
+          "filled_count": 9,
+          "sheet_row": 257
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "454894",
+      "name": "Stefan Georgi",
+      "operations": [
+        {
+          "op_num": 2,
+          "date": "2024-03-12",
+          "empty_fields": [
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 263
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "478963",
+      "name": "Andre Wolf",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2024-03-12",
+          "empty_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI"
+          ],
+          "filled_fields": [
+            "SMM",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "empty_count": 9,
+          "filled_count": 12,
+          "sheet_row": 293
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "482715",
+      "name": "Madlen Michel",
+      "operations": [
+        {
+          "op_num": 2,
+          "date": "2025-12-22",
+          "empty_fields": [
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 307
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "482936",
+      "name": "Katja Mayer",
+      "operations": [
+        {
+          "op_num": 2,
+          "date": "2026-02-23",
+          "empty_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FFM(kg)",
+            "FFM(%)"
+          ],
+          "filled_fields": [
+            "FMI",
+            "FFMI",
+            "SMM",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "empty_count": 7,
+          "filled_count": 14,
+          "sheet_row": 309
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "485760",
+      "name": "Doreen Brudek",
+      "operations": [
+        {
+          "op_num": 2,
+          "date": "2025-10-13",
+          "empty_fields": [
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 315
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "487487",
+      "name": "Jasmin Germann",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2024-12-02",
+          "empty_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FFM(kg)",
+            "FFM(%)"
+          ],
+          "filled_fields": [
+            "FMI",
+            "FFMI",
+            "SMM",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "empty_count": 7,
+          "filled_count": 14,
+          "sheet_row": 319
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "489265",
+      "name": "Heidi Glaser",
+      "operations": [
+        {
+          "op_num": 2,
+          "date": "2025-10-13",
+          "empty_fields": [
+            "Perzentile"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "SMM",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "empty_count": 1,
+          "filled_count": 20,
+          "sheet_row": 335
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "492327",
+      "name": "Sebastian Frey",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2024-11-28",
+          "empty_fields": [
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 347
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "460150",
+      "name": "Tony Backhaus",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2023-02-06",
+          "empty_fields": [
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 355
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    }
+  ],
+  "fully_empty_patients": [
+    {
+      "id": "237025",
+      "name": "Nadine Plottke",
+      "operations": [
+        {
+          "op_num": 2,
+          "date": "2024-08-20",
+          "empty_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "SMM",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [],
+          "empty_count": 21,
+          "filled_count": 0,
+          "all_empty": true,
+          "sheet_row": 69
+        }
+      ],
+      "has_partial_data": false,
+      "has_fully_empty_ops": true
+    }
+  ],
+  "all_patients_with_gaps": [
+    {
+      "id": "30006",
+      "name": "Sabrina Hamadi",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2024-04-09",
+          "empty_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FFM(kg)",
+            "FFM(%)",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "filled_fields": [
+            "FMI",
+            "FFMI",
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "empty_count": 13,
+          "filled_count": 8,
+          "sheet_row": 9
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "39221",
+      "name": "Lutz Dittmann",
+      "operations": [
+        {
+          "op_num": 2,
+          "date": "2024-11-13",
+          "empty_fields": [
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 13
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "72296",
+      "name": "Sabrina Reichelt",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2021-10-12",
+          "empty_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 15,
+          "filled_count": 6,
+          "sheet_row": 21
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "72298",
+      "name": "Sabrina Liebig",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2021-10-12",
+          "empty_fields": [
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 23
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "90056",
+      "name": "Sabrina Hamadi",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2022-03-18",
+          "empty_fields": [
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 27
+        },
+        {
+          "op_num": 3,
+          "date": "2024-04-09",
+          "empty_fields": [
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 27
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "125358",
+      "name": "Ricardo Liebl",
+      "operations": [
+        {
+          "op_num": 2,
+          "date": "2024-11-13",
+          "empty_fields": [
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 37
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "147096",
+      "name": "Juliane Folganty",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2023-02-27",
+          "empty_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 15,
+          "filled_count": 6,
+          "sheet_row": 47
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "151150",
+      "name": "Nico Weinigel",
+      "operations": [
+        {
+          "op_num": 3,
+          "date": "2024-09-24",
+          "empty_fields": [
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 49
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "1614978",
+      "name": "Unknown",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2025-07-10",
+          "empty_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FFM(kg)",
+            "FFM(%)",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "filled_fields": [
+            "FMI",
+            "FFMI",
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "empty_count": 13,
+          "filled_count": 8,
+          "sheet_row": 59
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "165656",
+      "name": "Sandra Stark",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2024-09-17",
+          "empty_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FFM(kg)",
+            "FFM(%)",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "filled_fields": [
+            "FMI",
+            "FFMI",
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "empty_count": 13,
+          "filled_count": 8,
+          "sheet_row": 61
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "166566",
+      "name": "Sandra Stark",
+      "operations": [
+        {
+          "op_num": 3,
+          "date": "2024-09-17",
+          "empty_fields": [
+            "SMM",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI"
+          ],
+          "empty_count": 12,
+          "filled_count": 9,
+          "sheet_row": 67
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "237025",
+      "name": "Nadine Plottke",
+      "operations": [
+        {
+          "op_num": 2,
+          "date": "2024-08-20",
+          "empty_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "SMM",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [],
+          "empty_count": 21,
+          "filled_count": 0,
+          "all_empty": true,
+          "sheet_row": 69
+        }
+      ],
+      "has_partial_data": false,
+      "has_fully_empty_ops": true
+    },
+    {
+      "id": "168566",
+      "name": "Sandra Stark",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2024-09-17",
+          "empty_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 15,
+          "filled_count": 6,
+          "sheet_row": 73
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "175037",
+      "name": "Petra Paul",
+      "operations": [
+        {
+          "op_num": 3,
+          "date": "2024-06-10",
+          "empty_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI"
+          ],
+          "filled_fields": [
+            "SMM",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "empty_count": 9,
+          "filled_count": 12,
+          "sheet_row": 77
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "244671",
+      "name": "Petra Lindner",
+      "operations": [
+        {
+          "op_num": 3,
+          "date": "2026-01-13",
+          "empty_fields": [
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 93
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "441882",
+      "name": "Lidija Barjamovic",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2024-12-10",
+          "empty_fields": [
+            "SMM",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI"
+          ],
+          "empty_count": 12,
+          "filled_count": 9,
+          "sheet_row": 129
+        },
+        {
+          "op_num": 2,
+          "date": "2025-07-10",
+          "empty_fields": [
+            "SMM",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI"
+          ],
+          "empty_count": 12,
+          "filled_count": 9,
+          "sheet_row": 129
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "450049",
+      "name": "Birgit Büttner",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2022-02-15",
+          "empty_fields": [
+            "SMM",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI"
+          ],
+          "empty_count": 12,
+          "filled_count": 9,
+          "sheet_row": 135
+        },
+        {
+          "op_num": 2,
+          "date": "2023-06-27",
+          "empty_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 15,
+          "filled_count": 6,
+          "sheet_row": 135
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "380007",
+      "name": "Angela Keil",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2024-05-27",
+          "empty_fields": [
+            "SMM",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI"
+          ],
+          "empty_count": 12,
+          "filled_count": 9,
+          "sheet_row": 169
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "416847",
+      "name": "Herbert Boge",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2022-04-25",
+          "empty_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 15,
+          "filled_count": 6,
+          "sheet_row": 175
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "437313",
+      "name": "Daniela Bernhardt",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2021-10-11",
+          "empty_fields": [
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 179
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "443074",
+      "name": "Claudia Becker",
+      "operations": [
+        {
+          "op_num": 3,
+          "date": "2024-05-13",
+          "empty_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 15,
+          "filled_count": 6,
+          "sheet_row": 181
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "453434",
+      "name": "René Dony",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2022-10-28",
+          "empty_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "filled_fields": [
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "empty_count": 15,
+          "filled_count": 6,
+          "sheet_row": 183
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "456968",
+      "name": "Anett Friedrich",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2023-01-23",
+          "empty_fields": [
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 185
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "190716",
+      "name": "Ellen Kroll",
+      "operations": [
+        {
+          "op_num": 3,
+          "date": "2024-09-24",
+          "empty_fields": [
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 191
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "194282",
+      "name": "Ramona Nemes",
+      "operations": [
+        {
+          "op_num": 3,
+          "date": "2024-07-30",
+          "empty_fields": [
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 193
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "202144",
+      "name": "Ursula Kaden",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2024-04-09",
+          "empty_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FFM(kg)",
+            "FFM(%)",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "filled_fields": [
+            "FMI",
+            "FFMI",
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "empty_count": 13,
+          "filled_count": 8,
+          "sheet_row": 195
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "233002",
+      "name": "Simone Gessner",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2022-09-13",
+          "empty_fields": [
+            "SMM",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI"
+          ],
+          "empty_count": 12,
+          "filled_count": 9,
+          "sheet_row": 201
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "292144",
+      "name": "Ursula Kaden",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2024-04-09",
+          "empty_fields": [
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 217
+        },
+        {
+          "op_num": 2,
+          "date": "2025-08-12",
+          "empty_fields": [
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 217
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "302114",
+      "name": "Silvio Bicker",
+      "operations": [
+        {
+          "op_num": 2,
+          "date": "2023-09-18",
+          "empty_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 15,
+          "filled_count": 6,
+          "sheet_row": 221
+        },
+        {
+          "op_num": 3,
+          "date": "2024-04-08",
+          "empty_fields": [
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 221
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "383157",
+      "name": "Wilfried Merres",
+      "operations": [
+        {
+          "op_num": 2,
+          "date": "2024-09-30",
+          "empty_fields": [
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 231
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "407407",
+      "name": "Jasmin Germann",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2024-12-02",
+          "empty_fields": [
+            "SMM",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI"
+          ],
+          "empty_count": 12,
+          "filled_count": 9,
+          "sheet_row": 235
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "439155",
+      "name": "Ramona Weisse",
+      "operations": [
+        {
+          "op_num": 2,
+          "date": "2022-07-08",
+          "empty_fields": [
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 245
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "444571",
+      "name": "Katrin Barth",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2022-08-23",
+          "empty_fields": [
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 249
+        },
+        {
+          "op_num": 2,
+          "date": "2023-08-07",
+          "empty_fields": [
+            "SMM",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI"
+          ],
+          "empty_count": 12,
+          "filled_count": 9,
+          "sheet_row": 249
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "445118",
+      "name": "Claudia Renke-Albert",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2022-06-07",
+          "empty_fields": [
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 251
+        },
+        {
+          "op_num": 2,
+          "date": "2023-04-27",
+          "empty_fields": [
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 251
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "453451",
+      "name": "Elke Rössel",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2023-03-20",
+          "empty_fields": [
+            "SMM",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI"
+          ],
+          "empty_count": 12,
+          "filled_count": 9,
+          "sheet_row": 257
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "454894",
+      "name": "Stefan Georgi",
+      "operations": [
+        {
+          "op_num": 2,
+          "date": "2024-03-12",
+          "empty_fields": [
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 263
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "478963",
+      "name": "Andre Wolf",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2024-03-12",
+          "empty_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI"
+          ],
+          "filled_fields": [
+            "SMM",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "empty_count": 9,
+          "filled_count": 12,
+          "sheet_row": 293
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "482715",
+      "name": "Madlen Michel",
+      "operations": [
+        {
+          "op_num": 2,
+          "date": "2025-12-22",
+          "empty_fields": [
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 307
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "482936",
+      "name": "Katja Mayer",
+      "operations": [
+        {
+          "op_num": 2,
+          "date": "2026-02-23",
+          "empty_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FFM(kg)",
+            "FFM(%)"
+          ],
+          "filled_fields": [
+            "FMI",
+            "FFMI",
+            "SMM",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "empty_count": 7,
+          "filled_count": 14,
+          "sheet_row": 309
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "485760",
+      "name": "Doreen Brudek",
+      "operations": [
+        {
+          "op_num": 2,
+          "date": "2025-10-13",
+          "empty_fields": [
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 315
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "487487",
+      "name": "Jasmin Germann",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2024-12-02",
+          "empty_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FFM(kg)",
+            "FFM(%)"
+          ],
+          "filled_fields": [
+            "FMI",
+            "FFMI",
+            "SMM",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "empty_count": 7,
+          "filled_count": 14,
+          "sheet_row": 319
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "489265",
+      "name": "Heidi Glaser",
+      "operations": [
+        {
+          "op_num": 2,
+          "date": "2025-10-13",
+          "empty_fields": [
+            "Perzentile"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "SMM",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "empty_count": 1,
+          "filled_count": 20,
+          "sheet_row": 335
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "492327",
+      "name": "Sebastian Frey",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2024-11-28",
+          "empty_fields": [
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 347
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    },
+    {
+      "id": "460150",
+      "name": "Tony Backhaus",
+      "operations": [
+        {
+          "op_num": 1,
+          "date": "2023-02-06",
+          "empty_fields": [
+            "SMM",
+            "TBW(l)",
+            "TBW(%)",
+            "ECW(l)",
+            "ECW(%)",
+            "ECW/TBW(%)"
+          ],
+          "filled_fields": [
+            "Gewicht",
+            "Größe",
+            "BMI",
+            "FM(kg)",
+            "FM(%)",
+            "FMI",
+            "FFM(kg)",
+            "FFM(%)",
+            "FFMI",
+            "R",
+            "Xc",
+            "VAT",
+            "Taillenumfang",
+            "φ",
+            "Perzentile"
+          ],
+          "empty_count": 6,
+          "filled_count": 15,
+          "sheet_row": 355
+        }
+      ],
+      "has_partial_data": true,
+      "has_fully_empty_ops": false
+    }
+  ]
+}
