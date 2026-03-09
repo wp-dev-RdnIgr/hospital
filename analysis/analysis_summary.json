@@ -1,0 +1,28 @@
+{
+  "total_patients": 189,
+  "total_records": 445,
+  "stats": {
+    "total_patients": 189,
+    "total_records": 445,
+    "patients_op1": 189,
+    "patients_op2": 172,
+    "patients_op3": 84,
+    "gender_F": 130,
+    "gender_M": 59,
+    "bmi_op1_mean": 47.849999999999994,
+    "bmi_op1_std": 8.737839006783918,
+    "bmi_op1_min": 24.28,
+    "bmi_op1_max": 73.17,
+    "bmi_op1_median": 48.815,
+    "bmi_30_35": 13,
+    "bmi_35_40": 17,
+    "bmi_40_50": 68,
+    "bmi_50_60": 63,
+    "bmi_60plus": 13,
+    "bmi_under30": 4,
+    "weight_op1_mean": 134.56488764044946,
+    "weight_op1_std": 29.23400987895987,
+    "weight_op1_min": 65.3,
+    "weight_op1_max": 222.0
+  }
+}
